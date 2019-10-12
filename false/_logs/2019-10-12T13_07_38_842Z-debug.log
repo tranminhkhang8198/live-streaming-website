@@ -1,0 +1,28 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node',
+1 verbose cli   '/usr/local/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'parcel',
+1 verbose cli   'src/views/admin.pug',
+1 verbose cli   'src/views/index.pug',
+1 verbose cli   '--no-cache' ]
+2 info using npm@6.11.3
+3 info using node@v8.10.0
+4 verbose stack Error: missing script: parcel
+4 verbose stack     at run (/usr/local/lib/node_modules/npm/lib/run-script.js:155:19)
+4 verbose stack     at /usr/local/lib/node_modules/npm/lib/run-script.js:63:5
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:116:5
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:435:5
+4 verbose stack     at checkBinReferences_ (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:391:45)
+4 verbose stack     at final (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:433:3)
+4 verbose stack     at then (/usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:161:5)
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/read-package-json/read-json.js:382:12
+4 verbose stack     at /usr/local/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:115:16
+4 verbose stack     at FSReqWrap.readFileAfterClose [as oncomplete] (fs.js:511:3)
+5 verbose cwd /home/noat/Workspace/psd-ui-template
+6 verbose Linux 5.0.0-31-generic
+7 verbose argv "/usr/bin/node" "/usr/local/bin/npm" "run" "parcel" "src/views/admin.pug" "src/views/index.pug" "--no-cache"
+8 verbose node v8.10.0
+9 verbose npm  v6.11.3
+10 error missing script: parcel
+11 verbose exit [ 1, true ]
