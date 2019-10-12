@@ -6,7 +6,10 @@
         'bases/_typography',
         'bases/_ultilities';
 
-@import 'components/_components';
+@import 'components/_components',
+        'components/_uploadStreaming',
+        'components/_streamingCard',
+        'components/_teamImage';
 
 @import 'layouts/header',
         'layouts/_footer';

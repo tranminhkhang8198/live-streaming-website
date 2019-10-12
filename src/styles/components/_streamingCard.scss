@@ -1,0 +1,19 @@
+.streaming-card {    
+    background-color: $color-white;   
+
+    &-team-1, &-team-2 {
+        font-weight: bold;
+    }
+
+    
+}
+
+.streaming-card-title {
+    font-size: $font-size-s;
+
+    &-container {
+        background-color: $color-dark;
+        height: 5rem;
+        color: #f6f6f6;
+    }
+}

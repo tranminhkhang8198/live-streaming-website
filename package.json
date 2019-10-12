@@ -5,15 +5,15 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf rm dist/*",
-    "start": "npm run clean && parcel src/views/index.pug --open --port 3000 --no-cache",
-    "build": "npm run clean && parcel build src/views/index.pug --no-source-maps --detailed-report --out-dir dist"
+    "start": "npm run clean && parcel src/views/*.pug --open --port 3000 --no-cache",
+    "build": "npm run clean && parcel build src/views/*.pug --no-source-maps --detailed-report --out-dir dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "gh-pages": "^2.1.1",
-    "parcel-bundler": "^1.12.3",
+    "parcel-bundler": "^1.12.4",
     "pug": "^2.0.4",
     "rimraf": "^3.0.0",
     "sass": "^1.22.10"
