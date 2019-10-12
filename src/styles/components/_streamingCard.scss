@@ -12,6 +12,8 @@
     font-size: $font-size-s;
 
     &-container {
+        clip-path: polygon(0 0, 100% 0%, 80% 100%, 0 100%);
+
         background-color: $color-dark;
         height: 5rem;
         color: #f6f6f6;
