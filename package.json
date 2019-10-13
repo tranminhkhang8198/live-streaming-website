@@ -9,8 +9,8 @@
     "dev:server": "nodemon src/server.js",
     "build:client": "concurrently -p \"[{name}]\" -n \"Clean,Build\" -c \"bgRed.bold,bgGreen.bold\" \"npm run clean\" \"parcel build src/views/*.pug --no-cache --no-source-maps --detailed-report --out-dir dist\"",
     "build:server": "",
-    "dev": "concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgGreen.bold,bgRed.bold,bgCyan.bold\" \"npm run clean\" \"npm run dev:client\" \"npm run dev:server\" ",
-    "build": "NODE_ENV=production concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgGreen.bold,bgRed.bold,bgCyan.bold\" \"npm run clean\" \"npm run build:client\" \"npm run build:server\""
+    "dev": "concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgRed.bold,bgGreen.bold,bgCyan.bold\" \"npm run clean\" \"npm run dev:client\" \"npm run dev:server\" ",
+    "build": "NODE_ENV=production concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgRed.bold,bgGreen.bold,bgCyan.bold\" \"npm run clean\" \"npm run build:client\" \"npm run build:server\""
   },
   "keywords": [],
   "author": "",

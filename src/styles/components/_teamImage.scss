@@ -1,45 +1,89 @@
-.schedule-team {    
-    padding: .6rem;
-    border-radius: 5px;
-    font-size: $font-size-s;
+.schedule-item {
+    &-containers {
+        margin-top: 1rem;
+        cursor: pointer;
 
-    &-img {
-        width: 5rem !important;
-        height: 5rem !important;        
-        position: relative;
-        z-index: 2;        
-    }    
-
-    .schedule-team-name {        
-        &-container {
-            &:nth-child(even) {
-                clip-path: polygon(0 0, 100% 0%, 84% 100%, 0% 100%);
-            }   
-            &:nth-child(odd) {
-                clip-path: polygon(0 0, 100% 0%, 100% 100%, 16% 100%);
-
-            }   
-
-            p {
-                margin-top: .5rem;
-                margin-bottom: .5rem;
-            }
+        &:hover .schedule-team-name-content{
+            color: transparent;
         }
-    }
-
-    &-name-container {
-        width: 100%;
-        text-align: center;
-        color: #f6f6f6;
-        background-color: $color-secondary;        
-        position: relative;
-        z-index: 1;
-
-        &-1 {margin-left: -1rem;}
-        &-2 {margin-right: -1rem;}
+        &:hover .schedule-team-name-content-left::before {
+            left: 40%;
+        }
+        &:hover .schedule-team-name-content-right::after {
+            right: 30%;
+        }
     }
 }
 
-.schedule-time {    
-    margin: 0;    
+.schedule-team {
+    &-img {
+        width: 4rem;
+        height: 4rem;        
+        position: relative;
+        z-index: 2;
+    }    
+
+    &-name {                
+        &-container {            
+            text-align: center;
+            width: 100%;
+            color: $color-dark;
+            background-color: $color-secondary;        
+            position: relative;
+            z-index: 1;
+
+            &-1 {margin-left: -1.5rem;}
+            &-2 {margin-right: -1.5rem;}
+
+            &:nth-child(even) {
+                clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
+            }   
+            &:nth-child(odd) {
+                clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
+            }              
+        }
+
+        &-content {
+            font-family: "Roboto";
+            margin-top: .5rem;
+            margin-bottom: .5rem;
+            position: relative;  
+            transition: 250ms;          
+
+            &-left {
+                &::before {
+                    content: 'blablabla';
+                    position: absolute;
+                    left: -20%;
+                    color: $color-white;
+                    transition: 250ms;
+                }
+            }
+
+            &-right {
+                &::after {
+                    content: 'Chi tiết trận đấu';
+                    position: absolute;
+                    right: -70%;
+                    color: $color-white;
+                    transition: 250ms;
+                }
+            }
+        }
+    }
+}
+
+.schedule-time {
+    &-stream {
+        width: 35%;
+    }
+
+    &-container {
+        text-align: center;
+    }
+}
+
+.schedule-tour-name {
+    border-top: 1px solid $color-dark;
+    font-size: $font-size-xs;
 }

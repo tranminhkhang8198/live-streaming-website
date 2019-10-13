@@ -2,222 +2,119 @@ extends ./layouts/common.pug
 block vars
     - var title="Trang chủ"
 
-block container    
-    //- Lich phat
-    .mt-5
+block container
+    .mt-5.col-lg-9.col-md-12.left-content
         h2 Lịch phát
-        hr
-        .schedule
-            .schedule-containers.row
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name
-                            | GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-            .schedule-containers.row
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name
-                            | GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-            .schedule-containers.row        
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name
-                            | GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-            .schedule-containers.row        
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name
-                            | GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-            .schedule-containers.row        
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name
-                            | GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-            .schedule-containers.row
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-            .schedule-containers.row        
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name
-                            | GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-            .schedule-containers.row        
-                .col-1
-                .col-4.d-flex.flex-row.align-items-center.justify-content-start.schedule-team-1.schedule-team
-                    img.rounded-circle.img-responsive.schedule-team-img(src="../images/472-536x354.jpg", alt="Team logo")
-                    .schedule-team-name-container.schedule-team-name-container-1
-                        p.schedule-team-name
-                            | GEORIA
-                .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
-                    p.schedule-time
-                        | 12/10/2019 - 10:00 PM
-                    strong.schedule-tour-name
-                        | Euro 2020 Qualification
-                .col-4.d-flex.flex-row.align-items-center.justify-content-end.schedule-team-2.schedule-team
-                    .schedule-team-name-container.schedule-team-name-container-2
-                        p.schedule-team-name
-                            | Republic of Russia
-                    img.rounded-circle.schedule-team-img.img-responsive(src="../images/472-536x354.jpg", alt="Team logo")
-                .col-1
-    //- Lich phat >>
-
-    //- Dang phat
-    .mt-5
-        h2 Đang phát
-        hr
-        .d-flex.flex-column.streaming-container.mt-5
-            .streaming-card.row.w-75.mx-auto.mb-3
-                .col-4.streaming-card-title-container.d-flex.flex-row.align-items-center
+        hr        
+        .schedule-container
+            .sport-type-container.text-center
+                span.ml-2.sport-type
+                    | BÓNG ĐÁ
+                .row.schedule-item-containers
+                    .col-5.d-flex.flex-row.align-items-center
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                        .schedule-team-name-container.schedule-team-name-container-1
+                            p.schedule-team-name-content.schedule-team-name-content-left Lokey
+                    .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
+                        p.schedule-time 2:00 PM
+                        strong.schedule-tour-name 20/10/2019
+                    .col-5.d-flex.flex-row.align-items-center.justify-content-end
+                        .schedule-team-name-container.schedule-team-name-container-2
+                            p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                .row.schedule-item-containers
+                    .col-5.d-flex.flex-row.align-items-center
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                        .schedule-team-name-container.schedule-team-name-container-1
+                            p.schedule-team-name-content.schedule-team-name-content-left Lokey
+                    .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center                    
+                        img.schedule-time-stream(src="../images/live-streaming.svg" alt="Live stream")
+                    .col-5.d-flex.flex-row.align-items-center.justify-content-end
+                        .schedule-team-name-container.schedule-team-name-container-2
+                            p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')            
+            
+            .sport-type-container.text-center
+                span.ml-2.sport-type
+                    | BÓNG CHUYỀN
+                .row.schedule-item-containers
+                    .col-5.d-flex.flex-row.align-items-center
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                        .schedule-team-name-container.schedule-team-name-container-1
+                            p.schedule-team-name-content.schedule-team-name-content-left Lokey
+                    .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
+                        p.schedule-time 2:00 PM
+                        strong.schedule-tour-name 20/10/2019
+                    .col-5.d-flex.flex-row.align-items-center.justify-content-end
+                        .schedule-team-name-container.schedule-team-name-container-2
+                            p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                .row.schedule-item-containers
+                    .col-5.d-flex.flex-row.align-items-center
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                        .schedule-team-name-container.schedule-team-name-container-1
+                            p.schedule-team-name-content.schedule-team-name-content-left Lokey
+                    .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center                    
+                        img.schedule-time-stream(src="../images/live-streaming.svg" alt="Live stream")
+                    .col-5.d-flex.flex-row.align-items-center.justify-content-end
+                        .schedule-team-name-container.schedule-team-name-container-2
+                            p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')            
+            .sport-type-container.text-center                
+                span.ml-2.sport-type
+                    | BÓNG BÀN
+                .row.schedule-item-containers
+                    .col-5.d-flex.flex-row.align-items-center
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                        .schedule-team-name-container.schedule-team-name-container-1
+                            p.schedule-team-name-content.schedule-team-name-content-left Lokey
+                    .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center
+                        p.schedule-time 2:00 PM
+                        strong.schedule-tour-name 20/10/2019
+                    .col-5.d-flex.flex-row.align-items-center.justify-content-end
+                        .schedule-team-name-container.schedule-team-name-container-2
+                            p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                .row.schedule-item-containers
+                    .col-5.d-flex.flex-row.align-items-center
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')
+                        .schedule-team-name-container.schedule-team-name-container-1
+                            p.schedule-team-name-content.schedule-team-name-content-left.test Lokey
+                    .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center                    
+                        img.schedule-time-stream(src="../images/live-streaming.svg" alt="Live stream")
+                    .col-5.d-flex.flex-row.align-items-center.justify-content-end
+                        .schedule-team-name-container.schedule-team-name-container-2
+                            p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
+                        img.rounded-circle.img-responsive.schedule-team-img(src='../images/representative.jpg' alt='Images logo')            
+            
+        .mt-5.streaming-container
+            h2.streaming-heading Đang phát
+            hr
+            .streaming-card-containers.row
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container
                     i.fas.fa-tv.mr-3
                     h3.streaming-card-title Japan League Women
-                .col-3.streaming-card-team-1-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-1 Ehime (Women)
-                p.col-1.streaming-card-score.d-flex.align-items-center.justify-content-center 1 - 0                
-                .col-3.streaming-card-team-2-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-2 Ehime (Men)    
-        
-            .streaming-card.row.w-75.mx-auto.mb-3
-                .col-4.streaming-card-title-container.d-flex.flex-row.align-items-center
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Women)
+                p.col-xl-1.col-lg-2.d-flex.align-items-center.justify-content-center.streaming-card-score 
+                    | 1 - 0
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Men)
+            .streaming-card-containers.row
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container
                     i.fas.fa-tv.mr-3
                     h3.streaming-card-title Japan League Women
-                .col-3.streaming-card-team-1-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-1 Ehime (Women)
-                p.col-1.streaming-card-score.d-flex.align-items-center.justify-content-center 1 - 0                
-                .col-3.streaming-card-team-2-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-2 Ehime (Men)    
-        
-            .streaming-card.row.w-75.mx-auto.mb-3
-                .col-4.streaming-card-title-container.d-flex.flex-row.align-items-center
-                    i.fas.fa-tv.mr-3
-                    h3.streaming-card-title Japan League Women
-                .col-3.streaming-card-team-1-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-1 Ehime (Women)
-                p.col-1.streaming-card-score.d-flex.align-items-center.justify-content-center 1 - 0                
-                .col-3.streaming-card-team-2-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-2 Ehime (Men)
-            .streaming-card.row.w-75.mx-auto.mb-3
-                .col-4.streaming-card-title-container.d-flex.flex-row.align-items-center
-                    i.fas.fa-tv.mr-3
-                    h3.streaming-card-title Japan League Women
-                .col-3.streaming-card-team-1-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-1 Ehime (Women)
-                p.col-1.streaming-card-score.d-flex.align-items-center.justify-content-center 1 - 0                
-                .col-3.streaming-card-team-2-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-2 Ehime (Men)    
-        
-            .streaming-card.row.w-75.mx-auto.mb-3
-                .col-4.streaming-card-title-container.d-flex.flex-row.align-items-center
-                    i.fas.fa-tv.mr-3
-                    h3.streaming-card-title Japan League Women
-                .col-3.streaming-card-team-1-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-1 Ehime (Women)
-                p.col-1.streaming-card-score.d-flex.align-items-center.justify-content-center 1 - 0                
-                .col-3.streaming-card-team-2-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-2 Ehime (Men)    
-        
-            .streaming-card.row.w-75.mx-auto.mb-3
-                .col-4.streaming-card-title-container.d-flex.flex-row.align-items-center
-                    i.fas.fa-tv.mr-3
-                    h3.streaming-card-title Japan League Women
-                .col-3.streaming-card-team-1-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-1 Ehime (Women)
-                p.col-1.streaming-card-score.d-flex.align-items-center.justify-content-center 1 - 0                
-                .col-3.streaming-card-team-2-container.d-flex.align-items-center.justify-content-center
-                    p.streaming-card-team-2 Ehime (Men)
-    //- Dang phat >>
-
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Women)
+                p.col-xl-1.col-lg-2.d-flex.align-items-center.justify-content-center.streaming-card-score 
+                    | 1 - 0
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Men)
+                
+    
+    .right-content.col-lg-3.col-md-12
+        block chat
+            include ./blocks/chat
 block script
     script(src='./../scripts/main.js')
 
