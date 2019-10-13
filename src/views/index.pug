@@ -3,10 +3,10 @@ block vars
     - var title="Trang chủ"
 
 block container
-    .mt-5.col-lg-9.col-md-12.left-content
-        h2 Lịch phát
-        hr        
-        .schedule-container
+    .col-lg-9.col-md-12.left-content        
+        .mt-5.schedule-container
+            h2.schedule-heading Lịch phát
+            hr
             .sport-type-container.text-center
                 span.ml-2.sport-type
                     | BÓNG ĐÁ
@@ -28,7 +28,7 @@ block container
                         .schedule-team-name-container.schedule-team-name-container-1
                             p.schedule-team-name-content.schedule-team-name-content-left Lokey
                     .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center                    
-                        img.schedule-time-stream(src="../images/live-streaming.svg" alt="Live stream")
+                        img.schedule-time-stream.hvr-buzz(src="../images/live-icon.png" alt="Live stream")
                     .col-5.d-flex.flex-row.align-items-center.justify-content-end
                         .schedule-team-name-container.schedule-team-name-container-2
                             p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
@@ -55,7 +55,7 @@ block container
                         .schedule-team-name-container.schedule-team-name-container-1
                             p.schedule-team-name-content.schedule-team-name-content-left Lokey
                     .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center                    
-                        img.schedule-time-stream(src="../images/live-streaming.svg" alt="Live stream")
+                        img.schedule-time-stream.hvr-buzz(src="../images/live-icon.png" alt="Live stream")
                     .col-5.d-flex.flex-row.align-items-center.justify-content-end
                         .schedule-team-name-container.schedule-team-name-container-2
                             p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
@@ -81,7 +81,7 @@ block container
                         .schedule-team-name-container.schedule-team-name-container-1
                             p.schedule-team-name-content.schedule-team-name-content-left.test Lokey
                     .col-2.schedule-time-container.d-flex.flex-column.justify-content-center.align-items-center                    
-                        img.schedule-time-stream(src="../images/live-streaming.svg" alt="Live stream")
+                        img.schedule-time-stream.hvr-buzz(src="../images/live-icon.png" alt="Live stream")
                     .col-5.d-flex.flex-row.align-items-center.justify-content-end
                         .schedule-team-name-container.schedule-team-name-container-2
                             p.schedule-team-name-content.schedule-team-name-content-right Boba Marine
@@ -90,8 +90,18 @@ block container
         .mt-5.streaming-container
             h2.streaming-heading Đang phát
             hr
-            .streaming-card-containers.row
-                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container
+            .row.streaming-card-containers
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container.hvr-bounce-to-right
+                    i.fas.fa-tv.mr-3
+                    h3.streaming-card-title Japan League Women
+                .col-xl-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Women)
+                p.col-xl-1.col-lg-2.d-flex.align-items-center.justify-content-center.streaming-card-score 
+                    | 1 - 0
+                .col-xl-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Men)
+            .row.streaming-card-containers
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container.hvr-bounce-to-right
                     i.fas.fa-tv.mr-3
                     h3.streaming-card-title Japan League Women
                 .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
@@ -100,8 +110,8 @@ block container
                     | 1 - 0
                 .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
                     p.streaming-card-team Ehime (Men)
-            .streaming-card-containers.row
-                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container
+            .row.streaming-card-containers
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container.hvr-bounce-to-right
                     i.fas.fa-tv.mr-3
                     h3.streaming-card-title Japan League Women
                 .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
@@ -110,11 +120,118 @@ block container
                     | 1 - 0
                 .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
                     p.streaming-card-team Ehime (Men)
-                
-    
-    .right-content.col-lg-3.col-md-12
+            .row.streaming-card-containers
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container.hvr-bounce-to-right
+                    i.fas.fa-tv.mr-3
+                    h3.streaming-card-title Japan League Women
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Women)
+                p.col-xl-1.col-lg-2.d-flex.align-items-center.justify-content-center.streaming-card-score 
+                    | 1 - 0
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Men)
+            .row.streaming-card-containers
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container.hvr-bounce-to-right
+                    i.fas.fa-tv.mr-3
+                    h3.streaming-card-title Japan League Women
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Women)
+                p.col-xl-1.col-lg-2.d-flex.align-items-center.justify-content-center.streaming-card-score 
+                    | 1 - 0
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Men)
+            .row.streaming-card-containers
+                .col-xl-5.col-lg-4.d-flex.flex-row.align-items-center.streaming-card-title-container.hvr-bounce-to-right
+                    i.fas.fa-tv.mr-3
+                    h3.streaming-card-title Japan League Women
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Women)
+                p.col-xl-1.col-lg-2.d-flex.align-items-center.justify-content-center.streaming-card-score 
+                    | 1 - 0
+                .col-3.d-flex.align-items-center.justify-content-center.streaming-card-team-container
+                    p.streaming-card-team Ehime (Men)
+        
+        .mt-5.highlight-video-container
+            h2.highlight-video-heading Video nổi bậc
+            hr
+            .row.highlight-box-containers
+                .col-xl-3.col-lg-4.col-md-6.highlight-box                    
+                    .highlight-thumbnail
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match Đức - Ý
+                        p.highlight-title-tour Laliga 2020 cup                
+                .col-xl-3.col-lg-4.col-md-6.highlight-box
+                    .highlight-thumbnail                        
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match Pháp - Mỹ
+                        p.highlight-title-tour Laliga 2020 cup                
+                .col-xl-3.col-lg-4.col-md-6.highlight-box
+                    .highlight-thumbnail                        
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match BĐ Nha - TB Nha
+                        p.highlight-title-tour Laliga 2020 cup                
+                .col-xl-3.col-lg-4.col-md-6.highlight-box
+                    .highlight-thumbnail                        
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match Việt Nam - Thái Cùi
+                        p.highlight-title-tour Laliga 2020 cup  
+            .row.highlight-box-containers
+                .col-xl-3.col-lg-4.col-md-6.highlight-box
+                    .highlight-thumbnail                        
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match Đức - Ý
+                        p.highlight-title-tour Laliga 2020 cup                
+                .col-xl-3.col-lg-4.col-md-6.highlight-box
+                    .highlight-thumbnail                        
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match Pháp - Mỹ
+                        p.highlight-title-tour Laliga 2020 cup                
+                .col-xl-3.col-lg-4.col-md-6.highlight-box
+                    .highlight-thumbnail                        
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match BĐ Nha - TB Nha
+                        p.highlight-title-tour Laliga 2020 cup                
+                .col-xl-3.col-lg-4.col-md-6.highlight-box
+                    .highlight-thumbnail                        
+                        .highlight-play-button.pulse
+                        .highlight-play-button
+                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
+                                polygon(points="40,30 65,50 40,70")
+                    .highlight-title
+                        p.highlight-title-match Việt Nam - Thái Cùi
+                        p.highlight-title-tour Laliga 2020 cup                 
+
+    .right-content.col-lg-3.col-md-12.col-xs-0
         block chat
             include ./blocks/chat
 block script
     script(src='./../scripts/main.js')
-
+    script(src='./../scripts/helper/ScrollReveal.js')

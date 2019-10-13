@@ -9,9 +9,10 @@
 @import 'components/_components',
         'components/_uploadStreaming',
         'components/_streamingCard',
-        'components/_teamImage';
+        'components/_teamImage',
+        'components/_highlightBox';
 
-@import 'helper/_activeNavbar';        
+@import 'helper/_activeNavbar';
 
 @import 'layouts/header',
         'layouts/_footer';

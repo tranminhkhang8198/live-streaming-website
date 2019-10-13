@@ -1,0 +1,106 @@
+.highlight {
+    &-video-container {
+        margin-bottom: 5rem;
+    }
+
+    &-box {
+        margin-bottom: 2rem;
+        cursor: pointer;
+        transition: 150ms;
+        &:hover .highlight-thumbnail {
+            filter: brightness(.7);            
+        }
+
+        &:hover .highlight-play-button {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        &:hover {
+            transform: scale(1.1) translate(10px, -5px);
+        }
+    }
+
+    &-thumbnail {
+        position: relative;
+        background-image: url('../images/champion-league.jpg');
+        background-size: cover;
+        background-position: center center;
+        background-repeat: none;
+        height: 9rem;
+    }
+
+    &-title {
+        padding: 5px;
+        background-color: rgba($color-dark-2, .95);
+        color: $color-white;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, .5);
+        text-align: center;
+
+        &-match {
+            font-size: $font-size-xs;
+        }
+
+        &-tour {
+            font-size: $font-size-xxs;
+            color: rgba($color-white, .8);
+        }
+    }
+}
+
+.highlight-play-button {
+    opacity: 0;
+    visibility: hidden;
+    transition: 150ms;
+    
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background-color: $color-secondary-2;
+    margin: auto;
+    transform: scale(1, 1);
+
+    &.pulse {
+        animation-timing-function: ease;
+        animation: pulse 2s infinite;
+        background-color: lighten($color-secondary-2, 25%);
+    }
+}
+
+svg {
+    fill: darken($color-secondary-2, 50%);
+    stroke: darken($color-secondary-2, 50%);
+    stroke-linejoin: round;
+    stroke-width: 5;
+    transition: all 0.3s;
+
+    &:hover {
+        cursor: pointer;
+        fill: darken($color-secondary-2, 25%);
+        stroke: darken($color-secondary-2, 25%);
+        transform: scale(1.2, 1.2);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    25% {
+        transform: scale(1, 1);
+    }
+
+    50% {
+        transform: scale(1.2, 1.2);
+    }
+
+    100% {
+        transform: scale(1, 1);
+    }
+}
