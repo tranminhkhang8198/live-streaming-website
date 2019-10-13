@@ -1,3 +1,11 @@
 .header
-    nav.navbar.navbar-dark.bg-dark
+    nav.navbar.navbar-expand-lg.navbar-light.bg-light
         a.navbar-brand(href='/') Logo
+        button.navbar-toggler(type='button' data-toggle='collapse' data-target='#headerNavBar' aria-controls='headerNavBar' aria-expanded='false' aria-label='Toggle navigation')
+            span.navbar-toggler-icon
+        #headerNavBar.collapse.navbar-collapse
+            ul.navbar-nav.mr-auto
+                li.nav-item
+                    a.nav-link(href='/') Trang chủ
+                li.nav-item
+                    a.nav-link(href='/streaming') Live stream

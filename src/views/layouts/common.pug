@@ -1,3 +1,5 @@
+block vars
+
 doctype html
 html
     head
@@ -22,17 +24,15 @@ html
         link(rel="stylesheet", 
             href="./../styles/index.scss")
 
-        title Hello template
+        title=title
+
     body
         .wrapper
             block header
                 include ../blocks/header
 
-            .container-fluid
+            main.container-fluid
                 block container
-
-            block footer
-                //- include ../blocks/footer
 
             include ../blocks/scripts
             block script
