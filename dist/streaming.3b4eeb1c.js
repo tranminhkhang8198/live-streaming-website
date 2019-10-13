@@ -117,133 +117,37 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"../scripts/main.js":[function(require,module,exports) {
-var teamBlocks = Array.from(document.querySelectorAll('.schedule-team-name'));
-teamBlocks.forEach(function (item) {
-  item.addEventListener('mouseenter', function () {});
-});
-var cloneObject = [{
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming2"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming2"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming1"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming1"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming1"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming1"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming1"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming2"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming1"
-}, {
-  imgSrc: ['https://picsum.photos/200/200', 'https://picsum.photos/200/200'],
-  alt: 'Alt logo',
-  teamName: ['GEORIA', 'VietVi'],
-  time: '12/10/2019 - 10:00 PM',
-  tournament: 'Euro 2020 Qualification',
-  streamingKey: "streaming2"
-}];
-var scheduler = document.querySelector('.schedule');
-var outputScheduler = '';
-cloneObject.forEach(function (item) {
-  outputScheduler += "\n        <div class=\"schedule-containers row\" data-key=\"".concat(item.streamingKey, "\">\n            <div class=\"col-1\"></div>\n            <div class=\"col-4 d-flex flex-row align-items-center justify-content-start schedule-team-1 schedule-team\">\n                <img class=\"rounded-circle img-responsive schedule-team-img\" src=\"").concat(item.imgSrc[0], "\" alt=\"").concat(item.alt, "\" />\n                <div class=\"schedule-team-name-container schedule-team-name-container-1\">\n                    <p class=\"schedule-team-name\">").concat(item.teamName[0], "</p>\n                </div>\n            </div>\n            <div class=\"col-2 schedule-time-container d-flex flex-column justify-content-center align-items-center\">\n                <p class=\"schedule-time\">").concat(item.time, "</p><strong class=\"schedule-tour-name\">Euro 2020 Qualification</strong></div>\n            <div class=\"col-4 d-flex flex-row align-items-center justify-content-end schedule-team-2 schedule-team\">\n                <div class=\"schedule-team-name-container schedule-team-name-container-2\">\n                    <p class=\"schedule-team-name\">").concat(item.teamName[1], "</p>\n                </div><img class=\"rounded-circle schedule-team-img img-responsive\" src=\"").concat(item.imgSrc[1], "\" alt=\"").concat(item.alt, "\" /></div>\n            <div class=\"col-1\"></div>\n        </div>");
-});
-scheduler.innerHTML = outputScheduler;
-var streamingContainer = document.querySelector('.streaming-container');
-var streamingOutput = '';
-var cloneStreaming = [{
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}, {
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}, {
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}, {
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}, {
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}, {
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}, {
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}, {
-  teamName: ['BAGA', 'PetLand'],
-  score: '0 - 1',
-  tournament: 'Vietnem'
-}];
-cloneStreaming.forEach(function (item) {
-  streamingOutput += "\n        <div class=\"streaming-card row w-75 mx-auto mb-3\">\n            <div class=\"col-4 streaming-card-title-container d-flex flex-row align-items-center\"><i class=\"fas fa-tv mr-3\"></i>\n                <h3 class=\"streaming-card-title\">".concat(item.tournament, "</h3>\n            </div>\n            <div class=\"col-3 streaming-card-team-1-container d-flex align-items-center justify-content-center\">\n                <p class=\"streaming-card-team-1\">").concat(item.teamName[0], "</p>\n            </div>\n            <p class=\"col-1 streaming-card-score d-flex align-items-center justify-content-center\">").concat(item.score, "</p>\n            <div class=\"col-3 streaming-card-team-2-container d-flex align-items-center justify-content-center\">\n                <p class=\"streaming-card-team-2\">").concat(item.teamName[1], "</p>\n            </div>\n        </div>\n    ");
-});
-streamingContainer.innerHTML = streamingOutput;
-Array.from(document.querySelectorAll('.schedule-containers')).forEach(function (item) {
-  item.addEventListener('click', function () {
-    localStorage.setItem('key', item.dataset.key);
-    window.location = '/streaming.html';
+})({"../scripts/streaming.js":[function(require,module,exports) {
+var getStreamingKey = localStorage.getItem('key');
+var source = "http://45.63.62.153:3002/live/".concat(getStreamingKey, "/index.m3u8");
+var video = document.querySelector('.video-streaming');
+
+if (Hls.isSupported()) {
+  var hls = new Hls();
+  hls.loadSource(source);
+  hls.attachMedia(video);
+  hls.on(Hls.Events.MANIFEST_PARSED, function () {
+    video.play();
   });
-});
+} // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+// When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element through the `src` property.
+// This is using the built-in support of the plain video element, without using hls.js.
+// Note: it would be more normal to wait on the 'canplay' event below however on Safari (where you are most likely to find built-in HLS support) the video.src URL must be on the user-driven
+// white-list before a 'canplay' event will be emitted; the last video event that can be reliably listened-for when the URL is not on the white-list is 'loadedmetadata'.
+else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+    video.addEventListener('loadedmetadata', function () {
+      video.play();
+    });
+  } // if (video.src) {
+//     const videoFound = document.querySelector('.video-not-found');
+//     videoFound.setAttribute('style', 'display: none !important');
+//     videoFound.classList.remove('d-flex', 'flex-column');
+// } else {
+//     const videoFound = document.querySelector('.video-not-found');
+//     videoFound.setAttribute('style', 'display: flex');
+//     videoFound.classList.add('d-flex', 'flex-column');
+// }
 },{}],"../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -448,5 +352,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","../scripts/main.js"], null)
-//# sourceMappingURL=/main.1cbf646b.js.map
+},{}]},{},["../../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","../scripts/streaming.js"], null)
+//# sourceMappingURL=/streaming.3b4eeb1c.js.map

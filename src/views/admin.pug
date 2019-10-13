@@ -27,7 +27,7 @@ block container
                 .w-50
                     label(for="input-video-title") Tên đội 2
                     input.form-control#input-video-team-2(type="text",placeholder="Nhập vào tên đội 2")
-            .d-flex.flex-row.mt-3                    
+            .d-flex.flex-row.mt-3
                 .w-50.mr-5
                     label(for='input-video-status') Phương phức phát
                     select.form-control#input-video-status
@@ -170,3 +170,7 @@ block container
                         .dropdown-menu(aria-labelledby='dropdown-action')
                             a.dropdown-item(href='#') Cập nhật thông tin
                             a.dropdown-item(href='#') Tắt stream
+
+
+block script
+    script(src='./../scripts/admin.js')
