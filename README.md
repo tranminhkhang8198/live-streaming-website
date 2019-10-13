@@ -1,14 +1,23 @@
+# Sport streaming website
+## Contributors
+- [Nguyễn Minh Toàn (Noat)](https://github.com/nmtoan251998)
+
 ## Prerequites
-1. Node.Js v8+
-2. Parcel Bundler (config instruction listed below)
+1. [Node.Js v8.10.0+](https://nodejs.org/en/) - Core source code environment
+2. [NPM v6.11.3+](https://www.npmjs.com/) - Node packages management
+2. [Parcel Bundler](https://parceljs.org/) - Client side code bundler
 
 ## Installation
+To prevent unexpected error, install `parcel bundler` with `-g` flag
 ```
 $ npm install -g parcel
+```
 
-$ git clone https://github.com/nmtoan251998/psd-ui-template.git
+```
 
-$ cd psd-ui-template
+$ git clone https://github.com/nmtoan251998/streaming.git
+
+$ cd streaming
 
 $ npm install
 ```
@@ -27,21 +36,25 @@ $ npm audit fix
 ```
 
 ## Development
-Development
+- Start client side development
 ```
-$ npm start
+$ npm run dev:client
+```
+
+- Start server side development
+```
+$ npm run dev:server
+```
+
+- Start both client side and server side
+```
+$ npm run dev
 ```
 ## Production
-Production
 ```
 $ npm run build
 ```
 
-**HOT FIX**
-
-There will be a problem building production because of files path. After running `npm run build`, you have to go to the .html file in dist/ to rename the path to exact path (sorry forks who use my source code as a serverless web app, I configured the production for server based purpose)
-
 ```
-$ npm run deploy
+$ npm start
 ```
-
