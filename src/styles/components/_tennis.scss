@@ -1,0 +1,125 @@
+body {
+    font-family: "Roboto Condensed", Arial, sans-serif;
+    color: rgb(24, 24, 24);
+    font-weight: 300;
+}
+
+.sport-title1 {
+    text-align: center;
+    font-size: 30px;
+    color: #3f444a;
+    text-transform: uppercase;
+    padding: 0 0 10px;
+    position: relative;
+}
+
+.sport-title1::after {
+    background-color: gold;
+    bottom: 0;
+    content: '';
+    display: block;
+    height: 3px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    width: 120px;
+}
+
+.schedules-info1 {
+    text-align: center;
+    font-size: 24px;
+    color: rgb(63, 68, 74);
+    font-weight: 500;
+}
+
+.date1 {
+    text-align: center;
+    font-size: 24px;
+    color: rgb(63, 68, 74);
+    font-weight: 500;
+}
+
+.custom_match_layout1 {
+    align-items: center;
+    margin: 15px 0;
+    padding: 10px;
+    background: #f6f6f6;
+    transition: box-shadow .3s;
+}
+
+.custom_match_layout1:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px 0px;
+}
+
+.custom_image1 {
+    width: 30%;
+    padding: 0px;
+}
+
+.custom_image1 img {
+    width: 75%;
+    max-height: 300px;
+}
+
+.custom_match_info1 {
+    padding: 0 15px;
+    text-align: center;
+}
+
+.custom_name1 {
+    text-transform: uppercase;
+    color: rgb(63, 68, 74);
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.custom_tournament_name1 {
+    font-size: 20px;
+    margin-top: 15px;
+    font-weight: 300;
+    color: rgb(63, 68, 74);
+}
+
+.custom_play_button1 {
+    width: 30%;
+    text-align: right;
+}
+
+.custom_date1 {
+    margin: 10px 0 0 0;
+    color: #5c6873;
+}
+
+.match_is_playing1 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000 !important;
+    position: relative;
+    margin-top: -5px;
+}
+
+.match_is_playing1 img {
+    display: block;
+    margin: 0 auto;
+}
+
+.custom_match_link1:hover,
+.custom_match_link1:focus {
+    text-decoration: inherit;
+    color: rgb(63, 68, 74);
+}
+
+/* Small devices (landscape phones, 544px and up) */
+@media (max-width: 768px) {
+    .custom_match_info1 h2.custom_name1 {
+        font-size: 18px;
+    }
+
+    .custom_match_info1 h3.custom_tournament_name1 {
+        font-size: 16px;
+    }
+
+    .schedules-info1 {
+        font-size: 15px;
+    }
+}

@@ -1,19 +1,20 @@
 @import 'abstracts/_variables',
-        'abstracts/_mixins',
-        'abstracts/_extends';
+'abstracts/_mixins',
+'abstracts/_extends';
 
 @import 'bases/_base',
-        'bases/_typography',
-        'bases/_ultilities';
+'bases/_typography',
+'bases/_ultilities';
 
 @import 'components/_components',
-        'components/_uploadStreaming',
-        'components/_streamingCard',
-        'components/_teamImage';
+'components/_uploadStreaming',
+'components/_streamingCard',
+'components/_teamImage',
+'components/_tennis';
 
-@import 'helper/_activeNavbar';        
+@import 'helper/_activeNavbar';
 
 @import 'layouts/header',
-        'layouts/_footer';
+'layouts/_footer';
 
 @import 'pages/_home';
