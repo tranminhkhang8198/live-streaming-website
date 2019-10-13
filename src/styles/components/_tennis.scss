@@ -4,27 +4,6 @@ body {
     font-weight: 300;
 }
 
-.sport-title {
-    text-align: center;
-    font-size: 30px;
-    color: #3f444a;
-    text-transform: uppercase;
-    padding: 0 0 10px;
-    position: relative;
-}
-
-.sport-title::after {
-    background-color: gold;
-    bottom: 0;
-    content: '';
-    display: block;
-    height: 3px;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, 0);
-    width: 120px;
-}
-
 .schedules-info {
     text-align: center;
     font-size: 24px;
