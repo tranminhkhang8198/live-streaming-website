@@ -16,7 +16,7 @@ body {
 .sport-title::after {
     background-color: gold;
     bottom: 0;
-    content: '';
+    content: "";
     display: block;
     height: 3px;
     left: 50%;
@@ -44,7 +44,7 @@ body {
     margin: 15px 0;
     padding: 10px;
     background: #f6f6f6;
-    transition: box-shadow .3s;
+    transition: box-shadow 0.3s;
 }
 
 .custom_match_layout:hover {
@@ -52,7 +52,7 @@ body {
 }
 
 .custom_image {
-    width: 30%;
+    max-width: 30%;
     padding: 0px;
 }
 
@@ -81,7 +81,7 @@ body {
 }
 
 .custom_play_button {
-    width: 30%;
+    max-width: 30%;
     text-align: right;
 }
 
@@ -112,7 +112,7 @@ body {
 /* Small devices (landscape phones, 544px and up) */
 @media (max-width: 768px) {
     .custom_match_info h2.custom_name {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     .custom_match_info h3.custom_tournament_name {
@@ -120,6 +120,34 @@ body {
     }
 
     .schedules-info {
-        font-size: 15px;
+        font-size: 17px;
     }
+
+    .custom_date {
+        font-size: 13px;
+    }
+
+    .live_text {
+        font-size: 13px;
+    }
+}
+
+/* roboto-condensed-regular - latin */
+@font-face {
+    font-family: "Roboto Condensed";
+    font-style: normal;
+    font-weight: 400;
+    src: url("../fonts/roboto-condensed-v18-latin-regular.eot");
+    /* IE9 Compat Modes */
+    src: local("Roboto Condensed"), local("RobotoCondensed-Regular"),
+        url("../fonts/roboto-condensed-v18-latin-regular.eot?#iefix") format("embedded-opentype"),
+        /* IE6-IE8 */
+        url("../fonts/roboto-condensed-v18-latin-regular.woff2") format("woff2"),
+        /* Super Modern Browsers */
+        url("../fonts/roboto-condensed-v18-latin-regular.woff") format("woff"),
+        /* Modern Browsers */
+        url("../fonts/roboto-condensed-v18-latin-regular.ttf") format("truetype"),
+        /* Safari, Android, iOS */
+        url("../fonts/roboto-condensed-v18-latin-regular.svg#RobotoCondensed") format("svg");
+    /* Legacy iOS */
 }
