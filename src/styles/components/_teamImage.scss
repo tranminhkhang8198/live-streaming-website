@@ -2,6 +2,13 @@
     &-containers {
         margin-top: 1rem;
         cursor: pointer;
+        color: $color-dark;        
+
+        @include breakpoint(md-tablet) {
+            &:not(:first-child) {
+                margin-top: 2.5rem;
+            }
+        }
 
         &:hover .schedule-team-name-content {
             color: transparent;
@@ -9,6 +16,8 @@
         
         &:hover .schedule-team-name-content-left::before, &:hover .schedule-team-name-content-right::after {
             top: 0%;
+            opacity: 1;
+            visibility: visible;
         }
     }
 }
@@ -18,7 +27,7 @@
         width: 4rem;
         height: 4rem;
         position: relative;
-        z-index: 2;
+        z-index: 2;        
     }
 
     &-name {
@@ -26,7 +35,14 @@
             text-align: center;
             width: 100%;
             color: $color-dark-1;
-            background-color: $color-secondary;
+
+            background: #5ea55d;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #0c8f6a, #5ea55d);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #0c8f6a, #5ea55d); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+
+            // background-color: $color-secondary;
             position: relative;
             z-index: 1;
 
@@ -35,9 +51,12 @@
 
             &:nth-child(even) {
                 clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
+                -webkit-clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
+
             }
             &:nth-child(odd) {
                 clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
+                -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
             }              
         }
 
@@ -52,11 +71,16 @@
                 &::before {
                     content: 'blablabla';
                     color: $color-white;
+
                     position: absolute;
-                    transform: translateX(-50%);
                     left: 50%;
                     top: -200%;
+
+                    transform: translateX(-50%);                    
                     transition: 250ms;
+                    
+                    opacity: 0;
+                    visibility: hidden;
                 }
             }
 
@@ -64,11 +88,16 @@
                 &::after {
                     content: 'Chi tiết trận đấu';
                     color: $color-white;
+
                     position: absolute;
-                    transform: translateX(-50%);
                     left: 50%;
                     top: -200%;
+
+                    transform: translateX(-50%);
                     transition: 250ms;
+
+                    opacity: 0;
+                    visibility: hidden;
                 }
             }
         }
@@ -76,8 +105,8 @@
 }
 
 .schedule-time {
-    &-stream {
-        width: 35%;
+    &-img {
+        position: relative;        
     }
 
     &-container {

@@ -1,6 +1,6 @@
 .highlight {
     &-video-container {
-        margin-bottom: 5rem;
+        margin-bottom: 6rem;
     }
 
     &-box {
@@ -34,7 +34,7 @@
         padding: 5px;
         background-color: rgba($color-dark-2, .95);
         color: $color-white;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, .5);
+        box-shadow: $box-shadow-dark-2;
         text-align: center;
 
         &-match {
