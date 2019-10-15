@@ -4,8 +4,7 @@ const slideUp = {
     opacity: 0,
     duration: 500,
     delay: 100,
-    scale: .2,
-    reset: true,
+    scale: .2,    
     mobile: false,
 }
 
@@ -15,8 +14,7 @@ const slideRight = {
     opacity: 0,
     duration: 500,
     delay: 100,
-    scale: .2,
-    reset: true,
+    scale: .2,    
     mobile: false,
 }
 
@@ -25,7 +23,6 @@ const reveal = {
     duration: 700,
     delay: 100,
     mobile: false,
-    reset: true,
 }
 
 // query selectors

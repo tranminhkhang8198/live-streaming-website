@@ -3,7 +3,7 @@ block vars
     - var title="Trang chủ"
 
 block container
-    .col-md-12.col-lg-8.left-content
+    .col-md-12.col-lg-9.col-xl-8.left-content
         section.mt-5.schedule-container
             include ./components/_schedule
         
@@ -15,9 +15,10 @@ block container
         
         section.mt-5.highlight-video-container
             include ./components/_hightlightsVideo
-    .col-md-0.col-lg-4.right-content
+    .col-md-0.col-lg-3.col-xl-4.right-content
         block chat
-            include ./components/_chat
+            include ./components/_chat    
+
 block script
     script(src='./../scripts/main.js')
     script(src='./../scripts/helper/ScrollReveal.js')

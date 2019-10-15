@@ -111,6 +111,10 @@ svg {
     
     & .highlight-thumbnail {
         height: 20rem;
+
+        @include breakpoint(desktop) {
+            height: 30rem;
+        }
     }
 
     & .highlight-title {
@@ -148,6 +152,9 @@ svg {
         }
         @include breakpoint(l-mobile) {
             font-size: 10px !important;
+        }
+        @include breakpoint(md-mobile) {
+            font-size: 9px !important;
         }
     }
 

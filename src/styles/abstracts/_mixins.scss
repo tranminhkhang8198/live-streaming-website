@@ -1,12 +1,3 @@
-@mixin style-header-text($in--font-size, $in--letter-spacing) {    
-    letter-spacing: $in--letter-spacing;
-    font-size: $in--font-size;    
-    color: $color-white;
-    text-align: center;
-    text-transform: uppercase;
-    display: block;        
-}
-
 @mixin clearfix {
     &::after {
         content: "";
@@ -70,6 +61,26 @@
     }    
     @else if $point == desktop {
         @media only screen and (min-width: 1500px) {
+            @content ;
+        }
+    }
+    @else if $point == md-desktop {
+        @media only screen and (min-width: 1600px) {
+            @content ;
+        }
+    }
+    @else if $point == lg-desktop {
+        @media only screen and (min-width: 1700px) {
+            @content ;
+        }
+    }
+    @else if $point == xl-desktop {
+        @media only screen and (min-width: 1800px) {
+            @content ;
+        }
+    }
+    @else if $point == xxl-desktop {
+        @media only screen and (min-width: 1900px) {
             @content ;
         }
     }

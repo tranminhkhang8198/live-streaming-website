@@ -1,0 +1,49 @@
+main > .container-fluid {
+    @include breakpoint(md-desktop) {
+        padding-right: 0;
+    }
+}
+
+main > .row {
+    @include breakpoint(md-desktop) {
+        margin-left: 0;
+    }
+}
+
+main > .col-xl-8 {
+    @include breakpoint(md-desktop) {
+        max-width: 62.5%;
+        flex: 0 0 62.5%;
+    }
+    @include breakpoint(lg-desktop) {
+        max-width: 60%;
+        flex: 0 0 60%;
+    }
+    @include breakpoint(xl-desktop) {
+        max-width: 57%;
+        flex: 0 0 57%;
+    }
+    @include breakpoint(xxl-desktop) {
+        max-width: 55%;
+        flex: 0 0 55%;
+    }
+}
+
+main > .col-xl-4 {
+    @include breakpoint(md-desktop) {
+        max-width: 37.5%;
+        flex: 0 0 37.5%;       
+    }
+    @include breakpoint(lg-desktop) {
+        max-width: 40%;
+        flex: 0 0 40%;       
+    }
+    @include breakpoint(xl-desktop) {
+        max-width: 43%;
+        flex: 0 0 43%;       
+    }
+    @include breakpoint(xxl-desktop) {
+        max-width: 45%;
+        flex: 0 0 45%;       
+    }
+}
