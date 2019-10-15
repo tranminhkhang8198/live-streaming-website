@@ -1,6 +1,8 @@
 extends ./layouts/common.pug
 block vars
     - var title="Trang quản lý"
+block link
+    link(rel="stylesheet" href="./../styles/admin.scss")
 
 block container
     .mt-5
@@ -173,6 +175,8 @@ block container
                             a.dropdown-item(href='#') Cập nhật thông tin
                             a.dropdown-item(href='#') Tắt stream
 
-
 block script
+    //- streamer
+    script(src="https://cdn.jsdelivr.net/npm/hls.js@latest")
+    //- main files
     script(src='./../scripts/admin.js')

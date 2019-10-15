@@ -18,14 +18,7 @@ html
         link(rel="stylesheet", 
             href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
             integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU", 
-            crossorigin="anonymous")
-        //- slick slider
-        link(rel="stylesheet",
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css")
-        link(rel="stylesheet",
-            href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css")
-        //- hover.css
-        link(href="./../styles/css/hover.min.css" rel="stylesheet")
+            crossorigin="anonymous")        
 
         //- favicon
         link(rel="icon", 
@@ -33,11 +26,9 @@ html
             type="image/x-icon", 
             sizes="32x32")
 
-        link(rel="stylesheet", 
-            href="./../styles/index.scss")
-
         title=title
-
+        
+        block link
     body
         .wrapper
             block header

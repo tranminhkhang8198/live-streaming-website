@@ -2,6 +2,17 @@ extends ./layouts/common.pug
 block vars
     - var title="Trang chủ"
 
+block link
+    //- slick slider
+    link(rel="stylesheet",
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css")
+    link(rel="stylesheet",
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css")
+    //- hover.css
+    link(href="./../styles/css/hover.min.css" rel="stylesheet")
+    //- main file
+    link(rel="stylesheet" href="./../styles/index.scss")
+    
 block container
     .col-md-12.col-lg-9.col-xl-8.left-content
         section.mt-5.schedule-container
@@ -11,15 +22,20 @@ block container
             include ./components/_tennis.pug
         
         section.mt-5.streaming-container
-            include ./components/_streaming
+            include ./components/_streamingMatches
         
         section.mt-5.highlight-video-container
-            include ./components/_hightlightsVideo
+            include ./components/_hightlightVideos
     .col-md-0.col-lg-3.col-xl-4.right-content
         block chat
             include ./components/_chat    
 
 block script
+    //- slick
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js")
+    //- scroll reveal
+    script(src="https://unpkg.com/scrollreveal")
+    //- main files
     script(src='./../scripts/main.js')
-    script(src='./../scripts/helper/ScrollReveal.js')
-    script(src='./../scripts/helper/SlickSlider.js')
+    script(src='./../scripts/vendors/ScrollReveal.js')
+    script(src='./../scripts/vendors/SlickSlider.js')

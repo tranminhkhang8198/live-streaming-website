@@ -13,11 +13,11 @@
         'components/_highlightBox',
         'components/_button';
 
-@import 'helper/_activeNavbar';
+@import 'helpers/_activeNavbar';
 
 @import 'layouts/header',
         'layouts/_footer';
 
-@import 'pages/_home';
+@import 'pages/_index';
 
-@import 'vendor/_bootStrapLayout';
+@import 'vendors/_bootStrapLayout';
