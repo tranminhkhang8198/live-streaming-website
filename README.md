@@ -1,6 +1,7 @@
 # Sport streaming website
 ## Contributors
 - [Nguyễn Minh Toàn (Noat)](https://github.com/nmtoan251998)
+- [Trần Minh Khang](https://github.com/tranminhkhang8198)
 
 ## Prerequites
 1. [Node.Js v8.10.0+](https://nodejs.org/en/) - Core source code environment
