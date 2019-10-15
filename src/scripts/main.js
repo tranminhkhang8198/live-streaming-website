@@ -1,82 +1,82 @@
 const cloneScheduleData = [{
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['Boba Marine', 'Lokey Esport'],
+        teamName: ['Boba Marine', 'Lokey Esport'],
+        time: '14:00',
+        date: '11/10/2019',
+        tournament: 'Vòng loại',
         streamingKey: "streaming2",
+        isStreaming: true,
     },
     {
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['SKT T1 Telecom', 'GAM'],
+        teamName: ['SKT T1 Telecom', 'GAM'],
+        time: '14:00',
+        date: '12/10/2019',
+        tournament: 'Vòng bảng',
         streamingKey: "streaming2",
+        isStreaming: true,
     },
     {
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['Boba Marine', 'Lokey Esport'],
+        teamName: ['Boba Marine', 'Lokey Esport'],
+        time: '15:00',
+        date: '12/10/2019',
+        tournament: 'Chung kết thế giới',
         streamingKey: "streaming1",
+        isStreaming: true,
     },
     {
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['Boba Marine', 'Lokey Esport'],
+        teamName: ['Boba Marine', 'Lokey Esport'],
+        time: '16:00',
+        date: '12/10/2019',
+        tournament: 'Chung kết thế giới',
         streamingKey: "streaming1",
+        isStreaming: false,
     },
     {
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['Boba Marine', 'Lokey Esport'],
+        teamName: ['Boba Marine', 'Lokey Esport'],
+        time: '16:00',
+        date: '12/10/2019',
+        tournament: 'Chung kết thế giới',
         streamingKey: "streaming1",
+        isStreaming: false,
     },
     {
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['Boba Marine', 'Lokey Esport'],
+        teamName: ['Boba Marine', 'Lokey Esport'],
+        time: '18:00',
+        date: '12/10/2019',
+        tournament: 'Chung kết thế giới',
         streamingKey: "streaming1",
+        isStreaming: false,
     },
     {
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['Boba Marine', 'Lokey Esport'],
+        teamName: ['Boba Marine', 'Lokey Esport'],
+        time: '14:00',
+        date: '13/10/2019',
+        tournament: 'Chung kết thế giới',
         streamingKey: "streaming1",
+        isStreaming: false,
     },
     {
         imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
+        imgAlt: ['Boba Marine', 'Lokey Esport'],
+        teamName: ['Boba Marine', 'Lokey Esport'],
+        time: '14:00',
+        date: '14/10/2019',
+        tournament: 'Chung kết thế giới',
         streamingKey: "streaming2",
-    },
-    {
-        imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
-        streamingKey: "streaming1",
-    },
-    {
-        imgSrc: ['/images/representative.jpg', '/images/representative.jpg'],
-        alt: 'Alt logo',
-        teamName: ['GEORIA', 'VietVi'],
-        time: '12/10/2019 - 10:00 PM',
-        tournament: 'Euro 2020 Qualification',
-        streamingKey: "streaming2",
+        isStreaming: false,
     }
 ];
 
@@ -123,31 +123,66 @@ const cloneStreamingData = [{
 ];
 
 const renderScheduleBlock = (data) => {
-    const scheduler = document.querySelector('.schedule');
+    const scheduler = document.querySelector('.schedule-container');    
 
-    let outputScheduler = '';
-    data.forEach(item => {
-        outputScheduler += `
-            <div class="schedule-containers row" data-key="${item.streamingKey}">
-                <div class="col-1"></div>
-                <div class="col-4 d-flex flex-row align-items-center justify-content-start schedule-team-1 schedule-team">
-                    <img class="rounded-circle img-responsive schedule-team-img" src="${item.imgSrc[0]}" alt="${item.alt}" />
-                    <div class="schedule-team-name-container schedule-team-name-container-1">
-                        <p class="schedule-team-name">${item.teamName[0]}</p>
+    let outputScheduler = `
+        <h2 class="schedule-heading">Lịch phát</h2>
+        <hr/>
+        <div class="sport-type-container text-center">
+            <span class="ml-2 sport-type">BÓNG ĐÁ</span>
+        </div>
+    `;
+    
+    data.forEach((match, index) => {
+        if (match.isStreaming === true) {
+            outputScheduler += `
+                <a class="row schedule-item-containers" href="${match.streamingKey}">
+                    <div class="col-sm-5 col-md-5 d-flex flex-row align-items-center">
+                        <img class="rounded-circle img-responsive schedule-team-img" src="${match.imgSrc[0]}" alt="${match.imgSrc[1]}" />
+                        <div class="schedule-team-name-container schedule-team-name-container-1">
+                            <p class="schedule-team-name-content schedule-team-name-content-left">${match.teamName[0]}</p>
+                        </div>
                     </div>
-                </div>
-                <div class="col-2 schedule-time-container d-flex flex-column justify-content-center align-items-center">
-                    <p class="schedule-time">${item.time}</p><strong class="schedule-tour-name">Euro 2020 Qualification</strong></div>
-                <div class="col-4 d-flex flex-row align-items-center justify-content-end schedule-team-2 schedule-team">
-                    <div class="schedule-team-name-container schedule-team-name-container-2">
-                        <p class="schedule-team-name">${item.teamName[1]}</p>
-                    </div><img class="rounded-circle schedule-team-img img-responsive" src="${item.imgSrc[1]}" alt="${item.alt}" /></div>
-                <div class="col-1"></div>
-            </div>`;
-    })
+                    <div class="col-sm-2 col-md-2 col-xl-2 schedule-time-container d-flex flex-column justify-content-center align-items-center">
+                        <img class="schedule-time-img hvr-bounce-in" src="../images/live-icon.png" alt="Live streaming" />
+                        <strong class="schedule-team-img-live">Live</strong>
+                    </div>
+                    <div class="col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-end">
+                        <div class="schedule-team-name-container schedule-team-name-container-2">
+                            <p class="schedule-team-name-content schedule-team-name-content-right">${match.teamName[1]}</p>
+                        </div><img class="rounded-circle img-responsive schedule-team-img" src="${match.imgSrc[1]}" alt="${match.imgAlt[1]}" /></div>
+                </a>
+            `;
+        } else {
+            outputScheduler += `
+                <a class="row schedule-item-containers" href="${match.streamingKey}">
+                    <div class="col-sm-5 col-md-5 d-flex flex-row align-items-center">
+                        <img class="rounded-circle img-responsive schedule-team-img" src="${match.imgSrc[0]}" alt="${match.imgAlt[0]}" />
+                        <div class="schedule-team-name-container schedule-team-name-container-1">
+                            <p class="schedule-team-name-content schedule-team-name-content-left">${match.teamName[0]}</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-2 col-md-2 col-xl-2 schedule-time-container d-flex flex-column justify-content-center align-items-center">
+                        <p class="schedule-time">${match.time}</p><strong class="schedule-tour-name">${match.date}</strong></div>
+                    <div class="col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-end">
+                        <div class="schedule-team-name-container schedule-team-name-container-2">
+                            <p class="schedule-team-name-content schedule-team-name-content-right">${match.teamName[1]}</p>
+                        </div><img class="rounded-circle img-responsive schedule-team-img" src="${match.imgSrc[1]}" alt="${match.imgAlt[1]}" />
+                    </div>
+                </a>
+            `;
+        }
+    });
 
     scheduler.innerHTML = outputScheduler;
+
+    // assign ::before content to elements
+    const inlineTextEls = Array.from(document.querySelectorAll('.schedule-team-name-content-left'));
+    data.forEach((match, index) => {
+        inlineTextEls[index].setAttribute('data-before', match.tournament);
+    })
 }
+// renderScheduleBlock(cloneScheduleData);
 
 const renderStreamingBlock = (data) => {
     const streamingContainer = document.querySelector('.streaming-container');

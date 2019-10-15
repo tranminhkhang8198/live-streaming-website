@@ -36,5 +36,5 @@ const highlightBoxes = document.querySelectorAll('.highlight-box');
 
 ScrollReveal().reveal(streamingCardEles, slideUp);
 ScrollReveal().reveal(scheduleEles, reveal);
-ScrollReveal().reveal(highlightBoxes, reveal);
+// ScrollReveal().reveal(highlightBoxes, reveal);
 ScrollReveal().reveal(tennisCards, slideRight);
