@@ -1,41 +1,13 @@
-body {
-    font-family: "Roboto Condensed", Arial, sans-serif;
-    color: rgb(24, 24, 24);
-    font-weight: 300;
+#tennis {
+    font-family: $font-family-1;
+    color: $color-dark-4;
+    font-weight: 300;    
 }
 
-.sport-title {
-    text-align: center;
-    font-size: 30px;
-    color: #3f444a;
-    text-transform: uppercase;
-    padding: 0 0 10px;
-    position: relative;
-}
-
-.sport-title::after {
-    background-color: gold;
-    bottom: 0;
-    content: "";
-    display: block;
-    height: 3px;
-    left: 50%;
-    position: absolute;
-    transform: translate(-50%, 0);
-    width: 120px;
-}
-
-.schedules-info {
+.schedules-info, .date {
     text-align: center;
     font-size: 24px;
-    color: rgb(63, 68, 74);
-    font-weight: 500;
-}
-
-.date {
-    text-align: center;
-    font-size: 24px;
-    color: rgb(63, 68, 74);
+    color: $color-gray;
     font-weight: 500;
 }
 
@@ -48,7 +20,7 @@ body {
 }
 
 .custom_match_layout:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 0px 15px 0px;
+    box-shadow: $box-shadow-dark-1;
 }
 
 .custom_image {
@@ -68,7 +40,7 @@ body {
 
 .custom_name {
     text-transform: uppercase;
-    color: rgb(63, 68, 74);
+    color: $color-gray;
     font-size: 24px;
     font-weight: bold;
 }
@@ -77,7 +49,7 @@ body {
     font-size: 20px;
     margin-top: 15px;
     font-weight: 300;
-    color: rgb(63, 68, 74);
+    color: $color-gray;
 }
 
 .custom_play_button {
@@ -106,11 +78,10 @@ body {
 .custom_match_link:hover,
 .custom_match_link:focus {
     text-decoration: inherit;
-    color: rgb(63, 68, 74);
+    color: $color-gray;
 }
 
-/* Small devices (landscape phones, 544px and up) */
-@media (max-width: 768px) {
+@include breakpoint (md-tablet) {
     .custom_match_info h2.custom_name {
         font-size: 16px;
     }

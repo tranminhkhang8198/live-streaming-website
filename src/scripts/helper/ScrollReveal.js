@@ -5,6 +5,7 @@ const slideUp = {
     duration: 500,
     delay: 100,
     scale: .2,
+    reset: true,
     mobile: false,
 }
 
@@ -15,6 +16,7 @@ const slideRight = {
     duration: 500,
     delay: 100,
     scale: .2,
+    reset: true,
     mobile: false,
 }
 
@@ -30,7 +32,9 @@ const reveal = {
 const scheduleEles = document.querySelectorAll('.schedule-item-containers');
 const streamingCardEles = document.querySelectorAll('.streaming-card-containers');
 const tennisCards = document.querySelectorAll('.custom_match_layout');
+const highlightBoxes = document.querySelectorAll('.highlight-box');
 
 ScrollReveal().reveal(streamingCardEles, slideUp);
 ScrollReveal().reveal(scheduleEles, reveal);
+// ScrollReveal().reveal(highlightBoxes, reveal);
 ScrollReveal().reveal(tennisCards, slideRight);

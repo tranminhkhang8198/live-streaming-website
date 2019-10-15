@@ -1,5 +1,5 @@
 .sport-type {
-    font-family: "Roboto Condensed", Arial, sans-serif;
+    font-family: $font-family-1;
     text-transform: uppercase;    
 
     font-size: 1.7rem;    
@@ -10,7 +10,7 @@
     border-bottom: 3px solid gold;
 
     &-container {
-        margin-bottom: 5rem;
+        margin-bottom: 4rem;
     }
 
     &::after, &::before {
@@ -20,10 +20,11 @@
         
         bottom: -5px;
         
-        width: 10%;        
+        width: 15%;        
         height: 5px;
 
-        background-color: $color-secondary;
+        background: rgb(105, 230, 143);  /* fallback for old browsers */
+
         transition: 250ms;        
     }
 
@@ -36,11 +37,39 @@
 }
 
 .streaming-card {
+    &-team-display, &-score-display {
+        @include breakpoint(wtf-tablet) {
+            display: none !important;
+            visibility: 0 !important;
+            opacity: 0 !important;
+        }
+    }
+    &-hidden {
+        margin-top: 1rem;
+        opacity: 0;
+        visibility: hidden;
+        display: none;
+        width: 100%;
+        
+        @include breakpoint(wtf-tablet) {
+            display: flex !important;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+
     &-containers {
-        cursor: pointer;
         background-color: $color-white;
         margin: 0 auto;
-        margin-bottom: 1rem;
+        margin-bottom: 1rem;        
+        color: $color-dark;       
+        
+        @include breakpoint(wtf-tablet) {
+            padding-bottom: .5rem;
+        }
     }
 
     &-team {
@@ -52,9 +81,22 @@
         font-size: $font-size-s;
     
         &-container {
-            clip-path: polygon(0 0, 100% 0%, 80% 100%, 0 100%);
+            clip-path: polygon(0 0, 100% 0%, 88% 100%, 0 100%);
+            -webkit-clip-path: polygon(0 0, 100% 0%, 88% 100%, 0 100%);
+
+            @include breakpoint(wtf-tablet) {                
+                clip-path: unset;
+                -webkit-clip-path: unset;
+                height: 3rem;
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+            }
     
-            background-color: $color-dark;
+            background: #16222A;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #326077, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #326077, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            
+
             height: 5rem;
             color: #f6f6f6;
         }

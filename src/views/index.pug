@@ -3,22 +3,22 @@ block vars
     - var title="Trang chủ"
 
 block container
-    .col-lg-9.col-md-12.left-content        
-        .mt-5.schedule-container
+    .col-md-12.col-lg-8.left-content
+        section.mt-5.schedule-container
             include ./components/_schedule
         
-        section#tennis
+        section#tennis.mt-5
             include ./components/_tennis.pug
         
-        .mt-5.streaming-container
+        section.mt-5.streaming-container
             include ./components/_streaming
         
-        .mt-5.highlight-video-container
+        section.mt-5.highlight-video-container
             include ./components/_hightlightsVideo
-
-    .right-content.col-lg-3.col-md-12.col-xs-0
+    .col-md-0.col-lg-4.right-content
         block chat
-            include ./blocks/chat
+            include ./components/_chat
 block script
     script(src='./../scripts/main.js')
     script(src='./../scripts/helper/ScrollReveal.js')
+    script(src='./../scripts/helper/SlickSlider.js')

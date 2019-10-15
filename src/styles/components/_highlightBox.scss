@@ -1,10 +1,5 @@
 .highlight {
-    &-video-container {
-        margin-bottom: 5rem;
-    }
-
-    &-box {
-        margin-bottom: 2rem;
+    &-box {        
         cursor: pointer;
         transition: 150ms;
         &:hover .highlight-thumbnail {
@@ -14,10 +9,11 @@
         &:hover .highlight-play-button {
             visibility: visible;
             opacity: 1;
-        }
 
-        &:hover {
-            transform: scale(1.1) translate(10px, -5px);
+            @include breakpoint(md-tablet) {
+                visibility: 0;
+                opacity: 0;
+            }
         }
     }
 
@@ -26,16 +22,15 @@
         background-image: url('../images/champion-league.jpg');
         background-size: cover;
         background-position: center center;
-        background-repeat: none;
-        height: 9rem;
+        background-repeat: none;        
     }
 
     &-title {
         padding: 5px;
         background-color: rgba($color-dark-2, .95);
         color: $color-white;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, .5);
         text-align: center;
+        font-family: 'Comic Sans MS';        
 
         &-match {
             font-size: $font-size-xs;
@@ -43,7 +38,7 @@
 
         &-tour {
             font-size: $font-size-xxs;
-            color: rgba($color-white, .8);
+            color: rgba($color-white, .8);            
         }
     }
 }
@@ -102,5 +97,62 @@ svg {
 
     100% {
         transform: scale(1, 1);
+    }
+}
+
+.slider-for {
+    @include breakpoint(md-tablet) {
+        display: none;
+    }
+    & .highlight-box {
+        position: relative;
+        overflow: hidden;
+    }
+    
+    & .highlight-thumbnail {
+        height: 20rem;
+    }
+
+    & .highlight-title {
+        display: block;
+        width: 105%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgba($color-dark, 0);
+        color: $color-dark;        
+    }
+
+    & .highlight-title-match {
+        font-size: $font-size-m;
+        color: $color-dark;
+    }
+}
+
+.slider-nav {    
+    .highlight-video-container {
+        margin-bottom: 6rem;    
+    }
+
+    & .highlight-thumbnail {
+        height: 9rem;
+
+        @include breakpoint(l-mobile) {
+            height: 7rem;
+        }
+    }
+
+    & .highlight-title-match, & .highlight-title-tour {
+        @include breakpoint(md-tablet) {
+            font-size: 16px !important;
+        }
+        @include breakpoint(l-mobile) {
+            font-size: 12px !important;
+        }
+    }
+
+    .slick-slide {
+        padding-left: .1rem;
+        padding-right: .1rem;
     }
 }

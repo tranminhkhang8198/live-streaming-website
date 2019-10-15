@@ -9,6 +9,9 @@ $color-dark: #000;
 $color-dark-1: #373F3F;
 $color-dark-2: #03090C;
 $color-dark-3: #3f444a;
+$color-dark-4: rgb(24, 24, 24);
+
+$color-gray: rgb(63, 68, 74);
 
 $color-white: #f5f5f5;
 $color-white-1: #e1e1e1;
@@ -20,3 +23,11 @@ $font-size-s: 1.3rem;
 $font-size-m: 1.6rem;
 $font-size-l: 2rem;
 $font-size-xl: 2.6rem;
+
+// Font family
+$font-family-primary: "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue", Arial, sans-serif;
+$font-family-1: "Roboto Condensed", Arial, sans-serif;
+
+// Box shadow
+$box-shadow-dark-1: rgba(0, 0, 0, 0.35) 0px 0px 15px 0px;
+$box-shadow-dark-2: 0 10px 15px rgba(0, 0, 0, .5);

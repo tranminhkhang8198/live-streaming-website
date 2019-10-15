@@ -1,28 +1,5 @@
-// .nav-item {
-//     position: relative;    
-//     transition: 250ms;
-    
-//     &::after {
-//         transition: 250ms;
-//         position: absolute;
-//         content: '';
-//         height: 3px;
-//         width: 0;
-//         left: 0;
-//         bottom: 0;
-//         z-index: 1;
-//     }
-//     &:hover::after {        
-//         width: 100%;
-//         background-color:$color-secondary-1;
-//     }
-
-//     .nav-link {
-//         transition: 250ms;
-//     }
-//     &:hover .nav-link {        
-//         position: relative;
-//         z-index: 2;
-//         color: $color-white-1;
-//     }
-// }
+.navbar {
+    background: #536976;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #292E49, #536976);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
