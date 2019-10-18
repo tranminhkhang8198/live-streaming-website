@@ -1,0 +1,46 @@
+.chat-container {
+    width: 90%;
+    height: 28.5rem;
+    margin: 6rem auto 0rem;
+    position: relative;            
+
+    @include breakpoint(md-laptop) {
+        width: 110%;
+    }    
+
+    @include breakpoint(wtf-chatbox) {
+        width: 65%;
+        height: 35rem;
+        margin-top: 2rem;
+    }
+
+    @include breakpoint(sm-tablet) {
+        width: 80%;
+        height: 26rem;
+    }
+
+    @include breakpoint(md-desktop) {
+        width: 75%;
+    }
+
+    @include breakpoint(lg-desktop) {
+        width: 65%;
+    }
+
+    @include breakpoint(xxl-desktop) {
+        width: 55%;
+        height: 35rem;
+    }
+}
+
+.chat-box {
+    width: 100%;
+    height: 100%;    
+    border: 1px solid black;
+}
+
+.donation-button {
+    position: absolute;
+    bottom: -3rem;
+    left: 0;
+}

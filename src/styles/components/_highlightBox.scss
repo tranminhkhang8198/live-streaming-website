@@ -6,6 +6,20 @@
             filter: brightness(.7);            
         }
 
+        @include breakpoint(md-tablet) {
+            margin-bottom: 1rem;
+            padding-left: 7.5px !important;
+            padding-right: 7.5px !important;
+        }
+
+        &-containers-responsive {
+
+            display: none;
+            @include breakpoint(md-tablet) {
+                display: block;
+            }
+        }
+
         &:hover .highlight-play-button {
             visibility: visible;
             opacity: 1;
@@ -22,8 +36,14 @@
         background-image: url('../images/champion-league.jpg');
         background-size: cover;
         background-position: center center;
-        background-repeat: none;        
-    }
+        background-repeat: none;    
+        
+        height: 10rem;        
+
+        @include breakpoint(sm-tablet) {
+            height: 7.5rem;
+        }
+    }    
 
     &-title {
         padding: 5px;
@@ -34,11 +54,28 @@
 
         &-match {
             font-size: $font-size-xs;
+
+            @include breakpoint(l-mobile) {
+                font-size: 8px !important;
+            }
+            @include breakpoint(md-mobile) {
+                font-size: 12px !important;
+            }
         }
 
         &-tour {
             font-size: $font-size-xxs;
-            color: rgba($color-white, .8);            
+            color: rgba($color-white, .8);     
+            
+            @include breakpoint(md-tablet) {
+                font-size: 16px !important;
+            }
+            @include breakpoint(l-mobile) {
+                font-size: 10px !important;
+            }
+            // @include breakpoint(md-mobile) {
+            //     font-size: 8px !important;
+            // }   
         }
     }
 }
@@ -134,8 +171,15 @@ svg {
 }
 
 .slider-nav {    
+    @include breakpoint(md-tablet) {
+        display: none;
+    }
     .highlight-video-container {
         margin-bottom: 6rem;    
+
+        @include breakpoint(md-desktop) {
+            margin-bottom: 8rem;
+        }
     }
 
     & .highlight-thumbnail {

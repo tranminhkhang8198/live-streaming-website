@@ -7,13 +7,14 @@
         'bases/_ultilities';
 
 @import 'components/_uploadStreaming',
+        'components/_navbar',
         'components/_streamingCard',
-        'components/_teamImage',
+        'components/_schedule',
         'components/_tennis',
         'components/_highlightBox',
-        'components/_button';
-
-@import 'helpers/_activeNavbar';
+        'components/_button',
+        'components/_advertisement',
+        'components/_chat';
 
 @import 'layouts/header',
         'layouts/_footer';
