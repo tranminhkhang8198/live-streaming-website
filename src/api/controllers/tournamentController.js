@@ -1,4 +1,5 @@
 const Tournament = require("./../models/tournamentModel");
+const APIFeatures = require("./../utils/apiFeatures");
 
 
 exports.getAllTournament = async (req, res) => {
@@ -23,7 +24,11 @@ exports.getAllTournament = async (req, res) => {
 
 exports.getTournament = async (req, res) => {
     try {
-        const tournament = await Tournament.findById(req.params.id);
+        // EXCUTE QUERY
+        const features = new APIFeature(Tournament.find(), req.query)
+            .filter()
+
+        const tournaments = await features.query;
 
         res.status(200).json({
             status: 'success',
