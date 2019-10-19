@@ -1,0 +1,14 @@
+** Sport Type API **
+https://documenter.getpostman.com/view/6997301/SVtbPQcX
+
+
+** Tournament API **
+https://documenter.getpostman.com/view/6997301/SVtbPQgo
+
+
+** Match API **
+https://documenter.getpostman.com/view/6997301/SVtbPQY2
+
+
+** Streaming API **
+https://documenter.getpostman.com/view/6997301/SVtbPQgp
