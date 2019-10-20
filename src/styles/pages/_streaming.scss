@@ -15,9 +15,10 @@
     width: 100%;
 }
 .title-container{
+    // margin: 0px 20px;
     display: flex;
     align-items: center;
-    height: 50px;
+    min-height: 50px;
 }
 .page-control{
     background: #3f3f3f;
@@ -27,7 +28,7 @@
 }
 
 .title{
-    // margin-left: 20px;
+    margin: 20px 0px;
 }
 body{
     background: #1a1a1a;
@@ -36,11 +37,17 @@ body{
     height: 60px;
 }
 .server{
+    cursor:default;
     font-size: 14px;
     margin: 0px;
-    height: 50px;
+    min-height: 60px;
+    padding: 10px 0px;
     align-items: center;
     border-bottom: 1px whitesmoke solid;
+}
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
 }
 .server-selection{
     padding: 0px;
@@ -48,11 +55,14 @@ body{
 
 }
 .panel{
-    height: 40px;
+    min-height: 60px;
 }
 .container-center{
     width: 80%;
     padding: 0;
+    @include breakpoint(sm-tablet){
+        width: 100%;
+    }
 }
 .watching-ab{
     background: #3f3f3f;
@@ -87,8 +97,12 @@ body{
 .watching-ab-content span{
     margin-left: 5px;
 }
-.page-control-content::before{
+.page-control-content .fa::before{
     margin-right: 5px;
+}
+.page-control-content{
+    // background: gray;
+    cursor:default;
 }
 .server-bt.active{
     font-size: 12px;
@@ -106,9 +120,11 @@ body{
 .title{
     font-family: 'Times New Roman', Times, serif;
     font-style: bold;
+    font-size: 3vw;
 }
 .description{
     margin: 0;
+    padding: 0;
 }
 .icon{
     font-size: 16px;
@@ -124,9 +140,11 @@ body{
     display: flex ;
     margin: 0 auto;;
 }
-.watching-ab-icon{
-    @include breakpoint(xl-mobile){
-        font-size: 10px !important;
-    }
+.watching-ab-icon span{
+    margin-left: 5px;
 }
+.description-row{
+    margin: 0px;
+}
+
 
