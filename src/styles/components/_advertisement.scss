@@ -1,0 +1,42 @@
+.advertisement {
+    width: 80%;
+    height: 5rem;
+    // display: none;
+}
+
+.navbar .advertisement {
+    width: 100%;
+
+    @include breakpoint(md-tablet) {
+        width: 80%;
+        margin-left: 20%;
+    }
+
+    @include breakpoint(sm-tablet) {
+        height: 90%;
+    }
+}
+
+.sport-type-container .advertisement {
+    margin-top: 1rem;            
+    width: 70%;
+
+    @include breakpoint(desktop) {
+        width: 80%
+    }
+
+    @include breakpoint(l-mobile) {
+        width: 100%;
+    }
+    
+}
+
+.chat-container .advertisement {
+    margin-top: 3.5rem;
+    width: 100%;
+}
+
+.streaming-container .advertisement {
+    margin-top: 1rem;
+    width: 100%;
+}

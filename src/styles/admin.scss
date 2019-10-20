@@ -6,9 +6,9 @@
         'bases/_typography',
         'bases/_ultilities';
 
-@import 'helpers/_activeNavbar';
+@import 'components/_navbar';
 
 @import 'layouts/header',
         'layouts/_footer';
 
-@import 'pages/_index';
+@import 'pages/_admin';

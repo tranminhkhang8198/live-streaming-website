@@ -1,12 +1,16 @@
-.header
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-        a.navbar-brand(href='/')
-            i.far.fa-futbol(style="font-size: 50px;")
+nav.navbar.navbar-expand-lg.navbar-dark.bg-light
+    ul.navbar-nav.navbar-logo
+        li.nav-item.hvr-bounce-in
+            a.navbar-brand(href='/')
+                img.navbar-brand-logo(src="../images/logo.png" style="width: 10rem;")    
+        li.nav-item
+            include ../components/_advertisement
+
+.header.position-sticky(style="top: -1px; z-index: 10")
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.navbar-main
         button.navbar-toggler(type='button' data-toggle='collapse' data-target='#headerNavBar' aria-controls='headerNavBar' aria-expanded='false' aria-label='Toggle navigation')
             span.navbar-toggler-icon
-        #headerNavBar.collapse.navbar-collapse
+        #headerNavBar.collapse.navbar-collapse        
             ul.navbar-nav.mr-auto
                 li.nav-item.hvr-bounce-in
-                    a.nav-link(href='/') Trang chủ
-                li.nav-item.hvr-bounce-in
-                    a.nav-link(href='/streaming') Live stream
+                    a.nav-link(href='/') Home

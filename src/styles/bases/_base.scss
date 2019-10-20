@@ -13,20 +13,22 @@
 /**
 * default font-size = 10px;
 */
-html { 
+html {
     // font-size: 62.5%;    
-    scroll-behavior: smooth;      
+    scroll-behavior: smooth;
 }
 
-body { 
+body {
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
-ul { list-style-type: none; }
+ul {
+    list-style-type: none;
+}
 
-a { 
-    text-decoration: none; 
+a {
+    text-decoration: none;
 
     &:hover,
     &:focus,
@@ -36,16 +38,7 @@ a {
     }
 }
 
-p { margin: 0; padding: 0 }
-
-@include breakpoint(wtf-tablet) {
-    main.row {
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-    }
-
-    main.container-fluid {
-        padding-left: 0 !important;
-        padding-right: 0 !important;
-    }
+p {
+    margin: 0;
+    padding: 0
 }
