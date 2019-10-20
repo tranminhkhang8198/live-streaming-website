@@ -1,7 +1,12 @@
 const getStreamingKey = localStorage.getItem('key');
-const source = `http://45.63.62.153:3002/live/${getStreamingKey}/index.m3u8`;
+const source = `http://127.0.0.1:3002/live/loi/index.m3u8`;
 
-const video = document.querySelector('.video-streaming');
+const video = document.querySelector('.streamVideo');
+// const liveBT = document.querySelector('.live')
+// liveBT.addEventListener("click",function(){
+//     duration = video.duration
+//     video.currentTime = duration-5
+// })
 
 if (Hls.isSupported()) {
     var hls = new Hls();
