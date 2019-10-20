@@ -1,0 +1,35 @@
+/*CSS*/ 
+video {
+    width: 100%;
+    max-height: 150%;
+}
+
+.container-fluid {
+    width: unset;
+
+    @include breakpoint(md-tablet) {
+        width: 100%;        
+    }
+}
+
+
+.row {
+    @include breakpoint(md-tablet) {
+        margin-right: 0;
+        margin-left: 0;
+    }    
+}
+
+.col-lg-6, .col-12, .col-lg-12, .col-md-12 {
+    @include breakpoint(md-tablet) {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+.col-md-6 {
+    @include breakpoint(md-tablet) {
+        flex: 0 0 80%;
+        max-width: 80%;
+    }
+}

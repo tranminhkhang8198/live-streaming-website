@@ -31,7 +31,10 @@ html
     body
         .wrapper
             block header
-                include ../blocks/header
+                if authorized
+                    include ../blocks/adminHeader
+                else
+                    include ../blocks/header
 
             main.row.container-fluid
                 block container                    
