@@ -6,9 +6,15 @@
         'bases/_typography',
         'bases/_ultilities';
 
-@import 'components/_navbar';
+@import 'components/_navbar',
+        'components/_advertisement',
+        'components/_button';
 
 @import 'layouts/header',
         'layouts/_footer';
 
-@import 'pages/_index';
+@import 'pages/_streaming';
+
+
+
+

@@ -1,3 +1,150 @@
-.streaming {
-    
+
+.streamVideo {
+    width: 100%;
+    padding: 0px;
 }
+
+.video-alt-img{
+    width: 100%;
+    height: auto;   
+}
+
+.live{
+}
+.row{
+    width: 100%;
+}
+.title-container{
+    // margin: 0px 20px;
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+}
+.page-control{
+    background: #3f3f3f;
+    display: flex;
+    height: 40px;
+    align-items: center;
+}
+
+.title{
+    margin: 20px 0px;
+}
+body{
+    background: #1a1a1a;
+}
+.info-container{
+    height: 60px;
+}
+.server{
+    cursor:default;
+    font-size: 14px;
+    margin: 0px;
+    min-height: 60px;
+    padding: 10px 0px;
+    align-items: center;
+    border-bottom: 1px whitesmoke solid;
+}
+.container-fluid{
+    margin: 0px;
+    padding: 0px;
+}
+.server-selection{
+    padding: 0px;
+    display: block !important;
+
+}
+.panel{
+    min-height: 60px;
+}
+.container-center{
+    width: 80%;
+    padding: 0;
+    @include breakpoint(sm-tablet){
+        width: 100%;
+    }
+}
+.watching-ab{
+    background: #3f3f3f;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+.icon{
+    margin-right: 10px;
+}
+.body{
+    color: #ccc;
+}
+.server-bt{
+    background: #777;
+    border-bottom-color: #666;
+    color: #eee;
+
+    font-size: 10px;
+
+    padding: 7px 12px 5px 12px;
+    border-radius: 3px;
+    min-width: 72;
+    font-weight: bold;
+    margin: 5px;
+    display: inline-block;
+    white-space: nowrap;
+}
+.watching-ab-content::before{
+    margin-right: 5px;
+}
+.watching-ab-content span{
+    margin-left: 5px;
+}
+.page-control-content .fa::before{
+    margin-right: 5px;
+}
+.page-control-content{
+    // background: gray;
+    cursor:default;
+}
+.server-bt.active{
+    font-size: 12px;
+    border-color: #73ad38;
+    background: #70b63d;
+    color: white;
+}
+.server-bt::before{
+    // content: "\f038";
+    // font-family: 'FontAwesome';
+    font-size: 10px;
+    // margin-right: 10px;
+    // font-weight: 700px;
+}
+.title{
+    font-family: 'Times New Roman', Times, serif;
+    font-style: bold;
+    font-size: 3vw;
+}
+.description{
+    margin: 0;
+    padding: 0;
+}
+.icon{
+    font-size: 16px;
+    margin-right: 0;
+    width: 16px;
+    text-align: center;
+}
+.video-container{
+    margin: 0px;
+    padding: 0px;
+}
+.container{
+    display: flex ;
+    margin: 0 auto;;
+}
+.watching-ab-icon span{
+    margin-left: 5px;
+}
+.description-row{
+    margin: 0px;
+}
+
+

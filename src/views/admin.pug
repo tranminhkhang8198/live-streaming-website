@@ -1,15 +1,19 @@
 extends ./layouts/common.pug
 block vars
-    - var title="Trang quản lý"
+    - var title="Admin panel"
+    - var authorized = true
 block link
     link(rel="stylesheet" href="./../styles/admin.scss")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.css")
 
 block container
-    .container-fluid.row.col-12.upload-new-video
-        include ./components/_uploadStreamingData
+    .container-fluid
+        include ./components/_streamingDataTable
     
 block script
     //- streamer
     //- script(src="https://cdn.jsdelivr.net/npm/hls.js@latest")
-    //- main files
-    //- script(src='./../scripts/admin.js')
+    //- pagination.js
+    script(src="https://cdnjs.cloudflare.com/ajax/libs/paginationjs/2.1.4/pagination.min.js")
+    //- main files    
+    script(src='./../scripts/admin.js')

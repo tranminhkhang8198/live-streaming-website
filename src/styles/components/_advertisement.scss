@@ -1,7 +1,6 @@
 .advertisement {
     width: 80%;
     height: 5rem;
-    // display: none;
 }
 
 .navbar .advertisement {
@@ -38,5 +37,9 @@
 
 .streaming-container .advertisement {
     margin-top: 1rem;
+    width: 100%;
+}
+
+.ad .advertisement{
     width: 100%;
 }
