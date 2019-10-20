@@ -6,8 +6,7 @@
         'bases/_typography',
         'bases/_ultilities';
 
-@import 'components/_uploadStreaming',
-        'components/_navbar',
+@import 'components/_navbar',
         'components/_streamingCard',
         'components/_schedule',
         'components/_tennis',
@@ -16,7 +15,7 @@
         'components/_advertisement',
         'components/_chat';
 
-@import 'layouts/header',
+@import 'layouts/_header',
         'layouts/_footer';
 
 @import 'pages/_index';

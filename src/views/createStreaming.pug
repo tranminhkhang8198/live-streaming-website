@@ -1,0 +1,14 @@
+extends ./layouts/common.pug
+block vars
+    - var title="Create new streaming video"
+    - var authorized = true
+block link
+    link(rel="stylesheet" href="./../styles/createStreaming.scss")
+
+block container
+    .container-fluid
+        include ./components/_createNewStreaming        
+
+block script
+    //- main files
+    script(src='./../scripts/createStreaming.js')

@@ -1,0 +1,18 @@
+.create-streaming-heading {
+    @include breakpoint(md-tablet) {
+        font-size: $font-size-s;
+    }
+}
+
+.streaming-table-data th {
+    @include breakpoint(tablet) {
+        white-space: nowrap; 
+        overflow: hidden;
+    }
+}
+
+.upload-streaming-title-tour {
+    @include breakpoint(wtf-chatbox) {
+        margin-top: 2rem;
+    }
+}
