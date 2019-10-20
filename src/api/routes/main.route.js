@@ -3,7 +3,8 @@ const Router = require('express').Router();
 const {
     homePage,
     adminPage,
-    streamingPage,
+    watchStreamingPage,
+    createStreamingPage,
 } = require('../controllers/main.controller');
 
 
@@ -19,7 +20,14 @@ Router.route('/').get(homePage);
  * @api {get} /streaming
  * @public
  */
-Router.route('/streaming').get(streamingPage);
+Router.route('/streaming').get(watchStreamingPage);
+
+/**
+ * Render create new streaming page
+ * @api {get} /admin/create-streaming
+ * @public
+ */
+Router.route('/admin/create-streaming').get(createStreamingPage);
 
 /**
  * Render home page

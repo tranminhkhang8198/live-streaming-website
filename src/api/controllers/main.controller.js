@@ -21,9 +21,19 @@ module.exports.adminPage = (req, res, next) => {
     }
 }
 
-module.exports.streamingPage = (req, res, next) => {
+module.exports.watchStreamingPage = (req, res, next) => {
     try {
         const pathToFile = path.join(__dirname, '../../../dist/streaming.html');
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.createStreamingPage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, '../../../dist/createStreaming.html');
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
     } catch (error) {
