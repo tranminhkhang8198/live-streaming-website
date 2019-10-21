@@ -6,15 +6,13 @@ const renderScheduleBlock = (data) => {
     const scheduler = document.querySelector('.schedule-container');    
 
     let outputScheduler = `
-        <h2 class="schedule-heading">Schedule
-            <hr/>            
-        </h2>
+        <h2 class="schedule-heading">Schedule</h2>
+        <hr/>
         <div class="sport-type-container text-center">
-            <span class="ml-2 sport-type">Football</span>
+                <span class="ml-2 sport-type">Football</span>
             <br/>
-        </div>
-        <div class="schedule-divider mt-4">
-            <h4 class="text-center">Today</h4>
+            <div class="schedule-divider mt-4">
+                <h4 class="text-center">Today</h4>
     `;
 
     data.forEach((match, index) => {
@@ -153,6 +151,7 @@ const renderScheduleBlock = (data) => {
         }
     });
     outputScheduler += `</div>`;
+    outputScheduler += `</div>`;
 
     scheduler.innerHTML = outputScheduler;
 
@@ -169,7 +168,7 @@ const renderScheduleBlock = (data) => {
         item.setAttribute('data-before', data[index].tournament);
     })
 }
-renderScheduleBlock(scheduleData);
+// renderScheduleBlock(scheduleData);
 
 const renderTennisBlock = (data) => {
     const tennisContainer = document.querySelector('.tennis-container');    
@@ -271,7 +270,7 @@ const renderTennisBlock = (data) => {
 
     tennisContainer.innerHTML = outputTennis;
 }
-renderTennisBlock(tennisData);
+// renderTennisBlock(tennisData);
 
 const renderStreamingBlock = (data) => {
     const streamingContainer = document.querySelector('.streaming-container');
@@ -304,4 +303,4 @@ const renderStreamingBlock = (data) => {
     })
     streamingContainer.innerHTML = streamingOutput;
 }
-renderStreamingBlock(streamingData);
+// renderStreamingBlock(streamingData);

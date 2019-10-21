@@ -16,15 +16,11 @@ const templateTableData = (data) => {
     let modals = '';
 
     const streamingStatusEnum = {
-        '-1': {
-            html: 'Unset',
-            class: 'badge-secondary'
-        },
-        '0': {
+        'false': {
             html: 'Pending',
             class: 'badge-info'
         },
-        '1': {
+        'true': {
             html: 'On air',
             class: 'badge-danger'
         },
@@ -33,7 +29,7 @@ const templateTableData = (data) => {
         const streamingStatus = streamingStatusEnum[item.is_streaming.toString()];
 
         // show shutdown dropdown item if video is streaming
-        if (streamingStatus.html === 'On air') {
+        if (item.is_streaming == true) {
             html += `
             <tr>
                 <th style="text-overflow: hidden;" scope="row">${item.title}</th>
@@ -41,7 +37,7 @@ const templateTableData = (data) => {
                 <td> 
                     <span class="badge ${streamingStatus.class} p-2">${streamingStatus.html}</span>
                 </td>
-                <td>${item.score}</td>
+                <td>${item.score1} - ${item.score2}</td>
                 <td>
                     <div class="dropdown"><button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdown-action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-action">
@@ -61,7 +57,7 @@ const templateTableData = (data) => {
                 <td> 
                     <span class="badge ${streamingStatus.class} p-2">${streamingStatus.html}</span>
                 </td>
-                <td>${item.score}</td>
+                <td>${item.score1} - ${item.score2}</td>
                 <td>
                     <div class="dropdown"><button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdown-action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                         <div class="dropdown-menu" aria-labelledby="dropdown-action">
@@ -103,7 +99,7 @@ const templateTableData = (data) => {
                                 </p>
                             </div>
                             <div class="col-2 d-flex justify-content-center align-items-center">
-                                <p>${item.score}</p>
+                                <p>${item.score1} - ${item.score2}</p>
                             </div>
                             <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                 <img 
@@ -189,7 +185,11 @@ const templateTableData = (data) => {
                             <div class="col-2 d-flex justify-content-center align-items-center">
                                 <input 
                                     class="input-modify-score" 
-                                    value="${item.score}">
+                                    value="${item.score1}">
+                                -
+                                <input 
+                                    class="input-modify-score" 
+                                    value="${item.score2}">
                             </div>
                             <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                 <div 

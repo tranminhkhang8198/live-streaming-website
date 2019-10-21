@@ -1,35 +1,27 @@
 .chat-container {
-    width: 90%;
-    height: 28.5rem;
-    margin: 6rem auto 0rem;
+    width: 100%;
+    height: 25rem;
+    margin: 3rem auto 0;
     position: relative;            
 
-    @include breakpoint(md-laptop) {
-        width: 110%;
-    }    
+    @include breakpoint(laptop) {
+        margin-top: 1rem;
+        margin-bottom: 12rem;
+        width: 35%;
+    }
 
-    @include breakpoint(wtf-chatbox) {
-        width: 65%;
-        height: 35rem;
-        margin-top: 2rem;
+    @include breakpoint(tablet) {
+        margin-top: -1rem;
+        width: 40%;        
     }
 
     @include breakpoint(sm-tablet) {
-        width: 80%;
-        height: 26rem;
+        width: 50%;
+        height: 20rem;
     }
 
-    @include breakpoint(md-desktop) {
-        width: 75%;
-    }
-
-    @include breakpoint(lg-desktop) {
-        width: 65%;
-    }
-
-    @include breakpoint(xxl-desktop) {
-        width: 55%;
-        height: 35rem;
+    @include breakpoint(lg-mobile) {
+        width: 60%;
     }
 }
 

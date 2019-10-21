@@ -1,4 +1,4 @@
-h2.mt-5.create-streaming-heading Create new streaming video
+h2.mt-3.create-streaming-heading Create new streaming video
 hr
 .row.upload-container
     .col-sm-9.col-md-6.col-lg-4.mx-auto.video-preview-container
@@ -22,57 +22,55 @@ hr
             .col-md-12.col-lg-6.row.upload-streaming-tournament                
                 .col-12
                     label(for="input-video-tour-category") Tournament:
-                    input.form-control#input-video-tour-name(type="text" placeholder="Input tournament name")
+                    input.form-control#input-video-tournament(type="text" placeholder="Input tournament name")
                 .col-12.mt-1.upload-video-tournament-logo(style="display: none;")
                     .form-group
-                        input(type="file" class="form-control-file" id="input-video-tournament-logo")
+                        input#input-video-tournament-logo(type="file" class="form-control-file")
 
         .col-12.row.upload-streaming-team1-team2.mt-4(style="display: none;")
             .col-md-12.col-lg-6.row.upload-streaming-team1
                 .col-lg-12
                     label(for="input-video-title") Team 1:
-                    input.form-control#input-video-team-1(type="text" placeholder="Input team 1 name")
+                    input.form-control#input-video-team1-name(type="text" placeholder="Input team 1 name")
                 .col-lg-12.mt-1
                     .form-group.upload-video-team1-logo
-                        input(type="file" class="form-control-file" id="input-video-team1-logo")
+                        input#input-video-team1-logo(type="file" class="form-control-file")
             .col-md-12.col-lg-6.row.upload-streaming-team2
                 .col-12
                     label(for="input-video-title") Team 2:
-                    input.form-control#input-video-team-2(type="text" placeholder="Input team 2 name")
+                    input.form-control#input-video-team2-name(type="text" placeholder="Input team 2 name")
                 .col-12.mt-1
                     .form-group.upload-video-team2-logo
-                        input(type="file" class="form-control-file" id="input-video-team2-logo")
+                        input#input-video-team2-logo(type="file" class="form-control-file")
 
         .col-12.row.upload-streaming-player1-player2.mt-2(style="display: none;")
             .col-12.col-lg-6
                 label(for="input-video-player1") Player 1:
-                input.form-control#input-video-player-1(type="text" placeholder="Input player 1 name")                
+                input.form-control#input-video-player1-name(type="text" placeholder="Input player 1 name")                
             .col-12.col-lg-6
                 label(for="input-video-player2") Player 2:
-                input.form-control#input-video-player-2(type="text" placeholder="Input player 2 name")                
+                input.form-control#input-video-player2-name(type="text" placeholder="Input player 2 name")                
 
         .col-12.row.upload-streaming-status-time.mt-2
             .col-12
                 label(for='input-video-status') Streaming status:
                 select.form-control#input-video-status(name="video-status")
                     option(value="undefined") Choose status
-                    option(value="now") Immediate
-                    option(value="schedule") Schedule
+                    option(value="1") Immediate
+                    option(value="0") Schedule
             .col-12.mt-3#input-video-time-container(style="display: none")
                 label(for="input-video-time") Time
-                input.form-control#input-video-time(type="date" disabled)
+                input#input-video-time.form-control(type="datetime-local" disabled)
         button(type="submit").btn.btn-outline-dark.mt-4.mx-auto#btn-generate-key Generate streaming key
 
 h2.mt-5.create-streaming-heading Streaming keys information
 hr
 .config-stream.mb-5
     .row
-        .col-md-12.col-lg-4.mt-3
+        .col-md-12.col-lg-6.mt-3
             label(for="streaming-key") Streaming key
             input#streaming-key.form-control(type="text" disabled) 
-        .col-md-12.col-lg-4.mt-3
+        .col-md-12.col-lg-6.mt-3
             label(for="streaming-live-url") URL of streaming event
             input#streaming-live-url.form-control(type="text" disabled) 
-        .col-md-12.col-lg-4.mt-3
-            label(for="streaming-backup-url") URL of backup server
-            input#streaming-backup-url.form-control(type="text" disabled) 
+        button#create-new-match-btn.col-4.mt-3.mx-auto.btn.btn-primary(disabled) Create new stream

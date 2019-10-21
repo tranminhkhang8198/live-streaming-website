@@ -10,17 +10,17 @@
     box-sizing: inherit;
 }
 
-/**
-* default font-size = 10px;
-*/
 html {
-    // font-size: 62.5%;    
     scroll-behavior: smooth;
+
+    @include breakpoint(desktop) {
+        font-size: 22px;
+    }
 }
 
 body {
     box-sizing: border-box;
-    overflow-x: hidden;
+    overflow-x: hidden;    
 }
 
 ul {

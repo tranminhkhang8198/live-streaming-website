@@ -1,189 +1,289 @@
-.schedule-item {
-    &-containers {
-        margin-top: 1rem;
-        @include breakpoint(l-mobile) {
-            margin-top: 0;
-        }
+.schedule {
+    &-item {
+        &-containers {
+            margin-top: 1rem;
 
-        cursor: pointer;
-        color: $color-dark;                   
-        font-size: 1.2rem;
-
-        @include breakpoint(sm-tablet) {
-            font-size: 13px;
-            margin-bottom: 1rem;
-        }        
-
-        &:hover .schedule-team-name-content {
-            color: transparent;         
-            
-            @include breakpoint(tablet) {
-                color: initial
-            }
-        }
-        
-        &:hover .schedule-team-name-content-left::before, &:hover .schedule-team-name-content-right::after {
-            top: 10%;
-            opacity: 1;
-            visibility: visible;
-
-            @include breakpoint(tablet) {
-                top: initial;
-                opacity: 0;
-                visibility: hidden;
-            }
-        }
-    }
-
-    &-left-content {
-        @include breakpoint(sm-tablet) {
-            flex-direction: column !important; 
-        }
-    }
-
-    &-right-content {
-        @include breakpoint(sm-tablet) {
-            flex-direction: column-reverse !important; 
-        }
-    }
-}
-
-.schedule-team {
-    &-img {
-        width: 3.5rem;
-        height: 3.5rem;
-        position: relative;
-        top: -5px;
-        z-index: 2;               
-        
-        &-live {
-            text-transform: uppercase;
+            cursor: pointer;
             color: $color-dark;
+            font-size: 1.2rem;
+
+            &:hover .schedule-team-name-content {
+                @include breakpoint(tablet) {
+                    color: initial
+                }
+            }
+
+            &:hover .schedule-team-name-container {
+                transform: scale(1.1);
+                background: url('../images/background-image.jpg');
+                background-position: center;                
+            }
+        }
+
+        &-left-content {
+            @include breakpoint(tablet) {
+                flex-direction: column !important;
+            }
+
+            @include breakpoint(md-mobile) {
+                padding-left: 0;
+            }
+        }
+
+        &-right-content {
+            @include breakpoint(tablet) {
+                flex-direction: column-reverse !important;
+            }
+
+            @include breakpoint(md-mobile) {
+                padding-right: 0;
+            }
         }
     }
 
-    &-name {
-        &-container {
-            @include breakpoint(sm-tablet) {
-                color: #16222A;
-                font-weight: 700;
-                background: transparent;
-            }            
+    &-team {
+        &-img {
+            width: 3.5rem;
+            height: 3.5rem;
 
-            text-align: center;
-            width: 100%;
-            color: $color-white;
-
-            background: #16222A;  /* fallback for old browsers */
-            background: -webkit-linear-gradient(to right, #326077, #16222A);  /* Chrome 10-25, Safari 5.1-6 */
-            background: linear-gradient(to right, #326077, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            
             position: relative;
-            z-index: 1;
+            top: -5px;
+            z-index: 2;
 
-            &-1 {
-                margin-left: -1.5rem;
-
-                @include breakpoint(sm-tablet) {
-                    margin-left: 0;
-                }
+            @include breakpoint(md-mobile) {
+                top: 5px;
             }
-            &-2 {
-                margin-right: -1.5rem;
-
-                @include breakpoint(sm-tablet) {
-                    margin-right: 0;
-                }
-            }
-
-            &:nth-child(even) {
-                clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
-                -webkit-clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
-
-            }
-            &:nth-child(odd) {
-                clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
-                -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
-            }              
         }
 
-        &-content {
-            font-family: "Roboto";
-            margin-top: .5rem;
-            margin-bottom: .5rem;
+        &-name {
+            &-container {
+                text-align: center;
+                width: 100%;
+                color: $color-white;
+
+                transition: all 300ms;
+
+                background: #16222A;
+                background: -webkit-linear-gradient(to right, #326077, #16222A);
+                background: linear-gradient(to right, #326077, #16222A);
+
+                position: relative;
+                z-index: 1;
+
+                @include breakpoint(tablet) {
+                    color: #16222A;
+                    font-weight: 700;
+                    background: transparent;
+                }
+
+                @include breakpoint(lg-desktop) {
+                    height: 60%;
+                }
+
+                &-1 {
+                    margin-left: -1.5rem;
+
+                    @include breakpoint(tablet) {
+                        margin-left: 0;
+                    }
+                }
+
+                &-2 {
+                    margin-right: -1.5rem;
+
+                    @include breakpoint(tablet) {
+                        margin-right: 0;
+                    }
+                }
+
+                &:nth-child(even) {
+                    clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
+                    -webkit-clip-path: polygon(0 0, 100% 0%, 88% 100%, 0% 100%);
+                }
+
+                &:nth-child(odd) {
+                    clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
+                    -webkit-clip-path: polygon(0 0, 100% 0%, 100% 100%, 12% 100%);
+                }
+            }
+
+            &-content {
+                font-family: "Roboto";
+                margin-top: .5rem;
+                margin-bottom: .5rem;
+                position: relative;
+                transition: all 100ms;
+                font-size: $font-size-xs;
+
+                @include breakpoint(md-mobile) {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+
+    &-time {
+        font-size: $font-size-xs;
+
+        &-img {
             position: relative;
-            transition: all 100ms;
+            width: 35px;
+            height: 35px;
+        }
+
+        &-container {
+            text-align: center;
+            font-size: $font-size-xxs;
+            text-transform: uppercase;
+        }
+    }
+
+    &-date {
+        border-top: 1px solid $color-dark;
+        font-size: $font-size-xxs;
+        font-weight: 800;
+    }
+
+    &-divider {
+        & h4 {
             font-size: $font-size-xs;
+        }
 
-            &-left {
-                &::before {
-                    content: attr(data-before);
-                    color: $color-white;
+        @include breakpoint(laptop) {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
 
-                    position: absolute;
-                    left: 50%;
-                    top: -200%;
-                    width: 100%;
-
-                    transform: translateX(-50%);                    
-                    transition: 250ms;
-                    
-                    opacity: 0;
-                    visibility: hidden;
-                }
-            }
-
-            &-right {
-                &::after {
-                    font-size: 1rem !important;
-                    content: 'More information';
-                    color: $color-white;
-
-                    position: absolute;
-                    left: 50%;
-                    top: -100%;
-
-                    transform: translateX(-50%);
-                    transition: 250ms;
-
-                    opacity: 0;
-                    visibility: hidden;
-                }
-            }
+        @include breakpoint(tablet) {
+            width: 100%;
         }
     }
 }
 
-.schedule-time {
-    @include breakpoint(l-mobile) {
-        font-size: 15px;
+.tennis {
+    &_layout {
+        align-items: center;
+        margin: 15px 0;
+        margin-top: 0;
+        padding: 10px;
+        background: #f6f6f6;
+        transition: box-shadow 0.3s;
+
+        &:hover {
+            box-shadow: $box-shadow-dark-1;
+        }
     }
 
-    &-img {
-        position: relative;        
-        width: 40px;
-        height: 40px;
-    }    
-
-    &-container {
+    &_info {
+        padding: 0 15px;
         text-align: center;
 
-        @include breakpoint(sm-tablet) {
-            justify-content: flex-start !important;
-            padding-top: 1rem;
-        }        
+        &.col-6 {
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+
+    &_link {
+        &:hover,
+        &:focus {
+            text-decoration: inherit;
+            color: $color-gray;
+        }
+    }
+
+    &_is_playing {
+        font-size: 15px;
+        font-weight: bold;
+        color: #000 !important;
+        position: relative;
+        margin-top: -5px;
+
+        & img {
+            display: block;
+            margin: 0 auto;
+
+            @include breakpoint(md-mobile) {
+                width: 35px;
+            }
+        }
+    }
+
+    &_players_name {
+        text-transform: uppercase;
+        color: $color-gray;
+        font-size: 18px;
+        font-weight: bold;
+    
+        @include breakpoint(md-tablet) {
+            font-size: 16px;
+        }
+    
+        @include breakpoint(tablet) {
+            font-size: 13px;
+        }
+    }
+
+    &_tournament_name {
+        font-size: 16px;
+        margin-top: 15px;
+        font-weight: 300;
+        color: $color-gray;
+    
+        @include breakpoint(md-tablet) {
+            font-size: 13px;
+        }
+    } 
+
+    &_logo {
+        max-width: 30%;
+        padding: 0px;
+    
+        img {
+            width: 50%;
+            max-height: 300px;
+        }
+    }
+
+    &_date {
+        margin: 10px 0 0 0;
+        color: #5c6873;
+
+        text-align: center;
+        font-size: 16px;
+        color: $color-gray;
+        font-weight: 500;
+
+        @include breakpoint(md-tablet) {
+            font-size: 13px;
+        }
+
+        @include breakpoint(tablet) {
+            font-size: 11px;
+        }    
+    }
+
+    &-time {
+        font-size: 12px;
+        text-align: center;
     }
 }
 
-.schedule-tour-name {
-    border-top: 1px solid $color-dark;
-    font-size: $font-size-xxs;
+.play_button {
+    max-width: 30%;
+    text-align: right;
+}
 
-    @include breakpoint(sm-tablet) {
-        font-size: 15px;
-    }
+#tennis {
+    font-family: $font-family-1;
+    color: $color-dark-4;
+    font-weight: 300;
+}
 
-    @include breakpoint(l-mobile) {
-        font-size: 12px;
+.col {
+    @include breakpoint(md-mobile) {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

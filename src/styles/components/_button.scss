@@ -1,36 +1,39 @@
 .btn-hover-animation {
     cursor: pointer;
-    border: none;
     background: #536976;
-    /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #292E49, #536976);
-    /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #292E49, #536976);
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     padding: 4px 14px;
     color: #e7dede !important;
+
     font-weight: 100;
-    text-transform: uppercase;
+
+    text-transform: capitalize;
+    border: none;
     border-radius: 6px;
+
     display: inline-block;
     transition: all 0.3s ease 0s;
-    // margin-top: 1rem;
 
-    // @include breakpoint() {
+    @include breakpoint(lg-tablet) {
+        padding: 4px 10px;
+        font-size: 14px;
+    }
 
-    // }
+    @include breakpoint(lg-mobile) {
+        padding: 3px 6px;
+        font-size: 12px;
+    }
 }
 
 
 .btn-hover-animation:hover {
     color: #536976 !important;
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     font-weight: 700 !important;
     letter-spacing: 3px;
     background: #e6e6e6;
     -webkit-box-shadow: 0px 5px 20px -10px rgba(0, 0, 0, 0.57);
     -moz-box-shadow: 0px 5px 20px -10px rgba(0, 0, 0, 0.57);
-    // transition: all 0.25s ease 0s;
 }
 
 

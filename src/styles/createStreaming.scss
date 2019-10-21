@@ -6,8 +6,7 @@
         'bases/_typography',
         'bases/_ultilities';
 
-@import 'components/_navbar',
-        'components/_createStreaming';
-
 @import 'layouts/_header',
         'layouts/_footer';
+
+@import 'pages/_createStreaming';
