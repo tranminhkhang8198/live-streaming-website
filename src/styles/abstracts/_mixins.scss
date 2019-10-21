@@ -49,6 +49,11 @@
             @content ;
         }
     }
+    @else if $point == xl-tablet {
+        @media only screen and (max-width: 1080px) {
+            @content ;
+        }
+    }
     @else if $point == sm-laptop {
         @media only screen and (max-width: 1150px) {
             @content ;

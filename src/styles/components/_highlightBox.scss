@@ -53,7 +53,7 @@
         text-align: center;
 
         &-match {
-            font-size: $font-size-xs;
+            font-size: 20px;
 
             @include breakpoint(lg-mobile) {
                 font-size: 8px !important;
@@ -64,12 +64,9 @@
         }
 
         &-tour {
-            font-size: $font-size-xxs;
             color: rgba($color-white, .8);     
+            font-size: 16px;
             
-            @include breakpoint(tablet) {
-                font-size: 16px !important;
-            }
             @include breakpoint(lg-mobile) {
                 font-size: 10px !important;
             }
@@ -145,10 +142,6 @@ svg {
     
     & .highlight-thumbnail {
         height: 20rem;
-
-        @include breakpoint(desktop) {
-            height: 30rem;
-        }
     }
 
     & .highlight-title {
@@ -178,14 +171,14 @@ svg {
     }
 
     & .highlight-thumbnail {
-        height: 9rem;
+        height: 8rem;
 
         @include breakpoint(lg-mobile) {
             height: 7rem;
         }
     }
 
-    & .highlight-title-match, & .highlight-title-tour {
+    & .highlight-title-match, & .highlight-title-tour {        
         @include breakpoint(tablet) {
             font-size: 16px !important;
         }
