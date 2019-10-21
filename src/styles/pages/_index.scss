@@ -1,31 +1,34 @@
-.wrapper {
-    margin-bottom: 2rem;
+body {
+    background: #f8f9fa url('../images/background-image.jpg');    
 }
 
+.wrapper {
+    background-color: #f8f9fa;
+}
+
+main .right-content {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.schedule-container, .streaming-container, .highlight-video-container {
+    margin-top: 2rem;
+}
+
+.highlight-video-container {
+    margin-bottom: 2rem;
+}
 
 .sport-type {
     font-family: $font-family-1;
     text-transform: uppercase;    
 
-    font-size: 1.7rem;    
+    font-size: 1.7rem;
     position: relative;
     transition: 250ms;
     cursor: default;
     
-    border-bottom: 3px solid gold;
-
-    &-container {
-        margin-bottom: 2rem;
-
-        @include breakpoint(desktop) {
-            margin-left: 5rem;
-        }
-
-        @include breakpoint(md-desktop) {
-            margin-left: 7.5rem;
-        }
-
-    }
+    border-bottom: 2px solid gold;
 
     &::after, &::before {
         content: "";
@@ -35,7 +38,7 @@
         bottom: -5px;
         
         width: 15%;        
-        height: 5px;
+        height: 3px;
 
         background: rgb(105, 230, 143);  /* fallback for old browsers */
 
@@ -48,4 +51,115 @@
     &:hover::after, &:hover::before {opacity: 1;}
     &:hover::after {left: 50%;}
     &:hover::before {right: 50%;}
+}
+
+.row {
+    @include breakpoint(laptop) {
+        padding-right: 0;
+        padding-left: 0;
+        margin-right: 0;
+        margin-left: 0;
+    }
+}
+
+@include breakpoint(lg-laptop) {
+    body > .col-xl-1 {
+        min-width: 6%;
+        flex: 0 0 6%;
+    }
+
+    body > .col-xl-10 {
+        min-width: 88%;
+        flex: 0 0 88%;
+    }
+
+    main .left-content {
+        padding-left: 30px;
+        padding-right: 30px;        
+    }
+}
+
+@include breakpoint(laptop) {
+    body > .col-xl-1 {
+        min-width: 0%;
+        flex: 0 0 0%;
+    }
+
+    body > .col-xl-10 {
+        min-width: 100%;
+        flex: 0 0 100%;
+    }
+
+    main .left-content {
+        padding-left: 40px;
+        padding-right: 40px;        
+    }
+
+    .col-xl-8 {
+        padding-right: 0;
+        padding-left: 0;
+    }
+}
+
+@include breakpoint(tablet) {
+    main .left-content {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.main-content {
+    &-wrapper {
+        @include breakpoint(desktop) {
+            flex: 0 0 90%;
+            max-width: 90%;
+        }
+
+        @include breakpoint(md-desktop) {
+            flex: 0 0 75%;
+            min-width: 75%;
+        }
+
+        @include breakpoint(lg-desktop) {
+            flex: 0 0 70%;
+            min-width: 70%;
+        }
+
+        @include breakpoint(xl-desktop) {
+            flex: 0 0 65%;
+            min-width: 65%;
+        }
+
+        @include breakpoint(xxl-desktop) {
+            flex: 0 0 60%;
+            min-width: 60%;
+        }
+    }
+
+    &-clone {
+        @include breakpoint(desktop) {
+            flex: 0 0 5%;
+            max-width: 5%;            
+        }
+
+        @include breakpoint(md-desktop) {
+            flex: 0 0 12.5%;
+            min-width: 12.5%;
+        }
+
+        @include breakpoint(lg-desktop) {
+            flex: 0 0 15%;
+            min-width: 15%;
+        }
+
+        @include breakpoint(xl-desktop) {
+            flex: 0 0 17.5%;
+            min-width: 17.5%;
+        }
+
+        @include breakpoint(xxl-desktop) {
+            flex: 0 0 20%;
+            min-width: 20%;
+        }
+    }
 }

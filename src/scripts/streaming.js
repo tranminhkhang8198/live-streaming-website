@@ -1,5 +1,5 @@
 const getStreamingKey = localStorage.getItem('key');
-const source = `http://192.168.10.109:3002/live/loi/index.m3u8`;
+const source = `http://f82f3403.ngrok.io/live/loi/index.m3u8`;
 const servers = Array.from(document.querySelectorAll('.server-bt'))
 
 
@@ -10,8 +10,8 @@ const video = document.querySelector('.streamVideo');
 //     video.currentTime = duration-5
 // })
 
-servers[0].dataset.source =`http://192.168.10.109:3002/live/loi/index.m3u8`
-servers[1].dataset.source =`http://192.168.10.109:3002/live/khang/index.m3u8`
+servers[0].dataset.source =`http://f82f3403.ngrok.io/live/loi/index.m3u8`
+servers[1].dataset.source =`http://f82f3403.ngrok.io/live/khang/index.m3u8`
 
 
 for (var i=0, max=servers.length; i < max; i++) {

@@ -14,20 +14,17 @@ block link
     //- main file
     link(rel="stylesheet" href="./../styles/index.scss")
     
-block container
-    .col-md-12.col-lg-9.col-xl-8.left-content
-        section.mt-5.schedule-container
+block container            
+    .col-lg-12.col-xl-9.left-content
+        section.schedule-container
             include ./components/_schedule
         
-        section#tennis.mt-5
-            include ./components/_tennis.pug
-        
-        section.mt-5.streaming-container
+        section.streaming-container
             include ./components/_streamingMatches
         
-        section.mt-5.highlight-video-container
+        section.highlight-video-container
             include ./components/_hightlightVideos
-    .col-md-12.col-lg-3.col-xl-4.right-content
+    .col-lg-12.col-xl-3.right-content
         include ./components/_chat
 
 block script

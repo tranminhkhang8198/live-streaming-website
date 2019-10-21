@@ -6,7 +6,7 @@
 .navbar .advertisement {
     width: 100%;
 
-    @include breakpoint(md-tablet) {
+    @include breakpoint(tablet) {
         width: 80%;
         margin-left: 20%;
     }
@@ -24,7 +24,7 @@
         width: 80%
     }
 
-    @include breakpoint(l-mobile) {
+    @include breakpoint(lg-mobile) {
         width: 100%;
     }
     
@@ -37,7 +37,7 @@
 
 .streaming-container .advertisement {
     margin-top: 1rem;
-    width: 100%;
+    width: 50%;
 }
 
 .ad .advertisement{

@@ -6,17 +6,18 @@
             filter: brightness(.7);            
         }
 
-        @include breakpoint(md-tablet) {
+        @include breakpoint(tablet) {
             margin-bottom: 1rem;
             padding-left: 7.5px !important;
             padding-right: 7.5px !important;
         }
 
-        &-containers-responsive {
-
-            display: none;
-            @include breakpoint(md-tablet) {
-                display: block;
+        &-containers {
+            &-responsive {
+                display: none;
+                @include breakpoint(tablet) {
+                    display: block;
+                }
             }
         }
 
@@ -24,7 +25,7 @@
             visibility: visible;
             opacity: 1;
 
-            @include breakpoint(md-tablet) {
+            @include breakpoint(tablet) {
                 visibility: 0;
                 opacity: 0;
             }
@@ -50,12 +51,11 @@
         background-color: rgba($color-dark-2, .95);
         color: $color-white;
         text-align: center;
-        font-family: 'Comic Sans MS';        
 
         &-match {
             font-size: $font-size-xs;
 
-            @include breakpoint(l-mobile) {
+            @include breakpoint(lg-mobile) {
                 font-size: 8px !important;
             }
             @include breakpoint(md-mobile) {
@@ -67,15 +67,12 @@
             font-size: $font-size-xxs;
             color: rgba($color-white, .8);     
             
-            @include breakpoint(md-tablet) {
+            @include breakpoint(tablet) {
                 font-size: 16px !important;
             }
-            @include breakpoint(l-mobile) {
+            @include breakpoint(lg-mobile) {
                 font-size: 10px !important;
             }
-            // @include breakpoint(md-mobile) {
-            //     font-size: 8px !important;
-            // }   
         }
     }
 }
@@ -138,7 +135,7 @@ svg {
 }
 
 .slider-for {
-    @include breakpoint(md-tablet) {
+    @include breakpoint(tablet) {
         display: none;
     }
     & .highlight-box {
@@ -161,17 +158,15 @@ svg {
         bottom: 0;
         left: 0;
         background-color: rgba($color-dark, 0);
-        color: $color-dark;        
     }
 
     & .highlight-title-match {
         font-size: $font-size-m;
-        color: $color-dark;
     }
 }
 
 .slider-nav {    
-    @include breakpoint(md-tablet) {
+    @include breakpoint(tablet) {
         display: none;
     }
     .highlight-video-container {
@@ -185,16 +180,16 @@ svg {
     & .highlight-thumbnail {
         height: 9rem;
 
-        @include breakpoint(l-mobile) {
+        @include breakpoint(lg-mobile) {
             height: 7rem;
         }
     }
 
     & .highlight-title-match, & .highlight-title-tour {
-        @include breakpoint(md-tablet) {
+        @include breakpoint(tablet) {
             font-size: 16px !important;
         }
-        @include breakpoint(l-mobile) {
+        @include breakpoint(lg-mobile) {
             font-size: 10px !important;
         }
         @include breakpoint(md-mobile) {

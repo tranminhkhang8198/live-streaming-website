@@ -28,16 +28,24 @@ html
         title=title
         
         block link
-    body
-        .wrapper
-            block header
-                if authorized
+
+    if authorized
+        body
+            .wrapper
+                block header
                     include ../blocks/adminHeader
-                else
+                main.row.container-fluid
+                    block container
+    else
+        body.row
+            .col-lg-0.col-xl-1.main-content-clone
+            .col-lg-12.col-xl-10.wrapper(style="padding-left: 0; padding-right: 0;").main-content-wrapper
+                block header
                     include ../blocks/header
 
-            main.row.container-fluid
-                block container                    
+                main.row.container-fluid
+                    block container
+            .col-lg-0.col-xl-1.main-content-clone
 
-        include ../blocks/scripts
-        block script
+    include ../blocks/scripts
+    block script
