@@ -1,13 +1,40 @@
 import "babel-polyfill";
 
 (async () => {
-    let videoTypeVal = undefined, streamingStatusVal;
+    const newStreaming = new FormData();
+    const hostname = 'localhost:5000';
+
+    let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
 
+    // utils
+    const createNewMatchBtn = document.querySelector('#create-new-match-btn');
+    const genKeyBtn = document.querySelector('#btn-generate-key');
+    const reloadVideoSrc = document.querySelector('#reload-video-source');
+
+    // general streaming data
     const streamingKey = document.querySelector('#streaming-key');
     const streamingLiveUrl = document.querySelector('#streaming-live-url');
+    const inputVideoType = document.querySelector('#input-video-type');
+    const inputVideoTitle = document.querySelector('#input-video-title');
+    const inputVideoStatus = document.querySelector('#input-video-status');
+    const inputVideoTime = document.querySelector('#input-video-time');
+    const inputVideoTournament = document.querySelector('#input-video-tournament');
 
+    // football
+    const inputTeam1Name = document.querySelector('#input-video-team1-name');
+    const inputTeam1Logo = document.querySelector('#input-video-team1-logo')
+    const inputTeam2Name = document.querySelector('#input-video-team2-name');
+    const inputTeam2Logo = document.querySelector('#input-video-team2-logo')
+
+    // tennis
+
+    // containers
+    const inputVideoTimeContainer = document.querySelector('#input-video-time-container');
     const uploadStreamingType = document.querySelector('.upload-streaming-title-type');
+    const uploadFootballTeams = document.querySelector('.upload-streaming-team1-team2');
+    const uploadTennisPlayers = document.querySelector('.upload-streaming-player1-player2');
+    const uploadTournamentLogo = document.querySelector('.upload-video-tournament-logo');
 
     const isValidInputValidator = (selector, isValid) => {    
         selector.classList.remove('is-invalid');    
@@ -29,29 +56,38 @@ import "babel-polyfill";
         try {
             const streamingTypes = await axios({
                 method: 'get',
-                url: 'http://192.168.3.152:3000/api/sport-types'
+                url: `http://${hostname}/api/sport-types`
             })
 
-            return streamingTypes;
+            return streamingTypes.data;
         } catch (error) {
             return error.response;;
-        }                
+        }
     }
 
-    const streamingTypes = await getStreamingTypes();    
-    console.log(streamingTypes);
+    const renderStreamingTypes = (data) => {
+        let output = '<option value="undefined">Choose sport type</option>';
 
+        data.forEach(object => {
+            output += `
+                <option value="${object._id}">${object.name}</option>            
+            `;            
+        })
 
-    uploadStreamingType.addEventListener('change', event => {
-        const uploadFootballTeams = document.querySelector('.upload-streaming-team1-team2');
-        const uploadTennisPlayers = document.querySelector('.upload-streaming-player1-player2');
-        const uploadTournamentLogo = document.querySelector('.upload-video-tournament-logo');
+        inputVideoType.innerHTML = output;
+    }
+    
+    const streamingTypes = await getStreamingTypes();
+    renderStreamingTypes(streamingTypes.data.sportTypes);
+
+    uploadStreamingType.addEventListener('change', event => {        
     
         const selectedIndex = event.target.selectedIndex;
         const options = document.querySelectorAll('#input-video-type option');
         videoTypeVal = options[selectedIndex].value;
+        videoTypeName = options[selectedIndex].innerText;
     
-        if (options[selectedIndex].textContent === 'Football') {
+        if (options[selectedIndex].textContent === 'football') {
             uploadFootballTeams.style.display = 'flex';
             uploadTennisPlayers.style.display = 'none';
             uploadTournamentLogo.style.display = 'none';
@@ -64,11 +100,7 @@ import "babel-polyfill";
             uploadFootballTeams.style.display = 'none';
             uploadTournamentLogo.style.display = 'none';
         }
-    })
-    
-    const inputVideoStatus = document.querySelector('#input-video-status');
-    const inputVideoTime = document.querySelector('#input-video-time');
-    const inputVideoTimeContainer = document.querySelector('#input-video-time-container');
+    })        
     
     inputVideoStatus.addEventListener('change', (event) => {
         const selectedIndex = event.target.selectedIndex;
@@ -83,13 +115,10 @@ import "babel-polyfill";
             inputVideoTimeContainer.style.display = 'none';
             inputVideoTime.setAttribute('disabled', 'disabled');
         }
-    })
+    })    
     
-    const genKeyBtn = document.querySelector('#btn-generate-key');
     genKeyBtn.addEventListener('click', (event) => {
-        event.preventDefault();
-    
-        const createNewMatchBtn = document.querySelector('#create-new-match-btn');
+        event.preventDefault();            
     
         streamingKey.removeAttribute('disabled');
         streamingLiveUrl.removeAttribute('disabled');
@@ -101,28 +130,20 @@ import "babel-polyfill";
         streamingLiveUrl.value = `${streamingServer}/${currentTimeInUnix}`;
     })
     
-    const reloadVideoSrc = document.querySelector('#reload-video-source');
+
     reloadVideoSrc.addEventListener('click', event => {
         event.preventDefault();
     })
-    
-    const createNewMatchBtn = document.querySelector('#create-new-match-btn');
+        
     createNewMatchBtn.addEventListener('click', async () => {
-        const videoTitleVal = document.querySelector('#input-video-title').value ?
-            document.querySelector('#input-video-title').value :
-            undefined;
-        const videoTournamentVal = document.querySelector('#input-video-tournament').value ?
-            document.querySelector('#input-video-tournament').value :
-            undefined;
-    
-    
-        const newStreaming = {
-            type: videoTypeVal,
-            title: videoTitleVal,
-            tournament: videoTournamentVal,
-            status: parseInt(streamingStatusVal),
-            streamingUrl: streamingLiveUrl.value,
-        }
+        const videoTitleVal = inputVideoTitle.value ? inputVideoTitle.value : undefined;
+        const videoTournamentVal = inputVideoTournament.value ? inputVideoTournament.value : undefined;                
+        
+        newStreaming.append('title', videoTitleVal);
+        newStreaming.append('type', videoTypeVal);
+        newStreaming.append('tournament', videoTournamentVal);
+        newStreaming.append('status', parseInt(streamingStatusVal));
+        newStreaming.append('streamingUrl', streamingLiveUrl.value);
     
         // if (newStreaming.streamingStatus == 0) {
         //     const currentDatetime = new Date().toISOString();
@@ -131,61 +152,53 @@ import "babel-polyfill";
             
         //     timeEl.value = formatDatetime;
         // } 
-    
-        if (!newStreaming.type) {
-            isValidInputValidator(document.querySelector('#input-video-type'), false);        
+        
+        if (!videoTypeVal) {
+            isValidInputValidator(inputVideoType, false);        
         } else {
-            isValidInputValidator(document.querySelector('#input-video-type'), true);
+            isValidInputValidator(inputVideoType, true);
         }
     
-        if (!newStreaming.title) {
-            isValidInputValidator(document.querySelector('#input-video-title'), false);
+        if (!videoTitleVal) {
+            isValidInputValidator(inputVideoTitle, false);
         } else {
-            isValidInputValidator(document.querySelector('#input-video-title'), true);
+            isValidInputValidator(inputVideoTitle, true);
         }
         
-        if (!newStreaming.tournament) {
-            isValidInputValidator(document.querySelector('#input-video-tournament'), false);
+        if (!videoTournamentVal) {
+            isValidInputValidator(inputVideoTournament, false);
         } else {
-            isValidInputValidator(document.querySelector('#input-video-tournament'), true);
+            isValidInputValidator(inputVideoTournament, true);
         }
     
-        if (!newStreaming.status) {
-            isValidInputValidator(document.querySelector('#input-video-status'), false);
+        if (!parseInt(streamingStatusVal)) {
+            isValidInputValidator(inputVideoStatus, false);
         } else {
-            isValidInputValidator(document.querySelector('#input-video-status'), true);
+            isValidInputValidator(inputVideoStatus, true);
         }
     
-        if (newStreaming.type === 'football') {
-            const team1NameVal = document.querySelector('#input-video-team1-name').value ?
-                document.querySelector('#input-video-team1-name').value :
-                undefined;
-            const team2NameVal = document.querySelector('#input-video-team2-name').value ?
-                document.querySelector('#input-video-team2-name').value :
-                undefined;
-            const team1LogoVal = document.querySelector('#input-video-team1-logo').value ?
-                document.querySelector('#input-video-team1-logo').value :
-                undefined;
-            const team2LogoVal = document.querySelector('#input-video-team2-logo').value ?
-                document.querySelector('#input-video-team2-logo').value :
-                undefined;
+        if (videoTypeName === 'football') {
+            const team1NameVal = inputTeam1Name.value ? inputTeam1Name.value : undefined;
+            const team1LogoVal = inputTeam1Logo.files[0] ? inputTeam1Logo.files[0] : undefined;
+            const team2NameVal = inputTeam2Name.value ? inputTeam2Name.value : undefined;
+            const team2LogoVal = inputTeam2Logo.files[0] ? inputTeam2Logo.files[0] : undefined;
     
             if (!team1NameVal) {
-                isValidInputValidator(document.querySelector('#input-video-team1-name'), false);
+                isValidInputValidator(inputTeam1Name, false);
             } else {
-                isValidInputValidator(document.querySelector('#input-video-team1-name'), true);
+                isValidInputValidator(inputTeam1Name, true);
             }
     
             if (!team2NameVal) {
-                isValidInputValidator(document.querySelector('#input-video-team2-name'), false);
+                isValidInputValidator(inputTeam2Name, false);
             } else {
-                isValidInputValidator(document.querySelector('#input-video-team2-name'), true);
+                isValidInputValidator(inputTeam2Name, true);
             }
-    
-            newStreaming.fc1 = team1NameVal;
-            newStreaming.fc2 = team2NameVal;
-            newStreaming.fc1Img = team1LogoVal;
-            newStreaming.fc2Img = team2LogoVal;
+                            
+            newStreaming.append('fc1', team1NameVal);
+            newStreaming.append('fc1Img', team1LogoVal);
+            newStreaming.append('fc2', team2NameVal);
+            newStreaming.append('fc2Img', team2LogoVal);
         } else if (newStreaming.type === 'tennis') {
     
         }
@@ -194,13 +207,19 @@ import "babel-polyfill";
             try {
                 const createNewMatchResponse = await axios({
                     method: 'post',
-                    url: 'http://192.168.3.152:3000/api/matches',
+                    url: `http://${hostname}/api/matches`,
+                    config: {
+                        headers: { 
+                            'Content-Type': 'multipart/form-data' 
+                        }
+                    },
                     data: newStreaming
                 })
                 console.log(createNewMatchResponse);
             } catch(error) {
                 console.log(error.response);
-            }        
+            }
+            console.log(newStreaming);
         } else {
             alert('Invalid input');
         }
