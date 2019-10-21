@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+<<<<<<< HEAD
 const uniqueValidator = require("mongoose-unique-validator");
 const Schema = mongoose.Schema;
 
@@ -43,6 +44,33 @@ const matchSchema = new mongoose.Schema({
 
 matchSchema.plugin(uniqueValidator);
 
+=======
+const Schema = mongoose.Schema;
+
+const matchSchema = new mongoose.Schema({
+    fc1: {
+        type: String,
+    },
+    fc2: {
+        type: String,
+    },
+    score: {
+        type: String,
+    },
+    time: {
+        type: Date,
+    },
+    type: {
+        type: Schema.Types.ObjectId,
+        ref: "SportType"
+    },
+    tournament: {
+        type: Schema.Types.ObjectId,
+        ref: "Tournament"
+    }
+});
+
+>>>>>>> a265ff9dc790704318945f7101f9517b90ff794c
 const Match = mongoose.model("Match", matchSchema);
 
 module.exports = Match;

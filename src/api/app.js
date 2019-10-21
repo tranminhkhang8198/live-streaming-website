@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+<<<<<<< HEAD
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -18,6 +19,18 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(morgan('dev'));
+=======
+
+const app = express();
+
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({
+    extended: false
+}));
+
+// parse application/json
+app.use(bodyParser.json());
+>>>>>>> a265ff9dc790704318945f7101f9517b90ff794c
 
 
 const sportTypeRoute = require('./routes/sportTypeRoutes');
