@@ -1,12 +1,12 @@
 extends ./layouts/common.pug
 block vars
-    - var   title="Watch"
+    - var title = "Watch"
     - var authorized = false
+    - var watchStreaming = true
 block link
     link(rel="stylesheet" href="./../styles/streaming.scss")
     link(href="./../styles/css/hover.min.css" rel="stylesheet")
 
-    
 block container
     .row.d-flex.justify-content-center.m-0
         .container-center.bg-none
@@ -50,13 +50,8 @@ block container
                     .col-12.col-sm-3
                         .server-bt-container.fa
                             a.hvr-bounce-in.server-bt.fas.fa-play(data-source)  HD-720p
-
                 .ad
                     include ./components/_advertisement
-
-
-
-
 
 block script
     script(src='./../scripts/streaming.js')

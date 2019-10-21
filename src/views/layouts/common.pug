@@ -36,6 +36,13 @@ html
                     include ../blocks/adminHeader
                 main.row.container-fluid
                     block container
+    else if watchStreaming
+        body
+            .wrapper
+                block header
+                    include ../blocks/header
+                main.row.container-fluid
+                    block container
     else
         body.row
             .col-lg-0.col-xl-1.main-content-clone
