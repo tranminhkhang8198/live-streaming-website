@@ -4,18 +4,26 @@ block vars
     - var authorized = false
     - var watchStreaming = true
 block link
+    link(href="https://vjs.zencdn.net/7.6.5/video-js.css" rel="stylesheet")
     link(rel="stylesheet" href="./../styles/streaming.scss")
+
+
     link(href="./../styles/css/hover.min.css" rel="stylesheet")
 
 block container
-    .row.d-flex.justify-content-center.m-0
+    .row.d-flex.justify-content-center.m-0.text-secondary
         .container-center.bg-none
             .title-container.container.p-0.d-flex.align-items-center
                 h1.title.text-uppercase.text-white.p-0 Man City - Man united
             .container.video-container
-                video(autoplay="False" controls).streamVideo
+                video(controls data-setup='{}' preload='auto')#video-hls.w-100.p-0.stream-video.video-js.vjs-styles-defaults.vjs-big-play-centered
+                    //- source(src="http://localhost:3002/live/loi/index.m3u8" type="application/x-mpegURL")
+                    p.vjs-no-js To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        a(href='https://videojs.com/html5-video-support/' target='_blank') supports HTML5 video
 
-            .watching-ab.container.description
+
+
+            .watching-ab.container.description.d-flex.align-items-center
                 .row.text-white.description-row
                     .col-6.watching-now.fas.fa-eye.d-none.d-sm-block.watching-ab-content Watching now:
                         span.watching-num 0
@@ -60,3 +68,4 @@ block container
 
 block script
     script(src='./../scripts/streaming.js')
+    //- script(src='./../scripts/video.js')
