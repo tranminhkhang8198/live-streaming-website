@@ -30,6 +30,7 @@
     "sass": "^1.22.10"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "babel-core": "^6.26.3",
     "babel-polyfill": "^6.26.0",
     "body-parser": "^1.19.0",
@@ -42,6 +43,13 @@
     "path": "^0.12.7",
     "http-status": "^1.4.0",
     "method-override": "^3.0.0",
+<<<<<<< HEAD
     "mongoose": "^5.7.5"
+=======
+    "moment": "^2.24.0",
+    "mongoose": "^5.7.5",
+    "mongoose-unique-validator": "^2.0.3",
+    "path": "^0.12.7"
+>>>>>>> master
   }
 }

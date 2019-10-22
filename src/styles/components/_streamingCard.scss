@@ -30,9 +30,8 @@
         font-family: Cagliostro;
         font-size: 17px;
 
-
         @include breakpoint(desktop) {
-            font-size: 18px;
+            font-size: 19px;
         }
     
         &-container {
@@ -40,11 +39,7 @@
             color: #f6f6f6;
 
             clip-path: polygon(0 0, 100% 0%, 78% 100%, 0 100%);
-            -webkit-clip-path: polygon(0 0, 100% 0%, 78% 100%, 0 100%);
-
-            @include breakpoint(desktop) {
-                height: 3.5rem;
-            }
+            -webkit-clip-path: polygon(0 0, 100% 0%, 78% 100%, 0 100%);            
 
             @include breakpoint(lg-laptop) {
                 max-width: 35%;
@@ -58,4 +53,22 @@
             background: linear-gradient(to right, #326077, #16222A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */                        
         }
     }    
+}
+
+@include breakpoint(desktop) {
+    .streaming-card-title-container {
+        height: 3.5rem;
+        max-width: 35%;
+        flex: 0 0 35%;
+    }    
+
+    .streaming-card-team-display {
+        max-width: 25%;
+        flex: 0 0 25%;
+    }
+
+    .streaming-card-score-display {
+        max-width: 10%;
+        flex: 0 0 10%;
+    }
 }

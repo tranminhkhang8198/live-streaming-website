@@ -50,9 +50,15 @@
             top: -5px;
             z-index: 2;
 
+            @include breakpoint(lg-desktop) {
+                width: 3rem;
+                height: 3rem;
+                top: -5px;
+            }
+
             @include breakpoint(md-mobile) {
                 top: 5px;
-            }
+            }            
         }
 
         &-name {
@@ -115,9 +121,14 @@
                 transition: all 100ms;
                 font-size: $font-size-xs;
 
+                @include breakpoint(lg-desktop) {
+                    margin-top: .2rem;
+                    font-size: 19px;
+                }
+
                 @include breakpoint(md-mobile) {
                     font-size: 14px;
-                }
+                }                
             }
         }
     }
@@ -141,18 +152,26 @@
     &-date {
         border-top: 1px solid $color-dark;
         font-size: $font-size-xxs;
-        font-weight: 800;
+        font-weight: 700;
     }
 
     &-divider {
         & h4 {
             font-size: $font-size-xs;
-        }
+        }        
 
         @include breakpoint(laptop) {
-            width: 80%;
+            width: 80%;            
             margin-left: auto;
             margin-right: auto;
+        }
+
+        @include breakpoint(sm-laptop) {
+            width: 88%;
+        }
+
+        @include breakpoint(xl-tablet) {
+            width: 95%;
         }
 
         @include breakpoint(tablet) {
@@ -228,7 +247,7 @@
     &_tournament_name {
         font-size: 16px;
         margin-top: 15px;
-        font-weight: 300;
+        font-weight: 500;
         color: $color-gray;
     
         @include breakpoint(md-tablet) {
