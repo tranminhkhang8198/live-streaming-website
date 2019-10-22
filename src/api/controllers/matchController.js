@@ -106,11 +106,16 @@ function removeImg(imgUrl) {
 
 exports.getAllMatch = async (req, res) => {
   try {
-    // // EXCUTE QUERY
+    // EXCUTE QUERY
+
     const features = new APIFeature(
-        Match.find().populate("streaming", "streamingUrl status streamingTitle -_id").populate("type", "-__v -_id").lean(), req.query
+        Match.find()
+        .populate("streaming", "streamingUrl status streamingTitle -_id")
+        .populate("type", "name -_id"),
+        req.query
       )
       .filter()
+      .type()
       .time()
       .sort()
       .limitFields()
@@ -128,6 +133,10 @@ exports.getAllMatch = async (req, res) => {
         "tournamentImagUrl": tournament.tournamentImgUrl
       };
     };
+    // console.log(req.query.sportType);
+    // const matches = await Match.find({
+    //   type: req.query.sportType
+    // });
 
     res.status(200).json({
       matches
