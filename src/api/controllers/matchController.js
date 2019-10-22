@@ -20,7 +20,7 @@ function validateImg(files, message) {
 }
 
 function saveImg(file) {
-  let imgUrl = path.join(__dirname, "../../images/representative.jpg");
+  let imgUrl = '/images/representative.jpg'
   if (file) {
     const filename =
       file.name
@@ -33,10 +33,9 @@ function saveImg(file) {
     const extname = file.name.split(".").slice(-1)[0];
     const img = filename + "." + extname;
 
-    imgUrl = path.join(__dirname, '../../uploads/' + img);
+    file.mv(path.join(__dirname, '../../uploads/' + img));
 
-    file.mv(imgUrl);
-
+    imgUrl = '/uploads/' + img;
   }
 
 
