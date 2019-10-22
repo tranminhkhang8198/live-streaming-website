@@ -25,9 +25,12 @@ import "babel-polyfill";
     const inputTeam1Name = document.querySelector('#input-video-team1-name');
     const inputTeam1Logo = document.querySelector('#input-video-team1-logo')
     const inputTeam2Name = document.querySelector('#input-video-team2-name');
-    const inputTeam2Logo = document.querySelector('#input-video-team2-logo')
-
+    const inputTeam2Logo = document.querySelector('#input-video-team2-logo');
+    
     // tennis
+    const inputPlayer1Name = document.querySelector('#input-video-player1-name');
+    const inputPlayer2Name = document.querySelector('#input-video-player2-name');
+    const inputVideoTournamentLogo = document.querySelector('#input-video-tournament-logo');
 
     // containers
     const inputVideoTimeContainer = document.querySelector('#input-video-time-container');
@@ -91,7 +94,7 @@ import "babel-polyfill";
             uploadFootballTeams.style.display = 'flex';
             uploadTennisPlayers.style.display = 'none';
             uploadTournamentLogo.style.display = 'none';
-        } else if (options[selectedIndex].textContent === 'Tennis') {
+        } else if (options[selectedIndex].textContent === 'tennis') {
             uploadTennisPlayers.style.display = 'flex';
             uploadTournamentLogo.style.display = 'block';
             uploadFootballTeams.style.display = 'none';
@@ -100,15 +103,15 @@ import "babel-polyfill";
             uploadFootballTeams.style.display = 'none';
             uploadTournamentLogo.style.display = 'none';
         }
-    })        
+    })
     
     inputVideoStatus.addEventListener('change', (event) => {
         const selectedIndex = event.target.selectedIndex;
     
         const options = document.querySelectorAll('#input-video-status option');
-        streamingStatusVal = options[selectedIndex].value;
+        streamingStatusVal = parseInt(options[selectedIndex].value);
     
-        if (options[selectedIndex].textContent === 'Schedule') {
+        if (streamingStatusVal == 0) {
             inputVideoTimeContainer.style.display = 'block';
             inputVideoTime.removeAttribute('disabled');
         } else {
@@ -129,7 +132,6 @@ import "babel-polyfill";
         streamingKey.value = currentTimeInUnix;
         streamingLiveUrl.value = `${streamingServer}/${currentTimeInUnix}`;
     })
-    
 
     reloadVideoSrc.addEventListener('click', event => {
         event.preventDefault();
@@ -137,7 +139,7 @@ import "babel-polyfill";
         
     createNewMatchBtn.addEventListener('click', async () => {
         const videoTitleVal = inputVideoTitle.value ? inputVideoTitle.value : undefined;
-        const videoTournamentVal = inputVideoTournament.value ? inputVideoTournament.value : undefined;                
+        const videoTournamentVal = inputVideoTournament.value ? inputVideoTournament.value : undefined;
         
         newStreaming.append('title', videoTitleVal);
         newStreaming.append('type', videoTypeVal);
@@ -200,7 +202,13 @@ import "babel-polyfill";
             newStreaming.append('fc2', team2NameVal);
             newStreaming.append('fc2Img', team2LogoVal);
         } else if (newStreaming.type === 'tennis') {
-    
+            const player1NameVal = inputPlayer1Name.value ? inputPlayer1Name.value : undefined;
+            const player2NameVal = inputPlayer2Name.value ? inputPlayer2Name.value : undefined;            
+            const tournamentLogoVal =  inputVideoTournamentLogo.files[0] ? inputVideoTournamentLogo.files[0] : undefined;
+
+            newStreaming.append('tournamentImg', tournamentLogoVal);
+            newStreaming.append('fc1', player1NameVal);
+            newStreaming.append('fc2', player2NameVal);
         }
         
         if (isValidInput) {
@@ -214,12 +222,12 @@ import "babel-polyfill";
                         }
                     },
                     data: newStreaming
-                })
-                console.log(createNewMatchResponse);
+                });
+                window.alert('Successful to create new streaming');
+                window.location = '/admin';
             } catch(error) {
-                console.log(error.response);
-            }
-            console.log(newStreaming);
+                window.alert('Failed to create new streaming');
+            }            
         } else {
             alert('Invalid input');
         }
