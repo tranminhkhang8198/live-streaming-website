@@ -1,7 +1,6 @@
 const Tournament = require("./../models/tournamentModel");
 const APIFeatures = require("./../utils/apiFeatures");
 
-<<<<<<< HEAD
 function removeImg(imgUrl) {
 
     const img_path = path.join(__dirname, '../uploads/images/' + imgUrl);
@@ -12,8 +11,6 @@ function removeImg(imgUrl) {
         fs.unlinkSync(img_path);
     }
 }
-=======
->>>>>>> a265ff9dc790704318945f7101f9517b90ff794c
 
 exports.getAllTournament = async (req, res) => {
     try {
@@ -102,13 +99,9 @@ exports.updateTournament = async (req, res) => {
 
 exports.deleteTournament = async (req, res) => {
     try {
-<<<<<<< HEAD
         tournament = await Tournament.findByIdAndDelete(req.params.id);
 
         removeImg(tournament.imgUrl);
-=======
-        await Tournament.findByIdAndDelete(req.params.id);
->>>>>>> a265ff9dc790704318945f7101f9517b90ff794c
 
         res.status(204).json({
             status: 'success',
