@@ -16,7 +16,7 @@ const tournamentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "SportType"
     },
-    imgUrl: {
+    tournamentImgUrl: {
         type: String
     }
 });

@@ -3,8 +3,7 @@ const Streaming = require("./../models/streamingModel");
 
 exports.getAllStreaming = async (req, res) => {
     try {
-        const streamings = await Streaming.find().populate('match');
-
+        const streamings = await Streaming.find();
         res.status(200).json({
             status: 'success',
             results: streamings.length,

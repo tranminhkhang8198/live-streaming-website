@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const morgan = require('morgan');
 
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(morgan('dev'));
 
 if (process.env.NODE_ENV === 'development') {
     app.use(require('morgan')('dev'));
