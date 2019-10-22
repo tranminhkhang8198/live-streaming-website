@@ -21,15 +21,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-<<<<<<< HEAD
-// app.use(morgan('dev'));
-=======
 
 app.use(express.static(path.join(__dirname, '../../dist')));
 app.use('/images', express.static(path.join(__dirname, '../images')));
 app.use('/scripts', express.static(path.join(__dirname, '../scripts')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
->>>>>>> e5925938909a0dbed7f2350b7a54f71caa32e7a5
 
 if (process.env.NODE_ENV === 'development') {
     app.use(require('morgan')('dev'));

@@ -238,11 +238,7 @@ import axios from "axios";
                 window.alert('Successful to create new streaming');
                 window.location = '/admin';
             } catch(error) {
-<<<<<<< HEAD
-                console.log(error.response)
-=======
                 console.log(error.response);
->>>>>>> e5925938909a0dbed7f2350b7a54f71caa32e7a5
                 window.alert('Failed to create new streaming');
             }            
         } else {
