@@ -1,18 +1,23 @@
 const SportType = require("./../models/sportTypeModel");
 
 class APIFeature {
-    constructor(query, queryString) {
+    constructor(query, queryString, typeId) {
         this.query = query;
         this.queryString = queryString;
+        this.typeId = typeId;
     }
 
     filter() {
-        const queryObj = {
+        var queryObj = {
             ...this.queryString
         }
 
         const excludedFields = ["page", "sort", "limit", "fields", "type"];
         excludedFields.forEach(el => delete queryObj[el]);
+
+        if (this.typeId != "") {
+            queryObj["type"] = this.typeId;
+        }
 
         var queryStr = JSON.stringify(queryObj);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
@@ -23,30 +28,51 @@ class APIFeature {
     }
 
 
+    // time() {
+    //     if (this.queryString.time) {
+    //         if (this.queryString.time == "today") {
+    //             var start = new Date();
+    //             start.setUTCHours(0, 0, 0, 0);
+
+    //             var end = new Date();
+    //             end.setUTCHours(23, 59, 59, 999);
+
+    //         } else if (this.queryString.time == "tomorrow") {
+    //             var today = new Date();
+
+    //             var start = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+    //             start.setUTCHours(0, 0, 0, 0);
+
+    //             var end = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+    //             end.setUTCHours(23, 59, 59, 999);
+    //         } else {
+    //             var start = new Date(this.queryString.time);
+    //             start.setUTCHours(0, 0, 0, 0);
+
+    //             var end = new Date(this.queryString.time);
+    //             end.setUTCHours(23, 59, 59, 999);
+    //         }
+
+    //         this.query = this.query.find({
+    //             time: {
+    //                 $gte: start,
+    //                 $lte: end
+    //             }
+    //         });
+    //     }
+
+    //     return this;
+    // }
+
     time() {
-        if (this.queryString.time) {
-            if (this.queryString.time == "today") {
-                var start = new Date();
-                start.setUTCHours(0, 0, 0, 0);
+        if (this.queryString.type) {
+            var today = new Date();
 
-                var end = new Date();
-                end.setUTCHours(23, 59, 59, 999);
+            var start = new Date();
+            start.setUTCHours(0, 0, 0, 0);
 
-            } else if (this.queryString.time == "tomorrow") {
-                var today = new Date();
-
-                var start = new Date(today.getTime() + (24 * 60 * 60 * 1000));
-                start.setUTCHours(0, 0, 0, 0);
-
-                var end = new Date(today.getTime() + (24 * 60 * 60 * 1000));
-                end.setUTCHours(23, 59, 59, 999);
-            } else {
-                var start = new Date(this.queryString.time);
-                start.setUTCHours(0, 0, 0, 0);
-
-                var end = new Date(this.queryString.time);
-                end.setUTCHours(23, 59, 59, 999);
-            }
+            var end = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+            end.setUTCHours(23, 59, 59, 999);
 
             this.query = this.query.find({
                 time: {
