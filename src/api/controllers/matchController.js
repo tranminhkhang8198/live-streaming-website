@@ -36,7 +36,9 @@ function saveImg(file) {
     imgUrl = path.join(__dirname, '../../uploads/' + img);
 
     file.mv(imgUrl);
+
   }
+
 
   return imgUrl;
 }
@@ -137,7 +139,6 @@ exports.getAllMatch = async (req, res) => {
     };
 
 
-
     res.status(200).json({
       matches
     });
@@ -151,7 +152,19 @@ exports.getAllMatch = async (req, res) => {
 
 exports.getMatch = async (req, res) => {
   try {
-    const match = await Match.findById(req.params.id).populate("streaming", "streamingUrl -_id");
+    const match = await Match.findById(req.params.id)
+      .populate("streaming", "streamingUrl -_id")
+      .populate("type", "name -_id");
+
+
+    // GET TOUNARMENT FOR MATCH
+    const tournament = await Tournament.findOne({
+      matches: match._id
+    });
+    match["tournament"] = {
+      "name": tournament.name,
+      "tournamentImagUrl": tournament.tournamentImgUrl
+    };
 
     res.status(200).json({
       status: "success",
