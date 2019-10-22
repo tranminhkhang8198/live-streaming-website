@@ -10,7 +10,7 @@
   "scripts": {
     "clean": "rimraf rm dist/*",
     "dev:client": "parcel src/views/*.pug --port 3000 --no-cache",
-    "dev:server": "nodemon src/api/server.js",
+    "dev:server": "nodemon --inspect src/api/server.js",
     "build:client": "concurrently -p \"[{name}]\" -n \"Clean,Build\" -c \"bgRed.bold,bgGreen.bold\" \"npm run clean\" \"parcel build src/views/*.pug --no-cache --no-source-maps --detailed-report --out-dir dist\"",
     "build:server": "",
     "dev": "concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgRed.bold,bgGreen.bold,bgCyan.bold\" \"npm run clean\" \"npm run dev:client\" \"npm run dev:server\" ",

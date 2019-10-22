@@ -115,7 +115,6 @@ exports.getAllMatch = async (req, res) => {
         req.query
       )
       .filter()
-      .type()
       .time()
       .sort()
       .limitFields()

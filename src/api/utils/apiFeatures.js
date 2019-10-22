@@ -73,7 +73,7 @@ class APIFeature {
 
     type() {
 
-        console.log(this.queryString.type);
+        // console.log(this.queryString.type);
 
         // if (this.queryString.type) {
         //     this.query = this.query.find({
