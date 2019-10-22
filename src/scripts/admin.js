@@ -377,12 +377,12 @@ import axios from 'axios';
             item.title = 'Fake streaming title';
             item.tournament = 'Fake streaming tournament';
             item.is_streaming = 1;
-            item.typeName = 'football';
+            item.typeName = 'tennis';
 
             if (item.time) {
-                item.time = moment(item.time).format('YYYY-MM-DD');
+                console.log(item.time);
+                item.time = moment(item.time).subtract(7, 'hours').format('DD-MM-YYYY, HH:mm:A');
             }
-
             const streamingStatus = streamingStatusEnum[item.is_streaming.toString()];
     
             // show shutdown dropdown item if video is streaming
