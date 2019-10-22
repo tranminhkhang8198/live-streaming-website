@@ -3,16 +3,29 @@ import moment from 'moment';
 import axios from 'axios';
 
 (async () => {
+    const getMatches = async () => {
+        try {
+            const matches = await axios({
+                method: 'get',
+                url: '/api/matches',
+            });
+            
+            return matches.data.response;
+        } catch (error) {
+            return [];
+        }
+    }
+    const matches = await getMatches();
+
     const innerViewDataInModal = (item, index, streamingStatus) => {
         let output = '';
-        
-        if (item.type.name === 'tennis') {
+        if (item.match.type.name === 'tennis') {                
             output += `
-                <div class="modal fade" id="modal-detail-${index}" tabindex="-1" role="dialog">
+                <div class="modal fade modals-table-data" id="modal-detail-${index}" tabindex="-1" role="dialog">
                     <div class="modal-dialog" href="#" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">${item.title}</h5>
+                                <h5 class="modal-title">${item.match.streaming.streamingTitle}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -22,32 +35,32 @@ import axios from 'axios';
                                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                                         <img 
                                             style="width: 50px; height: 50px;"
-                                            src="${item.fc1ImgUrl}" 
+                                            src="${item.tournament.tournamentImgUrl}" 
                                             alt="Logo">
-                                        <p class="text-center">${item.tournament}</p> 
+                                        <p class="text-center">${item.tournament.name}</p> 
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <small> ${item.type.name}</small>
+                                            <small> ${item.match.type.name}</small>
                                         </p> 
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
-                                    <div class="col-5 d-flex flex-column justify-content-center align-items-center">
+                                    <div class="col-5 d-flex flex-column justify-content-center align-items-start">
                                         <p class="text-center">Player 1:
-                                            <small>${item.fc1}</small>
+                                            <small>${item.match.fc1}</small>
                                         </p>
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
-                                        <p>${item.score1} - ${item.score2}</p>
+                                        <p>${item.match.score1} - ${item.match.score2}</p>
                                     </div>
-                                    <div class="col-5 d-flex flex-column justify-content-center align-items-center">                                    
+                                    <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
                                         <p class="text-center">Player 2:
-                                            <small>${item.fc2}</small>
+                                            <small>${item.match.fc2}</small>
                                         </p>
                                     </div>
                                 </div>
@@ -63,7 +76,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Start time: 
-                                            <small> ${item.time}</small>
+                                            <small> ${item.match.time}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -71,7 +84,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Streaming key: 
-                                            <small> ${item.streaming.streamingUrl[0]}</small>
+                                            <small> ${item.match.streaming.streamingUrl[0]}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -85,11 +98,11 @@ import axios from 'axios';
             `;
         } else {
             output += `
-                <div class="modal fade" id="modal-detail-${index}" tabindex="-1" role="dialog">
-                    <div class="modal-dialog" href="#" role="document">
+                <div class="modal fade modals-table-data" id="modal-detail-${index}" tabindex="-1" role="dialog">
+                    <div class="modal-dialog modals-table-data" href="#" role="document">
                         <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">${item.title}</h5>
+                            <h5 class="modal-title">${item.match.streaming.streamingTitle}</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -98,7 +111,7 @@ import axios from 'axios';
                             <div class="row">
                                 <div class="col-12">
                                     <p>Tournament: 
-                                        <small> ${item.tournament}</small>
+                                        <small> ${item.tournament.name}</small>
                                     </p> 
                                 </div>
                             </div>
@@ -106,7 +119,7 @@ import axios from 'axios';
                             <div class="row mt-2">
                                 <div class="col-12">
                                     <p>Match type: 
-                                        <small> ${item.type.name}</small>
+                                        <small> ${item.match.type.name}</small>
                                     </p> 
                                 </div>
                             </div>
@@ -115,22 +128,22 @@ import axios from 'axios';
                                 <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                     <img 
                                         style="width: 50px; height: 50px;"
-                                        src="${item.fc1ImgUrl}" 
+                                        src="${item.match.fc1ImgUrl}" 
                                         alt="Logo">
                                     <p class="text-center">
-                                        <small>${item.fc1}</small>
+                                        <small>${item.match.fc1}</small>
                                     </p>
                                 </div>
                                 <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <p>${item.score1} - ${item.score2}</p>
+                                    <p>${item.match.score1} - ${item.match.score2}</p>
                                 </div>
                                 <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                     <img 
                                         style="width: 50px; height: 50px;"
-                                        src="${item.fc2ImgUrl}" 
+                                        src="${item.match.fc2ImgUrl}" 
                                         alt="Logo">
                                     <p class="text-center">
-                                        <small>${item.fc2}</small>
+                                        <small>${item.match.fc2}</small>
                                     </p>
                                 </div>
                             </div>
@@ -146,7 +159,7 @@ import axios from 'axios';
                             <div class="row mt-2">
                                 <div class="col-12">
                                     <p>Start time: 
-                                        <small> ${item.time}</small>
+                                        <small> ${item.match.time}</small>
                                     </p> 
                                 </div>
                             </div>
@@ -154,7 +167,7 @@ import axios from 'axios';
                             <div class="row mt-2">
                                 <div class="col-12">
                                     <p>Streaming key: 
-                                        <small> ${item.streaming.streamingUrl[0]}</small>
+                                        <small> ${item.match.streaming.streamingUrl[0]}</small>
                                     </p> 
                                 </div>
                             </div>
@@ -174,13 +187,13 @@ import axios from 'axios';
     const innerUpdateDataInModal = (item, index, streamingStatus) => {
         let output = '';
 
-        if (item.type.name === 'tennis') {
+        if (item.match.type.name === 'tennis') {
             output += `
-                <div class="modal fade" id="modal-update-${index}" tabindex="-1" role="dialog">
+                <div class="modal fade modals-table-data" id="modal-update-${index}" tabindex="-1" role="dialog">
                     <div class="modal-dialog" href="#" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">${item.title}</h5>
+                                <h5 class="modal-title">${item.match.streaming.streamingTitle}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -190,38 +203,38 @@ import axios from 'axios';
                                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                                         <img 
                                             style="width: 50px; height: 50px;"
-                                            src="${item.fc1ImgUrl}" 
+                                            src="${item.tournament.tournamentImgUrl}" 
                                             alt="Logo">
-                                        <p class="text-center">${item.tournament}</p> 
+                                        <p class="text-center">${item.tournament.name}</p> 
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <small> ${item.type.name}</small>
+                                            <small> ${item.match.type.name}</small>
                                         </p> 
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
-                                    <div class="col-5 d-flex flex-column justify-content-center align-items-center">
+                                    <div class="col-5 d-flex flex-column justify-content-center align-items-start">
                                         <p class="text-center">Player 1:
-                                            <small>${item.fc1}</small>
+                                            <small>${item.match.fc1}</small>
                                         </p>
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <input 
                                             class="input-modify-score" 
-                                            value="${item.score1}">
+                                            value="${item.match.score1}">
                                         -
                                         <input 
                                             class="input-modify-score" 
-                                            value="${item.score2}">
+                                            value="${item.match.score2}">
                                     </div>
-                                    <div class="col-5 d-flex flex-column justify-content-center align-items-center">                                    
+                                    <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
                                         <p class="text-center">Player 2:
-                                            <small>${item.fc2}</small>
+                                            <small>${item.match.fc2}</small>
                                         </p>
                                     </div>
                                 </div>
@@ -237,7 +250,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Start time: 
-                                            <small> ${item.time}</small>
+                                            <small> ${item.match.time}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -245,7 +258,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Streaming key: 
-                                            <small> ${item.streaming.streamingUrl[0]}</small>
+                                            <small> ${item.match.streaming.streamingUrl[0]}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -260,11 +273,11 @@ import axios from 'axios';
             `;
         } else {
             output += `
-                <div class="modal fade" id="modal-update-${index}" tabindex="-1" role="dialog">
+                <div class="modal fade modals-table-data" id="modal-update-${index}" tabindex="-1" role="dialog">
                     <div class="modal-dialog" href="#" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">${item.title}</h5>
+                                <h5 class="modal-title">${item.match.streaming.streamingTitle}</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -273,7 +286,7 @@ import axios from 'axios';
                                 <div class="row">
                                     <div class="col-12">
                                         <p>Tournament: 
-                                            <small> ${item.tournament}</small>
+                                            <small> ${item.tournament.name}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -281,7 +294,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <small> ${item.type.name}</small>
+                                            <small> ${item.match.type.name}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -290,28 +303,28 @@ import axios from 'axios';
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                         <img 
                                             style="width: 50px; height: 50px;"
-                                            src="${item.fc1ImgUrl}" 
+                                            src="${item.match.fc1ImgUrl}" 
                                             alt="Logo">
                                         <p class="text-center">
-                                            <small>${item.fc1}</small>
+                                            <small>${item.match.fc1}</small>
                                         </p>
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <input 
                                             class="input-modify-score" 
-                                            value="${item.score1}">
+                                            value="${item.match.score1}">
                                         -
                                         <input 
                                             class="input-modify-score" 
-                                            value="${item.score2}">
+                                            value="${item.match.score2}">
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                         <img 
                                             style="width: 50px; height: 50px;"
-                                            src="${item.fc2ImgUrl}" 
+                                            src="${item.match.fc2ImgUrl}" 
                                             alt="Logo">
                                         <p class="text-center">
-                                            <small>${item.fc2}</small>
+                                            <small>${item.match.fc2}</small>
                                         </p>
                                     </div>
                                 </div>
@@ -327,7 +340,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Start time: 
-                                            <small> ${item.time}</small>
+                                            <small> ${item.match.time}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -335,7 +348,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Streaming key: 
-                                            <small> ${item.streaming.streamingUrl[0]}</small>
+                                            <small> ${item.match.streaming.streamingUrl[0]}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -351,22 +364,45 @@ import axios from 'axios';
         }        
 
         return output;
-    }
+    }        
 
-    const getMatches = async () => {
-        try {
-            const matches = await axios({
-                method: 'get',
-                url: '/api/matches',
-            });
-            
-            return matches.data.matches;
-        } catch (error) {
-            console.log(error.response);
-            return [];
-        }
+    const clearExistModal = () => {
+        const modals = Array.from(document.querySelectorAll('.modals-table-data'));
+
+        modals.forEach(item => {            
+            item.parentNode.removeChild(item);
+        })
     }
-    const matches = await getMatches();
+    
+    const renderModal = (data) => {
+        clearExistModal();
+        console.log(data[0].tournament.name);
+        let modals = '';
+
+        const streamingStatusEnum = {
+            'false': {
+                html: 'Pending',
+                class: 'badge-info'
+            },
+            'true': {
+                html: 'On air',
+                class: 'badge-danger'
+            },
+        }
+
+        data.forEach((item, index) => {
+            if (item.match.time) {
+                item.match.time = moment(item.match.time).subtract(7, 'hours').format('DD-MM-YYYY, HH:mm:A');
+            }
+            const streamingStatus = streamingStatusEnum[item.match.streaming.status.toString()];
+
+
+            modals += innerViewDataInModal(item, index, streamingStatus);
+            modals += innerUpdateDataInModal(item, index, streamingStatus);
+        })        
+        
+        $(modals).appendTo('body');
+    }
 
     const templateTableData = (data) => {
         let html = `
@@ -381,7 +417,6 @@ import axios from 'axios';
             </thead>
             <tbody>
             `;
-        let modals = '';
     
         const streamingStatusEnum = {
             'false': {
@@ -394,21 +429,21 @@ import axios from 'axios';
             },
         }
         data.forEach((item, index) => {
-            if (item.time) {
-                item.time = moment(item.time).subtract(7, 'hours').format('DD-MM-YYYY, HH:mm:A');
+            if (item.match.time) {
+                item.match.time = moment(item.match.time).subtract(7, 'hours').format('DD-MM-YYYY, HH:mm:A');
             }
-            const streamingStatus = streamingStatusEnum[item.streaming.status.toString()];
+            const streamingStatus = streamingStatusEnum[item.match.streaming.status.toString()];
     
             // show shutdown dropdown item if video is streaming
-            if (item.streaming.status == true) {
+            if (item.match.streaming.status == true) {
                 html += `
                 <tr>
-                    <th style="text-overflow: hidden;" scope="row">${item.title}</th>
-                    <td>${item.tournament}</td>
+                    <th style="text-overflow: hidden;" scope="row">${item.match.streaming.streamingTitle}</th>
+                    <td>${item.tournament.name}</td>
                     <td> 
                         <span class="badge ${streamingStatus.class} p-2">${streamingStatus.html}</span>
                     </td>
-                    <td>${item.score1} - ${item.score2}</td>
+                    <td>${item.match.score1} - ${item.match.score2}</td>
                     <td>
                         <div class="dropdown"><button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdown-action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">
@@ -423,12 +458,12 @@ import axios from 'axios';
             } else {
                 html += `
                 <tr>
-                    <th style="text-overflow: hidden;" scope="row">${item.title}</th>
-                    <td>${item.tournament}</td>
+                    <th style="text-overflow: hidden;" scope="row">${item.match.streaming.streamingTitle}</th>
+                    <td>${item.tournament.name}</td>
                     <td> 
                         <span class="badge ${streamingStatus.class} p-2">${streamingStatus.html}</span>
                     </td>
-                    <td>${item.score1} - ${item.score2}</td>
+                    <td>${item.match.score1} - ${item.match.score2}</td>
                     <td>
                         <div class="dropdown"><button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdown-action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">
@@ -439,17 +474,11 @@ import axios from 'axios';
                     </td>
                 </tr>
             `;
-            }
-    
-            modals += innerViewDataInModal(item, index, streamingStatus);
-            modals += innerUpdateDataInModal(item, index, streamingStatus);
+            }                
         });
     
         html += `</tbody>`;
-        return {
-            html,
-            modals
-        };
+        return html;
     }
 
     const pagination = (data) => {
@@ -460,17 +489,17 @@ import axios from 'axios';
             showGoButton: true,
             showPrevious: false,
             showNext: false,
+            formatResult: function(data) {                
+                renderModal(data);
+            },
             callback: function (data, pagination) {
-                const {
-                    html,
-                    modals
-                } = templateTableData(data);
+                const html = templateTableData(data);
                 $('.table-pagination-data').html(html);
-                $(modals).appendTo('body');
             }
         })
     }
-    pagination(matches);
+
+    pagination(matches);    
 
     const baseSource = 'http://45.63.62.153:3002/live/loi/index.m3u8';
     const streaming = (baseSource) => {

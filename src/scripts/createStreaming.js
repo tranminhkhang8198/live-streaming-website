@@ -143,15 +143,14 @@ import axios from "axios";
     createNewMatchBtn.addEventListener('click', async () => {
         const videoTitleVal = inputVideoTitle.value ? inputVideoTitle.value : undefined;
         const videoTournamentVal = inputVideoTournament.value ? inputVideoTournament.value : undefined;
-        
-        console.log(videoTypeVal);
-        newStreaming.set('title', videoTitleVal);
+                        
+        newStreaming.set('streamingTitle', videoTitleVal);
         newStreaming.set('type', videoTypeVal);        
         newStreaming.set('tournament', videoTournamentVal);
         (streamingStatusVal === 0) 
             ? newStreaming.set('status', false)
             : newStreaming.set('status', true);
-        newStreaming.set('streamingUrl', streamingLiveUrl.value);
+        newStreaming.set('streamingUrl', streamingLiveUrl.value);                
     
         if (streamingStatusVal == 0) {
             const currentTimePlus15Mins = moment().add(15, 'minutes').format();
@@ -201,11 +200,11 @@ import axios from "axios";
             newStreaming.set('fc1Img', team1LogoVal);
             newStreaming.set('fc2', team2NameVal);
             newStreaming.set('fc2Img', team2LogoVal);
-        } else if (newStreaming.type === 'tennis') {
+        } else if (videoTypeName === 'tennis') {
             const player1NameVal = inputPlayer1Name.value ? inputPlayer1Name.value : undefined;
             const player2NameVal = inputPlayer2Name.value ? inputPlayer2Name.value : undefined;            
             const tournamentLogoVal =  inputVideoTournamentLogo.files[0] ? inputVideoTournamentLogo.files[0] : undefined;
-
+            
             if (!player1NameVal) {
                 isValidInputValidator(inputPlayer1Name, false);
             } else {
@@ -217,12 +216,12 @@ import axios from "axios";
             } else {
                 isValidInputValidator(inputPlayer2Name, true);
             }
-
+                        
             newStreaming.set('tournamentImg', tournamentLogoVal);
             newStreaming.set('fc1', player1NameVal);
             newStreaming.set('fc2', player2NameVal);
         }
-
+        
         if (isValidInput) {
             try {
                 const createNewMatchResponse = await axios({
@@ -234,9 +233,9 @@ import axios from "axios";
                         }
                     },
                     data: newStreaming
-                });                
+                });
                 window.alert('Successful to create new streaming');
-                window.location = '/admin';
+                // window.location = '/admin';
             } catch(error) {
                 console.log(error.response);
                 window.alert('Failed to create new streaming');
