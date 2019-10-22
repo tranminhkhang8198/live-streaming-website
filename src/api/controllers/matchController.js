@@ -2,9 +2,9 @@ const Match = require("./../models/matchModel");
 const Streaming = require("./../models/streamingModel");
 const Tournament = require("./../models/tournamentModel");
 const APIFeature = require("./../utils/apiFeatures");
-const SportType = require('./../models/sportTypeModel');
+const SportType = require("./../models/sportTypeModel");
 const fs = require("fs");
-const path = require('path');
+const path = require("path");
 
 function checkFileType(filename) {
   if (!filename.match(/.(jpg|jpeg|png|gif)$/i)) return false;
@@ -14,30 +14,31 @@ function checkFileType(filename) {
 function validateImg(files, message) {
   for (file in files) {
     if (!checkFileType(files[file].name)) {
-      message.push(`${files[file].name} is not an image. Please choose an image`);
+      message.push(
+        `${files[file].name} is not an image. Please choose an image`
+      );
     }
   }
 }
 
 function saveImg(file) {
-  let imgUrl = '/images/representative.jpg'
+  let imgUrl = "/images/representative.jpg";
   if (file) {
     const filename =
       file.name
-      .split(".")
-      .slice(0, -1)
-      .join(".") +
+        .split(".")
+        .slice(0, -1)
+        .join(".") +
       "-" +
       Date.now();
 
     const extname = file.name.split(".").slice(-1)[0];
     const img = filename + "." + extname;
 
-    file.mv(path.join(__dirname, '../../uploads/' + img));
+    file.mv(path.join(__dirname, "../../uploads/" + img));
 
-    imgUrl = '/uploads/' + img;
+    imgUrl = "/uploads/" + img;
   }
-
 
   return imgUrl;
 }
@@ -60,7 +61,6 @@ async function createNewTournament(tournament_name, tournamentImgUrl, match) {
   return tournament;
 }
 
-
 async function updateTournament(tournament_name, tournamentImgUrl, match) {
   // Retrieve tournament
   const tournament = await Tournament.findOne({
@@ -71,17 +71,21 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
     removeImg(tournament.tournamentImgUrl);
   }
 
-  const newTournament = await Tournament.findByIdAndUpdate({
-    _id: tournament._id
-  }, {
-    $push: {
-      matches: match
+  const newTournament = await Tournament.findByIdAndUpdate(
+    {
+      _id: tournament._id
     },
-    tournamentImgUrl: tournamentImgUrl
-  }, {
-    new: true,
-    runValidators: true
-  });
+    {
+      $push: {
+        matches: match
+      },
+      tournamentImgUrl: tournamentImgUrl
+    },
+    {
+      new: true,
+      runValidators: true
+    }
+  );
 
   return newTournament;
 }
@@ -95,7 +99,6 @@ async function checkSportTypeExist(id) {
 }
 
 function removeImg(imgUrl) {
-
   const img_path = path.join(__dirname, "../../uploads/" + imgUrl);
   console.log(img_path);
 
@@ -108,15 +111,13 @@ function removeImg(imgUrl) {
 exports.getAllMatch = async (req, res) => {
   try {
     // EXCUTE QUERY
-
     const features = new APIFeature(
-        Match.find()
+      Match.find()
         .populate("streaming", "streamingUrl status streamingTitle -_id")
         .populate("type", "name -_id"),
-        req.query
-      )
+      req.query
+    )
       .filter()
-      .type()
       .time()
       .sort()
       .limitFields()
@@ -124,22 +125,36 @@ exports.getAllMatch = async (req, res) => {
 
     const matches = await features.query;
 
-
+    console.log(typeof matches);
 
     // GET TOURNAMENT FOR EACH MATCH
+    const response = [];
+
     for (var i in matches) {
+      const result = {};
+
       const tournament = await Tournament.findOne({
         matches: matches[i]._id
       });
-      matches[i]["tournament"] = {
-        "name": tournament.name,
-        "tournamentImagUrl": tournament.tournamentImgUrl
-      };
-    };
 
+      result["match"] = matches[i];
+      result["tournament"] = {
+        name: tournament.name,
+        tournamentImgUrl: tournament.tournamentImgUrl
+      };
+
+      response.push(result);
+    }
+
+    // const matches = await Match.find().populate({
+    //   path: 'type',
+    //   match: {
+    //     name: "Football"
+    //   }
+    // });
 
     res.status(200).json({
-      matches
+      response
     });
   } catch (err) {
     res.status(404).json({
@@ -155,14 +170,13 @@ exports.getMatch = async (req, res) => {
       .populate("streaming", "streamingUrl -_id")
       .populate("type", "name -_id");
 
-
     // GET TOUNARMENT FOR MATCH
     const tournament = await Tournament.findOne({
       matches: match._id
     });
     match["tournament"] = {
-      "name": tournament.name,
-      "tournamentImagUrl": tournament.tournamentImgUrl
+      name: tournament.name,
+      tournamentImagUrl: tournament.tournamentImgUrl
     };
 
     res.status(200).json({
@@ -178,7 +192,6 @@ exports.getMatch = async (req, res) => {
     });
   }
 };
-
 
 exports.createMatch = async (req, res) => {
   try {
@@ -215,7 +228,7 @@ exports.createMatch = async (req, res) => {
 
     if (message.length > 0) {
       return res.status(400).json({
-        status: 'fail',
+        status: "fail",
         message: message
       });
     }
@@ -235,16 +248,23 @@ exports.createMatch = async (req, res) => {
 
     const newMatch = await Match.create(queryStr);
 
-
     // ADD MATCH TO TOURNAMENT AND UPDATE TOURNAMENT IMG IF HAVE
     // Checking tournament exist and create new one if not
     let newTournament = null;
     if (!(await checkTournamentExist(req.body.tournament))) {
       // Create new one
-      newTournament = await createNewTournament(req.body.tournament, tournamentImgUrl, newMatch);
+      newTournament = await createNewTournament(
+        req.body.tournament,
+        tournamentImgUrl,
+        newMatch
+      );
     } else {
       // Retrieve and update
-      newTournament = await updateTournament(req.body.tournament, tournamentImgUrl, newMatch);
+      newTournament = await updateTournament(
+        req.body.tournament,
+        tournamentImgUrl,
+        newMatch
+      );
     }
 
     res.status(201).json({
@@ -252,13 +272,12 @@ exports.createMatch = async (req, res) => {
       match: newMatch,
       tournament: newTournament
     });
-
   } catch (err) {
     res.status(400).json({
       status: "fail",
       message: err
     });
-  };
+  }
 };
 
 exports.updateMatch = async (req, res) => {
@@ -268,13 +287,17 @@ exports.updateMatch = async (req, res) => {
     });
 
     if (match) {
-      var updated_match = await Match.findByIdAndUpdate(req.params.id, req.body, {
-        new: true,
-        runValidators: true
-      });
+      var updated_match = await Match.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+          new: true,
+          runValidators: true
+        }
+      );
     } else {
       return res.status(404).json({
-        status: 'fail',
+        status: "fail",
         message: "Match ID does't exist"
       });
     }
@@ -311,15 +334,16 @@ exports.deleteMatch = async (req, res) => {
         matches: req.params.id
       });
 
-      const updateTouranment = await Tournament.update({
-        _id: touranment._id
-      }, {
-        $pull: {
-          matches: req.params.id
+      const updateTouranment = await Tournament.update(
+        {
+          _id: touranment._id
+        },
+        {
+          $pull: {
+            matches: req.params.id
+          }
         }
-      });
-
-
+      );
 
       // REMOVE IMG FROM SERVER
       if (match.fc1ImgUrl != "") {
@@ -331,7 +355,7 @@ exports.deleteMatch = async (req, res) => {
       }
     } else {
       return res.status(404).json({
-        status: 'fail',
+        status: "fail",
         message: "Match ID does't exist"
       });
     }
@@ -340,7 +364,6 @@ exports.deleteMatch = async (req, res) => {
       status: "success",
       data: null
     });
-
   } catch (err) {
     res.status(404).json({
       status: "fail",
