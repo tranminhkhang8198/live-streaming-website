@@ -76,7 +76,7 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
     $push: {
       matches: match
     },
-    tournamentImagUrl: tournamentImgUrl
+    tournamentImgUrl: tournamentImgUrl
   }, {
     new: true,
     runValidators: true
@@ -85,10 +85,9 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
   return newTournament;
 }
 
-
-async function getSportType(name) {
+async function checkSportTypeExist(id) {
   const sportType = await SportType.findOne({
-    name: name
+    _id: id
   });
 
   return sportType;
@@ -175,7 +174,7 @@ exports.createMatch = async (req, res) => {
     }
 
     // CHECK SPORT TYPE EXIST
-    if (!(await getSportType(req.body.type))) {
+    if (!(await checkSportTypeExist(req.body.type))) {
       message.push("Sport type doesn't exist");
     }
 
@@ -208,7 +207,7 @@ exports.createMatch = async (req, res) => {
     queryStr = {
       ...req.body
     };
-    queryStr["type"] = getSportType(req.body.type)._id;
+
     queryStr["streaming"] = streaming_id;
     queryStr["fc1ImgUrl"] = fc1ImgUrl;
     queryStr["fc2ImgUrl"] = fc2ImgUrl;
