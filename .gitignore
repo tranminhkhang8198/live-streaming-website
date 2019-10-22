@@ -13,8 +13,5 @@ dist
 # remove log files from committed
 *.log
 
-# ignore app workflow and apis
-docs
-
 # ignore uploads folder
 src/uploads
