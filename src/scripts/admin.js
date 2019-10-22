@@ -6,7 +6,7 @@ import axios from 'axios';
     const innerViewDataInModal = (item, index, streamingStatus) => {
         let output = '';
         
-        if (item.typeName === 'tennis') {
+        if (item.type.name === 'tennis') {
             output += `
                 <div class="modal fade" id="modal-detail-${index}" tabindex="-1" role="dialog">
                     <div class="modal-dialog" href="#" role="document">
@@ -21,6 +21,7 @@ import axios from 'axios';
                                 <div class="row">
                                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                                         <img 
+                                            style="width: 50px; height: 50px;"
                                             src="${item.fc1ImgUrl}" 
                                             alt="Logo">
                                         <p class="text-center">${item.tournament}</p> 
@@ -30,7 +31,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <small> ${item.typeName}</small>
+                                            <small> ${item.type.name}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -103,8 +104,17 @@ import axios from 'axios';
                             </div>
                             <hr/>
                             <div class="row mt-2">
+                                <div class="col-12">
+                                    <p>Match type: 
+                                        <small> ${item.type.name}</small>
+                                    </p> 
+                                </div>
+                            </div>
+                            <hr/>
+                            <div class="row mt-2">
                                 <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                     <img 
+                                        style="width: 50px; height: 50px;"
                                         src="${item.fc1ImgUrl}" 
                                         alt="Logo">
                                     <p class="text-center">
@@ -116,6 +126,7 @@ import axios from 'axios';
                                 </div>
                                 <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                     <img 
+                                        style="width: 50px; height: 50px;"
                                         src="${item.fc2ImgUrl}" 
                                         alt="Logo">
                                     <p class="text-center">
@@ -163,7 +174,7 @@ import axios from 'axios';
     const innerUpdateDataInModal = (item, index, streamingStatus) => {
         let output = '';
 
-        if (item.typeName === 'tennis') {
+        if (item.type.name === 'tennis') {
             output += `
                 <div class="modal fade" id="modal-update-${index}" tabindex="-1" role="dialog">
                     <div class="modal-dialog" href="#" role="document">
@@ -178,6 +189,7 @@ import axios from 'axios';
                                 <div class="row">
                                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                                         <img 
+                                            style="width: 50px; height: 50px;"
                                             src="${item.fc1ImgUrl}" 
                                             alt="Logo">
                                         <p class="text-center">${item.tournament}</p> 
@@ -187,7 +199,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <small> ${item.typeName}</small>
+                                            <small> ${item.type.name}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -267,8 +279,17 @@ import axios from 'axios';
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
+                                    <div class="col-12">
+                                        <p>Match type: 
+                                            <small> ${item.type.name}</small>
+                                        </p> 
+                                    </div>
+                                </div>
+                                <hr/>
+                                <div class="row mt-2">
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                         <img 
+                                            style="width: 50px; height: 50px;"
                                             src="${item.fc1ImgUrl}" 
                                             alt="Logo">
                                         <p class="text-center">
@@ -286,6 +307,7 @@ import axios from 'axios';
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                         <img 
+                                            style="width: 50px; height: 50px;"
                                             src="${item.fc2ImgUrl}" 
                                             alt="Logo">
                                         <p class="text-center">
@@ -340,12 +362,11 @@ import axios from 'axios';
             
             return matches.data.matches;
         } catch (error) {
-            error.response;
-            return null;
+            console.log(error.response);
+            return [];
         }
     }
-    const matches = await getMatches();    
-    console.log(matches);
+    const matches = await getMatches();
 
     const templateTableData = (data) => {
         let html = `
@@ -363,30 +384,23 @@ import axios from 'axios';
         let modals = '';
     
         const streamingStatusEnum = {
-            '0': {
+            'false': {
                 html: 'Pending',
                 class: 'badge-info'
             },
-            '1': {
+            'true': {
                 html: 'On air',
                 class: 'badge-danger'
             },
         }
         data.forEach((item, index) => {
-            // re-assign data from apis after the modification from backend
-            item.title = 'Fake streaming title';
-            item.tournament = 'Fake streaming tournament';
-            item.is_streaming = 1;
-            item.typeName = 'tennis';
-
             if (item.time) {
-                console.log(item.time);
                 item.time = moment(item.time).subtract(7, 'hours').format('DD-MM-YYYY, HH:mm:A');
             }
-            const streamingStatus = streamingStatusEnum[item.is_streaming.toString()];
+            const streamingStatus = streamingStatusEnum[item.streaming.status.toString()];
     
             // show shutdown dropdown item if video is streaming
-            if (item.is_streaming == true) {
+            if (item.streaming.status == true) {
                 html += `
                 <tr>
                     <th style="text-overflow: hidden;" scope="row">${item.title}</th>

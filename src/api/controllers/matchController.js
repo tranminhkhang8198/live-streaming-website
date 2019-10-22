@@ -20,7 +20,7 @@ function validateImg(files, message) {
 }
 
 function saveImg(file) {
-  let imgUrl = path.join(__dirname, "../../images/representative.jpg");
+  let imgUrl = '/images/representative.jpg'
   if (file) {
     const filename =
       file.name
@@ -33,10 +33,11 @@ function saveImg(file) {
     const extname = file.name.split(".").slice(-1)[0];
     const img = filename + "." + extname;
 
-    imgUrl = path.join(__dirname, '../uploads/images/' + img);
+    file.mv(path.join(__dirname, '../../uploads/' + img));
 
-    file.mv(imgUrl);
+    imgUrl = '/uploads/' + img;
   }
+
 
   return imgUrl;
 }
@@ -76,7 +77,7 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
     $push: {
       matches: match
     },
-    tournamentImagUrl: tournamentImgUrl
+    tournamentImgUrl: tournamentImgUrl
   }, {
     new: true,
     runValidators: true
@@ -85,10 +86,9 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
   return newTournament;
 }
 
-
-async function getSportType(name) {
+async function checkSportTypeExist(id) {
   const sportType = await SportType.findOne({
-    name: name
+    _id: id
   });
 
   return sportType;
@@ -96,7 +96,7 @@ async function getSportType(name) {
 
 function removeImg(imgUrl) {
 
-  const img_path = path.join(__dirname, '../uploads/images/' + imgUrl);
+  const img_path = path.join(__dirname, "../../uploads/" + imgUrl);
   console.log(img_path);
 
   if (fs.existsSync(img_path)) {
@@ -107,9 +107,13 @@ function removeImg(imgUrl) {
 
 exports.getAllMatch = async (req, res) => {
   try {
-    // // EXCUTE QUERY
+    // EXCUTE QUERY
+
     const features = new APIFeature(
-        Match.find().populate("streaming", "streamingUrl status streamingTitle -_id").populate("type", "-__v -_id").lean(), req.query
+        Match.find()
+        .populate("streaming", "streamingUrl status streamingTitle -_id")
+        .populate("type", "name -_id"),
+        req.query
       )
       .filter()
       .time()
@@ -118,6 +122,8 @@ exports.getAllMatch = async (req, res) => {
       .paginate();
 
     const matches = await features.query;
+
+
 
     // GET TOURNAMENT FOR EACH MATCH
     for (var i in matches) {
@@ -129,6 +135,7 @@ exports.getAllMatch = async (req, res) => {
         "tournamentImagUrl": tournament.tournamentImgUrl
       };
     };
+
 
     res.status(200).json({
       matches
@@ -143,7 +150,19 @@ exports.getAllMatch = async (req, res) => {
 
 exports.getMatch = async (req, res) => {
   try {
-    const match = await Match.findById(req.params.id).populate("streaming", "streamingUrl -_id");
+    const match = await Match.findById(req.params.id)
+      .populate("streaming", "streamingUrl -_id")
+      .populate("type", "name -_id");
+
+
+    // GET TOUNARMENT FOR MATCH
+    const tournament = await Tournament.findOne({
+      matches: match._id
+    });
+    match["tournament"] = {
+      "name": tournament.name,
+      "tournamentImagUrl": tournament.tournamentImgUrl
+    };
 
     res.status(200).json({
       status: "success",
@@ -175,7 +194,7 @@ exports.createMatch = async (req, res) => {
     }
 
     // CHECK SPORT TYPE EXIST
-    if (!(await getSportType(req.body.type))) {
+    if (!(await checkSportTypeExist(req.body.type))) {
       message.push("Sport type doesn't exist");
     }
 
@@ -208,7 +227,7 @@ exports.createMatch = async (req, res) => {
     queryStr = {
       ...req.body
     };
-    queryStr["type"] = getSportType(req.body.type)._id;
+
     queryStr["streaming"] = streaming_id;
     queryStr["fc1ImgUrl"] = fc1ImgUrl;
     queryStr["fc2ImgUrl"] = fc2ImgUrl;
@@ -234,7 +253,6 @@ exports.createMatch = async (req, res) => {
     });
 
   } catch (err) {
-    console.log(err);
     res.status(400).json({
       status: "fail",
       message: err

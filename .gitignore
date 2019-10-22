@@ -17,4 +17,4 @@ dist
 docs
 
 # ignore uploads folder
-src/api/uploads
+src/uploads
