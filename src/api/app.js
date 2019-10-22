@@ -4,6 +4,7 @@ const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const morgan = require('morgan');
 
+
 const app = express();
 
 // enable files upload
@@ -19,6 +20,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(morgan('dev'));
 
+if (process.env.NODE_ENV === 'development') {
+    app.use(require('morgan')('dev'));
+}
 
 const sportTypeRoute = require('./routes/sportTypeRoutes');
 const tournamentRoute = require('./routes/tournamentRoutes');

@@ -234,15 +234,26 @@ exports.createMatch = async (req, res) => {
 
 exports.updateMatch = async (req, res) => {
   try {
-    const match = await Match.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
+    const match = await Match.findOne({
+      _id: req.params.id
     });
+
+    if (match) {
+      var updated_match = await Match.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+        runValidators: true
+      });
+    } else {
+      return res.status(404).json({
+        status: 'fail',
+        message: "Match ID does't exist"
+      });
+    }
 
     res.status(200).json({
       status: "success",
       data: {
-        match
+        updated_match
       }
     });
   } catch (err) {
@@ -255,19 +266,30 @@ exports.updateMatch = async (req, res) => {
 
 exports.deleteMatch = async (req, res) => {
   try {
-    // DELETE MATCH
-    const match = await Match.findByIdAndDelete(req.params.id);
+    const match = await Match.findOne({
+      _id: req.params.id
+    });
 
-    // DELETE STREAMING OF THIS MATCH
-    const streaming = await Streaming.findByIdAndDelete(match.streaming);
+    if (match) {
+      // DELETE MATCH
+      const match = await Match.findByIdAndDelete(req.params.id);
 
-    // REMOVE IMG FROM SERVER
-    if (match.fc1ImgUrl != "") {
-      removeImg(match.fc1ImgUrl);
-    }
+      // DELETE STREAMING OF THIS MATCH
+      const streaming = await Streaming.findByIdAndDelete(match.streaming);
 
-    if (match.fc2ImgUrl != "") {
-      removeImg(match.fc2ImgUrl);
+      // REMOVE IMG FROM SERVER
+      if (match.fc1ImgUrl != "") {
+        removeImg(match.fc1ImgUrl);
+      }
+
+      if (match.fc2ImgUrl != "") {
+        removeImg(match.fc2ImgUrl);
+      }
+    } else {
+      return res.status(404).json({
+        status: 'fail',
+        message: "Match ID does't exist"
+      });
     }
 
     res.status(204).json({

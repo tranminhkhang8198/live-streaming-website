@@ -1,13 +1,14 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
+const path = require('path');
 
 dotenv.config({
-    path: "./api/config.env"
+    path: path.join(__dirname, './config.env')
 });
 
 const app = require("./app");
 
-const DB = process.env.DB_LOCAL;
+const DB = process.env.DB_LOCAL || 'mongodb://127.0.0.1:27017/streaming_api';
 
 mongoose
     .connect(DB, {
@@ -18,7 +19,7 @@ mongoose
     })
     .then(() => console.log("DB connection successful!"));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log(`App running on port ${port}...`);
 });
