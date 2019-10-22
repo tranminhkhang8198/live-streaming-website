@@ -72,16 +72,14 @@ class APIFeature {
     }
 
     type() {
-
-        console.log(this.queryString.type);
-
         // if (this.queryString.type) {
+        //     console.log("sucess");
         //     this.query = this.query.find({
-        //         score1: 9
+        //         type: 
         //     });
         // }
 
-        // return this;
+        return this;
     }
 
     sort() {

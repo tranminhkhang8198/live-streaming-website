@@ -33,7 +33,7 @@ function saveImg(file) {
     const extname = file.name.split(".").slice(-1)[0];
     const img = filename + "." + extname;
 
-    imgUrl = path.join(__dirname, '../uploads/images/' + img);
+    imgUrl = path.join(__dirname, '../../uploads/' + img);
 
     file.mv(imgUrl);
   }
@@ -95,7 +95,7 @@ async function checkSportTypeExist(id) {
 
 function removeImg(imgUrl) {
 
-  const img_path = path.join(__dirname, '../uploads/images/' + imgUrl);
+  const img_path = path.join(__dirname, "../../uploads/" + imgUrl);
   console.log(img_path);
 
   if (fs.existsSync(img_path)) {
@@ -123,6 +123,8 @@ exports.getAllMatch = async (req, res) => {
 
     const matches = await features.query;
 
+
+
     // GET TOURNAMENT FOR EACH MATCH
     for (var i in matches) {
       const tournament = await Tournament.findOne({
@@ -133,10 +135,8 @@ exports.getAllMatch = async (req, res) => {
         "tournamentImagUrl": tournament.tournamentImgUrl
       };
     };
-    // console.log(req.query.sportType);
-    // const matches = await Match.find({
-    //   type: req.query.sportType
-    // });
+
+
 
     res.status(200).json({
       matches
