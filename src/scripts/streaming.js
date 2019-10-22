@@ -2,6 +2,7 @@ const getStreamingKey = localStorage.getItem('key');
 const source = `http://localhost:3002/live/loi/index.m3u8`;
 const servers = Array.from(document.querySelectorAll('.server-bt'))
 
+window.VIDEOJS_NO_DYNAMIC_STYLE = true
 ////-- init player
 var options = {
     html5: {
@@ -17,7 +18,7 @@ videojs.Html5Hlsjs.addHook('beforeinitialize', (videojsPlayer, hlsjsInstance) =>
 });
 
 var player = videojs('video-hls', options);
-
+// player.playsinline(true)
 ////
 
 
@@ -61,7 +62,15 @@ function getStreamingURL(){
 }
 function loadHLS(source,player){
     player.src({type: 'application/x-mpegURL', src: source});
-    player.play()
+    if (player.canPlayType('application/x-mpegurl')){
+        video.addEventListener('loadedmetadata',function() {
+            video.play();
+          });
+    }
+    else{
+        player.play()
+
+    }
 }
 
 
