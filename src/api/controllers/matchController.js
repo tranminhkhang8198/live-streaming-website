@@ -20,7 +20,7 @@ function validateImg(files, message) {
 }
 
 function saveImg(file) {
-  let imgUrl = '';
+  let imgUrl = path.join(__dirname, "../../images/representative.jpg");
   if (file) {
     const filename =
       file.name
@@ -76,7 +76,7 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
     $push: {
       matches: match
     },
-    imgUrl: tournamentImgUrl
+    tournamentImagUrl: tournamentImgUrl
   }, {
     new: true,
     runValidators: true
@@ -86,15 +86,12 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
 }
 
 
-async function checkSportTypeExist(id) {
+async function getSportType(name) {
   const sportType = await SportType.findOne({
-    _id: id
+    name: name
   });
 
-  if (!sportType) {
-    return false;
-  }
-  return true;
+  return sportType;
 }
 
 function removeImg(imgUrl) {
@@ -123,16 +120,15 @@ exports.getAllMatch = async (req, res) => {
     const matches = await features.query;
 
     // GET TOURNAMENT FOR EACH MATCH
-    matches.forEach(async function (match) {
+    for (var i in matches) {
       const tournament = await Tournament.findOne({
-        matches: match._id
+        matches: matches[i]._id
       });
-      match["tournament"] = {
+      matches[i]["tournament"] = {
         "name": tournament.name,
-        "tournamentImagUrl": tournament.tournamentImagUrl
+        "tournamentImagUrl": tournament.tournamentImgUrl
       };
-      console.log(match);
-    });
+    };
 
     res.status(200).json({
       matches
@@ -179,14 +175,14 @@ exports.createMatch = async (req, res) => {
     }
 
     // CHECK SPORT TYPE EXIST
-    if (!(await checkSportTypeExist(req.body.type))) {
+    if (!(await getSportType(req.body.type))) {
       message.push("Sport type doesn't exist");
     }
 
     // UPLOAD FC IMAGE TO SERVER
-    let fc1ImgUrl = path.join(__dirname, "../../images/representative.jpg");
-    let fc2ImgUrl = path.join(__dirname, "../../images/representative.jpg");
-    let tournamentImgUrl = path.join(__dirname, "../../images/representative.jpg");
+    let fc1ImgUrl = "";
+    let fc2ImgUrl = "";
+    let tournamentImgUrl = "";
     if (req.files) {
       validateImg(req.files, message);
 
@@ -212,10 +208,10 @@ exports.createMatch = async (req, res) => {
     queryStr = {
       ...req.body
     };
+    queryStr["type"] = getSportType(req.body.type)._id;
     queryStr["streaming"] = streaming_id;
     queryStr["fc1ImgUrl"] = fc1ImgUrl;
     queryStr["fc2ImgUrl"] = fc2ImgUrl;
-    queryStr["tournamentImgUrl"] = tournamentImgUrl;
 
     const newMatch = await Match.create(queryStr);
 
