@@ -67,9 +67,15 @@
             color: rgba($color-white, .8);     
             font-size: 16px;
             
+            @include breakpoint(lg-laptop) {
+                font-size: 14px !important;
+            }
+
             @include breakpoint(lg-mobile) {
                 font-size: 10px !important;
-            }
+            }    
+            
+            
         }
     }
 }
@@ -178,7 +184,7 @@ svg {
         }
     }
 
-    & .highlight-title-match, & .highlight-title-tour {        
+    & .highlight-title-match, & .highlight-title-tour {                
         @include breakpoint(tablet) {
             font-size: 16px !important;
         }

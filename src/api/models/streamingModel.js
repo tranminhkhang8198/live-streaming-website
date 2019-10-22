@@ -3,7 +3,7 @@ const uniqueValidator = require('mongoose-unique-validator')
 const Schema = mongoose.Schema;
 
 const streamingSchema = mongoose.Schema({
-    title: String,
+    streamingTitle: String,
     streamingUrl: {
         type: [String],
     },

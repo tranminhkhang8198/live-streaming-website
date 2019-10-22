@@ -12,9 +12,9 @@ const matchSchema = new mongoose.Schema({
   fc2ImgUrl: {
     type: String
   },
-  tournamentImgUrl: {
-    type: String,
-  },
+  // tournamentImgUrl: {
+  //   type: String,
+  // },
   fc2: {
     type: String
   },
@@ -27,7 +27,8 @@ const matchSchema = new mongoose.Schema({
     default: 0
   },
   time: {
-    type: Date
+    type: Date,
+    default: Date.now()
   },
   type: {
     type: Schema.Types.ObjectId,

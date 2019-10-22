@@ -2,14 +2,14 @@ const scheduleData = require('./data/fakeScheduleData.json');
 const tennisData = require('./data/fakeTennisData.json');
 const streamingData = require('./data/fakeStreamingData.json');
 
-const renderScheduleBlock = (data) => {
+const innerFootballBlock = (data) => {
     const scheduler = document.querySelector('.schedule-container');    
 
     let outputScheduler = `
         <h2 class="schedule-heading">Schedule</h2>
         <hr/>
         <div class="sport-type-container text-center">
-                <span class="ml-2 sport-type">Football</span>
+            <span class="ml-2 sport-type">Football</span>
             <br/>
             <div class="schedule-divider mt-4">
                 <h4 class="text-center">Today</h4>
@@ -168,9 +168,9 @@ const renderScheduleBlock = (data) => {
         item.setAttribute('data-before', data[index].tournament);
     })
 }
-// renderScheduleBlock(scheduleData);
+// innerFootballBlock(scheduleData);
 
-const renderTennisBlock = (data) => {
+const innerTennisBlock = (data) => {
     const tennisContainer = document.querySelector('.tennis-container');    
 
     let outputTennis = `
@@ -270,9 +270,9 @@ const renderTennisBlock = (data) => {
 
     tennisContainer.innerHTML = outputTennis;
 }
-// renderTennisBlock(tennisData);
+// innerTennisBlock(tennisData);
 
-const renderStreamingBlock = (data) => {
+const innerStreamingBlock = (data) => {
     const streamingContainer = document.querySelector('.streaming-container');
     let streamingOutput = `
         <h2 class="streaming-heading">Streaming</h2>
@@ -303,4 +303,4 @@ const renderStreamingBlock = (data) => {
     })
     streamingContainer.innerHTML = streamingOutput;
 }
-// renderStreamingBlock(streamingData);
+// innerStreamingBlock(streamingData);

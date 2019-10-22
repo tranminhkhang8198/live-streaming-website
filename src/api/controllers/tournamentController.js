@@ -4,12 +4,13 @@ const APIFeatures = require("./../utils/apiFeatures");
 function removeImg(imgUrl) {
 
     const img_path = path.join(__dirname, '../uploads/images/' + imgUrl);
-    console.log(img_path);
 
     if (fs.existsSync(img_path)) {
-        console.log("something");
+        console.log("Success");
         fs.unlinkSync(img_path);
     }
+
+    console.log("Success");
 }
 
 exports.getAllTournament = async (req, res) => {
@@ -100,6 +101,8 @@ exports.updateTournament = async (req, res) => {
 exports.deleteTournament = async (req, res) => {
     try {
         tournament = await Tournament.findByIdAndDelete(req.params.id);
+
+        console.log(tournament.imgUrl);
 
         removeImg(tournament.imgUrl);
 

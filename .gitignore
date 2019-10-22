@@ -15,3 +15,6 @@ dist
 
 # ignore app workflow and apis
 docs
+
+# ignore uploads folder
+src/api/uploads
