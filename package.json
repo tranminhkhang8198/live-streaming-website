@@ -43,13 +43,7 @@
     "path": "^0.12.7",
     "http-status": "^1.4.0",
     "method-override": "^3.0.0",
-<<<<<<< HEAD
-    "mongoose": "^5.7.5"
-=======
-    "moment": "^2.24.0",
     "mongoose": "^5.7.5",
-    "mongoose-unique-validator": "^2.0.3",
-    "path": "^0.12.7"
->>>>>>> master
+    "moment": "^2.24.0"   
   }
 }
