@@ -144,6 +144,7 @@ import axios from "axios";
         const videoTitleVal = inputVideoTitle.value ? inputVideoTitle.value : undefined;
         const videoTournamentVal = inputVideoTournament.value ? inputVideoTournament.value : undefined;
         
+        console.log(videoTypeVal);
         newStreaming.set('title', videoTitleVal);
         newStreaming.set('type', videoTypeVal);        
         newStreaming.set('tournament', videoTournamentVal);
@@ -237,6 +238,7 @@ import axios from "axios";
                 window.alert('Successful to create new streaming');
                 window.location = '/admin';
             } catch(error) {
+                console.log(error.response);
                 window.alert('Failed to create new streaming');
             }            
         } else {

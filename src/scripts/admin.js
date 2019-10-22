@@ -340,8 +340,8 @@ import axios from 'axios';
             
             return matches.data.matches;
         } catch (error) {
-            error.response;
-            return null;
+            console.log(error.response);
+            return [];
         }
     }
     const matches = await getMatches();    
