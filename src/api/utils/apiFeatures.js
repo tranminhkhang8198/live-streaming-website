@@ -6,18 +6,6 @@ class APIFeature {
         this.queryString = queryString;
     }
 
-    async getTypeId(typename) {
-        let id = "";
-        const sportType = await SportType.findOne({
-            name: typename
-        });
-
-        if (sportType) {
-            id = sportType._id;
-        }
-        return id;
-    }
-
     filter() {
         const queryObj = {
             ...this.queryString
@@ -65,17 +53,6 @@ class APIFeature {
                     $gte: start,
                     $lte: end
                 }
-            });
-        }
-
-        return this;
-    }
-
-    type() {
-        if (this.queryString.type) {
-            console.log("sucess");
-            this.query = this.query.find({
-                type: "5daebdcf20e9a40de1286577"
             });
         }
 
