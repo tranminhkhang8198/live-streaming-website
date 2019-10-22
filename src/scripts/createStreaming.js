@@ -1,4 +1,6 @@
 import "babel-polyfill";
+import moment from "moment";
+import axios from "axios";
 
 (async () => {
     const newStreaming = new FormData();
@@ -48,8 +50,7 @@ import "babel-polyfill";
         }
         else {
             selector.classList.remove('is-invalid');
-        }
-        
+        }        
         if(!Array.from(document.querySelectorAll('.is-invalid')).length) {
             isValidInput = true;
         }
@@ -71,9 +72,9 @@ import "babel-polyfill";
     const renderStreamingTypes = (data) => {
         let output = '<option value="undefined">Choose sport type</option>';
 
-        data.forEach(object => {
+        data.forEach(type => {
             output += `
-                <option value="${object._id}">${object.name}</option>            
+                <option value="${type._id}">${type.name}</option>            
             `;            
         })
 
@@ -83,8 +84,7 @@ import "babel-polyfill";
     const streamingTypes = await getStreamingTypes();
     renderStreamingTypes(streamingTypes.data.sportTypes);
 
-    uploadStreamingType.addEventListener('change', event => {        
-    
+    uploadStreamingType.addEventListener('change', event => {
         const selectedIndex = event.target.selectedIndex;
         const options = document.querySelectorAll('#input-video-type option');
         videoTypeVal = options[selectedIndex].value;
@@ -102,18 +102,21 @@ import "babel-polyfill";
             uploadTennisPlayers.style.display = 'none';
             uploadFootballTeams.style.display = 'none';
             uploadTournamentLogo.style.display = 'none';
-        }
+        }                
     })
     
     inputVideoStatus.addEventListener('change', (event) => {
         const selectedIndex = event.target.selectedIndex;
     
         const options = document.querySelectorAll('#input-video-status option');
-        streamingStatusVal = parseInt(options[selectedIndex].value);
+        streamingStatusVal = parseInt(options[selectedIndex].value);                
     
         if (streamingStatusVal == 0) {
             inputVideoTimeContainer.style.display = 'block';
             inputVideoTime.removeAttribute('disabled');
+
+            const currentTimePlus15Mins = moment().add(15, 'minutes').format('YYYY-MM-DDTHH:mm');
+            inputVideoTime.value = currentTimePlus15Mins;
         } else {
             inputVideoTimeContainer.style.display = 'none';
             inputVideoTime.setAttribute('disabled', 'disabled');
@@ -141,19 +144,21 @@ import "babel-polyfill";
         const videoTitleVal = inputVideoTitle.value ? inputVideoTitle.value : undefined;
         const videoTournamentVal = inputVideoTournament.value ? inputVideoTournament.value : undefined;
         
-        newStreaming.append('title', videoTitleVal);
-        newStreaming.append('type', videoTypeVal);
-        newStreaming.append('tournament', videoTournamentVal);
-        newStreaming.append('status', parseInt(streamingStatusVal));
-        newStreaming.append('streamingUrl', streamingLiveUrl.value);
+        newStreaming.set('title', videoTitleVal);
+        newStreaming.set('type', videoTypeVal);        
+        newStreaming.set('tournament', videoTournamentVal);
+        (streamingStatusVal === 0) 
+            ? newStreaming.set('status', false)
+            : newStreaming.set('status', true);
+        newStreaming.set('streamingUrl', streamingLiveUrl.value);
     
-        // if (newStreaming.streamingStatus == 0) {
-        //     const currentDatetime = new Date().toISOString();
-        //     const formatDatetime = currentDatetime.slice(0, currentDatetime.length-1);
-        //     const timeEl = document.querySelector('#input-video-time');
-            
-        //     timeEl.value = formatDatetime;
-        // } 
+        if (streamingStatusVal == 0) {
+            const currentTimePlus15Mins = moment().add(15, 'minutes').format();
+            newStreaming.set('time', currentTimePlus15Mins);
+        } else if (streamingStatusVal == 1){
+            const currentTime = moment().format();
+            newStreaming.set('time', currentTime);
+        }
         
         if (!videoTypeVal) {
             isValidInputValidator(inputVideoType, false);        
@@ -171,12 +176,6 @@ import "babel-polyfill";
             isValidInputValidator(inputVideoTournament, false);
         } else {
             isValidInputValidator(inputVideoTournament, true);
-        }
-    
-        if (!parseInt(streamingStatusVal)) {
-            isValidInputValidator(inputVideoStatus, false);
-        } else {
-            isValidInputValidator(inputVideoStatus, true);
         }
     
         if (videoTypeName === 'football') {
@@ -197,20 +196,32 @@ import "babel-polyfill";
                 isValidInputValidator(inputTeam2Name, true);
             }
                             
-            newStreaming.append('fc1', team1NameVal);
-            newStreaming.append('fc1Img', team1LogoVal);
-            newStreaming.append('fc2', team2NameVal);
-            newStreaming.append('fc2Img', team2LogoVal);
+            newStreaming.set('fc1', team1NameVal);
+            newStreaming.set('fc1Img', team1LogoVal);
+            newStreaming.set('fc2', team2NameVal);
+            newStreaming.set('fc2Img', team2LogoVal);
         } else if (newStreaming.type === 'tennis') {
             const player1NameVal = inputPlayer1Name.value ? inputPlayer1Name.value : undefined;
             const player2NameVal = inputPlayer2Name.value ? inputPlayer2Name.value : undefined;            
             const tournamentLogoVal =  inputVideoTournamentLogo.files[0] ? inputVideoTournamentLogo.files[0] : undefined;
 
-            newStreaming.append('tournamentImg', tournamentLogoVal);
-            newStreaming.append('fc1', player1NameVal);
-            newStreaming.append('fc2', player2NameVal);
+            if (!player1NameVal) {
+                isValidInputValidator(inputPlayer1Name, false);
+            } else {
+                isValidInputValidator(inputPlayer1Name, true);
+            }
+    
+            if (!player2NameVal) {
+                isValidInputValidator(inputPlayer2Name, false);
+            } else {
+                isValidInputValidator(inputPlayer2Name, true);
+            }
+
+            newStreaming.set('tournamentImg', tournamentLogoVal);
+            newStreaming.set('fc1', player1NameVal);
+            newStreaming.set('fc2', player2NameVal);
         }
-        
+
         if (isValidInput) {
             try {
                 const createNewMatchResponse = await axios({
@@ -222,7 +233,7 @@ import "babel-polyfill";
                         }
                     },
                     data: newStreaming
-                });
+                });                
                 window.alert('Successful to create new streaming');
                 window.location = '/admin';
             } catch(error) {

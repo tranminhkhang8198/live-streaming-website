@@ -1,5 +1,6 @@
 import 'babel-polyfill';
 import moment from 'moment';
+import axios from 'axios';
 
 (async () => {
     const innerViewDataInModal = (item, index, streamingStatus) => {
