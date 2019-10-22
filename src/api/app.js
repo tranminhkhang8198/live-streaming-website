@@ -22,6 +22,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+app.use(express.static(path.join(__dirname, '../../dist')));
+app.use('/images', express.static(path.join(__dirname, '../images')));
+app.use('/scripts', express.static(path.join(__dirname, '../scripts')));
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
+
 if (process.env.NODE_ENV === 'development') {
     app.use(require('morgan')('dev'));
 }

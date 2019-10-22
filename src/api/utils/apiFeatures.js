@@ -1,19 +1,32 @@
+const SportType = require("./../models/sportTypeModel");
+
 class APIFeature {
     constructor(query, queryString) {
         this.query = query;
         this.queryString = queryString;
     }
 
+    async getTypeId(typename) {
+        let id = "";
+        const sportType = await SportType.findOne({
+            name: typename
+        });
+
+        if (sportType) {
+            id = sportType._id;
+        }
+        return id;
+    }
 
     filter() {
         const queryObj = {
             ...this.queryString
         }
 
-        const excludedFields = ["page", "sort", "limit", "fields"];
+        const excludedFields = ["page", "sort", "limit", "fields", "type"];
         excludedFields.forEach(el => delete queryObj[el]);
 
-        let queryStr = JSON.stringify(queryObj);
+        var queryStr = JSON.stringify(queryObj);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
         this.query = this.query.find(JSON.parse(queryStr));
@@ -58,6 +71,16 @@ class APIFeature {
         return this;
     }
 
+    type() {
+        if (this.queryString.type) {
+            console.log("sucess");
+            this.query = this.query.find({
+                type: "5daebdcf20e9a40de1286577"
+            });
+        }
+
+        return this;
+    }
 
     sort() {
         if (this.queryString.sort) {
