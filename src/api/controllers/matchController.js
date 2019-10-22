@@ -20,7 +20,7 @@ function validateImg(files, message) {
 }
 
 function saveImg(file) {
-  let imgUrl = path.join(__dirname, "../../images/representative.jpg");
+  let imgUrl = '/images/representative.jpg'
   if (file) {
     const filename =
       file.name
@@ -33,10 +33,11 @@ function saveImg(file) {
     const extname = file.name.split(".").slice(-1)[0];
     const img = filename + "." + extname;
 
-    imgUrl = path.join(__dirname, '../uploads/images/' + img);
+    file.mv(path.join(__dirname, '../../uploads/' + img));
 
-    file.mv(imgUrl);
+    imgUrl = '/uploads/' + img;
   }
+
 
   return imgUrl;
 }
@@ -95,7 +96,7 @@ async function checkSportTypeExist(id) {
 
 function removeImg(imgUrl) {
 
-  const img_path = path.join(__dirname, '../uploads/images/' + imgUrl);
+  const img_path = path.join(__dirname, "../../uploads/" + imgUrl);
   console.log(img_path);
 
   if (fs.existsSync(img_path)) {
@@ -122,6 +123,8 @@ exports.getAllMatch = async (req, res) => {
 
     const matches = await features.query;
 
+
+
     // GET TOURNAMENT FOR EACH MATCH
     for (var i in matches) {
       const tournament = await Tournament.findOne({
@@ -132,10 +135,7 @@ exports.getAllMatch = async (req, res) => {
         "tournamentImagUrl": tournament.tournamentImgUrl
       };
     };
-    // console.log(req.query.sportType);
-    // const matches = await Match.find({
-    //   type: req.query.sportType
-    // });
+
 
     res.status(200).json({
       matches
@@ -150,7 +150,19 @@ exports.getAllMatch = async (req, res) => {
 
 exports.getMatch = async (req, res) => {
   try {
-    const match = await Match.findById(req.params.id).populate("streaming", "streamingUrl -_id");
+    const match = await Match.findById(req.params.id)
+      .populate("streaming", "streamingUrl -_id")
+      .populate("type", "name -_id");
+
+
+    // GET TOUNARMENT FOR MATCH
+    const tournament = await Tournament.findOne({
+      matches: match._id
+    });
+    match["tournament"] = {
+      "name": tournament.name,
+      "tournamentImagUrl": tournament.tournamentImgUrl
+    };
 
     res.status(200).json({
       status: "success",

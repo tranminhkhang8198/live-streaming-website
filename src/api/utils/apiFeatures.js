@@ -6,17 +6,17 @@ class APIFeature {
         this.queryString = queryString;
     }
 
-    // async getTypeId(typename) {
-    //     let id = "";
-    //     const sportType = await SportType.findOne({
-    //         name: typename
-    //     });
+    async getTypeId(typename) {
+        let id = "";
+        const sportType = await SportType.findOne({
+            name: typename
+        });
 
-    //     if (sportType) {
-    //         id = sportType._id;
-    //     }
-    //     return id;
-    // }
+        if (sportType) {
+            id = sportType._id;
+        }
+        return id;
+    }
 
     filter() {
         const queryObj = {
@@ -72,16 +72,14 @@ class APIFeature {
     }
 
     type() {
+        if (this.queryString.type) {
+            console.log("sucess");
+            this.query = this.query.find({
+                type: "5daebdcf20e9a40de1286577"
+            });
+        }
 
-        // console.log(this.queryString.type);
-
-        // if (this.queryString.type) {
-        //     this.query = this.query.find({
-        //         score1: 9
-        //     });
-        // }
-
-        // return this;
+        return this;
     }
 
     sort() {
