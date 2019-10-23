@@ -17,6 +17,27 @@ import axios from 'axios';
     }
     const matches = await getMatches();
 
+    const addEventToRemoveMatchData = ({ selectors }) => {
+        selectors.forEach(selector => {   
+            selector.addEventListener('click', async event => {
+                event.preventDefault();
+
+                const matchId = event.target.dataset.matchId;
+
+                try {
+                    const removeItemResponse = await axios({
+                        method: 'delete',
+                        url: `http://localhost:5000/api/matches/${matchId}`,
+                    })
+                    window.alert('Successfully shutdown stream');
+                    window.location = '/admin';
+                } catch (error) {
+                    window.alert('Failed to shutdown stream, please re-try for several times!');
+                }                
+            })
+        })
+    }
+
     const innerViewDataInModal = (item, index, streamingStatus) => {
         item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm:ss');
         
@@ -447,7 +468,7 @@ import axios from 'axios';
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-detail-${index}">Detail</a>
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-update-${index}">Update</a>
-                                <a class="dropdown-item" style="cursor: pointer" >Shutdown</a>
+                                <a class="dropdown-item remove-match-items" data-match-id="${item.match._id}" style="cursor: pointer" >Shutdown</a>
                             </div>
                         </div>
                     </td>
@@ -493,6 +514,9 @@ import axios from 'axios';
             callback: function (data, pagination) {
                 const html = templateTableData(data);
                 $('.table-pagination-data').html(html);
+
+                // add remove data events to Shutdown button everytime re-render data table
+                addEventToRemoveMatchData({ selectors: document.querySelectorAll('.remove-match-items') });
             }
         })
     }
