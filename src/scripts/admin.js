@@ -18,6 +18,8 @@ import axios from 'axios';
     const matches = await getMatches();
 
     const innerViewDataInModal = (item, index, streamingStatus) => {
+        item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm:ss');
+        
         let output = '';
         if (item.match.type.name === 'tennis') {                
             output += `
@@ -185,6 +187,7 @@ import axios from 'axios';
     }
 
     const innerUpdateDataInModal = (item, index, streamingStatus) => {
+        item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm:ss');
         let output = '';
 
         if (item.match.type.name === 'tennis') {
@@ -376,7 +379,6 @@ import axios from 'axios';
     
     const renderModal = (data) => {
         clearExistModal();
-        console.log(data[0].tournament.name);
         let modals = '';
 
         const streamingStatusEnum = {
@@ -390,12 +392,8 @@ import axios from 'axios';
             },
         }
 
-        data.forEach((item, index) => {
-            if (item.match.time) {
-                item.match.time = moment(item.match.time).subtract(7, 'hours').format('DD-MM-YYYY, HH:mm:A');
-            }
+        data.forEach((item, index) => {            
             const streamingStatus = streamingStatusEnum[item.match.streaming.status.toString()];
-
 
             modals += innerViewDataInModal(item, index, streamingStatus);
             modals += innerUpdateDataInModal(item, index, streamingStatus);
@@ -498,7 +496,6 @@ import axios from 'axios';
             }
         })
     }
-
     pagination(matches);    
 
     const baseSource = 'http://45.63.62.153:3002/live/loi/index.m3u8';
