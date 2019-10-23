@@ -5,6 +5,7 @@ import axios from "axios";
 (async () => {
     const newStreaming = new FormData();
     const hostname = 'localhost:5000';
+    const streamingHostname = '10.13.151.27';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -17,6 +18,7 @@ import axios from "axios";
     // general streaming data
     const streamingKey = document.querySelector('#streaming-key');
     const streamingLiveUrl = document.querySelector('#streaming-live-url');
+    const streamingServerUrl = document.querySelector('#streaming-url');
     const inputVideoType = document.querySelector('#input-video-type');
     const inputVideoTitle = document.querySelector('#input-video-title');
     const inputVideoStatus = document.querySelector('#input-video-status');
@@ -82,7 +84,7 @@ import axios from "axios";
     }
     
     const streamingTypes = await getStreamingTypes();
-    renderStreamingTypes(streamingTypes.data.sportTypes);
+    renderStreamingTypes(streamingTypes.sportTypes);
 
     uploadStreamingType.addEventListener('change', event => {
         const selectedIndex = event.target.selectedIndex;
@@ -127,13 +129,16 @@ import axios from "axios";
         event.preventDefault();            
     
         streamingKey.removeAttribute('disabled');
-        streamingLiveUrl.removeAttribute('disabled');
         createNewMatchBtn.removeAttribute('disabled');
+
+        streamingKey.addEventListener('keyup', event => {
+            streamingLiveUrl.value = `${streamingServer}/${event.target.value}/index.m3u8`;            
+        });
     
-        const currentTimeInUnix = new Date().getTime();
-        const streamingServer = 'http://192.168.1.101';
+        const currentTimeInUnix = new Date().getTime();        
         streamingKey.value = currentTimeInUnix;
-        streamingLiveUrl.value = `${streamingServer}/${currentTimeInUnix}`;
+        streamingServerUrl.value = `rtmp://${streamingHostname}/live`;
+        streamingLiveUrl.value = `http://${streamingHostname}:3002/live/${currentTimeInUnix}/index.m3u8`;
     })
 
     reloadVideoSrc.addEventListener('click', event => {
@@ -153,8 +158,9 @@ import axios from "axios";
         newStreaming.set('streamingUrl', streamingLiveUrl.value);                
     
         if (streamingStatusVal == 0) {
-            const currentTimePlus15Mins = moment().add(15, 'minutes').format();
-            newStreaming.set('time', currentTimePlus15Mins);
+            const currentTimePlus15Mins = moment().add(15, 'minutes').format();            
+            const timeValue = moment(inputVideoTime.value).format();
+            newStreaming.set('time', timeValue);
         } else if (streamingStatusVal == 1){
             const currentTime = moment().format();
             newStreaming.set('time', currentTime);
@@ -235,9 +241,8 @@ import axios from "axios";
                     data: newStreaming
                 });
                 window.alert('Successful to create new streaming');
-                // window.location = '/admin';
-            } catch(error) {
-                console.log(error.response);
+                window.location = '/admin';
+            } catch(error) {                
                 window.alert('Failed to create new streaming');
             }            
         } else {

@@ -26,9 +26,9 @@ function saveImg(file) {
   if (file) {
     const filename =
       file.name
-        .split(".")
-        .slice(0, -1)
-        .join(".") +
+      .split(".")
+      .slice(0, -1)
+      .join(".") +
       "-" +
       Date.now();
 
@@ -71,21 +71,17 @@ async function updateTournament(tournament_name, tournamentImgUrl, match) {
     removeImg(tournament.tournamentImgUrl);
   }
 
-  const newTournament = await Tournament.findByIdAndUpdate(
-    {
-      _id: tournament._id
+  const newTournament = await Tournament.findByIdAndUpdate({
+    _id: tournament._id
+  }, {
+    $push: {
+      matches: match
     },
-    {
-      $push: {
-        matches: match
-      },
-      tournamentImgUrl: tournamentImgUrl
-    },
-    {
-      new: true,
-      runValidators: true
-    }
-  );
+    tournamentImgUrl: tournamentImgUrl
+  }, {
+    new: true,
+    runValidators: true
+  });
 
   return newTournament;
 }
@@ -108,27 +104,53 @@ function removeImg(imgUrl) {
   }
 }
 
+async function getTypeId(name) {
+  let id = "";
+  const sportType = await SportType.findOne({
+    name: name
+  });
+
+  if (sportType) {
+    id = sportType._id;
+  }
+
+  return id;
+}
+
+
 exports.getAllMatch = async (req, res) => {
   try {
     // EXCUTE QUERY
+    let typeId = "";
+    if (req.query.type) {
+      typeId = await getTypeId(req.query.type);    
+
+      if (typeId == "") {
+        res.status(404).json({
+          status: "fail",
+          message: `Sport type ${typeId} doesn't exist`
+        });
+      }
+    }
+
     const features = new APIFeature(
-      Match.find()
+        Match.find()
         .populate("streaming", "streamingUrl status streamingTitle -_id")
         .populate("type", "name -_id"),
-      req.query
-    )
+        req.query,
+        typeId
+      )
       .filter()
       .time()
+      .type()
       .sort()
       .limitFields()
       .paginate();
 
     const matches = await features.query;
 
-    console.log(typeof matches);
-
     // GET TOURNAMENT FOR EACH MATCH
-    const response = [];
+    let response = [];
 
     for (var i in matches) {
       const result = {};
@@ -146,12 +168,34 @@ exports.getAllMatch = async (req, res) => {
       response.push(result);
     }
 
-    // const matches = await Match.find().populate({
-    //   path: 'type',
-    //   match: {
-    //     name: "Football"
-    //   }
-    // });
+    // DIVIDE MATCH INTO TODAY AND TOMORROW IF TYPE WAS SUBMITTED
+    if (req.query.type) {
+      const todays = [];
+      const tomorrows = [];
+
+      const today = new Date();
+      const today_str = today.toISOString().split("T")[0];
+
+      const tomorrow = new Date(today.getTime() + (24 * 60 * 60 * 1000))
+      const tomorrow_str = tomorrow.toISOString().split("T")[0];
+
+      for (var i in response) {
+        const date_tr = response[i].match.time.toISOString().split("T")[0];
+
+        if (date_tr == today_str) {
+          todays.push(response[i]);
+        }
+
+        if (date_tr == tomorrow_str) {
+          tomorrows.push(response[i]);
+        }
+      }
+
+      response = {};
+
+      response["today"] = todays;
+      response["tomorrow"] = tomorrows;
+    }
 
     res.status(200).json({
       response
@@ -174,16 +218,19 @@ exports.getMatch = async (req, res) => {
     const tournament = await Tournament.findOne({
       matches: match._id
     });
-    match["tournament"] = {
+
+    const tournament_info = {
       name: tournament.name,
       tournamentImagUrl: tournament.tournamentImgUrl
     };
 
+    const response = [];
+
+    response.push(match);
+    response.push(tournament_info);
+
     res.status(200).json({
-      status: "success",
-      data: {
-        match
-      }
+      response
     });
   } catch (err) {
     res.status(404).json({
@@ -289,8 +336,7 @@ exports.updateMatch = async (req, res) => {
     if (match) {
       var updated_match = await Match.findByIdAndUpdate(
         req.params.id,
-        req.body,
-        {
+        req.body, {
           new: true,
           runValidators: true
         }
@@ -334,16 +380,13 @@ exports.deleteMatch = async (req, res) => {
         matches: req.params.id
       });
 
-      const updateTouranment = await Tournament.update(
-        {
-          _id: touranment._id
-        },
-        {
-          $pull: {
-            matches: req.params.id
-          }
+      const updateTouranment = await Tournament.update({
+        _id: touranment._id
+      }, {
+        $pull: {
+          matches: req.params.id
         }
-      );
+      });
 
       // REMOVE IMG FROM SERVER
       if (match.fc1ImgUrl != "") {
@@ -362,7 +405,7 @@ exports.deleteMatch = async (req, res) => {
 
     res.status(204).json({
       status: "success",
-      data: null
+      data: null,
     });
   } catch (err) {
     res.status(404).json({

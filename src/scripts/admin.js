@@ -3,6 +3,8 @@ import moment from 'moment';
 import axios from 'axios';
 
 (async () => {
+    const hostname = `10.13.150.145:5000`;
+
     const getMatches = async () => {
         try {
             const matches = await axios({
@@ -16,9 +18,31 @@ import axios from 'axios';
         }
     }
     const matches = await getMatches();
+    console.log(matches);
+
+    const addEventToRemoveMatchData = ({ selectors }) => {
+        selectors.forEach(selector => {   
+            selector.addEventListener('click', async event => {
+                event.preventDefault();
+
+                const matchId = event.target.dataset.matchId;
+
+                try {
+                    const removeItemResponse = await axios({
+                        method: 'delete',
+                        url: `http://${hostname}/api/matches/${matchId}`,
+                    })
+                    window.alert('Successfully shutdown stream');
+                    window.location = '/admin';
+                } catch (error) {
+                    window.alert('Failed to shutdown stream, please re-try for several times!');
+                }                
+            })
+        })
+    }
 
     const innerViewDataInModal = (item, index, streamingStatus) => {
-        item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm:ss');
+        item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm');
         
         let output = '';
         if (item.match.type.name === 'tennis') {                
@@ -38,7 +62,7 @@ import axios from 'axios';
                                         <img 
                                             style="width: 50px; height: 50px;"
                                             src="${item.tournament.tournamentImgUrl}" 
-                                            alt="Logo">
+                                            >
                                         <p class="text-center">${item.tournament.name}</p> 
                                     </div>
                                 </div>
@@ -53,7 +77,7 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-start">
-                                        <p class="text-center">Player 1:
+                                        <p class="text-left">
                                             <small>${item.match.fc1}</small>
                                         </p>
                                     </div>
@@ -61,7 +85,7 @@ import axios from 'axios';
                                         <p>${item.match.score1} - ${item.match.score2}</p>
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
-                                        <p class="text-center">Player 2:
+                                        <p class="text-right">
                                             <small>${item.match.fc2}</small>
                                         </p>
                                     </div>
@@ -131,7 +155,7 @@ import axios from 'axios';
                                     <img 
                                         style="width: 50px; height: 50px;"
                                         src="${item.match.fc1ImgUrl}" 
-                                        alt="Logo">
+                                        >
                                     <p class="text-center">
                                         <small>${item.match.fc1}</small>
                                     </p>
@@ -143,7 +167,7 @@ import axios from 'axios';
                                     <img 
                                         style="width: 50px; height: 50px;"
                                         src="${item.match.fc2ImgUrl}" 
-                                        alt="Logo">
+                                        >
                                     <p class="text-center">
                                         <small>${item.match.fc2}</small>
                                     </p>
@@ -187,7 +211,7 @@ import axios from 'axios';
     }
 
     const innerUpdateDataInModal = (item, index, streamingStatus) => {
-        item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm:ss');
+        item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm');
         let output = '';
 
         if (item.match.type.name === 'tennis') {
@@ -196,35 +220,69 @@ import axios from 'axios';
                     <div class="modal-dialog" href="#" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">${item.match.streaming.streamingTitle}</h5>
+                                <h5 class="modal-title">
+                                    <input
+                                        size="40"
+                                        id="update-tennis-title-${item.match._id}"
+                                        style="border: none; outline: none;"
+                                        type="text"
+                                        value="${item.match.streaming.streamingTitle}">
+                                </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                             </div>
-                            <div class="modal-body">                    
+                            <div class="modal-body">
                                 <div class="row">
                                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                                         <img 
                                             style="width: 50px; height: 50px;"
-                                            src="${item.tournament.tournamentImgUrl}" 
-                                            alt="Logo">
-                                        <p class="text-center">${item.tournament.name}</p> 
+                                            src="${item.tournament.tournamentImgUrl}">
+                                        <input
+                                            class="text-center"
+                                            id="update-tennis-tournament-img-${item.match._id}"
+                                            style="
+                                                border: none; 
+                                                outline: none; 
+                                                max-width: 100%; 
+                                                max-height: 100%;
+                                                position: relative;
+                                                opacity: 0;
+                                                left: -20px;
+                                                top: -40px; 
+                                                cursor: pointer;"
+                                            type="file"
+                                            value="">
+                                        <input
+                                            class="text-center"
+                                            size="25"
+                                            id="update-tennis-tournament-name-${item.match._id}"
+                                            style="border: none; outline: none;"
+                                            type="text"
+                                            value="${item.tournament.name}" >
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <small> ${item.match.type.name}</small>
-                                        </p> 
+                                            <input
+                                                id="update-tennis-type-name-${item.match._id}"
+                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                type="text"
+                                                value="${item.match.type.name}">
+                                        </p>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-start">
-                                        <p class="text-center">Player 1:
-                                            <small>${item.match.fc1}</small>
-                                        </p>
+                                        <input
+                                            class="text-left"
+                                            id="update-tennis-fc1-${item.match._id}"
+                                            style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                            type="text"
+                                            value="${item.match.fc1}">
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <input 
@@ -236,16 +294,19 @@ import axios from 'axios';
                                             value="${item.match.score2}">
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
-                                        <p class="text-center">Player 2:
-                                            <small>${item.match.fc2}</small>
-                                        </p>
+                                        <input
+                                            class="text-right"
+                                            id="update-tennis-fc2-${item.match._id}"
+                                            style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                            type="text"
+                                            value="${item.match.fc2}">
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Streaming status: 
-                                            <small> ${streamingStatus['html']}</small>
+                                            <small>${streamingStatus['html']}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -253,16 +314,25 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Start time: 
-                                            <small> ${item.match.time}</small>
+                                            <small>${item.match.time}</small>
                                         </p> 
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p>Streaming key: 
-                                            <small> ${item.match.streaming.streamingUrl[0]}</small>
-                                        </p> 
+                                        <p>Streaming keys: </p> `;
+                                item.match.streaming.streamingUrl.forEach(streamingUrl => {
+                                    output += `
+                                        <input
+                                            class="text-left update-tennis-streaming-urls-${item.match._id}"
+                                            size="35"
+                                            style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                            type="text"
+                                            value="${streamingUrl}">
+                                        `;
+                                })
+                                output += `
                                     </div>
                                 </div>
                             </div>
@@ -280,7 +350,14 @@ import axios from 'axios';
                     <div class="modal-dialog" href="#" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">${item.match.streaming.streamingTitle}</h5>
+                                <h5 class="modal-title">
+                                    <input
+                                        size="40"
+                                        id="update-football-title-${item.match._id}"
+                                        style="border: none; outline: none;"
+                                        type="text"
+                                        value="${item.match.streaming.streamingTitle}">
+                                </h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -288,8 +365,14 @@ import axios from 'axios';
                             <div class="modal-body">                    
                                 <div class="row">
                                     <div class="col-12">
-                                        <p>Tournament: 
-                                            <small> ${item.tournament.name}</small>
+                                        <p>Tournament:
+                                            <input
+                                                class="text-left"
+                                                size="25"
+                                                id="update-football-tournament-name-${item.match._id}"
+                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                type="text"
+                                                value="${item.tournament.name}" >
                                         </p> 
                                     </div>
                                 </div>
@@ -297,7 +380,11 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <small> ${item.match.type.name}</small>
+                                            <input
+                                                id="update-footbal-type-name-${item.match._id}"
+                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                type="text"
+                                                value="${item.match.type.name}">
                                         </p> 
                                     </div>
                                 </div>
@@ -306,10 +393,28 @@ import axios from 'axios';
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                         <img 
                                             style="width: 50px; height: 50px;"
-                                            src="${item.match.fc1ImgUrl}" 
-                                            alt="Logo">
+                                            src="${item.match.fc1ImgUrl}">
+                                        <input
+                                            class="text-center"
+                                            id="update-football-fc1-img-${item.match._id}"
+                                            style="
+                                                border: none; 
+                                                outline: none; 
+                                                max-width: 100%; 
+                                                max-height: 100%;
+                                                position: relative;
+                                                opacity: 0;
+                                                top: -40px; 
+                                                cursor: pointer;"
+                                            type="file"
+                                            value="">
                                         <p class="text-center">
-                                            <small>${item.match.fc1}</small>
+                                            <input
+                                                class="text-center"
+                                                id="update-football-fc1-${item.match._id}"
+                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                type="text"
+                                                value="${item.match.fc1}">
                                         </p>
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
@@ -324,17 +429,35 @@ import axios from 'axios';
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                         <img 
                                             style="width: 50px; height: 50px;"
-                                            src="${item.match.fc2ImgUrl}" 
-                                            alt="Logo">
+                                            src="${item.match.fc2ImgUrl}">
+                                        <input
+                                            class="text-center"
+                                            id="update-football-fc2-img-${item.match._id}"
+                                            style="
+                                                border: none; 
+                                                outline: none; 
+                                                max-width: 100%; 
+                                                max-height: 100%;
+                                                position: relative;
+                                                opacity: 0;
+                                                top: -40px; 
+                                                cursor: pointer;"
+                                            type="file"
+                                            value="">
                                         <p class="text-center">
-                                            <small>${item.match.fc2}</small>
+                                            <input
+                                                class="text-center"
+                                                id="update-football-fc2-${item.match._id}"
+                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                type="text"
+                                                value="${item.match.fc2}">
                                         </p>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p>Streaming status: 
+                                        <p>Streaming status:
                                             <small> ${streamingStatus['html']}</small>
                                         </p> 
                                     </div>
@@ -350,9 +473,18 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p>Streaming key: 
-                                            <small> ${item.match.streaming.streamingUrl[0]}</small>
-                                        </p> 
+                                        <p>Streaming keys:</p>`;
+                                item.match.streaming.streamingUrl.forEach(streamingUrl => {
+                                    output += `
+                                        <input
+                                            class="text-left update-football-streaming-urls-${item.match._id}"
+                                            size="35"
+                                            style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                            type="text"
+                                            value="${streamingUrl}">
+                                        `;
+                                })
+                                output += `
                                     </div>
                                 </div>
                             </div>
@@ -447,7 +579,7 @@ import axios from 'axios';
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-detail-${index}">Detail</a>
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-update-${index}">Update</a>
-                                <a class="dropdown-item" style="cursor: pointer" >Shutdown</a>
+                                <a class="dropdown-item remove-match-items" data-match-id="${item.match._id}" style="cursor: pointer" >Shutdown</a>
                             </div>
                         </div>
                     </td>
@@ -467,6 +599,7 @@ import axios from 'axios';
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-detail-${index}">Detail</a>
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-update-${index}">Update</a>
+                                <a class="dropdown-item remove-match-items" data-match-id="${item.match._id}" style="cursor: pointer">Delete</a>
                             </div>
                         </div>
                     </td>
@@ -493,6 +626,9 @@ import axios from 'axios';
             callback: function (data, pagination) {
                 const html = templateTableData(data);
                 $('.table-pagination-data').html(html);
+
+                // add remove data events to Shutdown button everytime re-render data table
+                addEventToRemoveMatchData({ selectors: document.querySelectorAll('.remove-match-items') });
             }
         })
     }

@@ -1,18 +1,23 @@
 const SportType = require("./../models/sportTypeModel");
 
 class APIFeature {
-    constructor(query, queryString) {
+    constructor(query, queryString, typeId) {
         this.query = query;
         this.queryString = queryString;
+        this.typeId = typeId;
     }
 
     filter() {
-        const queryObj = {
+        var queryObj = {
             ...this.queryString
         }
 
         const excludedFields = ["page", "sort", "limit", "fields", "type"];
         excludedFields.forEach(el => delete queryObj[el]);
+
+        if (this.typeId != "") {
+            queryObj["type"] = this.typeId;
+        }
 
         var queryStr = JSON.stringify(queryObj);
         queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
@@ -47,6 +52,27 @@ class APIFeature {
                 var end = new Date(this.queryString.time);
                 end.setUTCHours(23, 59, 59, 999);
             }
+
+            this.query = this.query.find({
+                time: {
+                    $gte: start,
+                    $lte: end
+                }
+            });
+        }
+
+        return this;
+    }
+
+    type() {
+        if (this.queryString.type) {
+            var today = new Date();
+
+            var start = new Date();
+            start.setUTCHours(0, 0, 0, 0);
+
+            var end = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+            end.setUTCHours(23, 59, 59, 999);
 
             this.query = this.query.find({
                 time: {

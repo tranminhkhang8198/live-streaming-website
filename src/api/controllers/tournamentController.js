@@ -18,11 +18,7 @@ exports.getAllTournament = async (req, res) => {
         const tournaments = await Tournament.find();
 
         res.status(200).json({
-            status: 'success',
-            results: tournaments.length,
-            data: {
-                tournaments
-            }
+            tournaments
         });
     } catch (err) {
         res.status(404).json({
@@ -36,16 +32,12 @@ exports.getAllTournament = async (req, res) => {
 exports.getTournament = async (req, res) => {
     try {
         // EXCUTE QUERY
-        const features = new APIFeature(Tournament.find(), req.query)
-            .filter()
-
-        const tournaments = await features.query;
+        const tournament = await Tournament.findById(
+            req.params.id
+        );
 
         res.status(200).json({
-            status: 'success',
-            data: {
-                tournament
-            }
+            tournament
         });
     } catch (err) {
         res.status(404).json({
@@ -79,7 +71,7 @@ exports.updateTournament = async (req, res) => {
     try {
         const tournament = await Tournament.findByIdAndUpdate(req.params.id, req.body, {
             new: true,
-            runValidators: true
+            // runValidators: true
         });
 
         res.status(200).json({
@@ -102,9 +94,7 @@ exports.deleteTournament = async (req, res) => {
     try {
         tournament = await Tournament.findByIdAndDelete(req.params.id);
 
-        console.log(tournament.imgUrl);
-
-        removeImg(tournament.imgUrl);
+        // removeImg(tournament.tournamentImg);
 
         res.status(204).json({
             status: 'success',
