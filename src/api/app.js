@@ -6,10 +6,6 @@ const path = require('path');
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, '../../dist')));
-app.use('/images', express.static(path.join(__dirname, '../images')));
-app.use('/scripts', express.static(path.join(__dirname, '../scripts')));
-
 // enable files upload
 app.use(fileUpload({
     createParentPath: true
