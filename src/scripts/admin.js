@@ -74,7 +74,7 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-start">
-                                        <p class="text-center">Player 1:
+                                        <p class="text-left">
                                             <small>${item.match.fc1}</small>
                                         </p>
                                     </div>
@@ -82,7 +82,7 @@ import axios from 'axios';
                                         <p>${item.match.score1} - ${item.match.score2}</p>
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
-                                        <p class="text-center">Player 2:
+                                        <p class="text-right">
                                             <small>${item.match.fc2}</small>
                                         </p>
                                     </div>
@@ -243,7 +243,7 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-start">
-                                        <p class="text-center">Player 1:
+                                        <p class="text-left">
                                             <small>${item.match.fc1}</small>
                                         </p>
                                     </div>
@@ -257,7 +257,7 @@ import axios from 'axios';
                                             value="${item.match.score2}">
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
-                                        <p class="text-center">Player 2:
+                                        <p class="text-right">
                                             <small>${item.match.fc2}</small>
                                         </p>
                                     </div>
@@ -488,6 +488,7 @@ import axios from 'axios';
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-detail-${index}">Detail</a>
                                 <a class="dropdown-item" style="cursor: pointer" data-toggle="modal" data-target="#modal-update-${index}">Update</a>
+                                <a class="dropdown-item remove-match-items" data-match-id="${item.match._id}" style="cursor: pointer">Delete</a>
                             </div>
                         </div>
                     </td>
