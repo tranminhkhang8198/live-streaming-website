@@ -28,43 +28,43 @@ class APIFeature {
     }
 
 
-    // time() {
-    //     if (this.queryString.time) {
-    //         if (this.queryString.time == "today") {
-    //             var start = new Date();
-    //             start.setUTCHours(0, 0, 0, 0);
-
-    //             var end = new Date();
-    //             end.setUTCHours(23, 59, 59, 999);
-
-    //         } else if (this.queryString.time == "tomorrow") {
-    //             var today = new Date();
-
-    //             var start = new Date(today.getTime() + (24 * 60 * 60 * 1000));
-    //             start.setUTCHours(0, 0, 0, 0);
-
-    //             var end = new Date(today.getTime() + (24 * 60 * 60 * 1000));
-    //             end.setUTCHours(23, 59, 59, 999);
-    //         } else {
-    //             var start = new Date(this.queryString.time);
-    //             start.setUTCHours(0, 0, 0, 0);
-
-    //             var end = new Date(this.queryString.time);
-    //             end.setUTCHours(23, 59, 59, 999);
-    //         }
-
-    //         this.query = this.query.find({
-    //             time: {
-    //                 $gte: start,
-    //                 $lte: end
-    //             }
-    //         });
-    //     }
-
-    //     return this;
-    // }
-
     time() {
+        if (this.queryString.time) {
+            if (this.queryString.time == "today") {
+                var start = new Date();
+                start.setUTCHours(0, 0, 0, 0);
+
+                var end = new Date();
+                end.setUTCHours(23, 59, 59, 999);
+
+            } else if (this.queryString.time == "tomorrow") {
+                var today = new Date();
+
+                var start = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+                start.setUTCHours(0, 0, 0, 0);
+
+                var end = new Date(today.getTime() + (24 * 60 * 60 * 1000));
+                end.setUTCHours(23, 59, 59, 999);
+            } else {
+                var start = new Date(this.queryString.time);
+                start.setUTCHours(0, 0, 0, 0);
+
+                var end = new Date(this.queryString.time);
+                end.setUTCHours(23, 59, 59, 999);
+            }
+
+            this.query = this.query.find({
+                time: {
+                    $gte: start,
+                    $lte: end
+                }
+            });
+        }
+
+        return this;
+    }
+
+    type() {
         if (this.queryString.type) {
             var today = new Date();
 
