@@ -122,8 +122,9 @@ exports.getAllMatch = async (req, res) => {
   try {
     // EXCUTE QUERY
     let typeId = "";
+
     if (req.query.type) {
-      typeId = await getTypeId(req.query.type);    
+      typeId = await getTypeId(req.query.type);
 
       if (typeId == "") {
         res.status(404).json({
