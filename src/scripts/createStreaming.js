@@ -156,8 +156,9 @@ import axios from "axios";
         newStreaming.set('streamingUrl', streamingLiveUrl.value);                
     
         if (streamingStatusVal == 0) {
-            const currentTimePlus15Mins = moment().add(15, 'minutes').format();
-            newStreaming.set('time', currentTimePlus15Mins);
+            const currentTimePlus15Mins = moment().add(15, 'minutes').format();            
+            const timeValue = moment(inputVideoTime.value).format();
+            newStreaming.set('time', timeValue);
         } else if (streamingStatusVal == 1){
             const currentTime = moment().format();
             newStreaming.set('time', currentTime);

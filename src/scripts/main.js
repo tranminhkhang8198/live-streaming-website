@@ -43,12 +43,11 @@ const streamingData = require('./data/fakeStreamingData.json');
     const footballMatches = await getFootballMatches();
     const tennisMatches = await getTennisMatches();
 
-    console.log({ footballMatches, tennisMatches });
-    
     const innerFootballBlock = (data) => {        
-        const { today, tommorow } = data;
-        let todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
-        if (today) {
+        const { today, tomorrow } = data;
+        let todayFootballElOutput = '';
+        if (today && today.length) {
+            todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
                 const date = moment(data.match.time).format('DD/MM/YYYY');
@@ -116,15 +115,15 @@ const streamingData = require('./data/fakeStreamingData.json');
             }); 
         }
 
-        let tommorowFootballElOutput = '';
-        if (tommorow) {
-            tommorowFootballElOutput  += `<h4 class="text-center">Tommorow</h4>`;
-            tommorow.forEach((data, index) => {
+        let tomorrowFootballElOutput = '';
+        if (tomorrow && tomorrow.length) {
+            tomorrowFootballElOutput  += `<h4 class="text-center">Tomorrow</h4>`;
+            tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
                 const date = moment(data.match.time).format('DD/MM/YYYY');            
 
                 if (data.match.streaming.status == false) {
-                    tommorowFootballElOutput += `
+                    tomorrowFootballElOutput += `
                         <a class="row schedule-item-containers" href="/streaming?id=${data.match._id}">
                             <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-left-content">
                                 <img 
@@ -153,7 +152,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                         </a>
                     `;
                 } else {
-                    tommorowFootballElOutput += `
+                    tomorrowFootballElOutput += `
                         <a class="row schedule-item-containers" href="/streaming?id=${data.match._id}">
                             <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-left-content">
                                 <img 
@@ -185,19 +184,20 @@ const streamingData = require('./data/fakeStreamingData.json');
             });
         }
         
-        return { todayFootballElOutput, tommorowFootballElOutput };
+        return { todayFootballElOutput, tomorrowFootballElOutput };
     }
-    const { todayFootballElOutput, tommorowFootballElOutput } = innerFootballBlock(footballMatches.data.response);
+    const { todayFootballElOutput, tomorrowFootballElOutput } = innerFootballBlock(footballMatches.data.response);
     const todayFootballEl = document.querySelector('.today-football-matches');
-    const tommorowFootballEl = document.querySelector('.tommorow-football-matches');
+    const tomorrowFootballEl = document.querySelector('.tomorrow-football-matches');
     todayFootballEl.innerHTML = todayFootballElOutput;
-    tommorowFootballEl.innerHTML = tommorowFootballElOutput;
+    tomorrowFootballEl.innerHTML = tomorrowFootballElOutput;
 
     const innerTennisBlock = (data) => {
-        const { today, tommorow } = data;
-        let todayTennisElOutput = `<h4>Today</h4>`;                    
+        const { today, tomorrow } = data;
 
-        if (today) {
+        let todayTennisElOutput = '';
+        if (today && today.length) {
+            todayTennisElOutput = `<h4>Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
                 const date = moment(data.match.time).format('DD/MM/YYYY');
@@ -207,7 +207,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                         <a class="tennis_link" href="#">
                             <div class="tennis_layout row">
                                 <div class="col-3 tennis_logo">
-                                    <img src="${data.tournament.tournamentImgUrl}"/>
+                                    <img src="${data.tournament.tournamentImgUrl}"  alt=""/>
                                 </div>
                                 <div class="col-6 tennis_info text-center">
                                 <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
@@ -224,7 +224,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                         <a class="tennis_link" href="#">
                             <div class="tennis_layout row">
                                 <div class="col-3 tennis_logo">
-                                    <img src="${data.tournament.tournamentImgUrl}"/>
+                                    <img src="${data.tournament.tournamentImgUrl}"  alt=""/>
                                 </div>
                                 <div class="col-6 tennis_info text-center">
                                     <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
@@ -243,16 +243,19 @@ const streamingData = require('./data/fakeStreamingData.json');
             }); 
         }        
 
-        let tommorowTennisElOutput = '';
-        if (tommorow) {
-            tommorowTennisElOutput = `<h4>Tommorow</h4>`;
-            tommorow.forEach((data, index) => {
+        let tomorrowTennisElOutput = '';
+        if (tomorrow && tomorrow.length) {
+            tomorrowTennisElOutput = `<h4>Tomorrow</h4>`;
+            tomorrow.forEach((data, index) => {
+                const time = moment(data.match.time).format('HH:mm');
+                const date = moment(data.match.time).format('DD/MM/YYYY');
+                
                 if (data.match.streaming.status == false) {
-                    tommorowTennisElOutput += `
+                    tomorrowTennisElOutput += `
                         <a class="tennis_link" href="#">
                             <div class="tennis_layout row">
                                 <div class="col-3 tennis_logo">
-                                    <img src="${data.match}"/>
+                                    <img src="${data.tournament.tournamentImgUrl}"  alt=""/>
                                 </div>
                                 <div class="col-6 tennis_info text-center">
                                     <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
@@ -265,11 +268,11 @@ const streamingData = require('./data/fakeStreamingData.json');
                         </a>
                     `;
                 } else {
-                    tommorowTennisElOutput += `
+                    tomorrowTennisElOutput += `
                         <a class="tennis_link" href="#">
                             <div class="tennis_layout row">
                                 <div class="col-3 tennis_logo">
-                                    <img src="${data.tournament.tournamentImgUrl}"/>
+                                    <img src="${data.tournament.tournamentImgUrl}"  alt=""/>
                                 </div>
                                 <div class="col-6 tennis_info text-center">
                                     <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
@@ -277,7 +280,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                 </div>
                                 <div class="col-3 play_button">
                                     <div class="tennis_is_playing">
-                                        <img src="'images/live-icon.png"/>
+                                        <img src="'images/live-icon.png" alt=""/>
                                         <p class="tennis-time">LIVE</p>
                                     </div>
                                 </div>
@@ -288,44 +291,54 @@ const streamingData = require('./data/fakeStreamingData.json');
             });
         }        
 
-        return { todayTennisElOutput, tommorowTennisElOutput }
+        return { todayTennisElOutput, tomorrowTennisElOutput }
     }    
-    const { todayTennisElOutput, tommorowTennisElOutput } = innerTennisBlock(tennisMatches.data.response);    
+    const { todayTennisElOutput, tomorrowTennisElOutput } = innerTennisBlock(tennisMatches.data.response);    
     const todayTennisEl = document.querySelector('.today-tennis-matches');
-    const tommorowTennisEl = document.querySelector('.tommorow-tennis-matches');
+    const tomorrowTennisEl = document.querySelector('.tomorrow-tennis-matches');
     todayTennisEl.innerHTML = todayTennisElOutput;
-    tommorowTennisEl.innerHTML = tommorowTennisElOutput;
-
+    tomorrowTennisEl.innerHTML = tomorrowTennisElOutput;
+    
+    // console.log({ footballMatches, tennisMatches });
+    const liveStreamingMatches = footballMatches.data.response.today.map(data => {        
+        if (data.match.streaming.status === true) {
+            return {
+                id: data.match._id,
+                fc1: data.match.fc1,
+                fc2: data.match.fc2,
+                score1: data.match.score1,
+                score2: data.match.score2,
+                tournament: data.tournament.name
+            }
+        }            
+    })
+    console.log(liveStreamingMatches);
+    
     const innerStreamingBlock = (data) => {
-        const streamingContainer = document.querySelector('.streaming-container');
-        let streamingOutput = `
-            <h2 class="streaming-heading">Streaming</h2>
-            <hr/>
-        `;
+        let streamingOutput = '';
             
-
         data.forEach(item => {
             streamingOutput += `
-                <a class="row streaming-card-containers" href="${item.streaming_url}">
-                    <div class="col-4 d-flex flex-row align-items-center streaming-card-title-container hvr-sweep-to-right"><i class="fas fa-tv mr-3"></i>
+                <a class="row streaming-card-containers" href="/streaming?id=${item.id}">
+                    <div class="col-5 col-lg-4 d-flex flex-row align-items-center streaming-card-title-container hvr-sweep-to-right"><i class="fas fa-tv mr-1 mb-4"></i>
                         <h3 class="streaming-card-title">${item.tournament}</h3>
                     </div>
-                    <div class="col-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
-                        <p class="streaming-card-team">${item.team1_name}</p>
+                    <div class="col-3 col-lg-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
+                        <p class="streaming-card-team">${item.fc1}</p>
                     </div>
-                    <p class="col-2 d-flex align-items-center justify-content-center streaming-card-score-display">${item.score}</p>
-                    <div class="col-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
-                        <p class="streaming-card-team">${item.team2_name}</p>
-                    </div>
-                    <div class="streaming-card-hidden">
-                        <p class="streaming-card-team">${item.team1_name}</p>
-                        <p class="streaming-card-score">${item.score}</p>
-                        <p class="streaming-card-team">${item.team2_name} </p>
+                    <p class="col-1 col-lg-2 d-flex align-items-center justify-content-center streaming-card-score-display">
+                        ${item.score1} - ${item.score2}
+                    </p>
+                    <div class="col-3 col-lg-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
+                        <p class="streaming-card-team">${item.fc2}</p>
                     </div>
                 </a>
             `;
         })
-        streamingContainer.innerHTML = streamingOutput;
+
+        return streamingOutput;
     }
-    // innerStreamingBlock(streamingData);
+    const streamingOutput = innerStreamingBlock(liveStreamingMatches);
+    const streamingEl = document.querySelector('.streaming-videos-container');
+    streamingEl.innerHTML = streamingOutput;    
 })();
