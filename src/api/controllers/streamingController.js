@@ -5,11 +5,7 @@ exports.getAllStreaming = async (req, res) => {
     try {
         const streamings = await Streaming.find();
         res.status(200).json({
-            status: 'success',
-            results: streamings.length,
-            data: {
-                streamings
-            }
+            streamings
         });
     } catch (err) {
         res.status(404).json({
@@ -25,10 +21,7 @@ exports.getStreaming = async (req, res) => {
         const streaming = await Streaming.findById(req.params.id);
 
         res.status(200).json({
-            status: 'success',
-            data: {
-                streaming
-            }
+            streaming
         });
     } catch (err) {
         res.status(404).json({
@@ -43,10 +36,7 @@ exports.createStreaming = async (req, res) => {
         const newStreaming = await Streaming.create(req.body);
 
         res.status(201).json({
-            status: 'success',
-            data: {
-                streaming: newStreaming
-            }
+            newStreaming
         });
 
     } catch (err) {
