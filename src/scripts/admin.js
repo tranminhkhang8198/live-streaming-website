@@ -3,6 +3,8 @@ import moment from 'moment';
 import axios from 'axios';
 
 (async () => {
+    const hostname = `10.13.150.145:5000`;
+
     const getMatches = async () => {
         try {
             const matches = await axios({
@@ -28,7 +30,7 @@ import axios from 'axios';
                 try {
                     const removeItemResponse = await axios({
                         method: 'delete',
-                        url: `http://localhost:5000/api/matches/${matchId}`,
+                        url: `http://${hostname}/api/matches/${matchId}`,
                     })
                     window.alert('Successfully shutdown stream');
                     window.location = '/admin';
