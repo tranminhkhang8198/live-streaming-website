@@ -143,6 +143,7 @@ exports.getAllMatch = async (req, res) => {
       )
       .filter()
       .time()
+      .type()
       .sort()
       .limitFields()
       .paginate();
@@ -218,16 +219,19 @@ exports.getMatch = async (req, res) => {
     const tournament = await Tournament.findOne({
       matches: match._id
     });
-    match["tournament"] = {
+
+    const tournament_info = {
       name: tournament.name,
       tournamentImagUrl: tournament.tournamentImgUrl
     };
 
+    const response = [];
+
+    response.push(match);
+    response.push(tournament_info);
+
     res.status(200).json({
-      status: "success",
-      data: {
-        match
-      }
+      response
     });
   } catch (err) {
     res.status(404).json({
@@ -402,7 +406,7 @@ exports.deleteMatch = async (req, res) => {
 
     res.status(204).json({
       status: "success",
-      data: null
+      data: null,
     });
   } catch (err) {
     res.status(404).json({

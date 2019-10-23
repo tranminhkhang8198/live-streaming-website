@@ -127,13 +127,16 @@ import axios from "axios";
         event.preventDefault();            
     
         streamingKey.removeAttribute('disabled');
-        streamingLiveUrl.removeAttribute('disabled');
         createNewMatchBtn.removeAttribute('disabled');
+
+        streamingKey.addEventListener('keyup', event => {
+            streamingLiveUrl.value = `${streamingServer}/${event.target.value}/index.m3u8`;
+        });
     
         const currentTimeInUnix = new Date().getTime();
         const streamingServer = 'http://192.168.1.101';
         streamingKey.value = currentTimeInUnix;
-        streamingLiveUrl.value = `${streamingServer}/${currentTimeInUnix}`;
+        streamingLiveUrl.value = `${streamingServer}/${currentTimeInUnix}/index.m3u8`;
     })
 
     reloadVideoSrc.addEventListener('click', event => {
@@ -235,9 +238,8 @@ import axios from "axios";
                     data: newStreaming
                 });
                 window.alert('Successful to create new streaming');
-                // window.location = '/admin';
-            } catch(error) {
-                console.log(error.response);
+                window.location = '/admin';
+            } catch(error) {                
                 window.alert('Failed to create new streaming');
             }            
         } else {
