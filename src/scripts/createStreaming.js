@@ -4,7 +4,7 @@ import axios from "axios";
 
 (async () => {
     const newStreaming = new FormData();
-    const hostname = 'localhost:5000';
+    const hostname = '10.13.150.145:5000';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -82,7 +82,7 @@ import axios from "axios";
     }
     
     const streamingTypes = await getStreamingTypes();
-    renderStreamingTypes(streamingTypes.data.sportTypes);
+    renderStreamingTypes(streamingTypes.sportTypes);
 
     uploadStreamingType.addEventListener('change', event => {
         const selectedIndex = event.target.selectedIndex;
