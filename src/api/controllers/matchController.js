@@ -261,9 +261,9 @@ exports.createMatch = async (req, res) => {
     }
 
     // UPLOAD FC IMAGE TO SERVER
-    let fc1ImgUrl = "";
-    let fc2ImgUrl = "";
-    let tournamentImgUrl = "";
+    let fc1ImgUrl = "/images/representative.jpg";
+    let fc2ImgUrl = "/images/representative.jpg";
+    let tournamentImgUrl = "/images/representative.jpg";
     if (req.files) {
       validateImg(req.files, message);
 
@@ -293,6 +293,8 @@ exports.createMatch = async (req, res) => {
     queryStr["streaming"] = streaming_id;
     queryStr["fc1ImgUrl"] = fc1ImgUrl;
     queryStr["fc2ImgUrl"] = fc2ImgUrl;
+
+    console.log(queryStr);
 
     const newMatch = await Match.create(queryStr);
 
