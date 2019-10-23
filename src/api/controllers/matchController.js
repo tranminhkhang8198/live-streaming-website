@@ -408,7 +408,7 @@ exports.deleteMatch = async (req, res) => {
 
     res.status(204).json({
       status: "success",
-      data: null
+      data: null,
     });
   } catch (err) {
     res.status(404).json({

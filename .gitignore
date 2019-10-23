@@ -7,4 +7,11 @@ dist
 # environment
 .env
 
+# ignore package-lock
 .package-lock.json
+
+# remove log files from committed
+*.log
+
+# ignore uploads folder
+src/uploads
