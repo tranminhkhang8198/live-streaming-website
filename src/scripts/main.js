@@ -42,12 +42,11 @@ const streamingData = require('./data/fakeStreamingData.json');
     
     const footballMatches = await getFootballMatches();
     const tennisMatches = await getTennisMatches();
+
     console.log({ footballMatches, tennisMatches });
     
     const innerFootballBlock = (data) => {        
         const { today, tommorow } = data;
-        console.log({ today, tommorow });
-
         let todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
         if (today) {
             today.forEach((data, index) => {                
@@ -117,9 +116,9 @@ const streamingData = require('./data/fakeStreamingData.json');
             }); 
         }
 
-        let tommorowFootbalElOutput = '';
+        let tommorowFootballElOutput = '';
         if (tommorow) {
-            tommorowFootbalElOutput  += `<h4 class="text-center">Tommorow</h4>`;
+            tommorowFootballElOutput  += `<h4 class="text-center">Tommorow</h4>`;
             tommorow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
                 const date = moment(data.match.time).format('DD/MM/YYYY');            
@@ -186,115 +185,116 @@ const streamingData = require('./data/fakeStreamingData.json');
             });
         }
         
-        return { todayFootballElOutput, tommorowFootbalElOutput };
+        return { todayFootballElOutput, tommorowFootballElOutput };
     }
-    const { todayFootballElOutput, tommorowFootbalElOutput } = innerFootballBlock(footballMatches.data.response);
+    const { todayFootballElOutput, tommorowFootballElOutput } = innerFootballBlock(footballMatches.data.response);
     const todayFootballEl = document.querySelector('.today-football-matches');
     const tommorowFootballEl = document.querySelector('.tommorow-football-matches');
     todayFootballEl.innerHTML = todayFootballElOutput;
-    tommorowFootballEl.innerHTML = tommorowFootbalElOutput;
+    tommorowFootballEl.innerHTML = tommorowFootballElOutput;
 
     const innerTennisBlock = (data) => {
-        const tennisContainer = document.querySelector('.tennis-container');    
+        const { today, tommorow } = data;
+        let todayTennisElOutput = `<h4>Today</h4>`;                    
 
-        let outputTennis = `
-            <span class="ml-2 sport-title sport-type">TENNIS</span>
-            <div class="schedule-divider mt-4">
-                <h4>Today</h4>        
-        `;
-            
-        data.forEach((match, index) => {
-            if (match.is_streaming == true) {
-                outputTennis += `
-                    <a class="custom_match_link" href="${match.streaming_url}">
-                        <div class="custom_match_layout row">
-                            <div class="col-3 custom_image">
-                                <img src="${match.tournament_logo}"/>
-                            </div>
-                            <div class="col-6 custom_match_info text-center">
-                                <h2 class="custom_name">${match.player1_name} vs ${match.player2_name}</h2>
-                                <h3 class="custom_tournament_name">${match.tournament}</h3>
-                            </div>
-                            <div class="col-3 custom_play_botton">
-                                <div class="match_is_playing">
-                                    <img src="../images/live-icon.png"/>
-                                    <p style="text-align: center;">LIVE</p>
+        if (today) {
+            today.forEach((data, index) => {                
+                const time = moment(data.match.time).format('HH:mm');
+                const date = moment(data.match.time).format('DD/MM/YYYY');
+
+                if (data.match.streaming.status == false) {
+                    todayTennisElOutput += `
+                        <a class="tennis_link" href="#">
+                            <div class="tennis_layout row">
+                                <div class="col-3 tennis_logo">
+                                    <img src="${data.tournament.tournamentImgUrl}"/>
+                                </div>
+                                <div class="col-6 tennis_info text-center">
+                                <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
+                                    <h3 class="tennis_tournament_name">${data.tournament.name}</h3>
+                                </div>
+                                <div class="col-3 play_button text-right">
+                                    <p class="tennis_date">${time} ${date}</p>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                `;
-            } else {
-                outputTennis += `
-                    <a class="custom_match_link" href="${match.streaming_url}">
-                        <div class="custom_match_layout row">
-                            <div class="col-3 custom_image">
-                                <img src="${match.tournament_logo}"/>
-                            </div>
-                            <div class="col-6 custom_match_info text-center">
-                                <h2 class="custom_name">${match.player1_name} vs ${match.player2_name}</h2>
-                                <h3 class="custom_tournament_name">${match.tournament}</h3>
-                            </div>
-                            <div class="col-3 custom_play_botton text-right">
-                                <p class="custom_date">${match.date}</p>
-                            </div>
-                        </div>
-                    </a>
-                `;
-            }
-        });
-        outputTennis += `</div>`;
-
-        outputTennis += `
-            <div class="schedule-divider mt-5">
-                <h4>Tommorow</h4>        
-        `;
-
-        data.forEach((match, index) => {
-            if (match.is_streaming == true) {
-                outputTennis += `
-                    <a class="custom_match_link" href="${match.streaming_url}">
-                        <div class="custom_match_layout row">
-                            <div class="col-3 custom_image">
-                                <img src="${match.tournament_logo}"/>
-                            </div>
-                            <div class="col-6 custom_match_info text-center">
-                                <h2 class="custom_name">${match.player1_name} vs ${match.player2_name}</h2>
-                                <h3 class="custom_tournament_name">${match.tournament}</h3>
-                            </div>
-                            <div class="col-3 custom_play_botton">
-                                <div class="match_is_playing">
-                                    <img src="../images/live-icon.png"/>
-                                    <p style="text-align: center;">LIVE</p>
+                        </a>
+                    `;
+                } else {
+                    todayTennisElOutput += `
+                        <a class="tennis_link" href="#">
+                            <div class="tennis_layout row">
+                                <div class="col-3 tennis_logo">
+                                    <img src="${data.tournament.tournamentImgUrl}"/>
+                                </div>
+                                <div class="col-6 tennis_info text-center">
+                                    <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
+                                    <h3 class="tennis_tournament_name">${data.tournament.name}</h3>
+                                </div>
+                                <div class="col-3 play_button">
+                                    <div class="tennis_is_playing">
+                                        <img src="images/live-icon.png"/>
+                                        <p class="tennis-time">LIVE</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
-                `;
-            } else {
-                outputTennis += `
-                    <a class="custom_match_link" href="${match.streaming_url}">
-                        <div class="custom_match_layout row">
-                            <div class="col-3 custom_image">
-                                <img src="${match.tournament_logo}"/>
-                            </div>
-                            <div class="col-6 custom_match_info text-center">
-                                <h2 class="custom_name">${match.player1_name} vs ${match.player2_name}</h2>
-                                <h3 class="custom_tournament_name">${match.tournament}</h3>
-                            </div>
-                            <div class="col-3 custom_play_botton text-right">
-                                <p class="custom_date">${match.date}</p>
-                            </div>
-                        </div>
-                    </a>
-                `;
-            }
-        });
-        outputTennis += `</div>`;
+                        </a>
+                    `;
+                }
+            }); 
+        }        
 
-        tennisContainer.innerHTML = outputTennis;
-    }
-    // innerTennisBlock(tennisData);
+        let tommorowTennisElOutput = '';
+        if (tommorow) {
+            tommorowTennisElOutput = `<h4>Tommorow</h4>`;
+            tommorow.forEach((data, index) => {
+                if (data.match.streaming.status == false) {
+                    tommorowTennisElOutput += `
+                        <a class="tennis_link" href="#">
+                            <div class="tennis_layout row">
+                                <div class="col-3 tennis_logo">
+                                    <img src="${data.match}"/>
+                                </div>
+                                <div class="col-6 tennis_info text-center">
+                                    <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
+                                    <h3 class="tennis_tournament_name">${data.tournament.name}</h3>
+                                </div>
+                                <div class="col-3 play_button text-right">
+                                    <p class="tennis_date">${time} ${date}</p>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                } else {
+                    tommorowTennisElOutput += `
+                        <a class="tennis_link" href="#">
+                            <div class="tennis_layout row">
+                                <div class="col-3 tennis_logo">
+                                    <img src="${data.tournament.tournamentImgUrl}"/>
+                                </div>
+                                <div class="col-6 tennis_info text-center">
+                                    <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
+                                    <h3 class="tennis_tournament_name">${data.match.tournament}</h3>
+                                </div>
+                                <div class="col-3 play_button">
+                                    <div class="tennis_is_playing">
+                                        <img src="'images/live-icon.png"/>
+                                        <p class="tennis-time">LIVE</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                }
+            });
+        }        
+
+        return { todayTennisElOutput, tommorowTennisElOutput }
+    }    
+    const { todayTennisElOutput, tommorowTennisElOutput } = innerTennisBlock(tennisMatches.data.response);    
+    const todayTennisEl = document.querySelector('.today-tennis-matches');
+    const tommorowTennisEl = document.querySelector('.tommorow-tennis-matches');
+    todayTennisEl.innerHTML = todayTennisElOutput;
+    tommorowTennisEl.innerHTML = tommorowTennisElOutput;
 
     const innerStreamingBlock = (data) => {
         const streamingContainer = document.querySelector('.streaming-container');
