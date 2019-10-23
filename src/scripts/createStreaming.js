@@ -4,7 +4,8 @@ import axios from "axios";
 
 (async () => {
     const newStreaming = new FormData();
-    const hostname = '10.13.150.145:5000';
+    const hostname = 'localhost:5000';
+    const streamingHostname = '10.13.151.27';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -17,6 +18,7 @@ import axios from "axios";
     // general streaming data
     const streamingKey = document.querySelector('#streaming-key');
     const streamingLiveUrl = document.querySelector('#streaming-live-url');
+    const streamingServerUrl = document.querySelector('#streaming-url');
     const inputVideoType = document.querySelector('#input-video-type');
     const inputVideoTitle = document.querySelector('#input-video-title');
     const inputVideoStatus = document.querySelector('#input-video-status');
@@ -130,13 +132,13 @@ import axios from "axios";
         createNewMatchBtn.removeAttribute('disabled');
 
         streamingKey.addEventListener('keyup', event => {
-            streamingLiveUrl.value = `${streamingServer}/${event.target.value}/index.m3u8`;
+            streamingLiveUrl.value = `${streamingServer}/${event.target.value}/index.m3u8`;            
         });
     
-        const currentTimeInUnix = new Date().getTime();
-        const streamingServer = 'http://192.168.1.101';
+        const currentTimeInUnix = new Date().getTime();        
         streamingKey.value = currentTimeInUnix;
-        streamingLiveUrl.value = `${streamingServer}/${currentTimeInUnix}/index.m3u8`;
+        streamingServerUrl.value = `rtmp://${streamingHostname}/live`;
+        streamingLiveUrl.value = `http://${streamingHostname}:3002/live/${currentTimeInUnix}/index.m3u8`;
     })
 
     reloadVideoSrc.addEventListener('click', event => {

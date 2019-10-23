@@ -5,11 +5,10 @@
 }
 
 .streaming-videos-container {
-    // height: 20rem;
     overflow-y: auto;
 }
 
-.streaming-card {    
+.streaming-card {
     &-containers {
         background-color: $color-white;
         margin: 0 auto;
