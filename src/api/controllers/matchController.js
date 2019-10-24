@@ -282,7 +282,7 @@ exports.createMatch = async (req, res) => {
     }
 
     // CREATE STREAMING FOR NEW MATCH
-    const newStreaming = await Streaming.create(req.body);
+    const newStreaming = await Streaming.create(req.body);    
     const streaming_id = newStreaming._id;
 
     // CREATE NEW MATCH

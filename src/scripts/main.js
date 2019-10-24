@@ -9,18 +9,6 @@ const tennisData = require('./data/fakeTennisData.json');
 const streamingData = require('./data/fakeStreamingData.json');
 
 (async () => {
-    const getLiveStreamingMatches = function() {        
-        const matches = [];
-        [...arguments].forEach(item => {
-            item.forEach(flatItem => {
-                if (flatItem.match.streaming.status === true) {
-                    matches.push(flatItem);               
-                }
-            })
-        });
-        return matches;
-    }
-
     const getFootballMatches = async () => {
         try {
             const matches = await axios({
@@ -63,7 +51,7 @@ const streamingData = require('./data/fakeStreamingData.json');
             todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM/YYYY');
+                const date = moment(data.match.time).format('DD/MM');
 
                 if (data.match.streaming.status == false) {
                     todayFootballElOutput += `
@@ -133,7 +121,7 @@ const streamingData = require('./data/fakeStreamingData.json');
             tomorrowFootballElOutput  += `<h4 class="text-center">Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM/YYYY');            
+                const date = moment(data.match.time).format('DD/MM');
 
                 if (data.match.streaming.status == false) {
                     tomorrowFootballElOutput += `
@@ -213,7 +201,7 @@ const streamingData = require('./data/fakeStreamingData.json');
             todayTennisElOutput = `<h4>Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM/YYYY');
+                const date = moment(data.match.time).format('DD/MM');
 
                 if (data.match.streaming.status == false) {
                     todayTennisElOutput += `
@@ -227,7 +215,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     <h3 class="tennis_tournament_name">${data.tournament.name}</h3>
                                 </div>
                                 <div class="col-3 play_button text-right">
-                                    <p class="tennis_date">${time} ${date}</p>
+                                    <p class="tennis_date">${time}-${date}</p>
                                 </div>
                             </div>
                         </a>
@@ -261,7 +249,7 @@ const streamingData = require('./data/fakeStreamingData.json');
             tomorrowTennisElOutput = `<h4>Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM/YYYY');
+                const date = moment(data.match.time).format('DD/MM');
                 
                 if (data.match.streaming.status == false) {
                     tomorrowTennisElOutput += `
@@ -275,7 +263,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     <h3 class="tennis_tournament_name">${data.tournament.name}</h3>
                                 </div>
                                 <div class="col-3 play_button text-right">
-                                    <p class="tennis_date">${time} ${date}</p>
+                                    <p class="tennis_date">${time}-${date}</p>
                                 </div>
                             </div>
                         </a>
@@ -312,13 +300,23 @@ const streamingData = require('./data/fakeStreamingData.json');
     todayTennisEl.innerHTML = todayTennisElOutput;
     tomorrowTennisEl.innerHTML = tomorrowTennisElOutput;
         
+    const getLiveStreamingMatches = function() {        
+        const matches = [];
+        [...arguments].forEach(item => {
+            item.forEach(flatItem => {
+                if (flatItem.match.streaming.status === true) {
+                    matches.push(flatItem);               
+                }
+            })
+        });
+        return matches;
+    }
     const liveStreamingMatches = getLiveStreamingMatches(
         footballMatches.data.response.today, 
         tennisMatches.data.response.today);
     
     const innerStreamingBlock = (data) => {
         let streamingOutput = '';
-                    
         data.forEach(item => {
             streamingOutput += `
                 <a class="row streaming-card-containers" href="/streaming?id=${item.match._id}">
@@ -342,5 +340,12 @@ const streamingData = require('./data/fakeStreamingData.json');
     }
     const streamingOutput = innerStreamingBlock(liveStreamingMatches);
     const streamingEl = document.querySelector('.streaming-videos-container');
-    streamingEl.innerHTML = streamingOutput;    
+    streamingEl.innerHTML = streamingOutput;
+
+    const modifyStreamingMatches = (index, content) => {
+        const streamingCards = document.querySelectorAll('.streaming-card-score-display');
+
+        streamingCards[index].textContent = content;
+    }
+    modifyStreamingMatches(1, 'hello');
 })();
