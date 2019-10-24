@@ -109,9 +109,11 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p>Streaming key: 
-                                            <small> ${item.match.streaming.streamingUrl[0]}</small>
-                                        </p> 
+                                        <p>Streaming keys: </p>`;
+                                item.match.streaming.streamingUrl.forEach(streamingUrl => {
+                                    output += `<small>${streamingUrl}</small>`;
+                                });
+                                output += `
                                     </div>
                                 </div>
                             </div>
@@ -192,9 +194,11 @@ import axios from 'axios';
                             <hr/>
                             <div class="row mt-2">
                                 <div class="col-12">
-                                    <p>Streaming key: 
-                                        <small> ${item.match.streaming.streamingUrl[0]}</small>
-                                    </p> 
+                                    <p>Streaming keys: </p>`;
+                                item.match.streaming.streamingUrl.forEach(streamingUrl => {
+                                    output += `<small>${streamingUrl}</small>`;
+                                });
+                                output += `
                                 </div>
                             </div>
                         </div>
