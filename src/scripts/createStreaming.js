@@ -4,7 +4,8 @@ import axios from "axios";
 
 (async () => {
     const newStreaming = new FormData();
-    const hostname = '10.13.150.145:5000';
+    const hostname = 'localhost:5000';
+    const streamingHostname = '192.168.3.197';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -17,6 +18,7 @@ import axios from "axios";
     // general streaming data
     const streamingKey = document.querySelector('#streaming-key');
     const streamingLiveUrl = document.querySelector('#streaming-live-url');
+    const streamingServerUrl = document.querySelector('#streaming-url');
     const inputVideoType = document.querySelector('#input-video-type');
     const inputVideoTitle = document.querySelector('#input-video-title');
     const inputVideoStatus = document.querySelector('#input-video-status');
@@ -81,6 +83,34 @@ import axios from "axios";
         inputVideoType.innerHTML = output;
     }
     
+    const streamingVideo = (baseSource) => {
+        const video = document.querySelector('.video');
+        
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(baseSource);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+            video.addEventListener('loadedmetadata', function () {
+                video.play();
+            });
+        }
+
+        if (video.src) {
+            const videoFound = document.querySelector('.video-not-found');
+            videoFound.setAttribute('style', 'display: none !important');
+            videoFound.classList.remove('d-flex', 'flex-column');
+        } else {
+            const videoFound = document.querySelector('.video-not-found');
+            videoFound.setAttribute('style', 'display: flex');
+            videoFound.classList.add('d-flex', 'flex-column');
+        }
+    }
+    
     const streamingTypes = await getStreamingTypes();
     renderStreamingTypes(streamingTypes.sportTypes);
 
@@ -130,17 +160,22 @@ import axios from "axios";
         createNewMatchBtn.removeAttribute('disabled');
 
         streamingKey.addEventListener('keyup', event => {
-            streamingLiveUrl.value = `${streamingServer}/${event.target.value}/index.m3u8`;
+            streamingLiveUrl.value = `http://${streamingHostname}:3002/live/${event.target.value}/index.m3u8`;            
         });
     
-        const currentTimeInUnix = new Date().getTime();
-        const streamingServer = 'http://192.168.1.101';
+        const currentTimeInUnix = new Date().getTime();        
         streamingKey.value = currentTimeInUnix;
-        streamingLiveUrl.value = `${streamingServer}/${currentTimeInUnix}/index.m3u8`;
+        streamingServerUrl.value = `rtmp://${streamingHostname}/live`;
+        streamingLiveUrl.value = `http://${streamingHostname}:3002/live/${currentTimeInUnix}/index.m3u8`;
     })
 
     reloadVideoSrc.addEventListener('click', event => {
         event.preventDefault();
+
+        const streamingVideoKey = streamingKey.value;
+        
+        const baseSource = `http://${streamingHostname}:3002/live/${streamingVideoKey}/index.m3u8`;
+        streamingVideo(baseSource);
     })
         
     createNewMatchBtn.addEventListener('click', async () => {
@@ -156,8 +191,9 @@ import axios from "axios";
         newStreaming.set('streamingUrl', streamingLiveUrl.value);                
     
         if (streamingStatusVal == 0) {
-            const currentTimePlus15Mins = moment().add(15, 'minutes').format();
-            newStreaming.set('time', currentTimePlus15Mins);
+            const currentTimePlus15Mins = moment().add(15, 'minutes').format();            
+            const timeValue = moment(inputVideoTime.value).format();
+            newStreaming.set('time', timeValue);
         } else if (streamingStatusVal == 1){
             const currentTime = moment().format();
             newStreaming.set('time', currentTime);
@@ -225,6 +261,7 @@ import axios from "axios";
             newStreaming.set('fc2', player2NameVal);
         }
         
+        debugger;
         if (isValidInput) {
             try {
                 const createNewMatchResponse = await axios({

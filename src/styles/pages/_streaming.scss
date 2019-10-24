@@ -1,37 +1,25 @@
-.streamVideo {
-    width: 100%;
-    padding: 0px;
-}
 
-.video-alt-img{
-    width: 100%;
-    height: auto;   
-}
-
-.live{
-}
 .row{
     width: 100%;
 }
 .title-container{
+    // background: none;
     // margin: 0px 20px;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
     min-height: 50px;
 }
 .page-control{
     background: #3f3f3f;
-    display: flex;
+    // display: flex;
     height: 40px;
-    align-items: center;
+    // align-items: center;
 }
 
 .title{
     margin: 20px 0px;
 }
-body{
-    background: #1a1a1a;
-}
+
 .info-container{
     height: 60px;
 }
@@ -49,7 +37,7 @@ body{
     padding: 0px;
 }
 .server-selection{
-    padding: 0px;
+    // padding: 0px;
     display: block !important;
 
 }
@@ -57,23 +45,25 @@ body{
     min-height: 60px;
 }
 .container-center{
-    width: 80%;
+    width: 70%;
     padding: 0;
     @include breakpoint(sm-tablet){
         width: 100%;
     }
+    background:#3f3f3f ;
+    // background: none;
+}
+.container-center > div{
+    margin: 0px;
 }
 .watching-ab{
     background: #3f3f3f;
     height: 50px;
-    display: flex;
-    align-items: center;
+    // display: flex;
+    // align-items: center;
 }
 .icon{
     margin-right: 10px;
-}
-.body{
-    color: #ccc;
 }
 .server-bt{
     background: #777;
@@ -82,7 +72,7 @@ body{
 
     font-size: 10px;
 
-    padding: 7px 12px 5px 12px;
+    padding: 7px 12px 7px 12px;
     border-radius: 3px;
     min-width: 72;
     font-weight: bold;
@@ -113,13 +103,24 @@ body{
     // content: "\f038";
     // font-family: 'FontAwesome';
     font-size: 10px;
+    margin-right: 5px;
     // margin-right: 10px;
     // font-weight: 700px;
 }
+.fa-server::before{
+    // content: "\f038";
+    // font-family: 'FontAwesome';
+    margin-right: 5px;
+    // margin-right: 10px;
+    // font-weight: 700px;
+}
+
+
 .title{
     font-family: 'Times New Roman', Times, serif;
     font-style: bold;
     font-size: 3vw;
+    padding-left:15px !important;
 }
 .description{
     margin: 0;
@@ -134,7 +135,15 @@ body{
 .video-container{
     margin: 0px;
     padding: 0px;
+    @include breakpoint(xl-mobile){
+        min-height: 55vw !important;
+    }
+    @include breakpoint(lt-mobile){
+        min-height: 43vw !important;
+
+    }
 }
+
 .container{
     display: flex ;
     margin: 0 auto;;
@@ -144,6 +153,16 @@ body{
 }
 .description-row{
     margin: 0px;
+}
+body {
+    background-image: url("./../images/background-image.jpg");
+    background-repeat: repeat;
+}
+.stream-video{    
+
+}
+.ad{
+    height: 100px;
 }
 
 

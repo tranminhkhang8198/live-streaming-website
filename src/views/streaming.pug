@@ -4,18 +4,25 @@ block vars
     - var authorized = false
     - var watchStreaming = true
 block link
+    link(href="https://vjs.zencdn.net/7.6.5/video-js.css" rel="stylesheet")
     link(rel="stylesheet" href="./../styles/streaming.scss")
+
+
     link(href="./../styles/css/hover.min.css" rel="stylesheet")
 
 block container
-    .row.d-flex.justify-content-center.m-0
+    .row.d-flex.justify-content-center.m-0.text-secondary
         .container-center.bg-none
             .title-container.container.p-0.d-flex.align-items-center
                 h1.title.text-uppercase.text-white.p-0 Man City - Man united
             .container.video-container
-                video(autoplay="False" controls).streamVideo
+                video(controls data-setup='{}' playsinline preload='auto')#video-hls.w-100.p-0.stream-video.video-js.vjs-styles-defaults.vjs-big-play-centered
+                    //- source(src="http://localhost:3002/live/loi/index.m3u8" type="application/x-mpegURL")
+                    p.vjs-no-js To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        a(href='https://videojs.com/html5-video-support/' target='_blank') supports HTML5 video
 
-            .watching-ab.container.description
+
+            .watching-ab.container.description.d-flex.align-items-center
                 .row.text-white.description-row
                     .col-6.watching-now.fas.fa-eye.d-none.d-sm-block.watching-ab-content Watching now:
                         span.watching-num 0
@@ -26,7 +33,10 @@ block container
                             span.watching-num 0
                     .watching-ab-icon.col-3.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center
                         a.fa-globe-asia.icon
-                            span.total-num 0            
+                            span.total-num 0
+            .container.p-0
+                .ad.w-100
+                    include ./components/_advertisement
 
             .page-control.container.description
                 .row.text-white.description-row.h-100.d-flex.align-items-center
@@ -34,24 +44,20 @@ block container
                         .hvr-bounce-in.fa.fa-lightbulb Turn light off
                     .col-6.d-none.d-sm-block.page-control-content
                         .hvr-bounce-in.fa.fa-comments Comments
-                    .col-6.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center
+                    .col-6.hvr-bounce-in.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center
                         a.fa-lightbulb.icon
-                    .col-6.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center
+                    .col-6.hvr-bounce-in.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center
                         a.fa-comments.icon
             .server-selection.bg-blue.container.description
-                .row.server.text-white
-                    .col-12.col-sm-3.fa.fa-server  Server
-                    .col-12.col-sm-3
-                        .server-bt-container.fa
-                            a.hvr-bounce-in.server-bt.fas.fa-play.active(data-source)  HD-720p
+                //- include ./components/_serverContainer
 
-                .row.server.text-white
-                    .col-12.col-sm-3.fa.fa-server  Server
-                    .col-12.col-sm-3
-                        .server-bt-container.fa
-                            a.hvr-bounce-in.server-bt.fas.fa-play(data-source)  HD-720p
-                .ad
+                //- include ./components/_serverContainer
+
+
+            .container.p-0
+                .ad.w-100
                     include ./components/_advertisement
 
 block script
     script(src='./../scripts/streaming.js')
+    //- script(src='./../scripts/video.js')
