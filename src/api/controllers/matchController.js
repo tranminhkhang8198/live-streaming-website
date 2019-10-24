@@ -96,10 +96,8 @@ async function checkSportTypeExist(id) {
 
 function removeImg(imgUrl) {
   const img_path = path.join(__dirname, "../../uploads/" + imgUrl);
-  console.log(img_path);
 
   if (fs.existsSync(img_path)) {
-    console.log("something");
     fs.unlinkSync(img_path);
   }
 }
@@ -281,12 +279,24 @@ exports.createMatch = async (req, res) => {
       });
     }
 
+
     // CREATE STREAMING FOR NEW MATCH
-    const newStreaming = await Streaming.create(req.body);
+    const queryStreaming = {
+      ...req.body
+    }
+
+    let streamingUrl = [];
+
+    streamingUrl = req.body.streamingUrl.split(",");
+
+    queryStreaming['streamingUrl'] = streamingUrl;
+
+    const newStreaming = await Streaming.create(queryStreaming);
     const streaming_id = newStreaming._id;
 
+
     // CREATE NEW MATCH
-    queryStr = {
+    let queryStr = {
       ...req.body
     };
 
