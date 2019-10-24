@@ -215,7 +215,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     <h3 class="tennis_tournament_name">${data.tournament.name}</h3>
                                 </div>
                                 <div class="col-3 play_button text-right">
-                                    <p class="tennis_date">${time}-${date}</p>
+                                    <p class="tennis_date">${time} - ${date}</p>
                                 </div>
                             </div>
                         </a>
@@ -263,7 +263,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     <h3 class="tennis_tournament_name">${data.tournament.name}</h3>
                                 </div>
                                 <div class="col-3 play_button text-right">
-                                    <p class="tennis_date">${time}-${date}</p>
+                                    <p class="tennis_date">${time} - ${date}</p>
                                 </div>
                             </div>
                         </a>
