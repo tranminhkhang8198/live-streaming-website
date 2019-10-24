@@ -294,8 +294,6 @@ exports.createMatch = async (req, res) => {
     queryStr["fc1ImgUrl"] = fc1ImgUrl;
     queryStr["fc2ImgUrl"] = fc2ImgUrl;
 
-    console.log(queryStr);
-
     const newMatch = await Match.create(queryStr);
 
     // ADD MATCH TO TOURNAMENT AND UPDATE TOURNAMENT IMG IF HAVE

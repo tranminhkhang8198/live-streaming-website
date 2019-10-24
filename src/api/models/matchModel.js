@@ -7,10 +7,12 @@ const matchSchema = new mongoose.Schema({
     type: String
   },
   fc1ImgUrl: {
-    type: String
+    type: String,
+    default: "/images/representative.jpg"
   },
   fc2ImgUrl: {
-    type: String
+    type: String,
+    default: "/images/representative.jpg"
   },
   fc2: {
     type: String
