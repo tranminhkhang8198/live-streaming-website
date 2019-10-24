@@ -49,7 +49,8 @@ import { directive } from "babel-types";
             }                
         }
         const responseOj = await getServerURLs();    
-        const URLS = responseOj.data.data.match.streaming.streamingUrl;
+        console.log(responseOj);
+        const URLS = responseOj.data.response[0].streaming.streamingUrl;
 
 
         ///create UI

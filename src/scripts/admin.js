@@ -3,7 +3,7 @@ import moment from 'moment';
 import axios from 'axios';
 
 (async () => {
-    const hostname = `10.13.150.145:5000`;
+    const hostname = `localhost:5000`;
 
     const getMatches = async () => {
         try {
@@ -632,34 +632,5 @@ import axios from 'axios';
             }
         })
     }
-    pagination(matches);    
-
-    const baseSource = 'http://45.63.62.153:3002/live/loi/index.m3u8';
-    const streaming = (baseSource) => {
-        const video = document.querySelector('.video');
-        
-        if (Hls.isSupported()) {
-            var hls = new Hls();
-            hls.loadSource(baseSource);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, function () {
-                video.play();
-            });
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
-            video.addEventListener('loadedmetadata', function () {
-                video.play();
-            });
-        }
-
-        if (video.src) {
-            const videoFound = document.querySelector('.video-not-found');
-            videoFound.setAttribute('style', 'display: none !important');
-            videoFound.classList.remove('d-flex', 'flex-column');
-        } else {
-            const videoFound = document.querySelector('.video-not-found');
-            videoFound.setAttribute('style', 'display: flex');
-            videoFound.classList.add('d-flex', 'flex-column');
-        }
-    }
+    pagination(matches);       
 })()

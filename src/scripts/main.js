@@ -2,13 +2,25 @@ import 'babel-polyfill';
 import axios from 'axios';
 import moment from 'moment';
 
-const hostname = `10.13.150.145:5000`;
+const hostname = `localhost:5000`;
 
 const scheduleData = require('./data/fakeScheduleData.json');
 const tennisData = require('./data/fakeTennisData.json');
 const streamingData = require('./data/fakeStreamingData.json');
 
 (async () => {
+    const getLiveStreamingMatches = function() {        
+        const matches = [];
+        [...arguments].forEach(item => {
+            item.forEach(flatItem => {
+                if (flatItem.match.streaming.status === true) {
+                    matches.push(flatItem);               
+                }
+            })
+        });
+        return matches;
+    }
+
     const getFootballMatches = async () => {
         try {
             const matches = await axios({
@@ -21,9 +33,10 @@ const streamingData = require('./data/fakeStreamingData.json');
 
             return matches;
         } catch (error) {
-            console.log(error.response);
+
         }
     }
+
     const getTennisMatches = async () => {
         try {
             const matches = await axios({
@@ -36,7 +49,7 @@ const streamingData = require('./data/fakeStreamingData.json');
 
             return matches;
         } catch (error) {
-            console.log(error.response);
+            
         }
     }
     
@@ -204,7 +217,7 @@ const streamingData = require('./data/fakeStreamingData.json');
 
                 if (data.match.streaming.status == false) {
                     todayTennisElOutput += `
-                        <a class="tennis_link" href="#">
+                        <a class="tennis_link" href="/streaming?id=${data.match._id}">
                             <div class="tennis_layout row">
                                 <div class="col-3 tennis_logo">
                                     <img src="${data.tournament.tournamentImgUrl}"  alt=""/>
@@ -221,7 +234,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                     `;
                 } else {
                     todayTennisElOutput += `
-                        <a class="tennis_link" href="#">
+                        <a class="tennis_link" href="/streaming?id=${data.match._id}">
                             <div class="tennis_layout row">
                                 <div class="col-3 tennis_logo">
                                     <img src="${data.tournament.tournamentImgUrl}"  alt=""/>
@@ -298,39 +311,28 @@ const streamingData = require('./data/fakeStreamingData.json');
     const tomorrowTennisEl = document.querySelector('.tomorrow-tennis-matches');
     todayTennisEl.innerHTML = todayTennisElOutput;
     tomorrowTennisEl.innerHTML = tomorrowTennisElOutput;
-    
-    // console.log({ footballMatches, tennisMatches });
-    const liveStreamingMatches = footballMatches.data.response.today.map(data => {        
-        if (data.match.streaming.status === true) {
-            return {
-                id: data.match._id,
-                fc1: data.match.fc1,
-                fc2: data.match.fc2,
-                score1: data.match.score1,
-                score2: data.match.score2,
-                tournament: data.tournament.name
-            }
-        }            
-    })
-    console.log(liveStreamingMatches);
+        
+    const liveStreamingMatches = getLiveStreamingMatches(
+        footballMatches.data.response.today, 
+        tennisMatches.data.response.today);
     
     const innerStreamingBlock = (data) => {
         let streamingOutput = '';
-            
+                    
         data.forEach(item => {
             streamingOutput += `
-                <a class="row streaming-card-containers" href="/streaming?id=${item.id}">
+                <a class="row streaming-card-containers" href="/streaming?id=${item.match._id}">
                     <div class="col-5 col-lg-4 d-flex flex-row align-items-center streaming-card-title-container hvr-sweep-to-right"><i class="fas fa-tv mr-1 mb-4"></i>
-                        <h3 class="streaming-card-title">${item.tournament}</h3>
+                        <h3 class="streaming-card-title">${item.tournament.name}</h3>
                     </div>
                     <div class="col-3 col-lg-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
-                        <p class="streaming-card-team">${item.fc1}</p>
+                        <p class="streaming-card-team">${item.match.fc1}</p>
                     </div>
                     <p class="col-1 col-lg-2 d-flex align-items-center justify-content-center streaming-card-score-display">
-                        ${item.score1} - ${item.score2}
+                        ${item.match.score1} - ${item.match.score2}
                     </p>
                     <div class="col-3 col-lg-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
-                        <p class="streaming-card-team">${item.fc2}</p>
+                        <p class="streaming-card-team">${item.match.fc2}</p>
                     </div>
                 </a>
             `;

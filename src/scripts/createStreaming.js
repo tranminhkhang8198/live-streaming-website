@@ -5,7 +5,7 @@ import axios from "axios";
 (async () => {
     const newStreaming = new FormData();
     const hostname = 'localhost:5000';
-    const streamingHostname = '10.13.151.27';
+    const streamingHostname = '192.168.3.197';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -83,6 +83,34 @@ import axios from "axios";
         inputVideoType.innerHTML = output;
     }
     
+    const streamingVideo = (baseSource) => {
+        const video = document.querySelector('.video');
+        
+        if (Hls.isSupported()) {
+            var hls = new Hls();
+            hls.loadSource(baseSource);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = 'https://video-dev.github.io/streams/x36xhzz/x36xhzz.m3u8';
+            video.addEventListener('loadedmetadata', function () {
+                video.play();
+            });
+        }
+
+        if (video.src) {
+            const videoFound = document.querySelector('.video-not-found');
+            videoFound.setAttribute('style', 'display: none !important');
+            videoFound.classList.remove('d-flex', 'flex-column');
+        } else {
+            const videoFound = document.querySelector('.video-not-found');
+            videoFound.setAttribute('style', 'display: flex');
+            videoFound.classList.add('d-flex', 'flex-column');
+        }
+    }
+    
     const streamingTypes = await getStreamingTypes();
     renderStreamingTypes(streamingTypes.sportTypes);
 
@@ -132,7 +160,7 @@ import axios from "axios";
         createNewMatchBtn.removeAttribute('disabled');
 
         streamingKey.addEventListener('keyup', event => {
-            streamingLiveUrl.value = `${streamingServer}/${event.target.value}/index.m3u8`;            
+            streamingLiveUrl.value = `http://${streamingHostname}:3002/live/${event.target.value}/index.m3u8`;            
         });
     
         const currentTimeInUnix = new Date().getTime();        
@@ -143,6 +171,11 @@ import axios from "axios";
 
     reloadVideoSrc.addEventListener('click', event => {
         event.preventDefault();
+
+        const streamingVideoKey = streamingKey.value;
+        
+        const baseSource = `http://${streamingHostname}:3002/live/${streamingVideoKey}/index.m3u8`;
+        streamingVideo(baseSource);
     })
         
     createNewMatchBtn.addEventListener('click', async () => {
@@ -228,6 +261,7 @@ import axios from "axios";
             newStreaming.set('fc2', player2NameVal);
         }
         
+        debugger;
         if (isValidInput) {
             try {
                 const createNewMatchResponse = await axios({
