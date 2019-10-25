@@ -22,7 +22,7 @@ function validateImg(files, message) {
 }
 
 function saveImg(file) {
-  let imgUrl = "/images/representative.jpg";
+  let imgUrl = "/uploads/representative.jpg";
   if (file) {
     const filename =
       file.name
@@ -259,9 +259,9 @@ exports.createMatch = async (req, res) => {
     }
 
     // UPLOAD FC IMAGE TO SERVER
-    let fc1ImgUrl = "/images/representative.jpg";
-    let fc2ImgUrl = "/images/representative.jpg";
-    let tournamentImgUrl = "/images/representative.jpg";
+    let fc1ImgUrl = "/uploads/representative.jpg";
+    let fc2ImgUrl = "/uploads/representative.jpg";
+    let tournamentImgUrl = "/uploads/representative.jpg";
     if (req.files) {
       validateImg(req.files, message);
 
@@ -281,7 +281,6 @@ exports.createMatch = async (req, res) => {
 
 
     // CREATE STREAMING FOR NEW MATCH
-<<<<<<< HEAD
     const queryStreaming = {
       ...req.body
     }
@@ -293,9 +292,6 @@ exports.createMatch = async (req, res) => {
     queryStreaming['streamingUrl'] = streamingUrl;
 
     const newStreaming = await Streaming.create(queryStreaming);
-=======
-    const newStreaming = await Streaming.create(req.body);    
->>>>>>> 181b0c0e461ba144f9ef76d168197b347172fbab
     const streaming_id = newStreaming._id;
 
 
