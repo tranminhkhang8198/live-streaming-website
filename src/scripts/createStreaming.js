@@ -4,9 +4,9 @@ import axios from "axios";
 
 (async () => {
     const newStreaming = new FormData();
-    const hostname = '192.168.2.114:5000';
+    const hostname = '192.168.3.197:5000';
     // const streamingHostname = 'localhost';
-    let streamingHostnameVal = '192.168.2.114';
+    let streamingHostnameVal = '192.168.3.197';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;

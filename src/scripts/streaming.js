@@ -5,7 +5,7 @@ import { directive } from "babel-types";
 
 (async () => {
     window.VIDEOJS_NO_DYNAMIC_STYLE = true
-    const ApiHostName = "192.168.2.114"
+    const ApiHostName = "192.168.3.197"
     const ApiPort="5000"
     var options = {
         html5: {
@@ -25,17 +25,26 @@ import { directive } from "babel-types";
     // player.playsinline(true)
     ////
 
+    // bigPlayBt = player.bigPlayButton.el_
+    // console.log(bigPlayBt)
+    // var adContainer = document.createElement("div")
+    // adContainer.style.width = "70px"
+    // adContainer.style.height="70px"
+    // adContainer.style.backgroundColor="white"
+    // console.log("hihi")
+    // bigPlayBt.append(adContainer)
+
+
 
     player.on('pause', function() {
-        this.bigPlayButton.show();
-        // this.bigPlayButton.el_.setAttribute("display","block")
-        // console.log(this.bigPlayButton.el_.getAtribute)
-    
-        // Now the issue is that we need to hide it again if we start playing
-        // So every time we do this, we can create a one-time listener for play events.
-        // player.on('play', function() {
-        // this.bigPlayButton.hide();
-        // });
+        this.bigPlayButton.el_.classList.remove("d-none")
+
+        this.bigPlayButton.el_.classList.add("d-block")
+
+    });
+    player.on('play', function() {
+        this.bigPlayButton.el_.classList.remove("d-block")
+        this.bigPlayButton.el_.classList.add("d-none")
     });
 
     // function renderServerSelection(){
