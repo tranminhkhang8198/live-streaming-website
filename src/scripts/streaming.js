@@ -2,15 +2,18 @@ import "babel-polyfill";
 import axios from 'axios';
 import { directive } from "babel-types";
 
+
 (async () => {
     window.VIDEOJS_NO_DYNAMIC_STYLE = true
-
+    const ApiHostName = "192.168.2.114"
+    const ApiPort="5000"
     var options = {
         html5: {
             hlsjsConfig: {
             // Put your hls.js config here
             }
-        }
+        },
+        liveui: true
     };
 
     // setup beforeinitialize hook
@@ -25,12 +28,14 @@ import { directive } from "babel-types";
 
     player.on('pause', function() {
         this.bigPlayButton.show();
+        // this.bigPlayButton.el_.setAttribute("display","block")
+        // console.log(this.bigPlayButton.el_.getAtribute)
     
         // Now the issue is that we need to hide it again if we start playing
         // So every time we do this, we can create a one-time listener for play events.
-        player.on('play', function() {
-        this.bigPlayButton.hide();
-        });
+        // player.on('play', function() {
+        // this.bigPlayButton.hide();
+        // });
     });
 
     // function renderServerSelection(){
@@ -41,7 +46,7 @@ import { directive } from "babel-types";
             try {
                 const responseData = await axios({
                     method: 'get',
-                    url: `http://127.0.0.1:5000/api/matches/${matchID}`
+                    url: `http://${ApiHostName}:${ApiPort}/api/matches/${matchID}`
                 })
                 return responseData;
             } catch (error) {
@@ -68,32 +73,6 @@ import { directive } from "babel-types";
             serverSelection.append(newEl)
             loadHLS(URLS[0])
         }
-        
-
-
-
-    ///
-    // }
-    ////-- init player
-
-    // for (var i=0, max=servers.length; i < max; i++) {
-    //     // Do something with the element here
-    //     servers[i].addEventListener("click",function(){
-    //         const a = this.dataset.source
-    //         removeClass("active")
-    //         this.classList.add("active")
-    //         loadHLS(a)
-    //     })
-
-    // };
-
-    
-    // const video = videojs('stream-video');
-    // const liveBT = document.querySelector('.live')
-    // liveBT.addEventListener("click",function(){
-    //     duration = video.duration
-    //     video.currentTime = duration-5
-    // })
 
 
 

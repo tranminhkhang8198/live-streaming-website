@@ -4,9 +4,9 @@ import axios from "axios";
 
 (async () => {
     const newStreaming = new FormData();
-    const hostname = 'localhost:5000';
-    const streamingHostname = 'localhost';
-    let streamingHostnameVal = '192.168.3.197';
+    const hostname = '192.168.2.114:5000';
+    // const streamingHostname = 'localhost';
+    let streamingHostnameVal = '192.168.2.114';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -278,7 +278,6 @@ import axios from "axios";
             newStreaming.set('fc2', player2NameVal);
         }
         
-        debugger;
         if (isValidInput) {
             try {
                 const createNewMatchResponse = await axios({

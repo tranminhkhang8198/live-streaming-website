@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import axios from 'axios';
 import moment from 'moment';
 
-const hostname = `localhost:5000`;
+const hostname = `192.168.2.114:5000`;
 
 const scheduleData = require('./data/fakeScheduleData.json');
 const tennisData = require('./data/fakeTennisData.json');
