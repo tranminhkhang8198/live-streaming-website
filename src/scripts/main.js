@@ -48,8 +48,7 @@ const hostname = `localhost:5000`;
             todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
-                console.log(data.match.fc1ImgUrl);
+                const date = moment(data.match.time).format('DD/MM');                
 
                 if (data.match.streaming.status == false) {
                     todayFootballElOutput += `

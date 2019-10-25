@@ -570,19 +570,20 @@ import axios from 'axios';
                 if (typeName === 'football') {
                     fc1Img = document.querySelector(`#update-fc1-img-${index}`).value
                         ? document.querySelector(`#update-fc1-img-${index}`).files[0]
-                        : document.querySelector(`#update-fc1-img-container-${index}`).value;
+                        : document.querySelector(`#update-fc1-img-container-${index}`)
+                            .src.replace(/.+uploads\//, '').replace(/%20/g, ' ');
                     fc2Img = document.querySelector(`#update-fc2-img-${index}`).value
                         ? document.querySelector(`#update-fc2-img-${index}`).files[0]
-                        : document.querySelector(`#update-fc2-img-container-${index}`).value;
+                        : document.querySelector(`#update-fc2-img-container-${index}`)
+                            .src.replace(/.+uploads\//, '').replace(/%20/g, ' ');
                 } else {
                     tournamentImg = document.querySelector(`#update-tournament-img-${index}`).value
                         ? document.querySelector(`#update-tournament-img-${index}`).files[0]
-                        : document.querySelector(`#update-tournament-img-container-${index}`).value;
-                }
-                console.log({ fc1ImgEl, fc2ImgEl, tournamentImg });
-                debugger;
+                        : document.querySelector(`#update-tournament-img-container-${index}`)
+                            .src.replace(/.+uploads\//, '').replace(/%20/g, ' ');
+                }                
 
-                console.log({ fc1, fc2, fc1Img, fc2Img, title, tournament, tournamentImg, matchId, time, streamingStatus, streamingUrls });
+                console.log({fc1Img, fc2Img, tournamentImg});
             })
         })
     }  
