@@ -220,14 +220,14 @@ import axios from 'axios';
 
         if (item.match.type.name === 'tennis') {
             output += `
-                <div class="modal fade modals-table-data" id="modal-update-${index}" tabindex="-1" role="dialog">
+                <form class="modal fade modals-table-data" id="modal-update-${index}" tabindex="-1" role="dialog">
                     <div class="modal-dialog" href="#" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title">
                                     <input
-                                        size="40"
-                                        id="update-tennis-title-${item.match._id}"
+                                        size="20"
+                                        id="update-title-${index}"
                                         style="border: none; outline: none;"
                                         type="text"
                                         value="${item.match.streaming.streamingTitle}">
@@ -240,11 +240,12 @@ import axios from 'axios';
                                 <div class="row">
                                     <div class="col-12 d-flex flex-column justify-content-center align-items-center">
                                         <img 
+                                            id="update-tournament-img-container-${index}"
                                             style="width: 50px; height: 50px;"
                                             src="${item.tournament.tournamentImgUrl}">
                                         <input
                                             class="text-center"
-                                            id="update-tennis-tournament-img-${item.match._id}"
+                                            id="update-tournament-img-${index}"
                                             style="
                                                 border: none; 
                                                 outline: none; 
@@ -255,12 +256,11 @@ import axios from 'axios';
                                                 left: -20px;
                                                 top: -40px; 
                                                 cursor: pointer;"
-                                            type="file"
-                                            value="">
+                                            type="file">
                                         <input
                                             class="text-center"
                                             size="25"
-                                            id="update-tennis-tournament-name-${item.match._id}"
+                                            id="update-tournament-name-${index}"
                                             style="border: none; outline: none;"
                                             type="text"
                                             value="${item.tournament.name}" >
@@ -271,8 +271,12 @@ import axios from 'axios';
                                     <div class="col-12">
                                         <p>Match type: 
                                             <input
-                                                id="update-tennis-type-name-${item.match._id}"
-                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                id="update-type-name-${index}"
+                                                style="
+                                                    border: none; 
+                                                    font-size: 80%; 
+                                                    font-weight: 400; 
+                                                    outline: none;"
                                                 type="text"
                                                 value="${item.match.type.name}">
                                         </p>
@@ -283,24 +287,26 @@ import axios from 'axios';
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-start">
                                         <input
                                             class="text-left"
-                                            id="update-tennis-fc1-${item.match._id}"
+                                            id="update-fc1-name-${index}"
                                             style="border: none; font-size: 80%; font-weight: 400; outline: none;"
                                             type="text"
                                             value="${item.match.fc1}">
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <input 
+                                            id="update-score1-${index}"
                                             class="input-modify-score" 
                                             value="${item.match.score1}">
                                         -
-                                        <input 
+                                        <input
+                                            id="update-score2-${index}"
                                             class="input-modify-score" 
                                             value="${item.match.score2}">
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
                                         <input
                                             class="text-right"
-                                            id="update-tennis-fc2-${item.match._id}"
+                                            id="update-fc2-name-${index}"
                                             style="border: none; font-size: 80%; font-weight: 400; outline: none;"
                                             type="text"
                                             value="${item.match.fc2}">
@@ -329,8 +335,8 @@ import axios from 'axios';
                                 item.match.streaming.streamingUrl.forEach(streamingUrl => {
                                     output += `
                                         <input
-                                            class="text-left update-tennis-streaming-urls-${item.match._id}"
-                                            size="35"
+                                            class="text-left update-streaming-urls-${index}"
+                                            size="45"
                                             style="border: none; font-size: 80%; font-weight: 400; outline: none;"
                                             type="text"
                                             value="${streamingUrl}">
@@ -341,12 +347,19 @@ import axios from 'axios';
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm">Save</button>
+                                <button 
+                                    type="submit" 
+                                    class="btn btn-primary btn-sm btn-submit" 
+                                    data-item-index="${index}"
+                                    data-match-id="${item.match._id}" 
+                                    data-match-type="${item.match.type.name}"
+                                    data-match-streaming-status="${item.match.streaming.status}"
+                                    data-match-time="${item.match.time}">Save</button>
                                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             `;
         } else {
             output += `
@@ -356,8 +369,8 @@ import axios from 'axios';
                             <div class="modal-header">
                                 <h5 class="modal-title">
                                     <input
-                                        size="40"
-                                        id="update-football-title-${item.match._id}"
+                                        size="20"
+                                        id="update-title-${index}"
                                         style="border: none; outline: none;"
                                         type="text"
                                         value="${item.match.streaming.streamingTitle}">
@@ -373,7 +386,7 @@ import axios from 'axios';
                                             <input
                                                 class="text-left"
                                                 size="25"
-                                                id="update-football-tournament-name-${item.match._id}"
+                                                id="update-tournament-name-${index}"
                                                 style="border: none; font-size: 80%; font-weight: 400; outline: none;"
                                                 type="text"
                                                 value="${item.tournament.name}" >
@@ -385,8 +398,12 @@ import axios from 'axios';
                                     <div class="col-12">
                                         <p>Match type: 
                                             <input
-                                                id="update-footbal-type-name-${item.match._id}"
-                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                id="update-type-name-${index}"
+                                                style="
+                                                    border: none; 
+                                                    font-size: 80%; 
+                                                    font-weight: 400; 
+                                                    outline: none;"
                                                 type="text"
                                                 value="${item.match.type.name}">
                                         </p> 
@@ -395,12 +412,13 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
-                                        <img 
+                                        <img
+                                            id="update-fc1-img-container-${index}"
                                             style="width: 50px; height: 50px;"
                                             src="${item.match.fc1ImgUrl}">
                                         <input
                                             class="text-center"
-                                            id="update-football-fc1-img-${item.match._id}"
+                                            id="update-fc1-img-${index}"
                                             style="
                                                 border: none; 
                                                 outline: none; 
@@ -410,33 +428,35 @@ import axios from 'axios';
                                                 opacity: 0;
                                                 top: -40px; 
                                                 cursor: pointer;"
-                                            type="file"
-                                            value="">
+                                            type="file">
                                         <p class="text-center">
                                             <input
                                                 class="text-center"
-                                                id="update-football-fc1-${item.match._id}"
+                                                id="update-fc1-name-${index}"
                                                 style="border: none; font-size: 80%; font-weight: 400; outline: none;"
                                                 type="text"
                                                 value="${item.match.fc1}">
                                         </p>
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
-                                        <input 
+                                        <input
+                                            id="update-score1-${index}"
                                             class="input-modify-score" 
                                             value="${item.match.score1}">
                                         -
-                                        <input 
+                                        <input
+                                            id="update-score2-${index}"
                                             class="input-modify-score" 
                                             value="${item.match.score2}">
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
-                                        <img 
+                                        <img
+                                            id="update-fc2-img-container-${index}"
                                             style="width: 50px; height: 50px;"
                                             src="${item.match.fc2ImgUrl}">
                                         <input
                                             class="text-center"
-                                            id="update-football-fc2-img-${item.match._id}"
+                                            id="update-fc2-img-${index}"
                                             style="
                                                 border: none; 
                                                 outline: none; 
@@ -446,13 +466,16 @@ import axios from 'axios';
                                                 opacity: 0;
                                                 top: -40px; 
                                                 cursor: pointer;"
-                                            type="file"
-                                            value="">
+                                            type="file">
                                         <p class="text-center">
                                             <input
                                                 class="text-center"
-                                                id="update-football-fc2-${item.match._id}"
-                                                style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                                id="update-fc2-name-${index}"
+                                                style="
+                                                    border: none; 
+                                                    font-size: 80%; 
+                                                    font-weight: 400; 
+                                                    outline: none;"
                                                 type="text"
                                                 value="${item.match.fc2}">
                                         </p>
@@ -481,9 +504,13 @@ import axios from 'axios';
                                 item.match.streaming.streamingUrl.forEach(streamingUrl => {
                                     output += `
                                         <input
-                                            class="text-left update-football-streaming-urls-${item.match._id}"
-                                            size="35"
-                                            style="border: none; font-size: 80%; font-weight: 400; outline: none;"
+                                            class="text-left update-streaming-urls-${index}"
+                                            size="45"
+                                            style="
+                                                border: none;
+                                                font-size: 80%;
+                                                font-weight: 400;
+                                                outline: none;"
                                             type="text"
                                             value="${streamingUrl}">
                                         `;
@@ -493,7 +520,14 @@ import axios from 'axios';
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary btn-sm">Save</button>
+                                <button 
+                                    type="submit" 
+                                    class="btn btn-primary btn-sm btn-submit" 
+                                    data-item-index="${index}"
+                                    data-match-id="${item.match._id}" 
+                                    data-match-type="${item.match.type.name}"
+                                    data-match-streaming-status="${item.match.streaming.status}"
+                                    data-match-time="${item.match.time}">Save</button>
                                 <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -503,7 +537,55 @@ import axios from 'axios';
         }        
 
         return output;
-    }        
+    }      
+
+    const updateMatchData = () => {
+        const submitBtns = document.querySelectorAll('.btn-submit');
+
+        submitBtns.forEach(btn => {
+            btn.addEventListener('click', event => {
+                event.preventDefault();
+                const index = event.target.dataset.itemIndex;
+                let fc1 = document.querySelector(`#update-fc1-name-${index}`).value, 
+                    fc2 = document.querySelector(`#update-fc2-name-${index}`).value, 
+                    fc1Img = '',
+                    fc2Img = '', 
+                    title = document.querySelector(`#update-title-${index}`).value, 
+                    tournament = document.querySelector(`#update-tournament-name-${index}`).value, 
+                    tournamentImg = '',
+                    typeName = event.target.dataset.matchType,
+                    matchId = event.target.dataset.matchId,
+                    time = event.target.dataset.matchTime,
+                    streamingStatus = event.target.dataset.matchStreamingStatus,
+                    streamingUrls = [];
+
+                const streamingUrlsEls = document.querySelectorAll(`.update-streaming-urls-${index}`);
+                streamingUrlsEls.forEach(url => {
+                    streamingUrls.push(url.value);
+                })
+
+                const fc1ImgEl = document.querySelector(`#update-fc1-img-${index}`),
+                        fc2ImgEl = document.querySelector(`#update-fc2-img-${index}`),
+                        tournamentImgEl = document.querySelector(`#update-tournament-img-${index}`);
+                if (typeName === 'football') {
+                    fc1Img = document.querySelector(`#update-fc1-img-${index}`).value
+                        ? document.querySelector(`#update-fc1-img-${index}`).files[0]
+                        : document.querySelector(`#update-fc1-img-container-${index}`).value;
+                    fc2Img = document.querySelector(`#update-fc2-img-${index}`).value
+                        ? document.querySelector(`#update-fc2-img-${index}`).files[0]
+                        : document.querySelector(`#update-fc2-img-container-${index}`).value;
+                } else {
+                    tournamentImg = document.querySelector(`#update-tournament-img-${index}`).value
+                        ? document.querySelector(`#update-tournament-img-${index}`).files[0]
+                        : document.querySelector(`#update-tournament-img-container-${index}`).value;
+                }
+                console.log({ fc1ImgEl, fc2ImgEl, tournamentImg });
+                debugger;
+
+                console.log({ fc1, fc2, fc1Img, fc2Img, title, tournament, tournamentImg, matchId, time, streamingStatus, streamingUrls });
+            })
+        })
+    }  
 
     const clearExistModal = () => {
         const modals = Array.from(document.querySelectorAll('.modals-table-data'));
@@ -626,15 +708,21 @@ import axios from 'axios';
             showNext: false,
             formatResult: function(data) {                
                 renderModal(data);
+                updateMatchData();
             },
             callback: function (data, pagination) {
                 const html = templateTableData(data);
                 $('.table-pagination-data').html(html);
 
                 // add remove data events to Shutdown button everytime re-render data table
-                addEventToRemoveMatchData({ selectors: document.querySelectorAll('.remove-match-items') });
+                addEventToRemoveMatchData({ selectors: document.querySelectorAll('.remove-match-items') });                
             }
         })
     }
-    pagination(matches);       
+    pagination(matches);
 })()
+
+
+
+
+

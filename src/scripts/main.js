@@ -4,10 +4,6 @@ import moment from 'moment';
 
 const hostname = `localhost:5000`;
 
-const scheduleData = require('./data/fakeScheduleData.json');
-const tennisData = require('./data/fakeTennisData.json');
-const streamingData = require('./data/fakeStreamingData.json');
-
 (async () => {
     const getFootballMatches = async () => {
         try {
@@ -43,6 +39,7 @@ const streamingData = require('./data/fakeStreamingData.json');
     
     const footballMatches = await getFootballMatches();
     const tennisMatches = await getTennisMatches();
+    console.log({ footballMatches });
 
     const innerFootballBlock = (data) => {        
         const { today, tomorrow } = data;
@@ -52,14 +49,15 @@ const streamingData = require('./data/fakeStreamingData.json');
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
                 const date = moment(data.match.time).format('DD/MM');
+                console.log(data.match.fc1ImgUrl);
 
                 if (data.match.streaming.status == false) {
                     todayFootballElOutput += `
                         <a class="row schedule-item-containers" href="/streaming?id=${data.match._id}">
                             <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-left-content">
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
-                                    src="../images/representative.jpg"/>
+                                    class="img-responsive schedule-team-img" 
+                                    src="${data.match.fc1ImgUrl}"/>
                                 <div class="schedule-team-name-container schedule-team-name-container-1">
                                     <p class="schedule-team-name-content schedule-team-name-content-left">
                                         ${data.match.fc1}
@@ -77,7 +75,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     </p>
                                 </div>
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
+                                    class="img-responsive schedule-team-img" 
                                     src="${data.match.fc2ImgUrl}"/>
                             </div>
                         </a>
@@ -87,8 +85,8 @@ const streamingData = require('./data/fakeStreamingData.json');
                         <a class="row schedule-item-containers" href="/streaming?id=${data.match._id}">
                             <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-left-content">
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
-                                    src="../images/representative.jpg"/>
+                                    class="img-responsive schedule-team-img" 
+                                    src="${data.match.fc1ImgUrl}"/>
                                 <div class="schedule-team-name-container schedule-team-name-container-1">
                                     <p class="schedule-team-name-content schedule-team-name-content-left">
                                         ${data.match.fc1}
@@ -106,7 +104,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     </p>
                                 </div>
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
+                                    class="img-responsive schedule-team-img" 
                                     src="${data.match.fc2ImgUrl}"/>
                             </div>
                         </a>
@@ -128,8 +126,8 @@ const streamingData = require('./data/fakeStreamingData.json');
                         <a class="row schedule-item-containers" href="/streaming?id=${data.match._id}">
                             <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-left-content">
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
-                                    src="../images/representative.jpg"/>
+                                    class="img-responsive schedule-team-img" 
+                                    src="${data.match.fc1ImgUrl}"/>
                                 <div class="schedule-team-name-container schedule-team-name-container-1">
                                     <p class="schedule-team-name-content schedule-team-name-content-left">
                                         ${data.match.fc1}
@@ -147,7 +145,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     </p>
                                 </div>
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
+                                    class="img-responsive schedule-team-img" 
                                     src="${data.match.fc2ImgUrl}"/>
                             </div>
                         </a>
@@ -157,8 +155,8 @@ const streamingData = require('./data/fakeStreamingData.json');
                         <a class="row schedule-item-containers" href="/streaming?id=${data.match._id}">
                             <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-left-content">
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
-                                    src="../images/representative.jpg"/>
+                                    class="img-responsive schedule-team-img" 
+                                    src="${data.match.fc1ImgUrl}"/>
                                 <div class="schedule-team-name-container schedule-team-name-container-1">
                                     <p class="schedule-team-name-content schedule-team-name-content-left">
                                         ${data.match.fc1}
@@ -176,7 +174,7 @@ const streamingData = require('./data/fakeStreamingData.json');
                                     </p>
                                 </div>
                                 <img 
-                                    class="rounded-circle img-responsive schedule-team-img" 
+                                    class="img-responsive schedule-team-img" 
                                     src="${data.match.fc2ImgUrl}"/>
                             </div>
                         </a>
@@ -347,5 +345,5 @@ const streamingData = require('./data/fakeStreamingData.json');
 
         streamingCards[index].textContent = content;
     }
-    modifyStreamingMatches(1, 'hello');
+    // modifyStreamingMatches(1, 'hello');
 })();

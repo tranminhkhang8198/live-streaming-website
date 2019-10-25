@@ -238,6 +238,7 @@ import axios from "axios";
             const team1LogoVal = inputTeam1Logo.files[0] ? inputTeam1Logo.files[0] : undefined;
             const team2NameVal = inputTeam2Name.value ? inputTeam2Name.value : undefined;
             const team2LogoVal = inputTeam2Logo.files[0] ? inputTeam2Logo.files[0] : undefined;
+            debugger;
     
             if (!team1NameVal) {
                 isValidInputValidator(inputTeam1Name, false);
