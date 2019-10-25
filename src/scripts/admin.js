@@ -123,7 +123,7 @@ import axios from 'axios';
                                     <div class="col-12">
                                         <p>Streaming keys: </p>`;
                                 item.match.streaming.streamingUrl.forEach(streamingUrl => {
-                                    output += `<small>${streamingUrl}</small>`;
+                                    output += `<small>${streamingUrl}</small></br>`;
                                 });
                                 output += `
                                     </div>
@@ -208,7 +208,7 @@ import axios from 'axios';
                                 <div class="col-12">
                                     <p>Streaming keys: </p>`;
                                 item.match.streaming.streamingUrl.forEach(streamingUrl => {
-                                    output += `<small>${streamingUrl}</small>`;
+                                    output += `<small>${streamingUrl}</small></br>`;
                                 });
                                 output += `
                                 </div>
