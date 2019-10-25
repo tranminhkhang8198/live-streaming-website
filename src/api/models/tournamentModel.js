@@ -17,7 +17,8 @@ const tournamentSchema = new Schema({
         ref: "SportType"
     },
     tournamentImgUrl: {
-        type: String
+        type: String,
+        default: "/images/representative.jpg"
     }
 });
 

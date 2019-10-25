@@ -64,12 +64,20 @@ hr
 .config-stream.mb-5
     .row
         .col-md-12.col-lg-4.mt-3
+            label(for="streaming-host-name") Streaming server name
+            input#streaming-host-name.form-control(type="text" disabled)
+        .col-md-12.col-lg-4.mt-3
             label(for="streaming-key") Streaming key
-            input#streaming-key.form-control(type="text" disabled) 
+            input#streaming-key.form-control(type="text" disabled)
         .col-md-12.col-lg-4.mt-3
             label(for="streaming-url") URL
             input#streaming-url.form-control(type="text" disabled) 
-        .col-md-12.col-lg-4.mt-3
-            label(for="streaming-live-url") URL of streaming event
-            input#streaming-live-url.form-control(type="text" disabled) 
-        button#create-new-match-btn.w-25.mt-3.mx-auto.btn.btn-primary(disabled) Create new stream
+    .row        
+        .col-md-12.col-lg-12.mt-3.url-inputs-container
+            label(for="streaming-live-url") URL of streaming events:
+            input.streaming-live-urls#streaming-live-url.mb-1.form-control(type="text" disabled)            
+    .row        
+        button#add-more-streaming-url-btn.col-md-12.col-lg-6.mt-3.mx-auto.btn.btn-primary(disabled) Add another url
+    .row
+        button#create-new-match-btn.col-md-12.col-lg-6.mt-3.mx-auto.btn.btn-primary(disabled) Create new stream
+        

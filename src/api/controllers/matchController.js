@@ -122,8 +122,9 @@ exports.getAllMatch = async (req, res) => {
   try {
     // EXCUTE QUERY
     let typeId = "";
+
     if (req.query.type) {
-      typeId = await getTypeId(req.query.type);    
+      typeId = await getTypeId(req.query.type);
 
       if (typeId == "") {
         res.status(404).json({
@@ -214,7 +215,7 @@ exports.getMatch = async (req, res) => {
       .populate("streaming", "streamingUrl -_id")
       .populate("type", "name -_id");
 
-    // GET TOUNARMENT FOR MATCH
+    // GET TOURNAMENT FOR MATCH
     const tournament = await Tournament.findOne({
       matches: match._id
     });
@@ -260,9 +261,9 @@ exports.createMatch = async (req, res) => {
     }
 
     // UPLOAD FC IMAGE TO SERVER
-    let fc1ImgUrl = "";
-    let fc2ImgUrl = "";
-    let tournamentImgUrl = "";
+    let fc1ImgUrl = "/images/representative.jpg";
+    let fc2ImgUrl = "/images/representative.jpg";
+    let tournamentImgUrl = "/images/representative.jpg";
     if (req.files) {
       validateImg(req.files, message);
 
@@ -281,7 +282,7 @@ exports.createMatch = async (req, res) => {
     }
 
     // CREATE STREAMING FOR NEW MATCH
-    const newStreaming = await Streaming.create(req.body);
+    const newStreaming = await Streaming.create(req.body);    
     const streaming_id = newStreaming._id;
 
     // CREATE NEW MATCH
@@ -334,13 +335,107 @@ exports.updateMatch = async (req, res) => {
     });
 
     if (match) {
+
+      // IF TOURNAMENT WAS SUBMITTED
+      if (req.body.tournament) {
+        // Check submitted tournament exists
+        const tournament = await Tournament.findOne({
+          name: req.body.tournament
+        });
+
+        if (tournament) {
+
+          const oldTournament = await Tournament.findOne({
+            matches: req.params.id
+          });
+
+          // Compare submitted tournament and tournament that match belong to, if different then remove
+          if (oldTournament._id != tournament._id) {
+            // Remove match from old tournament
+            const updateTournament = await Tournament.update({
+              _id: oldTournament._id
+            }, {
+              $pull: {
+                matches: req.params.id
+              }
+            });
+
+            // Add match to submitted tournament
+            const newTournament = await Tournament.findByIdAndUpdate({
+              _id: tournament._id
+            }, {
+              $addToSet: {
+                matches: req.params.id
+              },
+            }, {
+              new: true,
+              runValidators: true
+            });
+          }
+
+        } else {
+          return res.status(404).json({
+            status: 'fail',
+            message: "Doesn't have tournament submitted in database"
+          });
+        }
+      }
+
+
+      let queryMatch = {
+        ...req.body
+      }
+
+      // Add type to queryMatch if was submitted
+      if (req.body.type) {
+        const sportType = await SportType.findOne({
+          name: req.body.type
+        });
+
+        if (sportType) {
+          queryMatch['type'] = sportType._id;
+
+        } else {
+          return res.status(404).json({
+            status: 'fail',
+            message: "Doesn't have sport type submitted in database"
+          });
+        }
+      }
+
       var updated_match = await Match.findByIdAndUpdate(
         req.params.id,
-        req.body, {
+        queryMatch, {
           new: true,
           runValidators: true
         }
       );
+
+      // UPDATE FOR STREAMING
+      const queryStreaming = {
+        ...req.body
+      };
+
+      delete queryStreaming["streamingUrl"];
+
+      var updated_streaming = await Streaming.findByIdAndUpdate(
+        match.streaming,
+        queryStreaming, {
+          new: true,
+          runValidators: true
+        }
+      );
+
+      if (req.body.streamingUrl) {
+        const streaming = await Streaming.update({
+          _id: match.streaming
+        }, {
+          $addToSet: {
+            streamingUrl: req.body.streamingUrl
+          }
+        });
+      }
+
     } else {
       return res.status(404).json({
         status: "fail",

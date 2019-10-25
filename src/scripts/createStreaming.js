@@ -6,16 +6,19 @@ import axios from "axios";
     const newStreaming = new FormData();
     const hostname = 'localhost:5000';
     const streamingHostname = 'localhost';
+    let streamingHostnameVal = '192.168.3.197';
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
 
     // utils
     const createNewMatchBtn = document.querySelector('#create-new-match-btn');
+    const addMoreUrlBtn = document.querySelector('#add-more-streaming-url-btn');
     const genKeyBtn = document.querySelector('#btn-generate-key');
     const reloadVideoSrc = document.querySelector('#reload-video-source');
 
     // general streaming data
+    const streamingHostname = document.querySelector('#streaming-host-name');
     const streamingKey = document.querySelector('#streaming-key');
     const streamingLiveUrl = document.querySelector('#streaming-live-url');
     const streamingServerUrl = document.querySelector('#streaming-url');
@@ -67,7 +70,7 @@ import axios from "axios";
 
             return streamingTypes.data;
         } catch (error) {
-            return error.response;;
+            return error.response;
         }
     }
 
@@ -99,20 +102,19 @@ import axios from "axios";
                 video.play();
             });
         }
-
-        if (video.src) {
-            const videoFound = document.querySelector('.video-not-found');
-            videoFound.setAttribute('style', 'display: none !important');
-            videoFound.classList.remove('d-flex', 'flex-column');
-        } else {
-            const videoFound = document.querySelector('.video-not-found');
-            videoFound.setAttribute('style', 'display: flex');
-            videoFound.classList.add('d-flex', 'flex-column');
-        }
     }
     
     const streamingTypes = await getStreamingTypes();
     renderStreamingTypes(streamingTypes.sportTypes);
+
+    addMoreUrlBtn.addEventListener('click', event => {
+        event.preventDefault();
+        
+        const newInput = document.createElement('input');
+        newInput.setAttribute('type', 'text');
+        newInput.classList.add('streaming-live-urls' ,'mb-1' ,'form-control');
+        document.querySelector('.url-inputs-container').appendChild(newInput);
+    })
 
     uploadStreamingType.addEventListener('change', event => {
         const selectedIndex = event.target.selectedIndex;
@@ -155,18 +157,27 @@ import axios from "axios";
     
     genKeyBtn.addEventListener('click', (event) => {
         event.preventDefault();            
+
+        const currentTimeInUnix = new Date().getTime();
+
+        streamingKey.value = currentTimeInUnix;
+        streamingHostname.value = streamingHostnameVal;
+        streamingServerUrl.value = `rtmp://${streamingHostnameVal}/live`;
+        streamingLiveUrl.value = `http://${streamingHostnameVal}:3002/live/${currentTimeInUnix}/index.m3u8`;
     
         streamingKey.removeAttribute('disabled');
+        streamingHostname.removeAttribute('disabled');
         createNewMatchBtn.removeAttribute('disabled');
+        addMoreUrlBtn.removeAttribute('disabled');
 
-        streamingKey.addEventListener('keyup', event => {
-            streamingLiveUrl.value = `http://${streamingHostname}:3002/live/${event.target.value}/index.m3u8`;            
-        });
-    
-        const currentTimeInUnix = new Date().getTime();        
-        streamingKey.value = currentTimeInUnix;
-        streamingServerUrl.value = `rtmp://${streamingHostname}/live`;
-        streamingLiveUrl.value = `http://${streamingHostname}:3002/live/${currentTimeInUnix}/index.m3u8`;
+        streamingKey.addEventListener('keyup', function(event) {
+            streamingLiveUrl.value = `http://${streamingHostname.value}:3002/live/${this.value}/index.m3u8`;
+        })
+
+        streamingHostname.addEventListener('keyup', function(event) {
+            streamingLiveUrl.value = `http://${this.value}:3002/live/${streamingKey.value}/index.m3u8`;
+            streamingServerUrl.value = `rtmp://${this.value}/live`;
+        })            
     })
 
     reloadVideoSrc.addEventListener('click', event => {
@@ -174,13 +185,19 @@ import axios from "axios";
 
         const streamingVideoKey = streamingKey.value;
         
-        const baseSource = `http://${streamingHostname}:3002/live/${streamingVideoKey}/index.m3u8`;
+        const baseSource = `http://${streamingHostnameVal}:3002/live/${streamingVideoKey}/index.m3u8`;
         streamingVideo(baseSource);
     })
         
     createNewMatchBtn.addEventListener('click', async () => {
         const videoTitleVal = inputVideoTitle.value ? inputVideoTitle.value : undefined;
         const videoTournamentVal = inputVideoTournament.value ? inputVideoTournament.value : undefined;
+
+        const streamingUrlsElements = document.querySelectorAll('.streaming-live-urls');
+        const urlsValues = [];
+        streamingUrlsElements.forEach(el => {
+            urlsValues.push(el.value);
+        })        
                         
         newStreaming.set('streamingTitle', videoTitleVal);
         newStreaming.set('type', videoTypeVal);        
@@ -188,7 +205,7 @@ import axios from "axios";
         (streamingStatusVal === 0) 
             ? newStreaming.set('status', false)
             : newStreaming.set('status', true);
-        newStreaming.set('streamingUrl', streamingLiveUrl.value);                
+        newStreaming.set('streamingUrl', urlsValues);
     
         if (streamingStatusVal == 0) {
             const currentTimePlus15Mins = moment().add(15, 'minutes').format();            
