@@ -2,7 +2,9 @@ import 'babel-polyfill';
 import axios from 'axios';
 import moment from 'moment';
 
-const hostname = `192.168.3.197:5000`;
+const fconfig = window.CONFIG
+
+const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
 
 (async () => {
     const getFootballMatches = async () => {

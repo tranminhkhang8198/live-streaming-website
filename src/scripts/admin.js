@@ -3,13 +3,14 @@ import moment from 'moment';
 import axios from 'axios';
 
 (async () => {
-    const hostname = `localhost:5000`;
+    const fconfig = window.CONFIG
+    const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
 
     const getMatches = async () => {
         try {
             const matches = await axios({
                 method: 'get',
-                url: '/api/matches',
+                url: `http://${hostname}/api/matches`,
             });
             
             return matches.data.response;

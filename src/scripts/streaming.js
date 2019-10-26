@@ -4,9 +4,11 @@ import { directive } from "babel-types";
 
 
 (async () => {
+    const fconfig = window.CONFIG
+    const ApiHostName = fconfig.API_IP
+    const ApiPort=fconfig.API_PORT
     window.VIDEOJS_NO_DYNAMIC_STYLE = true
-    const ApiHostName = "192.168.3.197"
-    const ApiPort="5000"
+    const title = document.querySelector(".title")
     var options = {
         html5: {
             hlsjsConfig: {
@@ -25,24 +27,31 @@ import { directive } from "babel-types";
     // player.playsinline(true)
     ////
 
-    // bigPlayBt = player.bigPlayButton.el_
-    // console.log(bigPlayBt)
-    // var adContainer = document.createElement("div")
-    // adContainer.style.width = "70px"
-    // adContainer.style.height="70px"
-    // adContainer.style.backgroundColor="white"
-    // console.log("hihi")
-    // bigPlayBt.append(adContainer)
+    const bigPlayBt = player.bigPlayButton.el_
+    bigPlayBt.style.zIndex = 2
+    var adContainer = document.createElement("div")
+    adContainer.classList.add("adInBigPlayBt")
+    adContainer.style.zIndex = 1
+    adContainer.style.backgroundColor="white"
+    adContainer.addEventListener("click",function(){
+        window.open("http://google.com")
+    })
+    player.el_.append(adContainer)
 
 
 
     player.on('pause', function() {
+        adContainer.classList.remove("d-none")
+        adContainer.classList.add("d-block")
+
         this.bigPlayButton.el_.classList.remove("d-none")
 
         this.bigPlayButton.el_.classList.add("d-block")
 
     });
     player.on('play', function() {
+        adContainer.classList.remove("d-block")
+        adContainer.classList.add("d-none")
         this.bigPlayButton.el_.classList.remove("d-block")
         this.bigPlayButton.el_.classList.add("d-none")
     });
@@ -57,15 +66,17 @@ import { directive } from "babel-types";
                     method: 'get',
                     url: `http://${ApiHostName}:${ApiPort}/api/matches/${matchID}`
                 })
+                // console.log(responseData)
                 return responseData;
             } catch (error) {
                 return error.response;;
             }                
         }
         const responseOj = await getServerURLs();    
-        console.log(responseOj);
         const URLS = responseOj.data.response[0].streaming.streamingUrl;
-
+        const FCTitle = (responseOj.data.response[0].fc1).toUpperCase()+" - "+(responseOj.data.response[0].fc2).toUpperCase();
+        // const FCTitle = "Man City - Man United"
+        title.innerHTML = FCTitle
 
         ///create UI
         const serverSelection = document.querySelector('.server-selection');
@@ -139,15 +150,12 @@ import { directive } from "babel-types";
 
     function loadHLS(source){
         player.src({type: 'application/x-mpegURL', src: source});
-        // if (player.canPlayType('application/x-mpegurl')){
-            // video.addEventListener('loadedmetadata',function() {
-                player.play();
-            //   });
-        // }
-        // else{
-            // player.play()
 
-        // }
+        var promise = player.play();
+        if (promise) {
+            //Older browsers may not return a promise, according to the MDN website
+            promise.catch(function(error) { console.error(error); });
+        }
     }
 
 
