@@ -5,8 +5,8 @@ const {
     adminPage,
     watchStreamingPage,
     createStreamingPage,
+    globalConfig,
 } = require('../controllers/main.controller');
-
 
 /**
  * Render home page
@@ -35,5 +35,18 @@ Router.route('/admin/create-streaming').get(createStreamingPage);
  * @public
  */
 Router.route('/admin').get(adminPage);
+
+/**
+* @api {get} /config
+* @apiDescription Send neccessary configuration to browser
+* @apiVersion 1.0.0
+* @apiName Configuration data
+* @apiGroup Main
+* @apiPermission Private
+*
+* @apiSuccess (Ok 200) {String} ip - IP address of live-streaming server
+* @apiSuccess (Ok 200) {String} port - Port of live-streaming server
+*/
+Router.route('/config').get(globalConfig);
 
 module.exports = Router;

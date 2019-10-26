@@ -20,11 +20,12 @@ import axios from "axios";
             return error.response;;
         }                
     }
-    const gconfig = (await getConfigFile()).data;
+    const gconfig = await getConfigFile();
+    console.log(gconfig.data);
 
     // const streamingHostname = 'localhost';
-    let streamingHostnameVal = gconfig.live_server_ip;
-    let streamingHostPortVal = gconfig.live_server_port;
+    let streamingHostnameVal = gconfig.data.ip;
+    let streamingHostPortVal = gconfig.data.port;
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
