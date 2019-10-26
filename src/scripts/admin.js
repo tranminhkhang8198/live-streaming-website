@@ -677,9 +677,8 @@ import axios from 'axios';
                         data: updateStreaming
                     })
 
-                    // window.alert('Updated');
-                    // window.location = '/admin';
-                    console.log(updateResponse);
+                    window.alert('Updated');
+                    window.location = '/admin';
                 } catch (error) {
                     
                 }
