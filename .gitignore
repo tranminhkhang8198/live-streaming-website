@@ -12,6 +12,7 @@ dist
 
 # remove log files from committed
 *.log
+doc/*
 
 # ignore uploads folder
 src/uploads

@@ -1,9 +1,16 @@
 {
+    "restartable": "rs",
     "verbose": true,
     "ignore": [
         "node_modules", 
         "dist"
     ],
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "events": {
+        "restart": "osascript -e 'display notification \"App restarted due to:\n'$FILENAME'\" with title \"nodemon\"'"
+    },
     "execMap": {
         "rb": "ruby",
         "pde": "processing --sketch={{pwd}} --run"

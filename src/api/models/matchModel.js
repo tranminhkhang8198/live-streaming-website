@@ -8,11 +8,11 @@ const matchSchema = new mongoose.Schema({
   },
   fc1ImgUrl: {
     type: String,
-    default: "/images/representative.jpg"
+    default: "/uploads/representative.jpg"
   },
   fc2ImgUrl: {
     type: String,
-    default: "/images/representative.jpg"
+    default: "/uploads/representative.jpg"
   },
   fc2: {
     type: String

@@ -19,31 +19,22 @@ import axios from 'axios';
         }
     }
     const matches = await getMatches();
-    console.log(matches);
 
-    const addEventToRemoveMatchData = ({ selectors }) => {
-        selectors.forEach(selector => {   
-            selector.addEventListener('click', async event => {
-                event.preventDefault();
-
-                const matchId = event.target.dataset.matchId;
-
-                try {
-                    const removeItemResponse = await axios({
-                        method: 'delete',
-                        url: `http://${hostname}/api/matches/${matchId}`,
-                    })
-                    window.alert('Successfully shutdown stream');
-                    window.location = '/admin';
-                } catch (error) {
-                    window.alert('Failed to shutdown stream, please re-try for several times!');
-                }                
-            })
-        })
-    }
-
-    const innerViewDataInModal = (item, index, streamingStatus) => {
+    const innerViewDataInModal = (item, index) => {
         item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm');
+
+        const streamingStatusEnum = {
+            'false': {
+                html: 'Pending',
+                class: 'badge-info'
+            },
+            'true': {
+                html: 'On air',
+                class: 'badge-danger'
+            },
+        }
+
+        const streamingStatus = streamingStatusEnum[item.match.streaming.status.toString()];
         
         let output = '';
         if (item.match.type.name === 'tennis') {                
@@ -112,7 +103,7 @@ import axios from 'axios';
                                     <div class="col-12">
                                         <p>Streaming keys: </p>`;
                                 item.match.streaming.streamingUrl.forEach(streamingUrl => {
-                                    output += `<small>${streamingUrl}</small>`;
+                                    output += `<small>${streamingUrl}</small></br>`;
                                 });
                                 output += `
                                     </div>
@@ -197,7 +188,7 @@ import axios from 'axios';
                                 <div class="col-12">
                                     <p>Streaming keys: </p>`;
                                 item.match.streaming.streamingUrl.forEach(streamingUrl => {
-                                    output += `<small>${streamingUrl}</small>`;
+                                    output += `<small>${streamingUrl}</small></br>`;
                                 });
                                 output += `
                                 </div>
@@ -215,13 +206,27 @@ import axios from 'axios';
         return output;
     }
 
-    const innerUpdateDataInModal = (item, index, streamingStatus) => {
+    const innerUpdateDataInModal = (item, index) => {
         item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm');
         let output = '';
 
+        const streamingStatusEnum = {
+            'false': {
+                html: 'Pending',
+                class: 'badge-info'
+            },
+            'true': {
+                html: 'On air',
+                class: 'badge-danger'
+            },
+        }
+
+        const streamingStatus = streamingStatusEnum[item.match.streaming.status.toString()];
+        const negativeStreamingStatus = streamingStatusEnum[(!item.match.streaming.status).toString()];
+
         if (item.match.type.name === 'tennis') {
             output += `
-                <form class="modal fade modals-table-data" id="modal-update-${index}" tabindex="-1" role="dialog">
+                <div class="modal fade modals-table-data" id="modal-update-${index}" tabindex="-1" role="dialog">
                     <div class="modal-dialog" href="#" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -270,16 +275,8 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p>Match type: 
-                                            <input
-                                                id="update-type-name-${index}"
-                                                style="
-                                                    border: none; 
-                                                    font-size: 80%; 
-                                                    font-weight: 400; 
-                                                    outline: none;"
-                                                type="text"
-                                                value="${item.match.type.name}">
+                                        <p>Match type:
+                                            <small>${item.match.type.name}</small>
                                         </p>
                                     </div>
                                 </div>
@@ -316,8 +313,20 @@ import axios from 'axios';
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p>Streaming status: 
-                                            <small>${streamingStatus['html']}</small>
+                                        <p>Streaming status:
+                                            <br>
+                                            <input 
+                                                type="radio" 
+                                                class="update-streaming-status-${index}" 
+                                                name="streaming-status-${index}"
+                                                checked
+                                                value="${item.match.streaming.status}"> ${streamingStatus['html']}
+                                            <br>
+                                            <input 
+                                                type="radio" 
+                                                class="update-streaming-status-${index}" 
+                                                name="streaming-status-${index}"
+                                                value="${!item.match.streaming.status}"> ${negativeStreamingStatus['html']}
                                         </p> 
                                     </div>
                                 </div>
@@ -325,7 +334,16 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Start time: 
-                                            <small>${item.match.time}</small>
+                                            <input
+                                                class="text-left"
+                                                id="update-time-${index}"
+                                                style="
+                                                    border: none; 
+                                                    font-size: 80%; 
+                                                    font-weight: 400; 
+                                                    outline: none;"
+                                                type="text"
+                                                value="${item.match.time}">
                                         </p> 
                                     </div>
                                 </div>
@@ -360,7 +378,7 @@ import axios from 'axios';
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             `;
         } else {
             output += `
@@ -398,15 +416,7 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Match type: 
-                                            <input
-                                                id="update-type-name-${index}"
-                                                style="
-                                                    border: none; 
-                                                    font-size: 80%; 
-                                                    font-weight: 400; 
-                                                    outline: none;"
-                                                type="text"
-                                                value="${item.match.type.name}">
+                                            <small>${item.match.type.name}</small>
                                         </p> 
                                     </div>
                                 </div>
@@ -486,15 +496,36 @@ import axios from 'axios';
                                 <div class="row mt-2">
                                     <div class="col-12">
                                         <p>Streaming status:
-                                            <small> ${streamingStatus['html']}</small>
+                                            <br>
+                                            <input 
+                                                type="radio" 
+                                                class="update-streaming-status-${index}" 
+                                                name="streaming-status-${index}" 
+                                                checked
+                                                value="${item.match.streaming.status}"> ${streamingStatus['html']}
+                                            <br>
+                                            <input 
+                                                type="radio" 
+                                                class="update-streaming-status-${index}" 
+                                                name="streaming-status-${index}"
+                                                value="${!item.match.streaming.status}"> ${negativeStreamingStatus['html']}
                                         </p> 
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row mt-2">
                                     <div class="col-12">
-                                        <p>Start time: 
-                                            <small> ${item.match.time}</small>
+                                        <p>Start time:
+                                            <input
+                                                class="text-left"
+                                                id="update-time-${index}"
+                                                style="
+                                                    border: none; 
+                                                    font-size: 80%; 
+                                                    font-weight: 400; 
+                                                    outline: none;"
+                                                type="text"
+                                                value="${item.match.time}">
                                         </p> 
                                     </div>
                                 </div>
@@ -540,24 +571,48 @@ import axios from 'axios';
         return output;
     }      
 
+    const deleteMatchData = () => {
+        const deleteBtns = document.querySelectorAll('.remove-match-items')
+        deleteBtns.forEach(selector => {   
+            selector.addEventListener('click', async event => {
+                event.preventDefault();
+
+                const matchId = event.target.dataset.matchId;
+
+                try {
+                    await axios({
+                        method: 'delete',
+                        url: `http://${hostname}/api/matches/${matchId}`,
+                    })
+                    window.alert('Successfully shutdown stream');
+                    window.location = '/admin';
+                } catch (error) {
+                    window.alert('Failed to shutdown stream, please re-try for several times!');
+                }                
+            })
+        })
+    }
+
     const updateMatchData = () => {
         const submitBtns = document.querySelectorAll('.btn-submit');
 
         submitBtns.forEach(btn => {
-            btn.addEventListener('click', event => {
+            btn.addEventListener('click', async event => {
                 event.preventDefault();
                 const index = event.target.dataset.itemIndex;
                 let fc1 = document.querySelector(`#update-fc1-name-${index}`).value, 
                     fc2 = document.querySelector(`#update-fc2-name-${index}`).value, 
                     fc1Img = '',
-                    fc2Img = '', 
+                    fc2Img = '',
+                    score1 = document.querySelector(`#update-score1-${index}`).value, 
+                    score2 = document.querySelector(`#update-score2-${index}`).value, 
                     title = document.querySelector(`#update-title-${index}`).value, 
                     tournament = document.querySelector(`#update-tournament-name-${index}`).value, 
                     tournamentImg = '',
                     typeName = event.target.dataset.matchType,
                     matchId = event.target.dataset.matchId,
-                    time = event.target.dataset.matchTime,
-                    streamingStatus = event.target.dataset.matchStreamingStatus,
+                    time = document.querySelector(`#update-time-${index}`).value,
+                    streamingStatus = true,
                     streamingUrls = [];
 
                 const streamingUrlsEls = document.querySelectorAll(`.update-streaming-urls-${index}`);
@@ -565,26 +620,69 @@ import axios from 'axios';
                     streamingUrls.push(url.value);
                 })
 
+                const streamingStatusEls = document.querySelectorAll(`.update-streaming-status-${index}`);
+                streamingStatusEls.forEach(el => {                    
+                    if (el.checked === true) {
+                        streamingStatus = el.value;
+                    }
+                })
+
+                time = moment(time).format();
+
                 const fc1ImgEl = document.querySelector(`#update-fc1-img-${index}`),
                         fc2ImgEl = document.querySelector(`#update-fc2-img-${index}`),
                         tournamentImgEl = document.querySelector(`#update-tournament-img-${index}`);
+
+                const updateStreaming = new FormData();
+                updateStreaming.set('streamingTitle', title);
+                updateStreaming.set('type', typeName);
+                updateStreaming.set('time', time);
+                updateStreaming.set('tournament', tournament);
+                updateStreaming.set('status', streamingStatus);
+                updateStreaming.set('streamingUrl', streamingUrls);
+                updateStreaming.set('fc1', fc1);
+                updateStreaming.set('fc2', fc2);
+                updateStreaming.set('score1', score1);
+                updateStreaming.set('score2', score2);
+
                 if (typeName === 'football') {
-                    fc1Img = document.querySelector(`#update-fc1-img-${index}`).value
-                        ? document.querySelector(`#update-fc1-img-${index}`).files[0]
+                    fc1Img = fc1ImgEl.value
+                        ? fc1ImgEl.files[0]
                         : document.querySelector(`#update-fc1-img-container-${index}`)
                             .src.replace(/.+uploads\//, '').replace(/%20/g, ' ');
-                    fc2Img = document.querySelector(`#update-fc2-img-${index}`).value
-                        ? document.querySelector(`#update-fc2-img-${index}`).files[0]
+                    fc2Img = fc2ImgEl.value
+                        ? fc2ImgEl.files[0]
                         : document.querySelector(`#update-fc2-img-container-${index}`)
                             .src.replace(/.+uploads\//, '').replace(/%20/g, ' ');
+
+                    updateStreaming.set('fc1Img', fc1Img);
+                    updateStreaming.set('fc2Img', fc2Img);
                 } else {
-                    tournamentImg = document.querySelector(`#update-tournament-img-${index}`).value
-                        ? document.querySelector(`#update-tournament-img-${index}`).files[0]
+                    tournamentImg = tournamentImgEl.value
+                        ? tournamentImgEl.files[0]
                         : document.querySelector(`#update-tournament-img-container-${index}`)
                             .src.replace(/.+uploads\//, '').replace(/%20/g, ' ');
-                }                
 
-                console.log({fc1Img, fc2Img, tournamentImg});
+                    updateStreaming.set('tournamentImg', tournamentImg);
+                }
+
+                try {
+                    const updateResponse = await axios({
+                        method: 'PATCH',
+                        url: `/api/matches/${matchId}`,
+                        config: {
+                            headers: { 
+                                'Content-Type': 'multipart/form-data' 
+                            }
+                        },
+                        data: updateStreaming
+                    })
+
+                    window.alert('Updated');
+                    window.location = '/admin';
+                } catch (error) {
+                    
+                }
             })
         })
     }  
@@ -601,22 +699,9 @@ import axios from 'axios';
         clearExistModal();
         let modals = '';
 
-        const streamingStatusEnum = {
-            'false': {
-                html: 'Pending',
-                class: 'badge-info'
-            },
-            'true': {
-                html: 'On air',
-                class: 'badge-danger'
-            },
-        }
-
-        data.forEach((item, index) => {            
-            const streamingStatus = streamingStatusEnum[item.match.streaming.status.toString()];
-
-            modals += innerViewDataInModal(item, index, streamingStatus);
-            modals += innerUpdateDataInModal(item, index, streamingStatus);
+        data.forEach((item, index) => {                        
+            modals += innerViewDataInModal(item, index);
+            modals += innerUpdateDataInModal(item, index);
         })        
         
         $(modals).appendTo('body');
@@ -626,7 +711,7 @@ import axios from 'axios';
         let html = `
             <thead>
                 <tr>
-                    <th style="width: 30%;" scope="col">Title</th>
+                    <th strenderModalyle="width: 30%;" scope="col">Title</th>
                     <th style="width: 30%;" scope="col">Tournament</th>
                     <th style="width: 15%;" scope="col">Status</th>
                     <th style="width: 10%;" scope="col">Score</th>
@@ -709,15 +794,14 @@ import axios from 'axios';
             showPrevious: false,
             showNext: false,
             formatResult: function(data) {                
-                renderModal(data);
-                updateMatchData();
+                renderModal(data);                
             },
             callback: function (data, pagination) {
                 const html = templateTableData(data);
-                $('.table-pagination-data').html(html);
+                $('.table-pagination-data').html(html);                
 
-                // add remove data events to Shutdown button everytime re-render data table
-                addEventToRemoveMatchData({ selectors: document.querySelectorAll('.remove-match-items') });                
+                updateMatchData();
+                deleteMatchData();
             }
         })
     }

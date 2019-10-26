@@ -3,9 +3,9 @@
         "config_id": "development",
         "app_name": "my app",
         "app_desc": "my app desc",
-        "node_ip":"192.168.2.118",
+        "node_ip":"192.168.2.134",
         "node_port": 5000,
-        "live_server_ip":"192.168.2.118",
+        "live_server_ip":"192.168.2.143",
         "live_server_port":3002,
         "json_indentation": 4,
         "database": "streaming"
