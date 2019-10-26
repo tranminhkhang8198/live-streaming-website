@@ -486,7 +486,7 @@ exports.updateMatch = async (req, res) => {
               $each: streamingUrl
             }
           }
-        });
+        });        
       }
 
       if (req.body.streamingUrl) {
