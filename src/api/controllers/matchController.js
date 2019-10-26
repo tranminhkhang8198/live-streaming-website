@@ -21,7 +21,7 @@ function validateImg(files, message) {
   }
 }
 
-function saveImg(file) {
+function saveImg(file, string) {
   let imgUrl = "/uploads/representative.jpg";
   if (file) {
     const filename =
@@ -30,7 +30,7 @@ function saveImg(file) {
       .slice(0, -1)
       .join(".") +
       "-" +
-      Date.now();
+      Date.now() + string;
 
     const extname = file.name.split(".").slice(-1)[0];
     const img = filename + "." + extname;
@@ -41,7 +41,7 @@ function saveImg(file) {
   }
 
   return imgUrl;
-}
+};
 
 async function checkTournamentExist(tournament_name) {
   const tournament = await Tournament.findOne({
@@ -270,9 +270,9 @@ exports.createMatch = async (req, res) => {
       validateImg(req.files, message);
 
       if (message.length == 0) {
-        fc1ImgUrl = saveImg(req.files.fc1Img);
-        fc2ImgUrl = saveImg(req.files.fc2Img);
-        tournamentImgUrl = saveImg(req.files.tournamentImg);
+        fc1ImgUrl = saveImg(req.files.fc1Img, "fc1");
+        fc2ImgUrl = saveImg(req.files.fc2Img, "fc2");
+        tournamentImgUrl = saveImg(req.files.tournamentImg, "");
       }
     }
 
@@ -355,68 +355,66 @@ exports.updateMatch = async (req, res) => {
 
       // IF TOURNAMENT WAS SUBMITTED
       if (req.body.tournament) {
+        var tournamentImgUrl = '';
+
         // Check submitted tournament exists
-        const tournament = await Tournament.findOne({
+        var tournament = await Tournament.findOne({
           name: req.body.tournament
         });
 
-        if (tournament) {
-
-          const oldTournament = await Tournament.findOne({
-            matches: req.params.id
-          });
-
-          // Compare submitted tournament and tournament that match belong to, if different then remove
-          let queryTournament = {
-            ...req.body
-          }
-
-          // Remove match from old tournament
-          const updateTournament = await Tournament.update({
-            _id: oldTournament._id
-          }, {
-            $pull: {
-              matches: req.params.id
-            }
-          });
-
-          // update tournament img if change
-          let tournamentImgUrl = '/uploads/representative.jpg';
-          if (req.files) {
-            if (req.files.tournamentImg) {
-              const tournamentImg_submitted = '/uploads/' + req.files.tournamentImg.name;
-              if (oldTournament.tournamentImgUrl.split('/').slice(-1)[0] != tournamentImg_submitted) {
-                removeImg(tournament.tournamentImgUrl.split("/").slice(-1)[0]);
-                tournamentImgUrl = saveImg(req.files.tournamentImg);
-                queryTournament['tournamentImgUrl'] = tournamentImgUrl;
-              }
-            }
-          }
-
-          // Add match to submitted tournament
-          const newTournament = await Tournament.findByIdAndUpdate({
-            _id: tournament._id
-          }, {
-            $addToSet: {
-              matches: req.params.id
-            },
-            tournamentImgUrl: tournamentImgUrl
-          }, {
-            new: true,
-            runValidators: true
-          });
-
-          response["tournament"] = newTournament;
-
-        } else {
-          return res.status(404).json({
-            status: 'fail',
-            message: "Doesn't have tournament submitted in database"
+        // create new tournament if doesn't exist
+        if (!tournament) {
+          tournament = await Tournament.create({
+            name: req.body.tournament
           });
         }
+
+        // Remove match from old tournament
+        const oldTournament = await Tournament.findOne({
+          matches: req.params.id
+        });
+        await Tournament.update({
+          _id: oldTournament._id
+        }, {
+          $pull: {
+            matches: req.params.id
+          }
+        });
+
+        // update tournament img if change
+        if (req.files) {
+          if (req.files.tournamentImg) {
+            const tournamentImg_submitted = '/uploads/' + req.files.tournamentImg.name;
+            if (oldTournament.tournamentImgUrl.split('/').slice(-1)[0] != tournamentImg_submitted) {
+              removeImg(tournament.tournamentImgUrl.split("/").slice(-1)[0]);
+              tournamentImgUrl = saveImg(req.files.tournamentImg, "");
+            } else {
+              tournamentImgUrl = '/uploads/' + req.files.tournamentImg.name;
+            }
+          }
+        }
+
+        if (tournamentImgUrl == '') {
+          tournamentImgUrl = "/uploads/representative.jpg";
+        }
+
+        // Add match to submitted tournament
+        const newTournament = await Tournament.findByIdAndUpdate({
+          _id: tournament._id
+        }, {
+          $addToSet: {
+            matches: req.params.id
+          },
+          tournamentImgUrl: tournamentImgUrl
+        }, {
+          new: true,
+          runValidators: true
+        });
+
+        response["tournament"] = newTournament;
       }
 
-
+      // HANDLE FOR UPDATE MATCH
       let queryMatch = {
         ...req.body
       }
@@ -443,7 +441,7 @@ exports.updateMatch = async (req, res) => {
           const fc1Img_submitted = '/uploads/' + req.files.fc1Img.name;
           if (match.fc1ImgUrl.split('/').slice(-1)[0] != fc1Img_submitted) {
             removeImg(match.fc1ImgUrl.split("/").slice(-1)[0]);
-            const fc1ImgUrl = saveImg(req.files.fc1Img);
+            const fc1ImgUrl = saveImg(req.files.fc1Img, "fc1");
             queryMatch['fc1ImgUrl'] = fc1ImgUrl;
           }
         }
@@ -452,7 +450,7 @@ exports.updateMatch = async (req, res) => {
           const fc2Img_submitted = '/uploads/' + req.files.fc2Img.name;
           if (match.fc2ImgUrl.split('/').slice(-1)[0] != fc2Img_submitted) {
             removeImg(match.fc2ImgUrl.split("/").slice(-1)[0]);
-            const fc2ImgUrl = saveImg(req.files.fc2Img);
+            const fc2ImgUrl = saveImg(req.files.fc2Img, "fc2");
             queryMatch['fc2ImgUrl'] = fc2ImgUrl;
           }
         }
@@ -475,22 +473,8 @@ exports.updateMatch = async (req, res) => {
 
       if (req.body.streamingUrl) {
         let streamingUrl = [];
-
         streamingUrl = req.body.streamingUrl.split(",");
-
-        const streaming = await Streaming.update({
-          _id: match.streaming
-        }, {
-          $addToSet: {
-            streamingUrl: {
-              $each: streamingUrl
-            }
-          }
-        });        
-      }
-
-      if (req.body.streamingUrl) {
-        delete queryStreaming["streamingUrl"];
+        queryStreaming['streamingUrl'] = streamingUrl;
       }
 
       var updated_streaming = await Streaming.findByIdAndUpdate(

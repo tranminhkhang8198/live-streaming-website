@@ -621,8 +621,9 @@ import axios from 'axios';
 
                 const streamingStatusEls = document.querySelectorAll(`.update-streaming-status-${index}`);
                 streamingStatusEls.forEach(el => {                    
-                    (el.checked === true) ? streamingStatus = el.value : console.log('');
-                    streamingStatus === "true" ? streamingStatus = true : streamingStatus = false;
+                    if (el.checked === true) {
+                        streamingStatus = el.value;
+                    }
                 })
 
                 time = moment(time).format();
@@ -665,7 +666,7 @@ import axios from 'axios';
                 }
 
                 try {
-                    await axios({
+                    const updateResponse = await axios({
                         method: 'PATCH',
                         url: `/api/matches/${matchId}`,
                         config: {
@@ -676,8 +677,9 @@ import axios from 'axios';
                         data: updateStreaming
                     })
 
-                    window.alert('Updated');
-                    window.location = '/admin';
+                    // window.alert('Updated');
+                    // window.location = '/admin';
+                    console.log(updateResponse);
                 } catch (error) {
                     
                 }
