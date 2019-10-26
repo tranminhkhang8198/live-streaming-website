@@ -344,6 +344,9 @@ exports.createMatch = async (req, res) => {
 
 exports.updateMatch = async (req, res) => {
   try {
+    // Array store response in order to send to client
+    let response = {};
+
     const match = await Match.findOne({
       _id: req.params.id
     });
@@ -403,6 +406,7 @@ exports.updateMatch = async (req, res) => {
             runValidators: true
           });
 
+          response["tournament"] = newTournament;
 
         } else {
           return res.status(404).json({
@@ -462,10 +466,28 @@ exports.updateMatch = async (req, res) => {
         }
       );
 
+      response["match"] = updated_match;
+
       // UPDATE FOR STREAMING
       const queryStreaming = {
         ...req.body
       };
+
+      if (req.body.streamingUrl) {
+        let streamingUrl = [];
+
+        streamingUrl = req.body.streamingUrl.split(",");
+
+        const streaming = await Streaming.update({
+          _id: match.streaming
+        }, {
+          $addToSet: {
+            streamingUrl: {
+              $each: streamingUrl
+            }
+          }
+        });
+      }
 
       if (req.body.streamingUrl) {
         delete queryStreaming["streamingUrl"];
@@ -479,15 +501,7 @@ exports.updateMatch = async (req, res) => {
         }
       );
 
-      if (req.body.streamingUrl) {
-        const streaming = await Streaming.update({
-          _id: match.streaming
-        }, {
-          $addToSet: {
-            streamingUrl: req.body.streamingUrl
-          }
-        });
-      }
+      response["streaming"] = updated_streaming;
 
     } else {
       return res.status(404).json({
@@ -499,7 +513,7 @@ exports.updateMatch = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        updated_match
+        response
       }
     });
   } catch (err) {
