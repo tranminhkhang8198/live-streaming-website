@@ -3,9 +3,6 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const path = require('path');
-const rfs = require('rotating-file-stream');
-const morgan = require('morgan');
-const fs = require('fs');
 
 const app = express();
 
@@ -26,20 +23,8 @@ app.use('/images', express.static(path.join(__dirname, '../images')));
 app.use('/scripts', express.static(path.join(__dirname, '../scripts')));
 app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(morgan('dev'));
-} else {
-    const logDirectory = path.join(__dirname, '../../log');
-    // ensure log directory exists
-    fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
-
-    app.use(morgan('combined', {
-        stream: rfs('access.log', {
-            interval: '1d',
-            path: logDirectory
-        })
-    }))
-}
+// logger
+require('../config/logger')(app);
 
 const mainRoute = require('./routes/main.route');
 const sportTypeRoute = require('./routes/sportTypeRoutes');
