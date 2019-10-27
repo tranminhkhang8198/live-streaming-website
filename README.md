@@ -1,4 +1,12 @@
 # Sport streaming website
+## Server information
+### Web server
+- IP: 45.77.203.83
+- PORT: 5000
+### Streaming server
+- IP: 144.202.13.69
+- PORT: 3002
+
 ## Contributors
 - [Nguyễn Minh Toàn (Noat)](https://github.com/nmtoan251998)
 - [Trần Minh Khang](https://github.com/tranminhkhang8198)
