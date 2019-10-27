@@ -1,4 +1,4 @@
 window.CONFIG = {
-    API_IP: "192.168.2.142",
+    API_IP: "45.77.203.83",
     API_PORT:"5000"
 }
