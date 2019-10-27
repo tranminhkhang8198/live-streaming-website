@@ -2,29 +2,31 @@
   "name": "streaming",
   "version": "1.0.0",
   "description": "",
-  "main": "src/api/server.js",
+  "main": "src/server.js",
   "browserslist": [
     "last 1 Chrome version",
     "since 2017-06"
   ],
   "scripts": {
+    "doc": "apidoc -i src/ -o docs/",
     "clean": "rimraf rm dist/*",
     "dev:client": "parcel src/views/*.pug --port 3000 --no-cache",
-    "dev:server": "nodemon --inspect src/api/server.js",
+    "dev:server": "nodemon --inspect src/server.js",
     "build:client": "concurrently -p \"[{name}]\" -n \"Clean,Build\" -c \"bgRed.bold,bgGreen.bold\" \"npm run clean\" \"parcel build src/views/*.pug --no-cache --no-source-maps --detailed-report --out-dir dist\"",
     "build:server": "",
     "dev": "concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgRed.bold,bgGreen.bold,bgCyan.bold\" \"npm run clean\" \"npm run dev:client\" \"npm run dev:server\" ",
-    "build": "NODE_ENV=production concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgRed.bold,bgGreen.bold,bgCyan.bold\" \"npm run clean\" \"npm run build:client\" \"npm run build:server\""
+    "build": "NODE_ENV=production concurrently -p \"[{name}]\" -n \"Clean,Client,Server\" -c \"bgRed.bold,bgGreen.bold,bgCyan.bold\" \"npm run clean\" \"npm run build:client\" \"npm run build:server\"",
+    "start": "NODE_ENV=production pm2 start src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "noat",
   "license": "ISC",
   "devDependencies": {
+    "apidoc": "^0.17.7",
     "babel-core": "^6.26.3",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-runtime": "^6.26.0",
     "concurrently": "^5.0.0",
-    "morgan": "^1.9.1",
     "nodemon": "^1.19.4",
     "parcel-bundler": "^1.12.4",
     "pug": "^2.0.4",
@@ -45,6 +47,9 @@
     "moment": "^2.24.0",
     "mongoose": "^5.7.5",
     "mongoose-unique-validator": "^2.0.3",
-    "path": "^0.12.7"
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "pm2": "^4.1.2",
+    "rotating-file-stream": "^1.4.6"
   }
 }

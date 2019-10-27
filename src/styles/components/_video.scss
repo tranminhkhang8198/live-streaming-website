@@ -25,14 +25,16 @@ $primary-foreground-color: #fff; // #fff default
 $primary-background-color: #2B333F;  // #2B333F default
 
 // Try changing to true
-$center-big-play-button: false; // true default
-
+$center-big-play-button: true; // true default
+// #video-hls{
+//   height: auto;
+// }
 .video-js {
   /* The base font size controls the size of everything, not just text.
      All dimensions use em-based sizes so that the scale along with the font size.
      Try increasing it to 15px and see what happens. */
   font-size: 10px;
-  
+  height: auto;
   /* The main font color changes the ICON COLORS as well as the text */
   color: $primary-foreground-color;
 }
@@ -122,4 +124,8 @@ $slider-bg-color: lighten($primary-background-color, 33%);
   /* Otherwise we'll rely on stacked opacities */
   background: rgba($slider-bg-color, 0.75);
 }
+
+// .vjs-default-skin{
+//   height: 100%;
+// }
 
