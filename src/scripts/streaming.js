@@ -13,15 +13,21 @@ import { directive } from "babel-types";
         html5: {
             hlsjsConfig: {
             // Put your hls.js config here
+            },
+            nativeAudioTracks:false,
+            nativeVideoTracks:false,
+            hls:{
+                debug:true,
+                overrideNative:true
             }
         },
         liveui: true
     };
 
     // setup beforeinitialize hook
-    videojs.Html5Hlsjs.addHook('beforeinitialize', (videojsPlayer, hlsjsInstance) => {
+    // videojs.Html5Hlsjs.addHook('beforeinitialize', (videojsPlayer, hlsjsInstance) => {
         // here you can interact with hls.js instance and/or video.js playback is initialized
-    });
+    // });
 
     var player = videojs('video-hls', options);
     // player.playsinline(true)
@@ -74,8 +80,9 @@ import { directive } from "babel-types";
         }
         const responseOj = await getServerURLs();    
         const URLS = responseOj.data.response[0].streaming.streamingUrl;
+        console.log(URLS)
         const FCTitle = (responseOj.data.response[0].fc1).toUpperCase()+" - "+(responseOj.data.response[0].fc2).toUpperCase();
-        // const FCTitle = "Man City - Man United"
+        // const FCTitle = URLS //"Man City - Man United"
         title.innerHTML = FCTitle
 
         ///create UI
@@ -89,7 +96,7 @@ import { directive } from "babel-types";
             }
             loadHLS(URLS[0])
         }else if(URLS.length==1){
-            const newEl = createServerElement(true,URLS[i])
+            const newEl = createServerElement(true,URLS[0])
             serverSelection.append(newEl)
             loadHLS(URLS[0])
         }
