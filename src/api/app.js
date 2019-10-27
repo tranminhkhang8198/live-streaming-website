@@ -32,6 +32,7 @@ const sportTypeRoute = require('./routes/sportTypeRoutes');
 const tournamentRoute = require('./routes/tournamentRoutes');
 const matchRoute = require('./routes/matchRoutes');
 const streamingRoute = require('./routes/streamingRoutes');
+const userRoute = require('./routes/userRoutes');
 
 // ROUTES
 app.use(mainRoute);
@@ -39,5 +40,6 @@ app.use('/api/sport-types', sportTypeRoute);
 app.use('/api/tournaments', tournamentRoute);
 app.use('/api/matches', matchRoute);
 app.use('/api/streamings', streamingRoute);
+app.use(userRoute);
 
 module.exports = app;
