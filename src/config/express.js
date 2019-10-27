@@ -46,8 +46,3 @@ app.use(Router);
 module.exports = {
     app,    
 };
-
-
-// app.get('/config', (req, res) => {
-//     res.json(global.gConfig);
-// });
