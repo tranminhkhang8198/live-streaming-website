@@ -2,6 +2,7 @@
 ## Contributors
 - [Nguyễn Minh Toàn (Noat)](https://github.com/nmtoan251998)
 - [Trần Minh Khang](https://github.com/tranminhkhang8198)
+- [Nguyễn Văn Lợi](https://github.com/vanloiidk)
 
 ## Prerequites
 1. [Node.Js v8.10.0+](https://nodejs.org/en/) - Core source code environment
