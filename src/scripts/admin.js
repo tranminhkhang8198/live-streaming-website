@@ -11,7 +11,7 @@ import axios from 'axios';
             const matches = await axios({
                 method: 'get',
                 // url: `http://${hostname}/api/matches`,
-                url: `/api/matches`,
+                url: `https://${hostname}/api/matches`,
             });
             
             return matches.data.response;
@@ -584,7 +584,7 @@ import axios from 'axios';
                     await axios({
                         method: 'delete',
                         // url: `http://${hostname}/api/matches/${matchId}`,
-                        url: `/api/matches/${matchId}`,
+                        url: `https://${hostname}/api/matches/${matchId}`,
 
                     })
                     window.alert('Successfully shutdown stream');
