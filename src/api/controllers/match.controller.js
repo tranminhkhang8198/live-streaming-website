@@ -138,7 +138,7 @@ exports.getAllMatch = async (req, res) => {
 
     const features = new APIFeature(
         Match.find()
-        .populate("streaming", "streamingUrl status streamingTitle -_id")
+        .populate("streaming", "-_id")
         .populate("type", "name -_id"),
         req.query,
         typeId
@@ -291,9 +291,28 @@ exports.createMatch = async (req, res) => {
 
     let streamingUrl = [];
 
-    streamingUrl = req.body.streamingUrl.split(",");
+    let streamingUrlFake = [];
 
+    streamingUrl = req.body.streamingUrl.split(",");
     queryStreaming['streamingUrl'] = streamingUrl;
+
+    // Create streaming url fake
+    let fc1 = "team1";
+    let fc2 = "team2"
+    if (req.body.fc1) {
+      fc1 = req.body.fc1;
+    }
+
+    if (req.body.fc2) {
+      fc2 = req.body.fc2;
+    }
+
+    for (var i = 0; i < streamingUrl.length; i++) {
+      const urlFake = fc1 + '-vs-' + fc2 + "-" + Date.now() + i;
+      streamingUrlFake.push(urlFake);
+    }
+
+    queryStreaming['streamingUrlFake'] = streamingUrlFake;
 
     const newStreaming = await Streaming.create(queryStreaming);
     const streaming_id = newStreaming._id;
@@ -473,8 +492,28 @@ exports.updateMatch = async (req, res) => {
 
       if (req.body.streamingUrl) {
         let streamingUrl = [];
+        let streamingUrlFake = [];
+
         streamingUrl = req.body.streamingUrl.split(",");
         queryStreaming['streamingUrl'] = streamingUrl;
+
+        // Create streaming url fake
+        let fc1 = "team1";
+        let fc2 = "team2"
+        if (req.body.fc1) {
+          fc1 = req.body.fc1;
+        }
+
+        if (req.body.fc2) {
+          fc2 = req.body.fc2;
+        }
+
+        for (var i = 0; i < streamingUrl.length; i++) {
+          const urlFake = fc1 + '-vs-' + fc2 + "-" + Date.now() + i;
+          streamingUrlFake.push(urlFake);
+        }
+
+        queryStreaming['streamingUrlFake'] = streamingUrlFake;
       }
 
       var updated_streaming = await Streaming.findByIdAndUpdate(
@@ -536,11 +575,11 @@ exports.deleteMatch = async (req, res) => {
 
       // REMOVE IMG FROM SERVER
       if (match.fc1ImgUrl != "") {
-        removeImg(match.fc1ImgUrl);
+        removeImg(match.fc1ImgUrl.split('/').slice(-1)[0]);
       }
 
       if (match.fc2ImgUrl != "") {
-        removeImg(match.fc2ImgUrl);
+        removeImg(match.fc2ImgUrl.split("/").slice(-1)[0]);
       }
     } else {
       return res.status(404).json({

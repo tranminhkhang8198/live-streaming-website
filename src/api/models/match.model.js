@@ -25,6 +25,10 @@ const matchSchema = new mongoose.Schema({
     type: String,
     default: 0
   },
+  score: {
+    type: String,
+    default: "0 - 0"
+  },
   time: {
     type: Date,
     default: Date.now()
