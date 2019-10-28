@@ -75,7 +75,7 @@ import axios from 'axios';
                                         </p>
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
-                                        <p>${item.match.score1} - ${item.match.score2}</p>
+                                        <p>${item.match.score}</p>
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
                                         <p class="text-right">
@@ -156,7 +156,7 @@ import axios from 'axios';
                                     </p>
                                 </div>
                                 <div class="col-2 d-flex justify-content-center align-items-center">
-                                    <p>${item.match.score1} - ${item.match.score2}</p>
+                                    <p>${item.match.score}</p>
                                 </div>
                                 <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                     <img 
@@ -293,14 +293,9 @@ import axios from 'axios';
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <input 
-                                            id="update-score1-${index}"
+                                            id="update-score-${index}"
                                             class="input-modify-score" 
-                                            value="${item.match.score1}">
-                                        -
-                                        <input
-                                            id="update-score2-${index}"
-                                            class="input-modify-score" 
-                                            value="${item.match.score2}">
+                                            value="${item.match.score}">
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-end">                                    
                                         <input
@@ -452,14 +447,9 @@ import axios from 'axios';
                                     </div>
                                     <div class="col-2 d-flex justify-content-center align-items-center">
                                         <input
-                                            id="update-score1-${index}"
+                                            id="update-score-${index}"
                                             class="input-modify-score" 
-                                            value="${item.match.score1}">
-                                        -
-                                        <input
-                                            id="update-score2-${index}"
-                                            class="input-modify-score" 
-                                            value="${item.match.score2}">
+                                            value="${item.match.score}">
                                     </div>
                                     <div class="col-5 d-flex flex-column justify-content-center align-items-center">
                                         <img
@@ -607,8 +597,9 @@ import axios from 'axios';
                     fc2 = document.querySelector(`#update-fc2-name-${index}`).value, 
                     fc1Img = '',
                     fc2Img = '',
-                    score1 = document.querySelector(`#update-score1-${index}`).value, 
-                    score2 = document.querySelector(`#update-score2-${index}`).value, 
+                    // score1 = document.querySelector(`#update-score1-${index}`).value, 
+                    // score2 = document.querySelector(`#update-score2-${index}`).value, 
+                    score = document.querySelector(`#update-score-${index}`).value, 
                     title = document.querySelector(`#update-title-${index}`).value, 
                     tournament = document.querySelector(`#update-tournament-name-${index}`).value, 
                     tournamentImg = '',
@@ -645,8 +636,7 @@ import axios from 'axios';
                 updateStreaming.set('streamingUrl', streamingUrls);
                 updateStreaming.set('fc1', fc1);
                 updateStreaming.set('fc2', fc2);
-                updateStreaming.set('score1', score1);
-                updateStreaming.set('score2', score2);
+                updateStreaming.set('score', score);
 
                 if (typeName === 'football') {
                     fc1Img = fc1ImgEl.value
@@ -749,7 +739,7 @@ import axios from 'axios';
                     <td> 
                         <span class="badge ${streamingStatus.class} p-2">${streamingStatus.html}</span>
                     </td>
-                    <td>${item.match.score1} - ${item.match.score2}</td>
+                    <td>${item.match.score}</td>
                     <td>
                         <div class="dropdown"><button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdown-action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">
@@ -769,7 +759,7 @@ import axios from 'axios';
                     <td> 
                         <span class="badge ${streamingStatus.class} p-2">${streamingStatus.html}</span>
                     </td>
-                    <td>${item.match.score1} - ${item.match.score2}</td>
+                    <td>${item.match.score}</td>
                     <td>
                         <div class="dropdown"><button class="btn btn-sm btn-secondary dropdown-toggle" id="dropdown-action" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Action</button>
                             <div class="dropdown-menu" aria-labelledby="dropdown-action">

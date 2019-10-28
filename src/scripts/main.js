@@ -327,7 +327,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                         <p class="streaming-card-team">${item.match.fc1}</p>
                     </div>
                     <p class="col-1 col-lg-2 d-flex align-items-center justify-content-center streaming-card-score-display">
-                        ${item.match.score1} - ${item.match.score2}
+                        ${item.match.score}
                     </p>
                     <div class="col-3 col-lg-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
                         <p class="streaming-card-team">${item.match.fc2}</p>
@@ -341,11 +341,4 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
     const streamingOutput = innerStreamingBlock(liveStreamingMatches);
     const streamingEl = document.querySelector('.streaming-videos-container');
     streamingEl.innerHTML = streamingOutput;
-
-    const modifyStreamingMatches = (index, content) => {
-        const streamingCards = document.querySelectorAll('.streaming-card-score-display');
-
-        streamingCards[index].textContent = content;
-    }
-    // modifyStreamingMatches(1, 'hello');
 })();
