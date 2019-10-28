@@ -2,10 +2,30 @@ import "babel-polyfill";
 import moment from "moment";
 import axios from "axios";
 
+
 (async () => {
+    const fconfig = window.CONFIG
+
     const newStreaming = new FormData();
-    const hostname = 'localhost:5000';
-    let streamingHostnameVal = '192.168.3.197';
+    const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
+
+    const getConfigFile = async () => {
+        try {
+            const responseData = await axios({
+                method: 'get',
+                url: `http://${hostname}/config`
+            })
+            return responseData;
+        } catch (error) {
+            return error.response;;
+        }                
+    }
+    const gconfig = await getConfigFile();
+    console.log(gconfig.data);
+
+    // const streamingHostname = 'localhost';
+    let streamingHostnameVal = gconfig.data.ip;
+    let streamingHostPortVal = gconfig.data.port;
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -162,7 +182,7 @@ import axios from "axios";
         streamingKey.value = currentTimeInUnix;
         streamingHostname.value = streamingHostnameVal;
         streamingServerUrl.value = `rtmp://${streamingHostnameVal}/live`;
-        streamingLiveUrl.value = `http://${streamingHostnameVal}:3002/live/${currentTimeInUnix}/index.m3u8`;
+        streamingLiveUrl.value = `http://${streamingHostnameVal}:${streamingHostPortVal}/live/${currentTimeInUnix}/index.m3u8`;
     
         streamingKey.removeAttribute('disabled');
         streamingHostname.removeAttribute('disabled');
@@ -170,11 +190,11 @@ import axios from "axios";
         addMoreUrlBtn.removeAttribute('disabled');
 
         streamingKey.addEventListener('keyup', function(event) {
-            streamingLiveUrl.value = `http://${streamingHostname.value}:3002/live/${this.value}/index.m3u8`;
+            streamingLiveUrl.value = `http://${streamingHostname.value}:${streamingHostPortVal}/live/${this.value}/index.m3u8`;
         })
 
         streamingHostname.addEventListener('keyup', function(event) {
-            streamingLiveUrl.value = `http://${this.value}:3002/live/${streamingKey.value}/index.m3u8`;
+            streamingLiveUrl.value = `http://${this.value}:${streamingHostPortVal}/live/${streamingKey.value}/index.m3u8`;
             streamingServerUrl.value = `rtmp://${this.value}/live`;
         })            
     })
@@ -184,7 +204,7 @@ import axios from "axios";
 
         const streamingVideoKey = streamingKey.value;
         
-        const baseSource = `http://${streamingHostnameVal}:3002/live/${streamingVideoKey}/index.m3u8`;
+        const baseSource = `http://${streamingHostnameVal}:${streamingHostPortVal}/live/${streamingVideoKey}/index.m3u8`;
         streamingVideo(baseSource);
     })
         
@@ -277,7 +297,6 @@ import axios from "axios";
             newStreaming.set('fc2', player2NameVal);
         }
         
-        debugger;
         if (isValidInput) {
             try {
                 const createNewMatchResponse = await axios({

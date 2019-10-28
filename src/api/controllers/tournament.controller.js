@@ -1,4 +1,4 @@
-const Tournament = require("./../models/tournamentModel");
+const Tournament = require("./../models/tournament.model");
 const APIFeatures = require("./../utils/apiFeatures");
 
 function removeImg(imgUrl) {

@@ -2,7 +2,9 @@ import 'babel-polyfill';
 import axios from 'axios';
 import moment from 'moment';
 
-const hostname = `localhost:5000`;
+const fconfig = window.CONFIG
+
+const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
 
 (async () => {
     const getFootballMatches = async () => {
@@ -48,7 +50,7 @@ const hostname = `localhost:5000`;
             todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');                
+                const date = moment(data.match.time).format('MMM Do');               
 
                 if (data.match.streaming.status == false) {
                     todayFootballElOutput += `
@@ -118,7 +120,7 @@ const hostname = `localhost:5000`;
             tomorrowFootballElOutput  += `<h4 class="text-center">Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
 
                 if (data.match.streaming.status == false) {
                     tomorrowFootballElOutput += `
@@ -198,7 +200,7 @@ const hostname = `localhost:5000`;
             todayTennisElOutput = `<h4>Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
 
                 if (data.match.streaming.status == false) {
                     todayTennisElOutput += `
@@ -246,7 +248,7 @@ const hostname = `localhost:5000`;
             tomorrowTennisElOutput = `<h4>Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
                 
                 if (data.match.streaming.status == false) {
                     tomorrowTennisElOutput += `

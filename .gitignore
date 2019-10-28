@@ -11,8 +11,8 @@ dist
 .package-lock.json
 
 # remove log files from committed
-*.log
-doc/*
+*.logs
+logs
 
 # ignore uploads folder
-src/uploads
+src/uploads/*

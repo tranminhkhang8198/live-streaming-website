@@ -1,4 +1,4 @@
-const SportType = require("./../models/sportTypeModel");
+const SportType = require("./../models/sportType.model");
 
 
 exports.getAllSportType = async (req, res) => {

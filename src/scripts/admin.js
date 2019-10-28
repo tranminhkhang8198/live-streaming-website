@@ -3,13 +3,14 @@ import moment from 'moment';
 import axios from 'axios';
 
 (async () => {
-    const hostname = `localhost:5000`;
+    const fconfig = window.CONFIG
+    const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
 
     const getMatches = async () => {
         try {
             const matches = await axios({
                 method: 'get',
-                url: '/api/matches',
+                url: `http://${hostname}/api/matches`,
             });
             
             return matches.data.response;
@@ -18,27 +19,6 @@ import axios from 'axios';
         }
     }
     const matches = await getMatches();
-
-    const addEventToRemoveMatchData = ({ selectors }) => {
-        selectors.forEach(selector => {   
-            selector.addEventListener('click', async event => {
-                event.preventDefault();
-
-                const matchId = event.target.dataset.matchId;
-
-                try {
-                    const removeItemResponse = await axios({
-                        method: 'delete',
-                        url: `http://${hostname}/api/matches/${matchId}`,
-                    })
-                    window.alert('Successfully shutdown stream');
-                    window.location = '/admin';
-                } catch (error) {
-                    window.alert('Failed to shutdown stream, please re-try for several times!');
-                }                
-            })
-        })
-    }
 
     const innerViewDataInModal = (item, index) => {
         item.match.time = moment(item.match.time).format('YYYY-MM-DD, HH:mm');
@@ -591,6 +571,28 @@ import axios from 'axios';
         return output;
     }      
 
+    const deleteMatchData = () => {
+        const deleteBtns = document.querySelectorAll('.remove-match-items')
+        deleteBtns.forEach(selector => {   
+            selector.addEventListener('click', async event => {
+                event.preventDefault();
+
+                const matchId = event.target.dataset.matchId;
+
+                try {
+                    await axios({
+                        method: 'delete',
+                        url: `http://${hostname}/api/matches/${matchId}`,
+                    })
+                    window.alert('Successfully shutdown stream');
+                    window.location = '/admin';
+                } catch (error) {
+                    window.alert('Failed to shutdown stream, please re-try for several times!');
+                }                
+            })
+        })
+    }
+
     const updateMatchData = () => {
         const submitBtns = document.querySelectorAll('.btn-submit');
 
@@ -601,7 +603,9 @@ import axios from 'axios';
                 let fc1 = document.querySelector(`#update-fc1-name-${index}`).value, 
                     fc2 = document.querySelector(`#update-fc2-name-${index}`).value, 
                     fc1Img = '',
-                    fc2Img = '', 
+                    fc2Img = '',
+                    score1 = document.querySelector(`#update-score1-${index}`).value, 
+                    score2 = document.querySelector(`#update-score2-${index}`).value, 
                     title = document.querySelector(`#update-title-${index}`).value, 
                     tournament = document.querySelector(`#update-tournament-name-${index}`).value, 
                     tournamentImg = '',
@@ -618,8 +622,9 @@ import axios from 'axios';
 
                 const streamingStatusEls = document.querySelectorAll(`.update-streaming-status-${index}`);
                 streamingStatusEls.forEach(el => {                    
-                    (el.checked === true) ? streamingStatus = el.value : console.log('');
-                    streamingStatus === "true" ? streamingStatus = true : streamingStatus = false;
+                    if (el.checked === true) {
+                        streamingStatus = el.value;
+                    }
                 })
 
                 time = moment(time).format();
@@ -637,6 +642,8 @@ import axios from 'axios';
                 updateStreaming.set('streamingUrl', streamingUrls);
                 updateStreaming.set('fc1', fc1);
                 updateStreaming.set('fc2', fc2);
+                updateStreaming.set('score1', score1);
+                updateStreaming.set('score2', score2);
 
                 if (typeName === 'football') {
                     fc1Img = fc1ImgEl.value
@@ -648,8 +655,8 @@ import axios from 'axios';
                         : document.querySelector(`#update-fc2-img-container-${index}`)
                             .src.replace(/.+uploads\//, '').replace(/%20/g, ' ');
 
-                    updateStreaming.set('fc2Img', fc1Img);
-                    updateStreaming.set('fc1Img', fc2Img);
+                    updateStreaming.set('fc1Img', fc1Img);
+                    updateStreaming.set('fc2Img', fc2Img);
                 } else {
                     tournamentImg = tournamentImgEl.value
                         ? tournamentImgEl.files[0]
@@ -660,7 +667,7 @@ import axios from 'axios';
                 }
 
                 try {
-                    const updateStreamingResponse = await axios({
+                    const updateResponse = await axios({
                         method: 'PATCH',
                         url: `/api/matches/${matchId}`,
                         config: {
@@ -670,9 +677,11 @@ import axios from 'axios';
                         },
                         data: updateStreaming
                     })
-                    console.log(updateStreamingResponse);
+
+                    window.alert('Updated');
+                    window.location = '/admin';
                 } catch (error) {
-                    console.log(error.response);
+                    
                 }
             })
         })
@@ -785,15 +794,14 @@ import axios from 'axios';
             showPrevious: false,
             showNext: false,
             formatResult: function(data) {                
-                renderModal(data);
-                updateMatchData();
+                renderModal(data);                
             },
             callback: function (data, pagination) {
                 const html = templateTableData(data);
-                $('.table-pagination-data').html(html);
+                $('.table-pagination-data').html(html);                
 
-                // add remove data events to Shutdown button everytime re-render data table
-                addEventToRemoveMatchData({ selectors: document.querySelectorAll('.remove-match-items') });                
+                updateMatchData();
+                deleteMatchData();
             }
         })
     }

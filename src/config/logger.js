@@ -9,7 +9,7 @@ module.exports = app => {
     if (env === 'development') {
         app.use(morgan('dev'));
     } else {
-        const logDirectory = path.join(__dirname, '../../log');
+        const logDirectory = path.join(__dirname, '../../logs');
         // ensure log directory exists
         fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 

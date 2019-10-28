@@ -1,4 +1,4 @@
-const Streaming = require("./../models/streamingModel");
+const Streaming = require("./../models/streaming.model");
 
 
 exports.getAllStreaming = async (req, res) => {

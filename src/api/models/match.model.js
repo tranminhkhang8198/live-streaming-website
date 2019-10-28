@@ -17,9 +17,13 @@ const matchSchema = new mongoose.Schema({
   fc2: {
     type: String
   },
-  score: {
+  score1: {
     type: String,
-    default: "0 - 0"
+    default: 0
+  },
+  score2: {
+    type: String,
+    default: 0
   },
   time: {
     type: Date,

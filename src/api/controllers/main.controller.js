@@ -1,5 +1,6 @@
 const path = require('path');
 const httpStatus = require('http-status');
+const { liveServer } = require(path.join(__dirname, '../../config/vars'));
 
 module.exports.homePage = (req, res, next) => {
     try {
@@ -36,6 +37,15 @@ module.exports.createStreamingPage = (req, res, next) => {
         const pathToFile = path.join(__dirname, '../../../dist/createStreaming.html');
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.globalConfig = (req, res, next) => {
+    try {
+        const { ip, port } = liveServer;
+        return res.status(httpStatus.OK).json({ ip, port }).end();
     } catch (error) {
         next(error);
     }
