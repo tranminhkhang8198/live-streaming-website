@@ -7,7 +7,7 @@ const {
     env
 } = require('./config/vars');
 
-const server = require('http').createServer(app);
+const server = require('https').createServer(app);
 
 // connect to mongodb
 require('./config/mongoose').connect();
