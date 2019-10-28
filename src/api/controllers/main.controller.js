@@ -44,8 +44,8 @@ module.exports.createStreamingPage = (req, res, next) => {
 
 module.exports.globalConfig = (req, res, next) => {
     try {
-        const { ip, port } = liveServer;
-        return res.status(httpStatus.OK).json({ ip, port }).end();
+        const { port } = liveServer;
+        return res.status(httpStatus.OK).json({ port }).end();
     } catch (error) {
         next(error);
     }

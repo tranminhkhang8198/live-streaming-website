@@ -13,6 +13,5 @@ module.exports = {
     },
     liveServer: {
         ip: process.env.LIVE_SERVER_IP,
-        port: process.env.LIVE_SERVER_PORT
     }
 };
