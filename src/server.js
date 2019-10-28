@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 const {
     app,
 } = require('./config/express');
@@ -7,7 +9,12 @@ const {
     env
 } = require('./config/vars');
 
-const server = require('http').createServer(app);
+const options = {
+    cert: fs.readFileSync('/etc/letsencrypt/live/mystream.noat.me/fullchain.pem'),
+    key: fs.readFileSync('/etc/letsencrypt/live/mystream.noat.me/privkey.pem'),
+}
+
+const server = require('http').createServer(options, app);
 
 // connect to mongodb
 require('./config/mongoose').connect();
