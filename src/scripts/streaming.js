@@ -71,7 +71,7 @@ import { directive } from "babel-types";
                 const responseData = await axios({
                     method: 'get',
                     // url: `http://${ApiHostName}:${ApiPort}/api/matches/${matchID}`
-                    url: `https://${ApiHostName}:${ApiPort}/api/matches/${matchID}`
+                    url: `/api/matches/${matchID}`
                 })
                 // console.log(responseData)
                 return responseData;

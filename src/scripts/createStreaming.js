@@ -14,7 +14,7 @@ import axios from "axios";
             const responseData = await axios({
                 method: 'get',
                 // url: `http://${hostname}/config`
-                url: `https://${hostname}/config`
+                url: `/config`
             })
             return responseData;
         } catch (error) {
@@ -86,7 +86,7 @@ import axios from "axios";
             const streamingTypes = await axios({
                 method: 'get',
                 // url: `http://${hostname}/api/sport-types`
-                url: `https://${hostname}/api/sport-types`
+                url: `/api/sport-types`
             })
 
             return streamingTypes.data;
@@ -304,7 +304,7 @@ import axios from "axios";
                 const createNewMatchResponse = await axios({
                     method: 'post',
                     // url: `http://${hostname}/api/matches`,
-                    url: `https://${hostname}/api/matches`,
+                    url: `/api/matches`,
                     config: {
                         headers: { 
                             'Content-Type': 'multipart/form-data' 
