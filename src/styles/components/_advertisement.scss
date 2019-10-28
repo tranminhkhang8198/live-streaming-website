@@ -43,3 +43,12 @@
 .ad .advertisement{
     width: 100%;
 }
+
+.navbar-block .advertisement {
+    width: 100%;
+
+    @include breakpoint(tablet) {
+        width: 100%;
+        margin-left: 0%;
+    }
+}

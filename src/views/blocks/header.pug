@@ -1,10 +1,22 @@
+//- navbar inline
 nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container
     ul.navbar-nav.navbar-logo
         li.nav-item.hvr-bounce-in
             a.navbar-brand(href='/')
-                img.navbar-brand-logo(src="../images/logo.png" style="width: 10rem;")    
+                img.navbar-brand-logo(src="../images/logo.png" style="width: 10rem;")
         li.nav-item
             include ../components/_advertisement
+
+//- navbar-block
+//- nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container.navbar-block
+//-     ul
+//-         li.nav-item.hvr-bounce-in
+//-             a.navbar-brand(href='/')
+//-                 img.navbar-brand-logo(src="../images/logo.png" style="width: 20rem;")
+//- nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container.navbar-block
+//-     ul
+//-         li.nav-item
+//-             include ../components/_advertisement
 
 .header.position-sticky(style="top: -1px; z-index: 10")
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.navbar-main
