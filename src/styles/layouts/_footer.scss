@@ -1,3 +1,19 @@
 .footer {
-   background-color: $color-secondary;
+   background: #536976;  /* fallback for old browsers */
+   background: -webkit-linear-gradient(to right, #292E49, #536976);  /* Chrome 10-25, Safari 5.1-6 */
+   background: linear-gradient(to right, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+   height: 10rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: flex-end;
+
+   color: $color-white;
+   font-size: $font-size-xxs;
+
+   &-content {
+      width: 50%;
+      margin-right: 2rem;      
+   }
 }
