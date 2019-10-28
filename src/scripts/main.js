@@ -50,7 +50,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');                
+                const date = moment(data.match.time).format('MMM Do');               
 
                 if (data.match.streaming.status == false) {
                     todayFootballElOutput += `
@@ -120,7 +120,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             tomorrowFootballElOutput  += `<h4 class="text-center">Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
 
                 if (data.match.streaming.status == false) {
                     tomorrowFootballElOutput += `
@@ -200,7 +200,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             todayTennisElOutput = `<h4>Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
 
                 if (data.match.streaming.status == false) {
                     todayTennisElOutput += `
@@ -248,7 +248,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             tomorrowTennisElOutput = `<h4>Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
                 
                 if (data.match.streaming.status == false) {
                     tomorrowTennisElOutput += `
