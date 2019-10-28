@@ -1,9 +1,11 @@
 # Sport streaming website
 ## Server information
 ### Web server
+- DOMAIN: stream.noat.me
 - IP: 45.77.203.83
 - PORT: 5000
 ### Streaming server
+- DOMAIN: server.mygoaltv.top
 - IP: 144.202.13.69
 - PORT: 3002
 

@@ -70,7 +70,8 @@ import { directive } from "babel-types";
             try {
                 const responseData = await axios({
                     method: 'get',
-                    url: `http://${ApiHostName}:${ApiPort}/api/matches/${matchID}`
+                    // url: `http://${ApiHostName}:${ApiPort}/api/matches/${matchID}`
+                    url: `/api/matches/${matchID}`
                 })
                 // console.log(responseData)
                 return responseData;

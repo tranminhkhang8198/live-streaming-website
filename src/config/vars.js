@@ -13,5 +13,6 @@ module.exports = {
     },
     liveServer: {
         ip: process.env.LIVE_SERVER_IP,
+        domain: process.env.LIVE_SERVER_DOMAIN,
     }
 };
