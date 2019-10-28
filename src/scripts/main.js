@@ -11,7 +11,8 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
         try {
             const matches = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/matches`,
+                // url: `http://${hostname}/api/matches`,
+                url: `/api/matches`,
                 params: {
                     type: 'football'
                 }
@@ -27,7 +28,8 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
         try {
             const matches = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/matches`,
+                // url: `http://${hostname}/api/matches`,
+                url: `/api/matches`,
                 params: {
                     type: 'tennis'
                 }
@@ -40,8 +42,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
     }
     
     const footballMatches = await getFootballMatches();
-    const tennisMatches = await getTennisMatches();
-    console.log({ footballMatches });
+    const tennisMatches = await getTennisMatches();    
 
     const innerFootballBlock = (data) => {        
         const { today, tomorrow } = data;

@@ -13,7 +13,8 @@ import axios from "axios";
         try {
             const responseData = await axios({
                 method: 'get',
-                url: `http://${hostname}/config`
+                // url: `http://${hostname}/config`
+                url: `/config`
             })
             return responseData;
         } catch (error) {
@@ -84,7 +85,8 @@ import axios from "axios";
         try {
             const streamingTypes = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/sport-types`
+                // url: `http://${hostname}/api/sport-types`
+                url: `/api/sport-types`
             })
 
             return streamingTypes.data;
@@ -301,7 +303,8 @@ import axios from "axios";
             try {
                 const createNewMatchResponse = await axios({
                     method: 'post',
-                    url: `http://${hostname}/api/matches`,
+                    // url: `http://${hostname}/api/matches`,
+                    url: `/api/matches`,
                     config: {
                         headers: { 
                             'Content-Type': 'multipart/form-data' 
