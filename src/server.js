@@ -7,12 +7,10 @@ const {
     env
 } = require('./config/vars');
 
-const server = require('https').createServer(app);
-
 // connect to mongodb
 require('./config/mongoose').connect();
 
-server.listen(port, () => console.log(`Server is started on port: ${port} (${env})`));
+app.listen(port, () => console.log(`Server is started on port: ${port} (${env})`));
 
 /**
  * App instance - For testing purposes
@@ -20,5 +18,4 @@ server.listen(port, () => console.log(`Server is started on port: ${port} (${env
  */
 module.exports = {
     app,
-    server,
 };
