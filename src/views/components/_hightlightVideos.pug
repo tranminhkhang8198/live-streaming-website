@@ -1,73 +1,96 @@
 .sport-type-container.text-center
     span.sport-type Highlight videos
-    .mb-3
-    .highlight-box-containers.slider-for
-        a(href="https://youtube.com").highlight-box
+    .mb-3    
+    // khi thêm vào 1 highlight video thì phải thêm 3 lần
+    // đừng thay đổi nội dung của line phía dưới
+    .highlight-box-containers.slider-for 
+        // thay đổi các nội dung sau dấu | ở các line phía dưới
+        // nhớ tăng thứ tự của nội dung trong a(href=/highlight-videos/x)
+        // x tăng dần với mỗi thẻ được thêm vào
+        a(href="/highlight-videos/1").highlight-box
             .highlight-thumbnail
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match German - Italy
-                p.highlight-title-tour Laliga 2020 cup                
-        a(href="https://youtube.com").highlight-box
+                p.highlight-title-match 
+                    | German - Italy
+                p.highlight-title-tour 
+                    | Laliga 2020 cup                
+        a(href="/highlight-videos/2").highlight-box
             .highlight-thumbnail                        
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match France - America
-                p.highlight-title-tour Laliga 2020 cup                
-        a(href="https://youtube.com").highlight-box
+                p.highlight-title-match 
+                    | France - America
+                p.highlight-title-tour 
+                    | Laliga 2020 cup                
+        a(href="/highlight-videos/3").highlight-box
             .highlight-thumbnail                        
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match Malaysia - Liverpool
-                p.highlight-title-tour Laliga 2020 cup                
-        a(href="https://youtube.com").highlight-box
+                p.highlight-title-match 
+                    | Malaysia - Liverpool
+                p.highlight-title-tour 
+                    | Laliga 2020 cup                
+        a(href="/highlight-videos/4").highlight-box
             .highlight-thumbnail                        
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match Vietnam - UAE
-                p.highlight-title-tour Laliga 2020 cup  
+                p.highlight-title-match 
+                    | Vietnam - UAE
+                p.highlight-title-tour 
+                    | Laliga 2020 cup  
 
+    // đừng tác động vào line dưới
     .highlight-box-containers.slider-nav
-        a(href="https://youtube.com").highlight-box
+        // thay đổi các nội dung sau dấu | ở các line phía dưới
+        // nhớ tăng thứ tự của nội dung trong a(href=/highlight-videos/x)
+        // x tăng dần với mỗi thẻ được thêm vào
+        a(href="/highlight-videos/1").highlight-box
             .highlight-thumbnail
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match German - Italy
-                p.highlight-title-tour Laliga 2020 cup                
-        a(href="https://youtube.com").highlight-box
+                p.highlight-title-match 
+                    | German - Italy
+                p.highlight-title-tour 
+                    | Laliga 2020 cup                
+        a(href="/highlight-videos/2").highlight-box
             .highlight-thumbnail
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match France - America
-                p.highlight-title-tour Laliga 2020 cup                
-        a(href="https://youtube.com").highlight-box
+                p.highlight-title-match 
+                    | France - America
+                p.highlight-title-tour 
+                    | Laliga 2020 cup
+        a(href="/highlight-videos/3").highlight-box
             .highlight-thumbnail                        
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match Malaysia - Liverpool
-                p.highlight-title-tour Laliga 2020 cup                
-        a(href="https://youtube.com").highlight-box
+                p.highlight-title-match 
+                    | Malaysia - Liverpool
+                p.highlight-title-tour 
+                    | Laliga 2020 cup                
+        a(href="/highlight-videos/4").highlight-box
             .highlight-thumbnail                        
                 .highlight-play-button.pulse
                 .highlight-play-button
@@ -77,65 +100,58 @@
                 p.highlight-title-match Vietnam - UAE
                 p.highlight-title-tour Laliga 2020 cup
 
-    .highlight-box-containers-responsive
+    // đừng tác động vào line dưới
+    .highlight-box-containers-responsive        
         .row.highlight-box-containers
+            // thay đổi các nội dung sau dấu | ở các line phía dưới
+            // nhớ tăng thứ tự của nội dung trong a(href=/highlight-videos/x)
+            // x tăng dần với mỗi thẻ được thêm vào
             .col-6.highlight-box
-                a(href="https://youtube.com")
+                a(href="/highlight-videos/1")
                     .highlight-thumbnail
                         .highlight-play-button.pulse
                         .highlight-play-button
                             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                                 polygon(points="40,30 65,50 40,70")
                     .highlight-title
-                        p.highlight-title-match German - Italy
-                        p.highlight-title-tour Laliga 2020 cup    
+                        p.highlight-title-match 
+                            | German - Italy
+                        p.highlight-title-tour 
+                            | Laliga 2020 cup    
             .col-6.highlight-box
-                a(href="https://youtube.com")
+                a(href="/highlight-videos/2")
                     .highlight-thumbnail                        
                         .highlight-play-button.pulse
                         .highlight-play-button
                             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                                 polygon(points="40,30 65,50 40,70")
                     .highlight-title
-                        p.highlight-title-match France - America
-                        p.highlight-title-tour Laliga 2020 cup                
+                        p.highlight-title-match 
+                            | France - America
+                        p.highlight-title-tour 
+                            | Laliga 2020 cup                
             .col-6.highlight-box
-                a(href="https://youtube.com")
+                a(href="/highlight-videos/3")
                     .highlight-thumbnail                        
                         .highlight-play-button.pulse
                         .highlight-play-button
                             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                                 polygon(points="40,30 65,50 40,70")
                     .highlight-title
-                        p.highlight-title-match Malaysia - Liverpool
-                        p.highlight-title-tour Laliga 2020 cup
+                        p.highlight-title-match 
+                            | Malaysia - Liverpool
+                        p.highlight-title-tour 
+                            | Laliga 2020 cup
             .col-6.highlight-box
-                a(href="https://youtube.com")
+                a(href="/highlight-videos/4")
                     .highlight-thumbnail
                         .highlight-play-button.pulse
                         .highlight-play-button
                             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                                 polygon(points="40,30 65,50 40,70")
                     .highlight-title
-                        p.highlight-title-match German - Italy
-                        p.highlight-title-tour Laliga 2020 cup    
-            .col-6.highlight-box
-                a(href="https://youtube.com")
-                    .highlight-thumbnail                        
-                        .highlight-play-button.pulse
-                        .highlight-play-button
-                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
-                                polygon(points="40,30 65,50 40,70")
-                    .highlight-title
-                        p.highlight-title-match France - America
-                        p.highlight-title-tour Laliga 2020 cup
-            .col-6.highlight-box
-                a(href="https://youtube.com")
-                    .highlight-thumbnail
-                        .highlight-play-button.pulse
-                        .highlight-play-button
-                            svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
-                                polygon(points="40,30 65,50 40,70")
-                    .highlight-title
-                        p.highlight-title-match Malaysia - Liverpool
-                        p.highlight-title-tour Laliga 2020 cup
+                        p.highlight-title-match 
+                            | German - Italy
+                        p.highlight-title-tour 
+                            | Laliga 2020 cup    
+            

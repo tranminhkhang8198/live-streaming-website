@@ -6,6 +6,7 @@ const {
     watchStreamingPage,
     createStreamingPage,
     globalConfig,
+    renderHighlightVideos
 } = require('../controllers/main.controller');
 
 /**
@@ -60,5 +61,15 @@ Router.route('/admin').get(adminPage);
 * @apiSuccess (Ok 200) {String} port - Port of live-streaming server
 */
 Router.route('/config').get(globalConfig);
+
+/**
+* @api {get} /highlight_videos/:id
+* @apiDescription Render highlight video based on id
+* @apiVersion 1.0.0
+* @apiName Hightlight videos
+* @apiGroup Main
+* @apiPermission Public
+*/
+Router.route('/highlight-videos/:id').get(renderHighlightVideos);
 
 module.exports = Router;
