@@ -12,7 +12,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             const matches = await axios({
                 method: 'get',
                 // url: `http://${hostname}/api/matches`,
-                url: `https://${hostname}/api/matches`,
+                url: `//${hostname}/api/matches`,
                 params: {
                     type: 'football'
                 }
@@ -29,7 +29,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             const matches = await axios({
                 method: 'get',
                 // url: `http://${hostname}/api/matches`,
-                url: `https://${hostname}/api/matches`,
+                url: `//${hostname}/api/matches`,
                 params: {
                     type: 'tennis'
                 }
