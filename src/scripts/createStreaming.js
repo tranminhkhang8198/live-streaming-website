@@ -184,7 +184,7 @@ import axios from "axios";
         streamingKey.value = currentTimeInUnix;
         streamingHostname.value = streamingHostnameVal;
         streamingServerUrl.value = `rtmp://${streamingHostnameVal}/live`;
-        streamingLiveUrl.value = `http://${streamingHostnameVal}:${streamingHostPortVal}/live/${currentTimeInUnix}/index.m3u8`;
+        streamingLiveUrl.value = `https://${streamingHostnameVal}:${streamingHostPortVal}/live/${currentTimeInUnix}/index.m3u8`;
     
         streamingKey.removeAttribute('disabled');
         streamingHostname.removeAttribute('disabled');
@@ -192,11 +192,11 @@ import axios from "axios";
         addMoreUrlBtn.removeAttribute('disabled');
 
         streamingKey.addEventListener('keyup', function(event) {
-            streamingLiveUrl.value = `http://${streamingHostname.value}:${streamingHostPortVal}/live/${this.value}/index.m3u8`;
+            streamingLiveUrl.value = `https://${streamingHostname.value}:${streamingHostPortVal}/live/${this.value}/index.m3u8`;
         })
 
         streamingHostname.addEventListener('keyup', function(event) {
-            streamingLiveUrl.value = `http://${this.value}:${streamingHostPortVal}/live/${streamingKey.value}/index.m3u8`;
+            streamingLiveUrl.value = `https://${this.value}:${streamingHostPortVal}/live/${streamingKey.value}/index.m3u8`;
             streamingServerUrl.value = `rtmp://${this.value}/live`;
         })            
     })
@@ -206,7 +206,7 @@ import axios from "axios";
 
         const streamingVideoKey = streamingKey.value;
         
-        const baseSource = `http://${streamingHostnameVal}:${streamingHostPortVal}/live/${streamingVideoKey}/index.m3u8`;
+        const baseSource = `https://${streamingHostnameVal}:${streamingHostPortVal}/live/${streamingVideoKey}/index.m3u8`;
         streamingVideo(baseSource);
     })
         
