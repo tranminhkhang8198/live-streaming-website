@@ -6,42 +6,20 @@ exports.login = async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
 
-        const user = await User.findOne({
-            username: username,
-            password: password
-        });
-
-        if (user) {
+        if (username === 'admin' && password === 'dWkyZjg5M2hmMjMyb2ZuMzAyM2Zw') {
+            const user = {
+                username, password
+            }
             // store user session
-            req.session.user = user;
+            req.session.user = user;            
 
-            // redirect to admin page
-            const pathToFile = path.join(__dirname, '../');
-            return res.status(httpStatus.OK)
-                .sendFile(pathToFile);
-        }
+            return res.redirect('/admin');
+        }        
 
         // redirect to login page
-        const pathToFile = path.join(__dirname, '../');
-        return res.status(httpStatus.OK)
-            .sendFile(pathToFile)
+        return res.redirect('/auth/login');
 
-    } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: err
-        });
+    } catch (err) {        
+        return res.redirect('/');
     }
 };
-
-
-exports.admin = async (req, res) => {
-    if (!req.session.user) {
-        return res.redirect(__dirname, '../../views/index.pug');
-    }
-
-    // Redirect to admin page
-    const pathToFile = path.join(__dirname, '../');
-    return res.status(httpStatus.OK)
-        .sendFile(pathToFile);
-}

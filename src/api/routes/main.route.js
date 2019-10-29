@@ -6,7 +6,8 @@ const {
     watchStreamingPage,
     createStreamingPage,
     globalConfig,
-    renderHighlightVideos
+    renderHighlightVideos,
+    renderLoginPage,
 } = require('../controllers/main.controller');
 
 /**
@@ -71,5 +72,7 @@ Router.route('/config').get(globalConfig);
 * @apiPermission Public
 */
 Router.route('/highlight-videos/:id').get(renderHighlightVideos);
+
+Router.route('/auth/login').get(renderLoginPage);
 
 module.exports = Router;

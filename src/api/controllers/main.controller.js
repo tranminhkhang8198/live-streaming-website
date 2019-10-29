@@ -14,6 +14,10 @@ module.exports.homePage = (req, res, next) => {
 
 module.exports.adminPage = (req, res, next) => {
     try {
+        if (!req.session.user) {
+            return res.redirect('/');
+        }            
+
         const pathToFile = path.join(__dirname, '../../../dist/admin.html');
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
@@ -55,6 +59,16 @@ module.exports.renderHighlightVideos = (req, res, next) => {
     try {
         const id = req.params.id;
         const pathToFile = path.join(__dirname, `../../../dist/highlight-videos-${id}.html`);
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports.renderLoginPage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, `../../../dist/login.html`);
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
     } catch (error) {
