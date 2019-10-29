@@ -7,6 +7,7 @@ const path = require('path');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
 const gzip = require('compression');
+const session = require('express-session');
 
 // Express instances
 const Router = require(path.join(__dirname, '../api/routes/index.route'));
@@ -41,6 +42,13 @@ app.use(fileUpload({
     createParentPath: true
 }));
 
+// Session
+app.use(session({
+    secret: "ui2f893hf232ofn3023fp",
+    resave: false,
+    saveUninitialized: true
+}));
+
 // Router
 app.use(Router);
 
@@ -49,5 +57,5 @@ app.use(Router);
  * @public
  */
 module.exports = {
-    app,    
+    app,
 };

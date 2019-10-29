@@ -1,0 +1,69 @@
+extends ./layouts/common.pug
+block vars
+    - var title = "Watch"
+    - var authorized = false
+    - var watchStreaming = true
+block link
+    link(href="https://vjs.zencdn.net/7.6.5/video-js.css" rel="stylesheet")
+    link(rel="stylesheet" href="./../styles/streaming.scss")
+
+
+    link(href="./../styles/css/hover.min.css" rel="stylesheet")
+
+block container
+    .row.d-flex.justify-content-center.m-0.text-secondary
+        .container-center.bg-none
+            .title-container.container.p-0.d-flex.align-items-center
+                h1.title.text-uppercase.text-white.p-0 
+                    | Man City - Man united
+            .container.video-container
+                video(controls data-setup='{}' playsinline)#video-hls.w-100.p-0.stream-video.video-js.vjs-default-skin
+                    source(src="http://techslides.com/demos/sample-videos/small.mp4" type="video/mp4")
+                    //- source(src="http://localhost:3002/live/loi/index.m3u8" type="application/x-mpegURL")
+                    p.vjs-no-js To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        a(href='https://videojs.com/html5-video-support/' target='_blank') supports HTML5 video
+
+            //- include ./components/_watchDescriptionText
+
+
+            .watching-ab.container.description.d-flex.align-items-center
+                .row.text-white.description-row
+                    .col-6.watching-now.fas.fa-eye.d-none.d-sm-block.watching-ab-content.p-0 Watching now:
+                        span.watching-num 0
+                    .col-6.watching-total.fas.fa-globe-asia.d-none.d-sm-block.watching-ab-content.p-0 Total:
+                        span.total-num 0
+                    .watching-ab-icon.col-3.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center.p-0
+                        a.fa-eye.icon
+                            span.watching-num 0
+                    .watching-ab-icon.col-3.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center.p-0
+                        a.fa-globe-asia.icon
+                            span.total-num 0
+            .container.p-0
+                .ads-wrapper.w-100.bg-white.d-flex.align-items-center.justify-content-center
+                    .ads.w-50.d-flex.align-items-center.justify-content-center
+                        include ./components/_advertisement
+
+            .page-control.container.description.d-flex.align-items-center
+                .row.text-white.description-row
+                    .col-6.d-none.d-sm-block.page-control-content.nav-item.active.p-0
+                        .hvr-bounce-in.fa.fa-lightbulb Turn light off
+                    .col-6.d-none.d-sm-block.page-control-content.p-0
+                        .hvr-bounce-in.fa.fa-comments Comments
+                    .col-6.hvr-bounce-in.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center
+                        a.fa-lightbulb.icon
+                    .col-6.hvr-bounce-in.fa.d-block.d-sm-none.border-right.h-100.d-flex.align-items-center.justify-content-center
+                        a.fa-comments.icon
+            .server-selection.bg-blue.container.description
+                //- include ./components/_serverContainer
+
+                //- include ./components/_serverContainer
+
+
+            .container.p-0
+                .ads-wrapper.w-100.bg-white.d-flex.align-items-center.justify-content-center
+                    .ads.w-50.d-flex.align-items-center.justify-content-center
+                        include ./components/_advertisement
+
+block script
+    //- script(src='./../scripts/streaming.js')
+    //- script(src='./../scripts/video.js')

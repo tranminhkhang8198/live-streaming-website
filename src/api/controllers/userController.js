@@ -3,18 +3,23 @@ const User = require("./../models/userModel");
 
 exports.login = async (req, res) => {
     try {
-        const user = await User.findOne({
-            username: req.body.username,
-            password: req.body.password
-        });
+        const username = req.body.username;
+        const password = req.body.password;
 
-        res.status(200).json({
-            user
-        });
-    } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: err
-        });
+        if (username === 'admin' && password === 'dWkyZjg5M2hmMjMyb2ZuMzAyM2Zw') {
+            const user = {
+                username, password
+            }
+            // store user session
+            req.session.user = user;            
+
+            return res.redirect('/admin');
+        }        
+
+        // redirect to login page
+        return res.redirect('/auth/login');
+
+    } catch (err) {        
+        return res.redirect('/');
     }
 };
