@@ -16,7 +16,7 @@ module.exports.adminPage = (req, res, next) => {
     try {
         if (!req.session.user) {
             return res.redirect('/');
-        }            
+        }
 
         const pathToFile = path.join(__dirname, '../../../dist/admin.html');
         return res.status(httpStatus.OK)
@@ -38,6 +38,9 @@ module.exports.watchStreamingPage = (req, res, next) => {
 
 module.exports.createStreamingPage = (req, res, next) => {
     try {
+        if (!req.session.user) {
+            return res.redirect('/');
+        }
         const pathToFile = path.join(__dirname, '../../../dist/createStreaming.html');
         return res.status(httpStatus.OK)
             .sendFile(pathToFile);
