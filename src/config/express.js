@@ -44,10 +44,18 @@ app.use(fileUpload({
 // Router
 app.use(Router);
 
+
+// Session
+app.use(session({
+    secret: "ui2f893hf232ofn3023fp",
+    resave: false,
+    saveUninitialized: true
+}));
+
 /**
  * Express instance
  * @public
  */
 module.exports = {
-    app,    
+    app,
 };

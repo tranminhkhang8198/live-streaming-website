@@ -7,4 +7,8 @@ router
     .route('/login')
     .post(userController.login);
 
+router
+    .route('/admin')
+    .get(userController.admin);
+
 module.exports = router;
