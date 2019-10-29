@@ -12,13 +12,13 @@ block link
     //- hover.css
     link(href="./../styles/css/hover.min.css" rel="stylesheet")
     //- main file
-    //- link(rel="stylesheet" href="./../styles/index.scss")
+    link(rel="stylesheet" href="./../styles/highlight.scss")
     link(href="https://vjs.zencdn.net/7.6.5/video-js.css" rel="stylesheet")
     link(rel="stylesheet" href="./../styles/streaming_copy.scss")
     
 block container            
     .col-lg-12.col-xl-9.left-content
-        include ./components/_liveWatchingPage 
+        include ./components/_highlight 
     .col-lg-12.col-xl-3.right-content
         include ./components/_chat
 
@@ -28,6 +28,6 @@ block script
     //- scroll reveal
     //- script(src="https://unpkg.com/scrollreveal")
     //- main files
-    script(src='./../scripts/streaming.js')
+    //- script(src='./../scripts/main.js')
     //- script(src='./../scripts/vendors/ScrollReveal.js')
     //- script(src='./../scripts/vendors/SlickSlider.js')

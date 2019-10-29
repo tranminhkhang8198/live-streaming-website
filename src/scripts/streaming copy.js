@@ -117,7 +117,7 @@ import { directive } from "babel-types";
     function createServerElement(isactive,serverUrl){
         const serverContainer = document.createElement("div")
         serverContainer.classList.add("row","server","text-white","description-row")
-        // console.log(serverContainer)
+        console.log(serverContainer)
         ///create server title element
         const serverTitle = document.createElement("div")
         serverTitle.classList.add("col-12","col-sm-3","fa","fa-server","p-0")
