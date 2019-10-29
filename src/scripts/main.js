@@ -11,7 +11,8 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
         try {
             const matches = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/matches`,
+                // url: `http://${hostname}/api/matches`,
+                url: `/api/matches`,
                 params: {
                     type: 'football'
                 }
@@ -27,7 +28,8 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
         try {
             const matches = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/matches`,
+                // url: `http://${hostname}/api/matches`,
+                url: `/api/matches`,
                 params: {
                     type: 'tennis'
                 }
@@ -40,8 +42,17 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
     }
     
     const footballMatches = await getFootballMatches();
-    const tennisMatches = await getTennisMatches();
-    console.log({ footballMatches });
+    const tennisMatches = await getTennisMatches(); 
+
+    const insertAdvertisement = ({ type, adSrc, adThumbnail }) => {
+        if (type === 'horizontal') {
+            return `
+                <a rel="nofollow" href="${adSrc}" title="Advertisement" target="_blank">
+                    <img class="advertisement" src="${adThumbnail}"/>
+                </a>
+            `
+        }    
+    }       
 
     const innerFootballBlock = (data) => {        
         const { today, tomorrow } = data;
@@ -50,7 +61,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');                
+                const date = moment(data.match.time).format('MMMM D');    
 
                 if (data.match.streaming.status == false) {
                     todayFootballElOutput += `
@@ -112,6 +123,13 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                     `;
                 }
                 
+                if (index === 3) {
+                    todayFootballElOutput += insertAdvertisement({ 
+                        type: 'horizontal' ,
+                        adSrc: 'http://uniad.phimmoi.net/data/banner/1130.gif',
+                        adThumbnail: 'http://uniad.phimmoi.net/data/banner/1130.gif'
+                    });
+                }
             }); 
         }
 
@@ -120,7 +138,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             tomorrowFootballElOutput  += `<h4 class="text-center">Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMMM D');
 
                 if (data.match.streaming.status == false) {
                     tomorrowFootballElOutput += `
@@ -151,38 +169,17 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                             </div>
                         </a>
                     `;
-                } else {
-                    tomorrowFootballElOutput += `
-                        <a class="row schedule-item-containers" href="/streaming?id=${data.match._id}">
-                            <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-left-content">
-                                <img 
-                                    class="img-responsive schedule-team-img" 
-                                    src="${data.match.fc1ImgUrl}"/>
-                                <div class="schedule-team-name-container schedule-team-name-container-1">
-                                    <p class="schedule-team-name-content schedule-team-name-content-left">
-                                        ${data.match.fc1}
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-2 col-sm-2 col-md-2 col-xl-2 schedule-time-container d-flex flex-column justify-content-center align-items-center">
-                                <img class="schedule-time-img hvr-bounce-in" src="/images/live-icon.png"/>
-                                <strong class="schedule-time-img-live">Live</strong>
-                            </div>
-                            <div class="col-5 col-sm-5 col-md-5 d-flex flex-row align-items-center justify-content-center schedule-item-right-content">
-                                <div class="schedule-team-name-container schedule-team-name-container-2">
-                                    <p class="schedule-team-name-content schedule-team-name-content-right">
-                                        ${data.match.fc2}
-                                    </p>
-                                </div>
-                                <img 
-                                    class="img-responsive schedule-team-img" 
-                                    src="${data.match.fc2ImgUrl}"/>
-                            </div>
-                        </a>
-                    `;
+                }
+
+                if (index === 3) {
+                    tomorrowFootballElOutput += insertAdvertisement({ 
+                        type: 'horizontal',
+                        adSrc: 'http://uniad.phimmoi.net/data/banner/1130.gif',
+                        adThumbnail: 'http://uniad.phimmoi.net/data/banner/1130.gif'
+                    });
                 }
             });
-        }
+        }        
         
         return { todayFootballElOutput, tomorrowFootballElOutput };
     }
@@ -200,7 +197,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             todayTennisElOutput = `<h4>Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMMM D');
 
                 if (data.match.streaming.status == false) {
                     todayTennisElOutput += `
@@ -248,7 +245,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             tomorrowTennisElOutput = `<h4>Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMMM D');
                 
                 if (data.match.streaming.status == false) {
                     tomorrowTennisElOutput += `
@@ -263,26 +260,6 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                                 </div>
                                 <div class="col-3 play_button text-right">
                                     <p class="tennis_date">${time} - ${date}</p>
-                                </div>
-                            </div>
-                        </a>
-                    `;
-                } else {
-                    tomorrowTennisElOutput += `
-                        <a class="tennis_link" href="#">
-                            <div class="tennis_layout row">
-                                <div class="col-3 tennis_logo">
-                                    <img src="${data.tournament.tournamentImgUrl}"  alt=""/>
-                                </div>
-                                <div class="col-6 tennis_info text-center">
-                                    <h2 class="tennis_players_name">${data.match.fc1} vs ${data.match.fc2}</h2>
-                                    <h3 class="tennis_tournament_name">${data.match.tournament}</h3>
-                                </div>
-                                <div class="col-3 play_button">
-                                    <div class="tennis_is_playing">
-                                        <img src="'images/live-icon.png" alt=""/>
-                                        <p class="tennis-time">LIVE</p>
-                                    </div>
                                 </div>
                             </div>
                         </a>
@@ -326,7 +303,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                         <p class="streaming-card-team">${item.match.fc1}</p>
                     </div>
                     <p class="col-1 col-lg-2 d-flex align-items-center justify-content-center streaming-card-score-display">
-                        ${item.match.score1} - ${item.match.score2}
+                        ${item.match.score}
                     </p>
                     <div class="col-3 col-lg-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
                         <p class="streaming-card-team">${item.match.fc2}</p>
@@ -340,11 +317,4 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
     const streamingOutput = innerStreamingBlock(liveStreamingMatches);
     const streamingEl = document.querySelector('.streaming-videos-container');
     streamingEl.innerHTML = streamingOutput;
-
-    const modifyStreamingMatches = (index, content) => {
-        const streamingCards = document.querySelectorAll('.streaming-card-score-display');
-
-        streamingCards[index].textContent = content;
-    }
-    // modifyStreamingMatches(1, 'hello');
 })();

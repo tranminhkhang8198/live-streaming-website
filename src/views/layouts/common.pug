@@ -43,6 +43,8 @@ html
                     include ../blocks/header
                 main.row.container-fluid
                     block container
+                block footer
+                    include ../blocks/footer
     else
         body.row
             .col-lg-0.col-xl-1.main-content-clone
@@ -52,6 +54,9 @@ html
 
                 main.row.container-fluid
                     block container
+
+                block footer
+                    include ../blocks/footer
             .col-lg-0.col-xl-1.main-content-clone
 
     include ../blocks/scripts

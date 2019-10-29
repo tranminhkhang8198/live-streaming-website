@@ -13,18 +13,20 @@ import axios from "axios";
         try {
             const responseData = await axios({
                 method: 'get',
-                url: `http://${hostname}/config`
+                // url: `http://${hostname}/config`
+                url: `/config`
             })
             return responseData;
         } catch (error) {
             return error.response;;
         }                
     }
-    const gconfig = (await getConfigFile()).data;
+    const gconfig = await getConfigFile();
+    console.log(gconfig.data);
 
     // const streamingHostname = 'localhost';
-    let streamingHostnameVal = gconfig.live_server_ip;
-    let streamingHostPortVal = gconfig.live_server_port;
+    let streamingHostnameIp = gconfig.data.ip;
+    let streamingHostnameDomain = gconfig.data.domain;
 
     let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
     let isValidInput = true;
@@ -83,7 +85,8 @@ import axios from "axios";
         try {
             const streamingTypes = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/sport-types`
+                // url: `http://${hostname}/api/sport-types`
+                url: `/api/sport-types`
             })
 
             return streamingTypes.data;
@@ -179,9 +182,9 @@ import axios from "axios";
         const currentTimeInUnix = new Date().getTime();
 
         streamingKey.value = currentTimeInUnix;
-        streamingHostname.value = streamingHostnameVal;
-        streamingServerUrl.value = `rtmp://${streamingHostnameVal}/live`;
-        streamingLiveUrl.value = `http://${streamingHostnameVal}:${streamingHostPortVal}/live/${currentTimeInUnix}/index.m3u8`;
+        streamingHostname.value = streamingHostnameDomain;
+        streamingServerUrl.value = `rtmp://${streamingHostnameDomain}/live`;
+        streamingLiveUrl.value = `https://${streamingHostnameDomain}/live/${currentTimeInUnix}/index.m3u8`;
     
         streamingKey.removeAttribute('disabled');
         streamingHostname.removeAttribute('disabled');
@@ -189,11 +192,11 @@ import axios from "axios";
         addMoreUrlBtn.removeAttribute('disabled');
 
         streamingKey.addEventListener('keyup', function(event) {
-            streamingLiveUrl.value = `http://${streamingHostname.value}:${streamingHostPortVal}/live/${this.value}/index.m3u8`;
+            streamingLiveUrl.value = `https://${streamingHostname.value}/live/${this.value}/index.m3u8`;
         })
 
         streamingHostname.addEventListener('keyup', function(event) {
-            streamingLiveUrl.value = `http://${this.value}:${streamingHostPortVal}/live/${streamingKey.value}/index.m3u8`;
+            streamingLiveUrl.value = `https://${this.value}/live/${streamingKey.value}/index.m3u8`;
             streamingServerUrl.value = `rtmp://${this.value}/live`;
         })            
     })
@@ -203,7 +206,7 @@ import axios from "axios";
 
         const streamingVideoKey = streamingKey.value;
         
-        const baseSource = `http://${streamingHostnameVal}:${streamingHostPortVal}/live/${streamingVideoKey}/index.m3u8`;
+        const baseSource = `https://${streamingHostnameDomain}/live/${streamingVideoKey}/index.m3u8`;
         streamingVideo(baseSource);
     })
         
@@ -300,7 +303,8 @@ import axios from "axios";
             try {
                 const createNewMatchResponse = await axios({
                     method: 'post',
-                    url: `http://${hostname}/api/matches`,
+                    // url: `http://${hostname}/api/matches`,
+                    url: `/api/matches`,
                     config: {
                         headers: { 
                             'Content-Type': 'multipart/form-data' 
@@ -309,7 +313,7 @@ import axios from "axios";
                     data: newStreaming
                 });
                 window.alert('Successful to create new streaming');
-                window.location = '/admin';
+                // window.location = '/admin';
             } catch(error) {                
                 window.alert('Failed to create new streaming');
             }            
