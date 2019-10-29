@@ -4,8 +4,8 @@ const mainRoutes = require('./main.route');
 
 const matchRoutes = require('./api/match.route');
 const sportTypeRoutes = require('./api/sportType.route');
-const tournamentRoutes = require('./api/streaming.route');
-const streamingRoutes = require('./api/tournament.route');
+const tournamentRoutes = require('./api/tournament.route');
+const streamingRoutes = require('./api/streaming.route');
 
 Router.use('/api/sport-types', sportTypeRoutes);
 Router.use('/api/tournaments', tournamentRoutes);

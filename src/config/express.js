@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const fileUpload = require('express-fileupload');
 const cors = require('cors');
+const gzip = require('compression');
 
 // Express instances
 const Router = require(path.join(__dirname, '../api/routes/index.route'));
@@ -26,7 +27,11 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
+// enable CORS in header
 app.use(cors());
+
+// gzip response to reduce their size
+app.use(gzip());
 
 // logger
 require('../config/logger')(app);

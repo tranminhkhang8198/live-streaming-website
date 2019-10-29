@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const matchSchema = new mongoose.Schema({
   fc1: {
-    type: String
+    type: String,
   },
   fc1ImgUrl: {
     type: String,
@@ -15,7 +15,7 @@ const matchSchema = new mongoose.Schema({
     default: "/uploads/representative.jpg"
   },
   fc2: {
-    type: String
+    type: String,
   },
   score1: {
     type: String,
@@ -24,6 +24,10 @@ const matchSchema = new mongoose.Schema({
   score2: {
     type: String,
     default: 0
+  },
+  score: {
+    type: String,
+    default: "0 - 0"
   },
   time: {
     type: Date,

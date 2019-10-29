@@ -1,6 +1,6 @@
 extends ./layouts/common.pug
 block vars
-    - var title="Mygoaltv.com - You are watching our streaming matches"
+    - var title = "Watch"
     - var authorized = false
     - var watchStreaming = true
 block link
@@ -17,11 +17,12 @@ block container
                 h1.title.text-uppercase.text-white.p-0 Man City - Man united
             .container.video-container
                 video(controls data-setup='{}' playsinline)#video-hls.w-100.p-0.stream-video.video-js.vjs-default-skin
+                    source(src="http://clips.vorwaerts-gmbh.de/VfE_html5.mp4" type="video/mp4")
                     //- source(src="http://localhost:3002/live/loi/index.m3u8" type="application/x-mpegURL")
                     p.vjs-no-js To view this video please enable JavaScript, and consider upgrading to a web browser that
                         a(href='https://videojs.com/html5-video-support/' target='_blank') supports HTML5 video
 
-            include ./components/_watchDescriptionText
+            //- include ./components/_watchDescriptionText
 
 
             .watching-ab.container.description.d-flex.align-items-center
@@ -63,5 +64,5 @@ block container
                         include ./components/_advertisement
 
 block script
-    script(src='./../scripts/streaming.js')
+    //- script(src='./../scripts/streaming.js')
     //- script(src='./../scripts/video.js')

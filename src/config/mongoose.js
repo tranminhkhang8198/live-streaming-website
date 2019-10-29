@@ -5,7 +5,8 @@ const {
     db
 } = require('./vars'); // env variables
 
-const uri = db.uri || 'mongodb+srv://admin:hbiit5XY8geJer7C@cluster0-6lu0f.mongodb.net/test?retryWrites=true&w=majority';
+// const uri = db.uri || 'mongodb+srv://admin:hbiit5XY8geJer7C@cluster0-6lu0f.mongodb.net/test?retryWrites=true&w=majority';
+const uri = 'mongodb://127.0.0.1:27017/streaming_api';
 
 // mongoose configuration options
 const mongooseOpts = {
@@ -24,7 +25,7 @@ mongoose.connection.on('error', error => {
 /**
  * Set debug mode on dev only
  */
-if(env === 'development') {
+if (env === 'development') {
     mongoose.set('debug', true);
 }
 

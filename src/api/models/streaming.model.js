@@ -7,6 +7,9 @@ const streamingSchema = mongoose.Schema({
     streamingUrl: {
         type: [String],
     },
+    streamingUrlFake: {
+        type: [String]
+    },
     status: {
         type: Boolean,
         default: false

@@ -11,7 +11,8 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
         try {
             const matches = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/matches`,
+                // url: `http://${hostname}/api/matches`,
+                url: `/api/matches`,
                 params: {
                     type: 'football'
                 }
@@ -27,7 +28,8 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
         try {
             const matches = await axios({
                 method: 'get',
-                url: `http://${hostname}/api/matches`,
+                // url: `http://${hostname}/api/matches`,
+                url: `/api/matches`,
                 params: {
                     type: 'tennis'
                 }
@@ -40,8 +42,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
     }
     
     const footballMatches = await getFootballMatches();
-    const tennisMatches = await getTennisMatches();
-    console.log({ footballMatches });
+    const tennisMatches = await getTennisMatches();    
 
     const innerFootballBlock = (data) => {        
         const { today, tomorrow } = data;
@@ -50,7 +51,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             todayFootballElOutput = `<h4 class="text-center">Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');                
+                const date = moment(data.match.time).format('MMM Do');               
 
                 if (data.match.streaming.status == false) {
                     todayFootballElOutput += `
@@ -120,7 +121,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             tomorrowFootballElOutput  += `<h4 class="text-center">Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
 
                 if (data.match.streaming.status == false) {
                     tomorrowFootballElOutput += `
@@ -200,7 +201,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             todayTennisElOutput = `<h4>Today</h4>`;
             today.forEach((data, index) => {                
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
 
                 if (data.match.streaming.status == false) {
                     todayTennisElOutput += `
@@ -248,7 +249,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
             tomorrowTennisElOutput = `<h4>Tomorrow</h4>`;
             tomorrow.forEach((data, index) => {
                 const time = moment(data.match.time).format('HH:mm');
-                const date = moment(data.match.time).format('DD/MM');
+                const date = moment(data.match.time).format('MMM Do');
                 
                 if (data.match.streaming.status == false) {
                     tomorrowTennisElOutput += `
@@ -326,7 +327,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                         <p class="streaming-card-team">${item.match.fc1}</p>
                     </div>
                     <p class="col-1 col-lg-2 d-flex align-items-center justify-content-center streaming-card-score-display">
-                        ${item.match.score1} - ${item.match.score2}
+                        ${item.match.score}
                     </p>
                     <div class="col-3 col-lg-3 d-flex align-items-center justify-content-center text-center streaming-card-team-display">
                         <p class="streaming-card-team">${item.match.fc2}</p>
@@ -340,11 +341,4 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
     const streamingOutput = innerStreamingBlock(liveStreamingMatches);
     const streamingEl = document.querySelector('.streaming-videos-container');
     streamingEl.innerHTML = streamingOutput;
-
-    const modifyStreamingMatches = (index, content) => {
-        const streamingCards = document.querySelectorAll('.streaming-card-score-display');
-
-        streamingCards[index].textContent = content;
-    }
-    // modifyStreamingMatches(1, 'hello');
 })();
