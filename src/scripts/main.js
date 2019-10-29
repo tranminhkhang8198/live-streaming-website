@@ -123,7 +123,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                     `;
                 }
                 
-                if (index === 3) {
+                if (index%3 === 0) {
                     todayFootballElOutput += insertAdvertisement({ 
                         type: 'horizontal' ,
                         adSrc: 'http://uniad.phimmoi.net/data/banner/1130.gif',
@@ -171,7 +171,7 @@ const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
                     `;
                 }
 
-                if (index === 3) {
+                if (index%3 === 0) {
                     tomorrowFootballElOutput += insertAdvertisement({ 
                         type: 'horizontal',
                         adSrc: 'http://uniad.phimmoi.net/data/banner/1130.gif',
