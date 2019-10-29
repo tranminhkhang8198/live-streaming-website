@@ -9,11 +9,7 @@
     @include breakpoint(tablet) {
         width: 80%;
         margin-left: 20%;
-    }
-
-    @include breakpoint(sm-tablet) {
-        height: 90%;
-    }
+    }    
 }
 
 .sport-type-container .advertisement {
@@ -45,10 +41,30 @@
 }
 
 .navbar-block .advertisement {
-    width: 100%;
+    width: 100%;    
 
-    @include breakpoint(tablet) {
-        width: 100%;
-        margin-left: 0%;
+    @include breakpoint(tablet) {        
+        margin-left: 0%;        
     }
+}
+
+.navbar-block {
+    flex-flow: column nowrap !important; 
+}
+
+.list-advertisement {        
+    .nav-item {
+        width: 33.3%;
+        display: inline-block;        
+    }
+
+    @include breakpoint(sm-tablet) {
+        .nav-item {
+            width: 50%;
+        }
+
+        .advertisement-responsive {
+            display: none;
+        }
+    }    
 }
