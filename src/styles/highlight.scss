@@ -6,21 +6,16 @@
         'bases/_typography',
         'bases/_ultilities';
 
-
 @import 'components/_schedule',
         'components/_streamingCard',
         'components/_highlightBox',
         'components/_button',
         'components/_advertisement',
-        'components/_video',
         'components/_chat';
 
-@import 'layouts/header',
+@import 'layouts/_header',
         'layouts/_footer';
 
-@import 'pages/_streaming_copy';
+@import 'pages/_highlight';
+
 @import 'vendors/_bootStrapLayout';
-
-
-
-
