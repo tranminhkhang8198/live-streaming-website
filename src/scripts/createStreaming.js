@@ -313,7 +313,7 @@ import axios from "axios";
                     data: newStreaming
                 });
                 window.alert('Successful to create new streaming');
-                window.location = '/admin';
+                // window.location = '/admin';
             } catch(error) {                
                 window.alert('Failed to create new streaming');
             }            
