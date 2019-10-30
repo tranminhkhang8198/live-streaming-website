@@ -1,21 +1,31 @@
 .footer {
+   display: flex;
+   flex-direction: row;
+
+   padding: 1.5rem 0;
+
    background: #536976;  /* fallback for old browsers */
    background: -webkit-linear-gradient(to right, #292E49, #536976);  /* Chrome 10-25, Safari 5.1-6 */
-   background: linear-gradient(to right, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-   
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: center;
+   background: linear-gradient(to right, #292E49, #536976); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */         
 
-   padding-top: 2rem;
-   padding-bottom: 2rem;
+   &-content {      
+      width: 40%;      
+      margin: 0 auto;  
+      
+      @include breakpoint(laptop) {
+         width: 50%;
+      }
+   }
+
+   &-clone-25 {
+      width: 25%;
+      height: 100%;      
+
+      @include breakpoint(laptop) {
+         width: 0;
+      }
+   }
 
    color: $color-white;
-   font-size: $font-size-xxs;
-
-   &-content {
-      width: 50%;
-      margin-right: 2rem;      
-   }
+   font-size: $font-size-xxs;   
 }
