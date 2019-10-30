@@ -145,6 +145,8 @@
     margin-left: 5px;
 }
 .description-row{
+    // padding-left: 15px !important;
+    width:100%;
     margin: 0px;
 }
 body {
@@ -205,14 +207,14 @@ main .right-content {
     margin-bottom: 2rem;
 }
 
-.row {
-    @include breakpoint(laptop) {
-        padding-right: 0;
-        padding-left: 0;
-        margin-right: 0;
-        margin-left: 0;
-    }
-}
+// .row {
+//     @include breakpoint(laptop) {
+//         padding-right: 0;
+//         padding-left: 0;
+//         margin-right: 0;
+//         margin-left: 0;
+//     }
+// }
 
 @include breakpoint(lg-laptop) {
     body > .col-xl-1 {
