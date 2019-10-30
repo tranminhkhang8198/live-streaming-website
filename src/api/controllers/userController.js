@@ -1,13 +1,22 @@
 const User = require("./../models/userModel");
 
+const {
+    env
+} = require('../../config/vars');
+
 
 exports.login = async (req, res) => {
     try {
         const username = req.body.username;
         const password = req.body.password;
+        
+        let ROOT_USER_NAME = 'admin', ROOT_PWD = '123456';
 
-        // if (username === 'admin' && password === 'dWkyZjg5M2hmMjMyb2ZuMzAyM2Zw') {
-        if (username === 'admin' && password === '123456') {
+        if (env === 'production') {
+            ROOT_PWD = 'dWkyZjg5M2hmMjMyb2ZuMzAyM2Zw';
+        }
+        
+        if (username === ROOT_USER_NAME && password === ROOT_PWD) {
             const user = {
                 username, password
             }
