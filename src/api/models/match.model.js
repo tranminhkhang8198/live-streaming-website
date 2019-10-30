@@ -3,6 +3,9 @@ const uniqueValidator = require("mongoose-unique-validator");
 const Schema = mongoose.Schema;
 
 const matchSchema = new mongoose.Schema({
+  _id: {
+    type: String
+  },
   fc1: {
     type: String,
   },

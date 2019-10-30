@@ -9,7 +9,7 @@ const tournamentSchema = new Schema({
         unique: true
     },
     matches: [{
-        type: Schema.Types.ObjectId,
+        type: String,
         ref: "Match"
     }],
     type: {

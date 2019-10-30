@@ -6,7 +6,8 @@ exports.login = async (req, res) => {
         const username = req.body.username;
         const password = req.body.password;
 
-        if (username === 'admin' && password === 'dWkyZjg5M2hmMjMyb2ZuMzAyM2Zw') {
+        // if (username === 'admin' && password === 'dWkyZjg5M2hmMjMyb2ZuMzAyM2Zw') {
+        if (username === 'admin' && password === '123456') {
             const user = {
                 username, password
             }

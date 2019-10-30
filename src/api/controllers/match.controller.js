@@ -326,6 +326,9 @@ exports.createMatch = async (req, res) => {
     queryStr["streaming"] = streaming_id;
     queryStr["fc1ImgUrl"] = fc1ImgUrl;
     queryStr["fc2ImgUrl"] = fc2ImgUrl;
+    
+    queryStr['_id'] = fc1.replace(/\s/g, '-').toLowerCase() + '-vs-' + fc2.replace(/\s/g, '-').toLowerCase() + '-' + new Date().getTime().toString().slice(10);
+    
 
     const newMatch = await Match.create(queryStr);
 
@@ -354,6 +357,7 @@ exports.createMatch = async (req, res) => {
       tournament: newTournament
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: "fail",
       message: err
