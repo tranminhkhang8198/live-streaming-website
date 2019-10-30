@@ -78,3 +78,13 @@ module.exports.renderLoginPage = (req, res, next) => {
         next(error);
     }
 }
+
+module.exports.renderSupportUsPage = (req, res, next) => {
+    try {
+        const pathToFile = path.join(__dirname, `../../../dist/support-us.html`);
+        return res.status(httpStatus.OK)
+            .sendFile(pathToFile);
+    } catch (error) {
+        next(error);
+    }
+}

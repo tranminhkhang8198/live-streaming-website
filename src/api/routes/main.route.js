@@ -8,6 +8,7 @@ const {
     globalConfig,
     renderHighlightVideos,
     renderLoginPage,
+    renderSupportUsPage,
 } = require('../controllers/main.controller');
 
 /**
@@ -74,5 +75,6 @@ Router.route('/config').get(globalConfig);
 Router.route('/highlight-videos/:id').get(renderHighlightVideos);
 
 Router.route('/auth/login').get(renderLoginPage);
+Router.route('/support-us').get(renderSupportUsPage);
 
 module.exports = Router;
