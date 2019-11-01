@@ -4,9 +4,6 @@ import { directive } from "babel-types";
 
 
 (async () => {
-    const fconfig = window.CONFIG
-    const ApiHostName = fconfig.API_IP
-    const ApiPort=fconfig.API_PORT
     window.VIDEOJS_NO_DYNAMIC_STYLE = true
     const title = document.querySelector(".title")
     var options = {

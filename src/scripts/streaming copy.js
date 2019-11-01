@@ -4,9 +4,6 @@ import { directive } from "babel-types";
 
 
 (async () => {
-    const fconfig = window.CONFIG
-    const ApiHostName = fconfig.API_IP
-    const ApiPort=fconfig.API_PORT
     window.VIDEOJS_NO_DYNAMIC_STYLE = true
     const title = document.querySelector(".title")
     var options = {
@@ -70,7 +67,7 @@ import { directive } from "babel-types";
             try {
                 const responseData = await axios({
                     method: 'get',
-                    url: `http://${ApiHostName}:${ApiPort}/api/matches/${matchID}`
+                    url: `/api/matches/${matchID}`
                 })
                 // console.log(responseData)
                 return responseData;

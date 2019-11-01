@@ -20,7 +20,7 @@
 
 2. Nhập mật khẩu
 ## Cài đặt và chạy mã nguồn lần đầu tiên
-`git clone https://github.com/nmtoan251998/streaming.git`
+`git clone --single-branch --branch production/v1 https://github.com/nmtoan251998/streaming.git`
 
 #### Sử dụng tài khoản git dưới đây để đăng nhập
 ``` Tài khoản git
@@ -31,6 +31,23 @@
 `cd streaming`
 
 `npm install`
+
+#### Chỉnh sửa địa chỉ của VPS 
+```javascript
+Vào thư mục src/scripts/conf.js để thay đổi IP của web server
+
+nano src/scripts/frontend_config/conf.js
+
+thay đổi nội dung giống dưới đây, tùy theo địa chỉ IP và domain của server
+window.CONFIG = {
+    // API_IP: "192.168.3.197",
+    API_DOMAIN: "stream.noat.me",
+    API_IP: "45.77.203.83",
+    API_PORT:"5000"
+}
+
+```
+
 
 `npm run build`
 
@@ -123,3 +140,10 @@ Sau khi đã thay đổi 3 thành phần ở mục 1, chusg ta tiếp tục vớ
 - Với x là số vừa được thêm vào trong nội dung ở 3 thành phần ở file 1
 
 ```
+
+
+
+
+IP Address: 157.245.130.116
+Username: root
+Password: db4e28fb62b7858f940d64e71c

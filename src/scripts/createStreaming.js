@@ -4,10 +4,7 @@ import axios from "axios";
 
 
 (async () => {
-    const fconfig = window.CONFIG
-
-    const newStreaming = new FormData();
-    const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
+    const newStreaming = new FormData();    
 
     const getConfigFile = async () => {
         try {

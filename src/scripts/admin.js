@@ -2,10 +2,7 @@ import 'babel-polyfill';
 import moment from 'moment';
 import axios from 'axios';
 
-(async () => {
-    const fconfig = window.CONFIG
-    const hostname = `${fconfig.API_IP}:${fconfig.API_PORT}`;
-
+(async () => {    
     const getMatches = async () => {
         try {
             const matches = await axios({
