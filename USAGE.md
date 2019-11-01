@@ -97,3 +97,29 @@ Sau đó build lại mã nguồn như đã làm
 ```
 
 4. Thêm mới một highlight video
+```javascript
+Để thêm mới một highlight videos, chúng ta cần thay đổi 2 thành phần sau
+
+1. thêm/chỉnh sửa các nội dung trong file (src/views/component/_highlightVideos.pug)
+
+Trong file này sẽ có 3 thành phần bị tác động
+
+1.1.Các dòng code nằm trong (.highlight-box-containers.slider-for)
+- thay đổi các nội dung sau dấu *|* ở các line phía dưới
+
+- nhớ tăng thứ tự của nội dung trong a(href=/highlight-videos/x) (x=0,1,2,3,4,5,...)
+
+- x tăng dần với mỗi thẻ được thêm vào
+
+1.2.Các dòng code nằm trong (.highlight-box-containers.slider-nav)
+- Lập lại các thao tác giống như ở thành phần thứ 1
+
+1.3.Các dòng code nằm trong (.highlight-box-containers-responsive)
+- Lặp lại các thao tác giống như ở thành phần thứ 1 và 2
+
+Sau khi đã thay đổi 3 thành phần ở mục 1, chusg ta tiếp tục với mục 2
+
+2.Thêm mới một file highlight-videos-x.pug
+- Với x là số vừa được thêm vào trong nội dung ở 3 thành phần ở file 1
+
+```
