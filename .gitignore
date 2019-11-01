@@ -16,3 +16,4 @@ logs
 
 # ignore uploads folder
 src/uploads/*
+src/videos/*

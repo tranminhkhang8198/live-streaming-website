@@ -8,7 +8,7 @@
     "since 2017-06"
   ],
   "scripts": {
-    "doc": "apidoc -i src/ -o docs/",
+    "doc": "apidoc -i src/ -o docs/api/",
     "clean": "rimraf rm dist/*",
     "dev:client": "parcel src/views/*.pug --port 3000 --no-cache",
     "dev:server": "nodemon --inspect src/server.js",
