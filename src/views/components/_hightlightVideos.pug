@@ -9,7 +9,7 @@
         // nhớ tăng thứ tự của nội dung trong a(href=/highlight-videos/x)
         // x tăng dần với mỗi thẻ được thêm vào
         a(href="/highlight-videos/1").highlight-box
-            .highlight-thumbnail
+            .highlight-thumbnail(style="background-image: url('https://picsum.photos/200')")
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
@@ -17,8 +17,8 @@
             .highlight-title
                 p.highlight-title-match 
                     | German - Italy
-                p.highlight-title-tour 
-                    | Laliga 2020 cup                
+                p.highlight-title-tour
+                    | Laliga 2020 cup
         a(href="/highlight-videos/2").highlight-box
             .highlight-thumbnail                        
                 .highlight-play-button.pulse
@@ -40,18 +40,19 @@
                 p.highlight-title-match 
                     | Malaysia - Liverpool
                 p.highlight-title-tour 
-                    | Laliga 2020 cup                
+                    | Laliga 2020 cup       
+        // phải canh lề cho đung với định dạng các đoạn code đã có sẵn
         a(href="/highlight-videos/4").highlight-box
-            .highlight-thumbnail                        
+            .highlight-thumbnail(style="background-image: url('https://picsum.photos/200')")
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
                 p.highlight-title-match 
-                    | Vietnam - UAE
-                p.highlight-title-tour 
-                    | Laliga 2020 cup  
+                    | Việt Năm
+                p.highlight-title-tour
+                    | Lòao
 
     // đừng tác động vào line dưới
     .highlight-box-containers.slider-nav
@@ -91,17 +92,19 @@
                 p.highlight-title-match 
                     | Malaysia - Liverpool
                 p.highlight-title-tour 
-                    | Laliga 2020 cup                
+                    | Laliga 2020 cup
         a(href="/highlight-videos/4").highlight-box
-            .highlight-thumbnail                        
+            .highlight-thumbnail(style="background-image: url('https://picsum.photos/200')")
                 .highlight-play-button.pulse
                 .highlight-play-button
                     svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                         polygon(points="40,30 65,50 40,70")
             .highlight-title
-                p.highlight-title-match Vietnam - UAE
-                p.highlight-title-tour Laliga 2020 cup
-
+                p.highlight-title-match 
+                    | Việt Năm
+                p.highlight-title-tour
+                    | Lòao                
+        
     // Thành phần bị tác động thứ 3
     // đừng tác động vào line dưới
     .highlight-box-containers-responsive        
@@ -111,7 +114,7 @@
             // x tăng dần với mỗi thẻ được thêm vào
             .col-6.highlight-box
                 a(href="/highlight-videos/1")
-                    .highlight-thumbnail
+                    .highlight-thumbnail(style="background-image: url('https://picsum.photos/200')")
                         .highlight-play-button.pulse
                         .highlight-play-button
                             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
@@ -147,14 +150,14 @@
                             | Laliga 2020 cup
             .col-6.highlight-box
                 a(href="/highlight-videos/4")
-                    .highlight-thumbnail
+                    .highlight-thumbnail(style="background-image: url('https://picsum.photos/200')")
                         .highlight-play-button.pulse
                         .highlight-play-button
                             svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100")
                                 polygon(points="40,30 65,50 40,70")
                     .highlight-title
                         p.highlight-title-match 
-                            | German - Italy
+                            | Việt Năm
                         p.highlight-title-tour 
-                            | Laliga 2020 cup    
+                            | Lòao
             

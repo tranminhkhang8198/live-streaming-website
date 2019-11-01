@@ -1,25 +1,34 @@
-//- navbar inline
-//- nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container
-//-     ul.navbar-nav.navbar-logo
-//-         li.nav-item.hvr-bounce-in
-//-             a.navbar-brand(href='/')
-//-                 img.navbar-brand-logo(src="../images/logo.png" style="width: 10rem;")
-//-         li.nav-item            
-//-             include ../components/_advertisement
-
-nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container.navbar-block
-    ul
+//-  top bar 1 hàng
+nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container
+    ul.navbar-nav.navbar-logo
         li.nav-item.hvr-bounce-in
             a.navbar-brand(href='/')
-                img.navbar-brand-logo(src="../images/logo.png" style="width: 20rem;")
-    ul.list-advertisement
-        li.nav-item
+                img.navbar-brand-logo(src="../images/logo.png" style="width: 10rem;")
+        li.nav-item            
             include ../components/_advertisement
-        li.nav-item
-            include ../components/_advertisement
-        li.nav-item.advertisement-responsive
-            include ../components/_advertisement
+//- top bar 1 hàng
 
+//- top bar 2 hàng
+//-nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container.navbar-block
+//-    ul
+//-        li.nav-item.hvr-bounce-in
+//-            a.navbar-brand(href='/')
+//-                img.navbar-brand-logo(src="../images/logo.png" style="width: 20rem;")
+//-    ul.list-advertisement
+//-        li.nav-item            
+//-            include ../components/_advertisement
+//-        li.nav-item
+//-            - var src = 'https://www.steepto.com/ghits/4077718/i/28130/0/pp/3/1?h=wV0O9Zv2J_onBq533zd6ACFaZ8S52fvFDNwTaCjmW0CwF-rgJ54PdgEVjiiiqk6P&rid=c4d92891-fc51-11e9-8dfd-e4434b2123d2&tt=Direct&k=401861fcNQrqgVo1zf5%24fW8k62oGfW8k65AEfJ2fQdfs%3BfOYfXfc!fi!fm%3DfZ%2BfKZmLbBfs%3BfQfTfaHR0cDovL215Z29hbHR2LmNvb%248%2FZmJjbGlkPUl3QVIxNWhER1gzNk5yMVJzOTk0UVpmNm93U3BXTnUtTUVhU1owQWJTUXR3a2d2T0ZZWExFbTVJamphUDA%3Dfff%3BfMTA1M3wyMTM2*DEwNzV8MjAwNw%3D%3DfMHww*DA%3Df!f!fcfMTA1NnwzMTJ8OTE4*C0zMTQ%3DfVWfMAfW8k62wJf!fTW96aWxsY%2481LjAgKFgxMTsgTGludXggeDg2XzY0K%24BBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvK%24BDaHJvbWUvNzguMC4zOTA0LjcwIFNhZmFya%2481MzcuMzY%3DfQ2hyb21lUERGUGx1Z2lu*ENocm9tZVBERlZpZXdlcnxOYXRpdmVDbGllbnQ%3Df%3DfTGludXggeDg2XzY0fNDIwfMHw1MA%3D%3DfVWfKwf!fbfQf!f*f*&muid=j9s4j_dK_rt5'            
+//-            - var thumbnail = 'https://s-img.steepto.com/g/4077718/492x328/0x49x900x600/aHR0cDovL2ltZ2hvc3RzLmNvbS90LzIwMTktMDgvNDEwNjMxL2I1ODQzY2YwMzlmZDVmNTcyODdjNGRiNTA1MWM0YzM5LnBuZw**.webp'
+//-            include ../components/_advertisement
+//-        li.nav-item.advertisement-responsive     
+//-            - var src = 'https://www.steepto.com/ghits/4370052/i/28130/0/pp/4/1?h=4j8Sg3TAvX0UHpjQA-B6ZlOd1czll2NAyRpyvep90uuT_58rC1WQ-Wmbd43FEavR&rid=853ee9fd-fa25-11e9-a136-e4434b2123d2&tt=Direct&k=401861fcQj1hEgEj5fJKfW8WnbrtfW8WsVGDfJ2fQSf8%3AfOYfRfv%3DfV~fm%3DfZ%2BfKZmLbBf8%3AfQfTfaHR0cDovL215Z29hbHR2LmNvb%248%2FZmJjbGlkPUl3QVIxNWhER1gzNk5yMVJzOTk0UVpmNm93U3BXTnUtTUVhU1owQWJTUXR3a2d2T0ZZWExFbTVJamphUDA%3Dfff%3BfMTA0MnwyMzMz*DEwNzV8MjI2Mw%3D%3DfMHww*DA%3Df!f!fcfMTA3MnwzMTJ8OTE4*C00Mzg%3DfVWfMAfW8Wnb-yf!fTW96aWxsY%2481LjAgKFgxMTsgTGludXggeDg2XzY0K%24BBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvK%24BDaHJvbWUvNzguMC4zOTA0LjcwIFNhZmFya%2481MzcuMzY%3DfQ2hyb21lUERGUGx1Z2lu*ENocm9tZVBERlZpZXdlcnxOYXRpdmVDbGllbnQ%3Df%3DfTGludXggeDg2XzY0fNDIwfMXwzMg%3D%3DfVWfKwf!fbfQf!f*f*&muid=j9s4j_dK_rt5'
+//-            - var thumbnail = 'https://s-img.steepto.com/g/3632791/492x328/622x0x679x452/aHR0cDovL2ltZ2hvc3RzLmNvbS90LzIwMTktMDUvMzc1NjkyLzRiZDdmNmU2OWZkY2JkZDVhMzVmNmEwZGUyYTAyYjQyLmpwZw**.webp'       
+//-            include ../components/_advertisement
+//- top bar 2 hàng
+
+
+//- thanh điều hướng
 .header.position-sticky(style="top: -1px; z-index: 10")
     nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.navbar-main
         button.navbar-toggler(type='button' data-toggle='collapse' data-target='#headerNavBar' aria-controls='headerNavBar' aria-expanded='false' aria-label='Toggle navigation')
@@ -36,3 +45,4 @@ nav.navbar.navbar-expand-lg.navbar-dark.bg-light.navbar-logo-container.navbar-bl
                     a.nav-link(href='#') Chat
                 li.nav-item.hvr-bounce-in.mr-4
                     a.nav-link(href='/support-us') Support us
+//- thanh điều hướng

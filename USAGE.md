@@ -48,7 +48,52 @@
 `npm start`
 
 ## Chỉnh sửa các thành phần trong mã nguồn
-1. Thêm mới một highlight video
-2. Chỉnh sửa quảng cáo
-3. Chỉnh sửa giao diện của thanh top bar
-4. Thay đổi thứ tự của thành phần football-tennis
+1. Chỉnh sửa nội dung quảng cáo
+```javascript
+Đầu tiên chúng ta sẽ thấy nội dung quảng cáo sẽ có 1 format chung, để thay đổi nội dung cũng như hình ảnh thumbnail, chúng ta cần thay đổi nguồn của nó bằng cách sau:
+
+- thêm 1 biến 'src'
+Chúng ta thêm 1 biến src vào mã nguồn dưới format như sau
+- var src = '<trong đây chứa nguồn của quảng cáo'
+
+
+- thêm 1 biến 'thumbnail'
+Cũng giống như src, chúng ta cần thêm 1 biến thumbnail để đổi hình ảnh đại diện của quảng cáo
+- var thumbnail = '<trong đây chứa nguồn tới hình ảnh>'
+
+
+- build (cập nhật) mã nguồn
+sau khi đã thay đổi mã nguồn và hình ảnh thumbnail, chúng ta cần cập nhật lại mã nguồn bằng câu lệnh
+npm run build
+
+kiểm tra kết quả
+
+Chú ý ở đây là thi thay đổi nguồn của 1 quảng cáo thì những quảng cáo ở dưới (cùng file mã nguồn) cũng sẽ bị ảnh hưởng.
+
+Như có thể thấy chúng ta chỉ thay đổi nguồn của quảng cáo thứ 2, nhưng quảng cáo thứ 3 vẫn bị ảnh hưởng. Do đó ta cần thay đổi nguồn cụ thể của từng quảng cáo.
+```
+
+
+2. Chỉnh sửa giao diện của thanh top bar
+```javascript
+Để chỉnh sửa giao diện, bạn cần vào file
+src/views/blocks/header.pug
+
+bạn chỉ cần thêm 'comment' vào giao diện nào bạn muốn ẩn bằng dấu //- hoặc bấm tổ hợp phím Ctrl + /
+
+Sau đó chúng ta cần build lại mã nguồn
+
+
+Chúng ta cùng thử để giao diện topbar 1 hàng
+```
+
+3. Thay đổi thứ tự của thành phần football-tennis
+```
+Đầu tiên bạn cần vào file src/views/components/_schedule.pug
+
+Bạn chỉ cần copy-paste thứ tự của 2 thành phần
+
+Sau đó build lại mã nguồn như đã làm 
+```
+
+4. Thêm mới một highlight video
