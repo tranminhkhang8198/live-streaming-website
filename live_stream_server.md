@@ -36,6 +36,7 @@ brew install nginx-full --with-rtmp-module --with-debug --with-http2
 ```
 nano /home/linuxbrew/.linuxbrew/etc/nginx/nginx.conf
 ```
+copy these line to file
 ```
 worker_processes  auto;
 events {
