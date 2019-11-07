@@ -33,7 +33,7 @@ sudo apt install mongodb -y\n
 sudo apt-get install curl -y\n
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -\n
 sudo apt install nodejs -y\n
-sudo apt install npm -y" > ~/conguration.sh
+sudo apt install npm -y" > ~/configuration.sh
 ```
 
 ```
