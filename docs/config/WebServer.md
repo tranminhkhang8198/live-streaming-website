@@ -24,9 +24,23 @@
 
 2. Nhập mật khẩu
 ## Cài đặt và chạy mã nguồn lần đầu tiên
+#### Cài đặt các phần mềm cần thiết
+```
+printf "sudo apt update -y\n
+sudo apt install git -y\n
+sudo apt install mongodb -y\n
+sudo apt-get install curl -y\n
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -\n
+sudo apt install nodejs -y\n
+sudo apt install npm -y" > ~/conguration.sh
+
+sudo chmod 755 ~/configuration.sh
+
+sudo ~/configuration.sh
+```
+#### Lấy mã nguồn
 `git clone --single-branch --branch production/v1 https://github.com/nmtoan251998/streaming.git`
 
-#### Sử dụng tài khoản git dưới đây để đăng nhập
 ``` Tài khoản git
 - ID: 
 - Password: 
