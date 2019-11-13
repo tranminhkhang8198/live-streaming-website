@@ -53,9 +53,9 @@ Hit ctr+X , then Y, then Enter to save
 nano /etc/nginx/sites-enabled/default
 ```
 Copy doan ben duoi vao va sua lai mot so vi tri nhu:
-    + O doan "server_name mygoaltv.top" ->>>> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
-    + O doan "ssl_certificate /etc/letsencrypt/live/mygoaltv.top/fullchain.pem ->> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
-    + O doan "ssl_certificate_key /etc/letsencrypt/live/mygoaltv.top/privkey.pem;" ->> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
+- O doan "server_name mygoaltv.top" ->>>> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
+- O doan "ssl_certificate /etc/letsencrypt/live/mygoaltv.top/fullchain.pem ->> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
+- O doan "ssl_certificate_key /etc/letsencrypt/live/mygoaltv.top/privkey.pem;" ->> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
 
 
 ```
