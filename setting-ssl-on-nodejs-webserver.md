@@ -103,4 +103,5 @@ nginx -t
 
 ```
 systemctl start nginx
+systemctl enable nginx
 ```
