@@ -1,25 +1,28 @@
+## Log in to VPS with root and password
 ## Install Nginx
 ```
-sudo apt update
-sudo apt install nginx
+apt update
+apt install nginx
 ```
 ## Setting SSL
 ```
-sudo apt-get install bc
+apt-get install bc
 
-sudo git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
+git clone https://github.com/letsencrypt/letsencrypt /opt/letsencrypt
 
 dig +short app.example.com
 
 cd /opt/letsencrypt
 
+nginx -s stop
+
 ./certbot-auto certonly --standalone
 
-sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
+openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
 
 mkdir /etc/nginx/snippets
 
-sudo nano /etc/nginx/snippets/ssl-params.conf
+nano /etc/nginx/snippets/ssl-params.conf
 ```
 Copy these line into file
 ```
@@ -44,7 +47,7 @@ ssl_dhparam /etc/ssl/certs/dhparam.pem;
 Hit ctr+X , then Y, then Enter to save
 ## Config Nginx
 ```
-sudo nano /etc/nginx/sites-enabled/default
+nano /etc/nginx/sites-enabled/default
 ```
 Copy these config to file
 ```
@@ -85,11 +88,11 @@ Hit ctr+X , then Y, then Enter to save
 ## Test nginx
 
 ```
-sudo nginx -t
+nginx -t
 ```
 
 ## Start nginx
 
 ```
-sudo systemctl start nginx
+systemctl start nginx
 ```
