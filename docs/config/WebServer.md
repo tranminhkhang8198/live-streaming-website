@@ -44,7 +44,7 @@ sudo chmod 755 ~/configuration.sh
 sudo ~/configuration.sh
 ```
 #### Lấy mã nguồn
-`git clone --single-branch --branch production/v1 https://github.com/nmtoan251998/streaming.git`
+`git clone https://github.com/nmtoan251998/streaming.git`
 
 ``` Tài khoản git
 - ID: 
