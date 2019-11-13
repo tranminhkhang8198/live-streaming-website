@@ -5,6 +5,9 @@ apt update
 apt install nginx
 ```
 ## Setting SSL
+Tai cau lenh thu 3 "dig +short app.example" doi phan app.example.com thanh domain, vd: "dig +short mytopstream.com"
+Neu ket qua ra la ip cua VPS la dung, neu ko phai ip cua vps thi phai xem phan cai dat cua trang thue domain
+
 ```
 apt-get install bc
 
@@ -49,7 +52,12 @@ Hit ctr+X , then Y, then Enter to save
 ```
 nano /etc/nginx/sites-enabled/default
 ```
-Copy these config to file
+Copy doan ben duoi vao va sua lai mot so vi tri nhu:
+    + O doan "server_name mygoaltv.top" ->>>> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
+    + O doan "ssl_certificate /etc/letsencrypt/live/mygoaltv.top/fullchain.pem ->> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
+    + O doan "ssl_certificate_key /etc/letsencrypt/live/mygoaltv.top/privkey.pem;" ->> doi "mygoaltv.top" thanh domain. vd: mytopstream.com
+
+
 ```
 server {
     listen 80;
