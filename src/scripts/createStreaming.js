@@ -1,5 +1,6 @@
 import "babel-polyfill";
 import moment from "moment";
+
 import axios from "axios";
 
 
@@ -19,13 +20,12 @@ import axios from "axios";
         }                
     }
     const gconfig = await getConfigFile();
-    console.log(gconfig.data);
 
     // const streamingHostname = 'localhost';
     let streamingHostnameIp = gconfig.data.ip;
     let streamingHostnameDomain = gconfig.data.domain;
 
-    let videoTypeVal = undefined, videoTypeName, streamingStatusVal;
+    let videoTypeVal = undefined, videoTypeName, streamingStatusVal = 1;
     let isValidInput = true;
 
     // utils
@@ -171,6 +171,8 @@ import axios from "axios";
             inputVideoTimeContainer.style.display = 'none';
             inputVideoTime.setAttribute('disabled', 'disabled');
         }
+
+        console.log({streamingStatusVal})
     })    
     
     genKeyBtn.addEventListener('click', (event) => {
@@ -225,14 +227,16 @@ import axios from "axios";
             : newStreaming.set('status', true);
         newStreaming.set('streamingUrl', urlsValues);
     
+        
         if (streamingStatusVal == 0) {
             const currentTimePlus15Mins = moment().add(15, 'minutes').format();            
             const timeValue = moment(inputVideoTime.value).format();
             newStreaming.set('time', timeValue);
         } else if (streamingStatusVal == 1){
-            const currentTime = moment().format();
+            const currentTime = moment().zone('+0700').format();
             newStreaming.set('time', currentTime);
         }
+        debugger;
         
         if (!videoTypeVal) {
             isValidInputValidator(inputVideoType, false);        
