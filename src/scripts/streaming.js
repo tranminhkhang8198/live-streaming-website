@@ -20,8 +20,7 @@ import { directive } from "babel-types";
         },
         liveui: true
     };
-
-    // setup beforeinitialize hook
+   // setup beforeinitialize hook
     // videojs.Html5Hlsjs.addHook('beforeinitialize', (videojsPlayer, hlsjsInstance) => {
         // here you can interact with hls.js instance and/or video.js playback is initialized
     // });
@@ -76,9 +75,8 @@ import { directive } from "babel-types";
                 return error.response;;
             }                
         }
-        const responseOj = await getServerURLs();    
+        const responseOj = await getServerURLs();        
         const URLS = responseOj.data.response[0].streaming.streamingUrl;
-        console.log(URLS)
         const FCTitle = (responseOj.data.response[0].fc1).toUpperCase()+" - "+(responseOj.data.response[0].fc2).toUpperCase();
         // const FCTitle = URLS //"Man City - Man United"
         title.innerHTML = FCTitle
@@ -133,8 +131,7 @@ import { directive } from "babel-types";
         const serverBt = document.createElement("a")
         serverBt.classList.add("hvr-bounce-in","server-bt","fas","fa-play")
         serverBt.setAttribute('data-source',serverUrl)
-        serverBt.addEventListener("click",function(){
-            console.log(this.dataset.source)
+        serverBt.addEventListener("click",function(){            
             const a = this.dataset.source
             removeClass("active")
             this.classList.add("active")
@@ -153,10 +150,9 @@ import { directive } from "babel-types";
     }
 
 
-    function loadHLS(source){
-        player.src({type: 'application/x-mpegURL', src: source});
-
-        var promise = player.play();
+    function loadHLS(source){        
+        player.src({ type: 'application/x-mpegURL', src: source });                   
+        var promise = player.play();        
         if (promise) {
             //Older browsers may not return a promise, according to the MDN website
             promise.catch(function(error) { console.error(error); });
